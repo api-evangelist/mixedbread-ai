@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/mixedbread-ai/mixedbread-rerank-schema.json",
+  "title": "Mixedbread Rerank",
+  "description": "Schema for the Mixedbread Reranking API request and response objects. Covers POST /v1/reranking.",
+  "type": "object",
+  "definitions": {
+    "RerankRequest": {
+      "type": "object",
+      "required": ["model", "query", "input"],
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Reranking model identifier (e.g. mixedbread-ai/mxbai-rerank-large-v2, mixedbread-ai/mxbai-rerank-base-v2, mixedbread-ai/mxbai-rerank-large-v1, mixedbread-ai/mxbai-rerank-base-v1, mixedbread-ai/mxbai-rerank-xsmall-v1, plus v3-listwise)."
+        },
+        "query": {"type": "string", "description": "The query string to rerank against."},
+        "input": {
+          "type": "array",
+          "description": "Candidate documents — raw strings or structured objects.",
+          "items": {
+            "oneOf": [
+              {"type": "string"},
+              {"type": "object"}
+            ]
+          }
+        },
+        "top_k": {"type": "integer", "description": "Number of top documents to return."},
+        "return_input": {"type": "boolean", "description": "Echo the original document content in the response."},
+        "rank_fields": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Object keys to consider for ranking when input items are structured objects."
+        },
+        "instruction": {
+          "type": "string",
+          "description": "Optional instruction guiding the v3-listwise reranker."
+        }
+      }
+    },
+    "RerankResult": {
+      "type": "object",
+      "required": ["index", "score"],
+      "properties": {
+        "index": {"type": "integer"},
+        "score": {"type": "number"},
+        "input": {
+          "description": "Original document content, only when return_input is true.",
+          "oneOf": [
+            {"type": "string"},
+            {"type": "object"}
+          ]
+        }
+      }
+    },
+    "RerankResponse": {
+      "type": "object",
+      "required": ["model", "data", "usage"],
+      "properties": {
+        "object": {"type": "string", "const": "list"},
+        "model": {"type": "string"},
+        "data": {"type": "array", "items": {"$ref": "#/definitions/RerankResult"}},
+        "usage": {
+          "type": "object",
+          "properties": {
+            "prompt_tokens": {"type": "integer"},
+            "total_tokens": {"type": "integer"}
+          }
+        },
+        "top_k": {"type": "integer"},
+        "return_input": {"type": "boolean"}
+      }
+    }
+  },
+  "oneOf": [
+    {"$ref": "#/definitions/RerankRequest"},
+    {"$ref": "#/definitions/RerankResponse"}
+  ]
+}

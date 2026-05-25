@@ -1,0 +1,116 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mixedbread Stores — Store Files
+  description: 'Mixedbread Stores — Store Files. 5 operations. Self-contained Naftiko capability covering one Mixedbread business surface.'
+  tags:
+    - Mixedbread
+    - Stores
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      MXBAI_API_KEY: MXBAI_API_KEY
+capability:
+  consumes:
+    - type: http
+      namespace: stores-files
+      baseUri: https://api.mixedbread.com
+      description: Mixedbread Stores — Store Files business capability. Self-contained, no shared references.
+      resources:
+        - name: v1-stores-files
+          path: /v1/stores/{store_identifier}/files
+          operations:
+            - name: uploadstorefile
+              method: POST
+              description: Upload file to store
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-stores-files-2
+          path: /v1/stores/{store_identifier}/files/list
+          operations:
+            - name: liststorefiles
+              method: POST
+              description: List store files with metadata filter
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-stores-files-3
+          path: /v1/stores/{store_identifier}/files/{file_identifier}
+          operations:
+            - name: getstorefile
+              method: GET
+              description: Get store file
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-stores-files-4
+          path: /v1/stores/{store_identifier}/files/{file_identifier}
+          operations:
+            - name: updatestorefile
+              method: PATCH
+              description: Update store file metadata
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-stores-files-5
+          path: /v1/stores/{store_identifier}/files/{file_identifier}
+          operations:
+            - name: deletestorefile
+              method: DELETE
+              description: Delete store file
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+      authentication:
+        type: apikey
+        key: authorization
+        value: 'Bearer {{env.MXBAI_API_KEY}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: stores-files-rest
+      port: 8080
+      description: REST adapter for Mixedbread Stores — Store Files. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources: []

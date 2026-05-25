@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/mixedbread-ai/mixedbread-store-schema.json",
+  "title": "Mixedbread Store",
+  "description": "Schema for the Mixedbread Stores API. Stores are multimodal search indexes.",
+  "type": "object",
+  "definitions": {
+    "Store": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {"type": "string"},
+        "name": {"type": "string"},
+        "description": {"type": "string"},
+        "metadata": {"type": "object"},
+        "expires_after": {"$ref": "#/definitions/ExpiresAfter"},
+        "file_counts": {"$ref": "#/definitions/FileCounts"},
+        "config": {"$ref": "#/definitions/StoreConfig"},
+        "created_at": {"type": "string", "format": "date-time"},
+        "updated_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "StoreConfig": {
+      "type": "object",
+      "description": "Per-store configuration covering embedding model, rerank, contextualization, and chunking.",
+      "properties": {
+        "embedding_model": {"type": "string"},
+        "reranking": {"$ref": "#/definitions/RerankConfig"},
+        "contextualization": {"$ref": "#/definitions/ContextualizationConfig"},
+        "chunking_strategy": {"type": "object"}
+      }
+    },
+    "RerankConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "model": {"type": "string"},
+        "top_k": {"type": "integer"}
+      }
+    },
+    "ContextualizationConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "model": {"type": "string"}
+      }
+    },
+    "ExpiresAfter": {
+      "type": "object",
+      "properties": {
+        "anchor": {"type": "string"},
+        "seconds": {"type": "integer"}
+      }
+    },
+    "FileCounts": {
+      "type": "object",
+      "properties": {
+        "total": {"type": "integer"},
+        "in_progress": {"type": "integer"},
+        "completed": {"type": "integer"},
+        "failed": {"type": "integer"},
+        "cancelled": {"type": "integer"}
+      }
+    },
+    "StoreSearchRequest": {
+      "type": "object",
+      "required": ["store_identifiers", "query"],
+      "properties": {
+        "store_identifiers": {"type": "array", "items": {"type": "string"}},
+        "query": {"type": "string"},
+        "top_k": {"type": "integer"},
+        "filters": {"type": "object"},
+        "search_options": {"type": "object"}
+      }
+    }
+  },
+  "oneOf": [
+    {"$ref": "#/definitions/Store"},
+    {"$ref": "#/definitions/StoreSearchRequest"}
+  ]
+}

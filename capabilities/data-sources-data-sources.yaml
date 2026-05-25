@@ -1,0 +1,116 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mixedbread Data Sources — Sources
+  description: 'Mixedbread Data Sources — Sources. 5 operations. Self-contained Naftiko capability covering one Mixedbread business surface.'
+  tags:
+    - Mixedbread
+    - Data
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      MXBAI_API_KEY: MXBAI_API_KEY
+capability:
+  consumes:
+    - type: http
+      namespace: data-sources-data-sources
+      baseUri: https://api.mixedbread.com
+      description: Mixedbread Data Sources — Sources business capability. Self-contained, no shared references.
+      resources:
+        - name: v1-data_sources
+          path: /v1/data_sources/
+          operations:
+            - name: createdatasource
+              method: POST
+              description: Create a new data source
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-data_sources-2
+          path: /v1/data_sources/
+          operations:
+            - name: listdatasources
+              method: GET
+              description: List data sources
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-data_sources-3
+          path: /v1/data_sources/{data_source_id}
+          operations:
+            - name: getdatasource
+              method: GET
+              description: Get a data source
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-data_sources-4
+          path: /v1/data_sources/{data_source_id}
+          operations:
+            - name: updatedatasource
+              method: PUT
+              description: Update a data source
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-data_sources-5
+          path: /v1/data_sources/{data_source_id}
+          operations:
+            - name: deletedatasource
+              method: DELETE
+              description: Delete a data source
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+      authentication:
+        type: apikey
+        key: authorization
+        value: 'Bearer {{env.MXBAI_API_KEY}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: data-sources-data-sources-rest
+      port: 8080
+      description: REST adapter for Mixedbread Data Sources — Sources. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources: []

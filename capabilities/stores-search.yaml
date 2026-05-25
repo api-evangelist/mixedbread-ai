@@ -1,0 +1,133 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mixedbread Stores — Search and QA
+  description: 'Mixedbread Stores — Search and QA. 6 operations. Self-contained Naftiko capability covering one Mixedbread business surface.'
+  tags:
+    - Mixedbread
+    - Stores
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      MXBAI_API_KEY: MXBAI_API_KEY
+capability:
+  consumes:
+    - type: http
+      namespace: stores-search
+      baseUri: https://api.mixedbread.com
+      description: Mixedbread Stores — Search and QA business capability. Self-contained, no shared references.
+      resources:
+        - name: v1-stores-search
+          path: /v1/stores/search
+          operations:
+            - name: search
+              method: POST
+              description: Semantic search across store chunks
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-stores-grep
+          path: /v1/stores/grep
+          operations:
+            - name: grep
+              method: POST
+              description: Regex match across store chunks
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-stores-list-chunks
+          path: /v1/stores/list-chunks
+          operations:
+            - name: listchunks
+              method: POST
+              description: List store chunks by metadata
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-stores-question-answering
+          path: /v1/stores/question-answering
+          operations:
+            - name: questionanswering
+              method: POST
+              description: Grounded question answering
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-stores-queries
+          path: /v1/stores/queries/enhance
+          operations:
+            - name: enhancequery
+              method: POST
+              description: Enhance a search query
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-stores-metadata-facets
+          path: /v1/stores/metadata-facets
+          operations:
+            - name: metadatafacets
+              method: POST
+              description: Get metadata facets
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+      authentication:
+        type: apikey
+        key: authorization
+        value: 'Bearer {{env.MXBAI_API_KEY}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: stores-search-rest
+      port: 8080
+      description: REST adapter for Mixedbread Stores — Search and QA. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources: []

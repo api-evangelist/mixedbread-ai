@@ -1,0 +1,205 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Mixedbread
+providerId: mixedbread-ai
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - AI
+  - Embeddings
+  - Reranking
+  - Search
+  - Vector Database
+description: Reconciled plans and per-unit pricing for the Mixedbread platform. Source — mixedbread.com/pricing.
+sources:
+  - https://www.mixedbread.com/pricing
+  - https://www.mixedbread.com/docs/stores/overview
+plans:
+  - id: mixedbread-starter
+    name: Starter
+    type: free
+    description: Free tier for evaluation with a one-time credit.
+    entries:
+      - label: Included credit (one-time)
+        name: starter_credit
+        type: included
+        metric: USD
+        limit: 5
+        timeFrame: lifetime
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Workspace users
+        name: users
+        type: included
+        metric: user
+        limit: 3
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Stores
+        name: stores
+        type: included
+        metric: store
+        limit: 10
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: API rate limit
+        name: rpm
+        type: included
+        metric: request
+        limit: 100
+        timeFrame: minute
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Community Slack support
+      - name: All embedding, reranking, parsing, and store endpoints
+      - name: 100 requests/minute combined
+  - id: mixedbread-scale
+    name: Scale
+    type: subscription
+    description: Production tier with monthly credit and higher limits.
+    entries:
+      - label: Monthly fee
+        name: subscription
+        type: subscription
+        metric: workspace
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '20.00'
+        userMultiplied: false
+      - label: Included credit
+        name: scale_credit
+        type: included
+        metric: USD
+        limit: 20
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Stores
+        name: stores
+        type: included
+        metric: store
+        limit: 10000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Query rate limit
+        name: queries_rpm
+        type: included
+        metric: query
+        limit: 1200
+        timeFrame: minute
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Ingestion rate limit
+        name: ingestion_rpm
+        type: included
+        metric: request
+        limit: 360
+        timeFrame: minute
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Unlimited workspace users
+      - name: Automatic backups
+      - name: Priority Slack support (same-day SLA)
+  - id: mixedbread-enterprise
+    name: Enterprise
+    type: contract
+    description: Custom contracts with volume discounts, BYOC, and dedicated support.
+    entries:
+      - label: Contract price
+        name: enterprise
+        type: contract
+        metric: workspace
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: 'Custom'
+        userMultiplied: false
+    elements:
+      - name: Volume-based discounts
+      - name: Unlimited workspace users and stores
+      - name: Custom rate limits & SLA
+      - name: Automatic backups with point-in-time recovery
+      - name: Dedicated support team
+      - name: Bring Your Own Cloud (BYOC)
+  - id: mixedbread-startup
+    name: Startup Program
+    type: credit
+    description: Up to $250 one-time credit for qualified startups (VC-funded or raised up to $20M).
+    entries:
+      - label: One-time credit
+        name: startup_credit
+        type: credit
+        metric: USD
+        limit: 250
+        timeFrame: lifetime
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Qualified startups only
+      - name: Existing Mixedbread users / VC-funded / up to $20M raised
+usagePricing:
+  - category: Index
+    sku: index_fast
+    label: Fast indexing
+    metric: tokens
+    unit: 1000000
+    price: '1.50'
+  - category: Index
+    sku: index_high_quality
+    label: High Quality indexing
+    metric: tokens
+    unit: 1000000
+    price: '3.00'
+  - category: Search
+    sku: search_basic
+    label: Basic search
+    metric: queries
+    unit: 1000
+    price: '4.00'
+  - category: Search
+    sku: search_rerank
+    label: Search with rerank
+    metric: queries
+    unit: 1000
+    price: '7.50'
+  - category: Search
+    sku: search_agentic
+    label: Agentic search
+    metric: queries
+    unit: 1000
+    price: '20.00'
+  - category: Storage
+    sku: data_storage
+    label: Data storage
+    metric: tokens
+    unit: 1000000
+    timeFrame: month
+    price: '0.50'

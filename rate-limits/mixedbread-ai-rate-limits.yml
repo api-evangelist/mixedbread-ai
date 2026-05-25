@@ -1,0 +1,59 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Mixedbread
+providerId: mixedbread-ai
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - AI
+  - Rate Limiting
+  - Quotas
+description: Reconciled rate limits for the Mixedbread platform. Limits are plan-tier driven and split between
+  query and ingestion lanes; Enterprise tier is custom.
+sources:
+  - https://www.mixedbread.com/pricing
+  - https://www.mixedbread.com/api-reference
+algorithm: token-bucket
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+headers:
+  retryAfter: retry-after
+limits:
+  - tier: Starter
+    plan: Free
+    lane: combined
+    rpm: 100
+    notes: Combined request budget across all endpoints
+  - tier: Scale
+    plan: Scale ($20/mo)
+    lane: queries
+    rpm: 1200
+    notes: Query lane — embeddings, reranking, store search, question-answering
+  - tier: Scale
+    plan: Scale ($20/mo)
+    lane: ingestion
+    rpm: 360
+    notes: Ingestion lane — file uploads, parsing, extraction, store writes
+  - tier: Enterprise
+    plan: Enterprise
+    lane: custom
+    rpm: -1
+    notes: Custom rate limits and SLA defined in contract
+quotas:
+  - tier: Starter
+    resource: stores
+    limit: 10
+  - tier: Scale
+    resource: stores
+    limit: 10000
+  - tier: Enterprise
+    resource: stores
+    limit: -1
+notes:
+  - 429 responses include a retry-after hint.
+  - Burst behavior is governed by the platform; enterprise customers can negotiate per-region capacity.
+  - Hugging Face Inference Providers usage (Mixedbread is a partner provider) is rate-limited by the Hugging Face
+    platform, not by api.mixedbread.com.

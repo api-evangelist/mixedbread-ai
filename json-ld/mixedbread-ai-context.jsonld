@@ -1,0 +1,110 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "mxbai": "https://api.mixedbread.com/v1/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+
+    "Embedding": {
+      "@id": "mxbai:Embedding",
+      "@context": {
+        "object": {"@id": "mxbai:Embedding/object", "@type": "xsd:string"},
+        "index": {"@id": "mxbai:Embedding/index", "@type": "xsd:integer"},
+        "embedding": {"@id": "mxbai:Embedding/embedding"}
+      }
+    },
+
+    "EmbeddingRequest": {
+      "@id": "mxbai:EmbeddingRequest",
+      "@context": {
+        "model": {"@id": "mxbai:EmbeddingRequest/model", "@type": "xsd:string"},
+        "input": {"@id": "mxbai:EmbeddingRequest/input"},
+        "dimensions": {"@id": "mxbai:EmbeddingRequest/dimensions", "@type": "xsd:integer"},
+        "encoding_format": {"@id": "mxbai:EmbeddingRequest/encodingFormat"},
+        "prompt": {"@id": "mxbai:EmbeddingRequest/prompt", "@type": "xsd:string"},
+        "normalized": {"@id": "mxbai:EmbeddingRequest/normalized", "@type": "xsd:boolean"}
+      }
+    },
+
+    "RerankRequest": {
+      "@id": "mxbai:RerankRequest",
+      "@context": {
+        "model": {"@id": "mxbai:RerankRequest/model", "@type": "xsd:string"},
+        "query": {"@id": "mxbai:RerankRequest/query", "@type": "xsd:string"},
+        "input": {"@id": "mxbai:RerankRequest/input", "@container": "@list"},
+        "top_k": {"@id": "mxbai:RerankRequest/topK", "@type": "xsd:integer"},
+        "return_input": {"@id": "mxbai:RerankRequest/returnInput", "@type": "xsd:boolean"},
+        "rank_fields": {"@id": "mxbai:RerankRequest/rankFields", "@container": "@list"},
+        "instruction": {"@id": "mxbai:RerankRequest/instruction", "@type": "xsd:string"}
+      }
+    },
+
+    "RerankResult": {
+      "@id": "mxbai:RerankResult",
+      "@context": {
+        "index": {"@id": "mxbai:RerankResult/index", "@type": "xsd:integer"},
+        "score": {"@id": "mxbai:RerankResult/score", "@type": "xsd:double"},
+        "input": {"@id": "mxbai:RerankResult/input"}
+      }
+    },
+
+    "Store": {
+      "@id": "mxbai:Store",
+      "@type": "schema:Dataset",
+      "@context": {
+        "id": {"@id": "mxbai:Store/id", "@type": "xsd:string"},
+        "name": {"@id": "schema:name", "@type": "xsd:string"},
+        "description": {"@id": "schema:description", "@type": "xsd:string"},
+        "metadata": {"@id": "mxbai:Store/metadata"},
+        "expires_after": {"@id": "mxbai:Store/expiresAfter"},
+        "file_counts": {"@id": "mxbai:Store/fileCounts"},
+        "config": {"@id": "mxbai:Store/config"},
+        "created_at": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+        "updated_at": {"@id": "schema:dateModified", "@type": "xsd:dateTime"}
+      }
+    },
+
+    "StoreFile": {
+      "@id": "mxbai:StoreFile",
+      "@type": "schema:DigitalDocument",
+      "@context": {
+        "id": {"@id": "mxbai:StoreFile/id", "@type": "xsd:string"},
+        "store_id": {"@id": "mxbai:StoreFile/storeId", "@type": "xsd:string"},
+        "status": {"@id": "mxbai:StoreFile/status", "@type": "xsd:string"},
+        "metadata": {"@id": "mxbai:StoreFile/metadata"}
+      }
+    },
+
+    "ParsingJob": {
+      "@id": "mxbai:ParsingJob",
+      "@context": {
+        "id": {"@id": "mxbai:ParsingJob/id", "@type": "xsd:string"},
+        "status": {"@id": "mxbai:ParsingJob/status", "@type": "xsd:string"},
+        "result": {"@id": "mxbai:ParsingJob/result"},
+        "chunking_strategy": {"@id": "mxbai:ParsingJob/chunkingStrategy"},
+        "return_format": {"@id": "mxbai:ParsingJob/returnFormat", "@type": "xsd:string"}
+      }
+    },
+
+    "ExtractionJob": {
+      "@id": "mxbai:ExtractionJob",
+      "@context": {
+        "id": {"@id": "mxbai:ExtractionJob/id", "@type": "xsd:string"},
+        "schema": {"@id": "mxbai:ExtractionJob/schema"},
+        "status": {"@id": "mxbai:ExtractionJob/status", "@type": "xsd:string"},
+        "result": {"@id": "mxbai:ExtractionJob/result"}
+      }
+    },
+
+    "Usage": {
+      "@id": "mxbai:Usage",
+      "@context": {
+        "prompt_tokens": {"@id": "mxbai:Usage/promptTokens", "@type": "xsd:integer"},
+        "total_tokens": {"@id": "mxbai:Usage/totalTokens", "@type": "xsd:integer"}
+      }
+    }
+  }
+}

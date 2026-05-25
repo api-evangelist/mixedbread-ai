@@ -1,0 +1,116 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mixedbread Parsing — Jobs
+  description: 'Mixedbread Parsing — Jobs. 5 operations. Self-contained Naftiko capability covering one Mixedbread business surface.'
+  tags:
+    - Mixedbread
+    - Parsing
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      MXBAI_API_KEY: MXBAI_API_KEY
+capability:
+  consumes:
+    - type: http
+      namespace: parsing-jobs
+      baseUri: https://api.mixedbread.com
+      description: Mixedbread Parsing — Jobs business capability. Self-contained, no shared references.
+      resources:
+        - name: v1-parsing-jobs
+          path: /v1/parsing/jobs
+          operations:
+            - name: createjob
+              method: POST
+              description: Start a parse job
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-parsing-jobs-2
+          path: /v1/parsing/jobs
+          operations:
+            - name: listjobs
+              method: GET
+              description: List parsing jobs
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-parsing-jobs-3
+          path: /v1/parsing/jobs/{job_id}
+          operations:
+            - name: getjob
+              method: GET
+              description: Get parsing job result
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-parsing-jobs-4
+          path: /v1/parsing/jobs/{job_id}
+          operations:
+            - name: canceljob
+              method: PATCH
+              description: Cancel a parsing job
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-parsing-jobs-5
+          path: /v1/parsing/jobs/{job_id}
+          operations:
+            - name: deletejob
+              method: DELETE
+              description: Delete a parsing job
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+      authentication:
+        type: apikey
+        key: authorization
+        value: 'Bearer {{env.MXBAI_API_KEY}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: parsing-jobs-rest
+      port: 8080
+      description: REST adapter for Mixedbread Parsing — Jobs. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources: []

@@ -1,0 +1,116 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mixedbread Stores — Stores CRUD
+  description: 'Mixedbread Stores — Stores CRUD. 5 operations. Self-contained Naftiko capability covering one Mixedbread business surface.'
+  tags:
+    - Mixedbread
+    - Stores
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      MXBAI_API_KEY: MXBAI_API_KEY
+capability:
+  consumes:
+    - type: http
+      namespace: stores-stores
+      baseUri: https://api.mixedbread.com
+      description: Mixedbread Stores — Stores CRUD business capability. Self-contained, no shared references.
+      resources:
+        - name: v1-stores
+          path: /v1/stores
+          operations:
+            - name: createstore
+              method: POST
+              description: Create a store
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-stores-2
+          path: /v1/stores
+          operations:
+            - name: liststores
+              method: GET
+              description: List stores
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-stores-3
+          path: /v1/stores/{store_identifier}
+          operations:
+            - name: getstore
+              method: GET
+              description: Get a store
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-stores-4
+          path: /v1/stores/{store_identifier}
+          operations:
+            - name: updatestore
+              method: PUT
+              description: Update a store
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-stores-5
+          path: /v1/stores/{store_identifier}
+          operations:
+            - name: deletestore
+              method: DELETE
+              description: Delete a store
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+      authentication:
+        type: apikey
+        key: authorization
+        value: 'Bearer {{env.MXBAI_API_KEY}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: stores-stores-rest
+      port: 8080
+      description: REST adapter for Mixedbread Stores — Stores CRUD. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources: []

@@ -1,0 +1,36 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.mixedbread.com/v1/stores/search",
+    "headers": {
+      "Authorization": "Bearer $MXBAI_API_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "store_identifiers": ["docs-store-2026"],
+      "query": "How do I configure the v3-listwise reranker?",
+      "top_k": 5,
+      "filters": {"lang": "en"},
+      "search_options": {"return_metadata": true, "rerank": true}
+    }
+  },
+  "response": {
+    "object": "list",
+    "store_identifiers": ["docs-store-2026"],
+    "data": [
+      {
+        "type": "text",
+        "score": 0.92,
+        "text": "Use model=mixedbread-ai/mxbai-rerank-large-v2 with an `instruction` field to drive the v3-listwise reranker...",
+        "metadata": {"source": "docs/reranking.md", "lang": "en"}
+      },
+      {
+        "type": "text",
+        "score": 0.88,
+        "text": "Listwise rerankers consider all candidates jointly, improving NDCG over pointwise scoring...",
+        "metadata": {"source": "blog/2026-05-rerank-v3.md", "lang": "en"}
+      }
+    ],
+    "usage": {"prompt_tokens": 18, "total_tokens": 18}
+  }
+}

@@ -1,0 +1,94 @@
+specification: API Commons Vocabulary
+specificationVersion: '0.1'
+provider: Mixedbread
+providerId: mixedbread-ai
+created: '2026-05-25'
+modified: '2026-05-25'
+description: Operational and capability vocabulary mapping for the Mixedbread search and retrieval platform.
+domains:
+  - id: retrieval
+    name: Retrieval
+    description: Embeddings, reranking, and search primitives.
+    terms:
+      - embedding
+      - dense vector
+      - sparse vector
+      - binary embedding
+      - Matryoshka embedding
+      - late interaction
+      - ColBERT
+      - reranking
+      - listwise reranking
+      - semantic search
+      - grep
+      - question answering
+  - id: ingestion
+    name: Ingestion
+    description: Files, parsing, extraction, and data sources.
+    terms:
+      - file
+      - upload
+      - multipart upload
+      - parsing job
+      - chunking strategy
+      - chunk
+      - return format
+      - extraction job
+      - structured extraction
+      - JSON Schema
+      - data source
+      - connector
+      - OAuth2
+  - id: storage
+    name: Storage
+    description: Stores, files-in-store, rules, events.
+    terms:
+      - store
+      - store identifier
+      - store file
+      - search rule
+      - metadata facet
+      - event
+      - reingest
+  - id: administration
+    name: Administration
+    description: API keys, billing, workspaces.
+    terms:
+      - workspace
+      - API key
+      - reroll
+      - revoke
+      - billing summary
+      - cost histogram
+      - plan
+      - tier
+  - id: agents
+    name: Agents
+    description: Surfaces consumed by AI coding agents and MCP clients.
+    terms:
+      - MCP
+      - Model Context Protocol
+      - skill
+      - Claude Code integration
+      - CLI
+modelCatalog:
+  embeddings:
+    - mixedbread-ai/wholembed-v3
+    - mixedbread-ai/mxbai-embed-large-v1
+    - mixedbread-ai/mxbai-embed-xsmall-v1
+    - mixedbread-ai/deepset-mxbai-embed-de-large-v1
+    - mixedbread-ai/mxbai-edge-colbert-v0-32m
+    - mixedbread-ai/mxbai-edge-colbert-v0-17m
+  rerankers:
+    - mixedbread-ai/mxbai-rerank-large-v2
+    - mixedbread-ai/mxbai-rerank-base-v2
+    - mixedbread-ai/mxbai-rerank-large-v1
+    - mixedbread-ai/mxbai-rerank-base-v1
+    - mixedbread-ai/mxbai-rerank-xsmall-v1
+    - mxbai-rerank-v3-listwise
+relatedStandards:
+  - JSON Schema (2020-12)
+  - OpenAPI 3.1
+  - OAuth 2.0
+  - Model Context Protocol (MCP)
+  - FOCUS 1.3

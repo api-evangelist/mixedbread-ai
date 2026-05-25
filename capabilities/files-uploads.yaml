@@ -1,0 +1,116 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mixedbread Files — Multipart Uploads
+  description: 'Mixedbread Files — Multipart Uploads. 5 operations. Self-contained Naftiko capability covering one Mixedbread business surface.'
+  tags:
+    - Mixedbread
+    - Files
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      MXBAI_API_KEY: MXBAI_API_KEY
+capability:
+  consumes:
+    - type: http
+      namespace: files-uploads
+      baseUri: https://api.mixedbread.com
+      description: Mixedbread Files — Multipart Uploads business capability. Self-contained, no shared references.
+      resources:
+        - name: v1-files-uploads
+          path: /v1/files/uploads
+          operations:
+            - name: createupload
+              method: POST
+              description: Create multipart upload
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-files-uploads-2
+          path: /v1/files/uploads
+          operations:
+            - name: listuploads
+              method: GET
+              description: List in-progress multipart uploads
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-files-uploads-3
+          path: /v1/files/uploads/{upload_id}
+          operations:
+            - name: getupload
+              method: GET
+              description: Get multipart upload details
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-files-uploads-4
+          path: /v1/files/uploads/{upload_id}/complete
+          operations:
+            - name: completeupload
+              method: POST
+              description: Complete multipart upload
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-files-uploads-5
+          path: /v1/files/uploads/{upload_id}/abort
+          operations:
+            - name: abortupload
+              method: POST
+              description: Abort multipart upload
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+      authentication:
+        type: apikey
+        key: authorization
+        value: 'Bearer {{env.MXBAI_API_KEY}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: files-uploads-rest
+      port: 8080
+      description: REST adapter for Mixedbread Files — Multipart Uploads. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources: []

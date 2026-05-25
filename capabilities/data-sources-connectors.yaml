@@ -1,0 +1,116 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mixedbread Data Sources — Connectors
+  description: 'Mixedbread Data Sources — Connectors. 5 operations. Self-contained Naftiko capability covering one Mixedbread business surface.'
+  tags:
+    - Mixedbread
+    - Data
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      MXBAI_API_KEY: MXBAI_API_KEY
+capability:
+  consumes:
+    - type: http
+      namespace: data-sources-connectors
+      baseUri: https://api.mixedbread.com
+      description: Mixedbread Data Sources — Connectors business capability. Self-contained, no shared references.
+      resources:
+        - name: v1-data_sources-connectors
+          path: /v1/data_sources/{data_source_id}/connectors
+          operations:
+            - name: createconnector
+              method: POST
+              description: Create connector
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-data_sources-connectors-2
+          path: /v1/data_sources/{data_source_id}/connectors
+          operations:
+            - name: listconnectors
+              method: GET
+              description: List connectors
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-data_sources-connectors-3
+          path: /v1/data_sources/{data_source_id}/connectors/{connector_id}
+          operations:
+            - name: getconnector
+              method: GET
+              description: Get connector
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-data_sources-connectors-4
+          path: /v1/data_sources/{data_source_id}/connectors/{connector_id}
+          operations:
+            - name: updateconnector
+              method: PUT
+              description: Update connector
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+        - name: v1-data_sources-connectors-5
+          path: /v1/data_sources/{data_source_id}/connectors/{connector_id}
+          operations:
+            - name: deleteconnector
+              method: DELETE
+              description: Delete connector
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Request body (JSON).
+                  required: false
+      authentication:
+        type: apikey
+        key: authorization
+        value: 'Bearer {{env.MXBAI_API_KEY}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: data-sources-connectors-rest
+      port: 8080
+      description: REST adapter for Mixedbread Data Sources — Connectors. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources: []

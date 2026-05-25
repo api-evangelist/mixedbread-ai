@@ -1,0 +1,360 @@
+aid: mixedbread-ai
+url: https://raw.githubusercontent.com/api-evangelist/mixedbread-ai/refs/heads/main/apis.yml
+apis:
+- aid: mixedbread-ai:mixedbread-embeddings-api
+  name: Mixedbread Embeddings API
+  tags:
+  - AI
+  - Embeddings
+  - Vectors
+  - Multimodal
+  humanURL: https://www.mixedbread.com/api-reference
+  baseURL: https://api.mixedbread.com
+  properties:
+  - url: https://www.mixedbread.com/api-reference
+    type: Documentation
+  - url: openapi/mixedbread-embeddings-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/mixedbread-embedding-schema.json
+    type: JSONSchema
+  - url: json-ld/mixedbread-ai-context.jsonld
+    type: JSONLD
+  - type: NaftikoCapability
+    url: capabilities/embeddings-embeddings.yaml
+  description: POST /v1/embeddings creates dense or multi-encoding embeddings for text and images using mxbai embedding
+    models (mxbai-embed-large-v1, deepset-mxbai-embed-de-large-v1, mxbai-embed-xsmall-v1, Wholembed v3). Supports
+    Matryoshka dimensions, binary/int8/float32 encodings, and prompt instructions. Returns Embedding objects with
+    token usage.
+- aid: mixedbread-ai:mixedbread-reranking-api
+  name: Mixedbread Reranking API
+  tags:
+  - AI
+  - Reranking
+  - Search
+  - Retrieval
+  humanURL: https://www.mixedbread.com/api-reference
+  baseURL: https://api.mixedbread.com
+  properties:
+  - url: https://www.mixedbread.com/api-reference
+    type: Documentation
+  - url: openapi/mixedbread-reranking-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/mixedbread-rerank-schema.json
+    type: JSONSchema
+  - type: NaftikoCapability
+    url: capabilities/reranking-reranking.yaml
+  description: POST /v1/reranking reorders a candidate document list against a query using the mxbai-rerank family
+    (xsmall-v1, base-v1, large-v1, base-v2, large-v2, plus the v3-listwise instruction-following reranker).
+    Documents can be raw strings or structured objects with a return_input flag. Top-K results returned with
+    relevance scores.
+- aid: mixedbread-ai:mixedbread-stores-api
+  name: Mixedbread Stores API
+  tags:
+  - AI
+  - Search
+  - Vector Database
+  - RAG
+  - Retrieval
+  humanURL: https://www.mixedbread.com/api-reference
+  baseURL: https://api.mixedbread.com
+  properties:
+  - url: https://www.mixedbread.com/docs/stores/overview
+    type: Documentation
+  - url: openapi/mixedbread-stores-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/mixedbread-store-schema.json
+    type: JSONSchema
+  - type: NaftikoCapability
+    url: capabilities/stores-stores.yaml
+  - type: NaftikoCapability
+    url: capabilities/stores-files.yaml
+  - type: NaftikoCapability
+    url: capabilities/stores-search.yaml
+  description: Stores are AI-powered multimodal search indexes. CRUD for stores plus file upload, semantic search,
+    grep, list-chunks, question-answering, query enhancement, metadata facets, search rules, and events.
+    Replaces the deprecated /v1/vector_stores surface; deprecated endpoints kept for backward compatibility.
+- aid: mixedbread-ai:mixedbread-parsing-api
+  name: Mixedbread Parsing API
+  tags:
+  - AI
+  - Parsing
+  - Documents
+  - Chunking
+  - OCR
+  humanURL: https://www.mixedbread.com/api-reference
+  baseURL: https://api.mixedbread.com
+  properties:
+  - url: https://www.mixedbread.com/api-reference
+    type: Documentation
+  - url: openapi/mixedbread-parsing-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/parsing-jobs.yaml
+  description: Asynchronous document parsing as jobs. POST /v1/parsing/jobs starts a parse over an uploaded file
+    with configurable chunking strategy, return format (markdown/HTML/text), and element extraction. GET/PATCH/DELETE
+    on /v1/parsing/jobs/{job_id} for retrieval, cancellation, and deletion. Produces structured chunks with type
+    metadata for text, code, tables, images, audio, video.
+- aid: mixedbread-ai:mixedbread-extractions-api
+  name: Mixedbread Extractions API
+  tags:
+  - AI
+  - Extraction
+  - Structured Output
+  - JSON Schema
+  humanURL: https://www.mixedbread.com/api-reference
+  baseURL: https://api.mixedbread.com
+  properties:
+  - url: https://www.mixedbread.com/api-reference
+    type: Documentation
+  - url: openapi/mixedbread-extractions-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/extractions-jobs.yaml
+  - type: NaftikoCapability
+    url: capabilities/extractions-schema.yaml
+  description: Schema-guided structured extraction. POST /v1/extractions/jobs runs an extraction job against a file;
+    POST /v1/extractions/content extracts from raw strings. The /v1/extractions/schema family creates, enhances,
+    and validates JSON Schema definitions used by the extraction pipeline.
+- aid: mixedbread-ai:mixedbread-files-api
+  name: Mixedbread Files API
+  tags:
+  - AI
+  - Files
+  - Storage
+  - Multipart Upload
+  humanURL: https://www.mixedbread.com/api-reference
+  baseURL: https://api.mixedbread.com
+  properties:
+  - url: https://www.mixedbread.com/api-reference
+    type: Documentation
+  - url: openapi/mixedbread-files-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/files-files.yaml
+  - type: NaftikoCapability
+    url: capabilities/files-uploads.yaml
+  description: Workspace file management for files used across stores, parsing, and extraction. Single-shot upload
+    via POST /v1/files plus multipart upload via /v1/files/uploads (create, complete, abort, list). Standard CRUD
+    on /v1/files/{file_id} including content download.
+- aid: mixedbread-ai:mixedbread-completions-api
+  name: Mixedbread Chat Completions API
+  tags:
+  - AI
+  - Chat
+  - Completions
+  - LLM
+  humanURL: https://www.mixedbread.com/api-reference
+  baseURL: https://api.mixedbread.com
+  properties:
+  - url: https://www.mixedbread.com/api-reference
+    type: Documentation
+  - url: openapi/mixedbread-completions-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/completions-chat.yaml
+  description: POST /v1/chat/completions exposes an OpenAI-compatible chat completion surface that grounds responses
+    in Mixedbread Stores. Used to drive question-answering and agentic flows on top of indexed multimodal content.
+- aid: mixedbread-ai:mixedbread-data-sources-api
+  name: Mixedbread Data Sources API
+  tags:
+  - AI
+  - Data Sources
+  - Connectors
+  - Integrations
+  - OAuth2
+  humanURL: https://www.mixedbread.com/api-reference
+  baseURL: https://api.mixedbread.com
+  properties:
+  - url: https://www.mixedbread.com/api-reference
+    type: Documentation
+  - url: openapi/mixedbread-data-sources-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/data-sources-data-sources.yaml
+  - type: NaftikoCapability
+    url: capabilities/data-sources-connectors.yaml
+  description: Manage external data sources and their connectors, including OAuth2 authorization/callback flows.
+    Lets stores ingest content from third-party SaaS systems through reusable connector definitions.
+- aid: mixedbread-ai:mixedbread-api-keys-api
+  name: Mixedbread API Keys API
+  tags:
+  - AI
+  - Administration
+  - API Keys
+  - Security
+  humanURL: https://www.mixedbread.com/api-reference
+  baseURL: https://api.mixedbread.com
+  properties:
+  - url: https://www.mixedbread.com/api-reference
+    type: Documentation
+  - url: openapi/mixedbread-api-keys-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/api-keys-api-keys.yaml
+  description: Programmatic management of workspace API keys. CRUD plus rotation (reroll) and revocation under
+    /v1/api-keys.
+- aid: mixedbread-ai:mixedbread-billing-api
+  name: Mixedbread Billing API
+  tags:
+  - AI
+  - Billing
+  - Usage
+  - FinOps
+  - Cost
+  humanURL: https://www.mixedbread.com/api-reference
+  baseURL: https://api.mixedbread.com
+  properties:
+  - url: https://www.mixedbread.com/api-reference
+    type: Documentation
+  - url: openapi/mixedbread-billing-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/billing-billing.yaml
+  description: Read-only billing telemetry. GET /v1/billing/summary returns workspace-level spend; /v1/billing/stores
+    breaks cost down per store; histogram endpoints chart store and parsing costs over time. Aligns with the
+    workspace's usage-based pricing.
+- aid: mixedbread-ai:mixedbread-schemas-api
+  name: Mixedbread Schemas API
+  tags:
+  - AI
+  - JSON Schema
+  - Discovery
+  humanURL: https://www.mixedbread.com/api-reference
+  baseURL: https://api.mixedbread.com
+  properties:
+  - url: https://www.mixedbread.com/api-reference
+    type: Documentation
+  - url: openapi/mixedbread-schemas-api-openapi.yml
+    type: OpenAPI
+  description: GET /v1/schemas/mxjson returns the mxbai JSON schema definition. Used by clients and the CLI to
+    validate Mixedbread-flavored JSON payloads.
+- aid: mixedbread-ai:mixedbread-admin-api
+  name: Mixedbread Admin API
+  tags:
+  - AI
+  - Administration
+  - Operations
+  humanURL: https://www.mixedbread.com/api-reference
+  baseURL: https://api.mixedbread.com
+  properties:
+  - url: https://www.mixedbread.com/api-reference
+    type: Documentation
+  - url: openapi/mixedbread-admin-api-openapi.yml
+    type: OpenAPI
+  description: Reserved operations for Mixedbread platform administrators. POST /v1/admin/stores/{organization_id}/{store_identifier}/reingest
+    triggers a full reingest of a tenant store.
+name: Mixedbread
+tags:
+- AI
+- Artificial Intelligence
+- Embeddings
+- Reranking
+- Search
+- Retrieval
+- RAG
+- Vector Database
+- Multimodal
+- Parsing
+- Open Weights
+kind: contract
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+common:
+- type: Portal
+  url: https://www.mixedbread.com/
+  name: Mixedbread Home
+- type: Documentation
+  url: https://www.mixedbread.com/docs
+  name: Mixedbread Docs
+- type: Documentation
+  url: https://www.mixedbread.com/api-reference
+  name: API Reference
+- type: SignUp
+  url: https://platform.mixedbread.com/
+  name: Mixedbread Platform
+- type: Pricing
+  url: https://www.mixedbread.com/pricing
+  name: Pricing
+- type: Blog
+  url: https://www.mixedbread.com/blog
+  name: Blog
+- type: GitHub
+  url: https://github.com/mixedbread-ai
+  name: Mixedbread GitHub
+- type: HuggingFace
+  url: https://huggingface.co/mixedbread-ai
+  name: Mixedbread on Hugging Face
+- type: SDK
+  url: https://github.com/mixedbread-ai/mixedbread-python
+  name: Python SDK
+- type: SDK
+  url: https://github.com/mixedbread-ai/mixedbread-ts
+  name: TypeScript SDK
+- type: SDK
+  url: https://github.com/mixedbread-ai/python-sdk
+  name: Python SDK (legacy)
+- type: SDK
+  url: https://github.com/mixedbread-ai/typescript-sdk
+  name: TypeScript SDK (legacy)
+- type: CLI
+  url: https://www.mixedbread.com/docs/cli
+  name: Mixedbread CLI
+- type: Tools
+  url: https://github.com/mixedbread-ai/skills
+  name: Agent Skills (npx skills add mixedbread-ai/skills)
+- type: Tools
+  url: https://github.com/mixedbread-ai/mxbai-rerank
+  name: mxbai-rerank (open-weight reranking models)
+- type: Tools
+  url: https://github.com/mixedbread-ai/baguetter
+  name: Baguetter (search engine library)
+- type: Tools
+  url: https://github.com/mixedbread-ai/batched
+  name: Batched (dynamic batching for inference)
+- type: Tools
+  url: https://github.com/mixedbread-ai/maxsim-cpu
+  name: maxsim-cpu (CPU late-interaction kernels)
+- type: Tools
+  url: https://github.com/mixedbread-ai/mgrep
+  name: mgrep (semantic CLI grep)
+- type: Integration
+  url: https://github.com/mixedbread-ai/mixedbread-ai-langchain
+  name: LangChain Integration
+- type: Integration
+  url: https://github.com/mixedbread-ai/mixedbread-ai-haystack
+  name: Haystack Integration
+- type: Integration
+  url: https://github.com/mixedbread-ai/vercel-marketplace-mixedbread
+  name: Vercel Marketplace Integration
+- type: Integration
+  url: https://www.mixedbread.com/docs/mcp
+  name: Model Context Protocol (MCP)
+- type: Authentication
+  url: https://www.mixedbread.com/api-reference
+  name: API Key (Bearer)
+- type: LinkedIn
+  url: https://www.linkedin.com/company/mixedbread-ai/
+  name: LinkedIn
+- type: Twitter
+  url: https://x.com/mixedbreadai
+  name: X (Twitter)
+- type: Discord
+  url: https://discord.gg/mixedbread
+  name: Discord
+- type: Plans
+  url: plans/mixedbread-ai-plans-pricing.yml
+  name: Plans (API Commons)
+- type: RateLimits
+  url: rate-limits/mixedbread-ai-rate-limits.yml
+  name: Rate Limits (API Commons)
+- type: FinOps
+  url: finops/mixedbread-ai-finops.yml
+  name: FinOps (FOCUS-aligned)
+created: '2026-05-25'
+modified: '2026-05-25'
+specificationVersion: '0.20'
+description: Mixedbread is a Berlin-based AI search and retrieval platform. It provides embeddings (mxbai-embed,
+  Wholembed v3), rerankers (mxbai-rerank v1/v2/v3-listwise), multimodal stores, document parsing, structured
+  extraction, and connector-based ingestion. Models are published as open weights on Hugging Face and consumed
+  via a hosted REST API at api.mixedbread.com. The platform powers RAG and agent retrieval over text, PDFs, images,
+  audio, and video across 100+ languages.

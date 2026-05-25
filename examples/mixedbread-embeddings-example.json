@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.mixedbread.com/v1/embeddings",
+    "headers": {
+      "Authorization": "Bearer $MXBAI_API_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "model": "mixedbread-ai/mxbai-embed-large-v1",
+      "input": [
+        "Represent this sentence for searching relevant passages: What is retrieval-augmented generation?",
+        "RAG combines retrieval over a corpus with generative LLMs."
+      ],
+      "normalized": true,
+      "encoding_format": "float"
+    }
+  },
+  "response": {
+    "object": "list",
+    "model": "mixedbread-ai/mxbai-embed-large-v1",
+    "normalized": true,
+    "encoding_format": "float",
+    "dimensions": 1024,
+    "data": [
+      {"object": "embedding", "index": 0, "embedding": [0.0123, -0.0456, "..."]},
+      {"object": "embedding", "index": 1, "embedding": [0.0987, 0.0214, "..."]}
+    ],
+    "usage": {"prompt_tokens": 32, "total_tokens": 32}
+  }
+}
