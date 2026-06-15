@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mixedbread Extractions API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "extractions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start an extraction job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/extractions/jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Start an extraction job for the provided file and schema.\n\nArgs:\n    params: The parameters for creating an extraction job.\n\nReturns:\n    The created extraction job."
+        },
+        {
+          "info": {
+            "name": "Get extraction job result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/extractions/jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the extraction job to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get detailed information about a specific extraction job.\n\nArgs:\n    job_id: The ID of the extraction job.\n\nReturns:\n    Detailed information about the extraction job."
+        },
+        {
+          "info": {
+            "name": "Create a schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/extractions/schema",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a schema with the provided parameters.\n\nArgs:\n    params: The parameters for creating a schema.\n\nReturns:\n    The created schema."
+        },
+        {
+          "info": {
+            "name": "Enhance a schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/extractions/schema/enhance",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Enhance a schema by enriching the descriptions to aid extraction.\n\nArgs:\n    params: The parameters for enhancing a schema.\n\nReturns:\n    The enhanced schema."
+        },
+        {
+          "info": {
+            "name": "Validate a schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/extractions/schema/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Validate a schema.\n\nArgs:\n    params: The parameters for validating a schema.\n\nReturns:\n    The validation result."
+        },
+        {
+          "info": {
+            "name": "Extract content from a string",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/extractions/content",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Extract content from a string using the provided schema.\n\nArgs:\n    params: The parameters for extracting content from a string.\n\nReturns:\n    The extracted content."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

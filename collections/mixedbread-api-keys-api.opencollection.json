@@ -1,0 +1,185 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mixedbread API Keys API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "api_keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/api-keys",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset of the first item to return"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all API keys for the authenticated user.\n\nArgs:\n    pagination: The pagination options\n\nReturns:\n    A list of API keys belonging to the user."
+        },
+        {
+          "info": {
+            "name": "Create API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/api-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new API key.\n\nArgs:\n    params: The parameters for creating the API key.\n\nReturns:\n    ApiKeyCreated: The response containing the details of the created API key."
+        },
+        {
+          "info": {
+            "name": "Get API key details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/api-keys/:api_key_id",
+            "params": [
+              {
+                "name": "api_key_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve details of a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to retrieve.\n\nReturns:\n    ApiKey: The response containing the API key details."
+        },
+        {
+          "info": {
+            "name": "Update API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mixedbread.com/v1/api-keys/:api_key_id",
+            "params": [
+              {
+                "name": "api_key_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to update.\n    params: The parameters to update.\n\nReturns:\n    ApiKey: The updated API key details."
+        },
+        {
+          "info": {
+            "name": "Delete API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/api-keys/:api_key_id",
+            "params": [
+              {
+                "name": "api_key_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to delete.\n\nReturns:\n    ApiKeyDeleted: The response containing the details of the deleted API key."
+        },
+        {
+          "info": {
+            "name": "Revoke API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/api-keys/:api_key_id/revoke",
+            "params": [
+              {
+                "name": "api_key_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key to revoke"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Revoke a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to revoke.\n\nReturns:\n    ApiKey: The response containing the details of the revoked API key."
+        },
+        {
+          "info": {
+            "name": "Reroll API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/api-keys/:api_key_id/reroll",
+            "params": [
+              {
+                "name": "api_key_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key to reroll"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reroll the secret for a specific API key by its ID.\n\nThis generates a new secret key, invalidating the old one.\n\nArgs:\n    api_key_id: The ID of the API key to reroll.\n\nReturns:\n    ApiKeyCreated: The response containing the API key details with the new secret key."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

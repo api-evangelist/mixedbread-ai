@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mixedbread Schemas API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "schemas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get mxbai json schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/schemas/mxjson",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the mxbai json schema.\n\nReturns:\n    The mxbai json schema."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

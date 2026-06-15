@@ -1,0 +1,311 @@
+{
+  "item": [
+    {
+      "id": "f939d476-3faa-48af-b5c0-20b4c8a22a2f",
+      "name": "Info",
+      "request": {
+        "name": "Info",
+        "description": {
+          "content": "Returns service information, including name and version.\n\nReturns:\n    InfoResponse: A response containing the service name and version.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            ""
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{bearerToken}}"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "7e7b168b-f559-406e-bcc5-3bf15ff1115b",
+          "name": "Info response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"name\": \"string\",\n  \"version\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "e9f4b0c4-d3c5-4298-a0fb-37e56f739c74",
+          "name": "Info failed",
+          "originalRequest": {
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"code\": 3022,\n    \"type\": \"string\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "f3cd47b0-ddd9-4704-9267-80464775e796",
+      "name": "Create embeddings for text and images",
+      "request": {
+        "name": "Create embeddings for text and images",
+        "description": {
+          "content": "Create embeddings for text or images using the specified model, encoding format, and normalization.\n\nArgs:\n    params: The parameters for creating embeddings.\n\nReturns:\n    EmbeddingCreateResponse: The response containing the embeddings.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "v1",
+            "embeddings"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{bearerToken}}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"dimensions\": \"<integer>\",\n  \"prompt\": \"<string>\",\n  \"normalized\": true,\n  \"encoding_format\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "a7b275e8-6731-4b85-8a4a-3f8deb725e8c",
+          "name": "The embeddings for the input text or image",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "v1",
+                "embeddings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"mixedbread-ai/mxbai-embed-large-v1\",\n  \"input\": \"<string>\",\n  \"dimensions\": \"<integer>\",\n  \"prompt\": \"<string>\",\n  \"normalized\": true,\n  \"encoding_format\": \"base64\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"usage\": {\n    \"completion_tokens\": 10,\n    \"prompt_tokens\": 10,\n    \"total_tokens\": 20\n  },\n  \"model\": \"string\",\n  \"data\": [\n    {\n      \"embedding\": [\n        1756.001786760505,\n        5323.244751682302\n      ],\n      \"index\": 0,\n      \"object\": \"embedding\"\n    },\n    {\n      \"embedding\": [\n        9342.81799822854,\n        4324.217831424214\n      ],\n      \"index\": 0,\n      \"object\": \"embedding\"\n    }\n  ],\n  \"normalized\": true,\n  \"encoding_format\": \"binary\",\n  \"dimensions\": 2258,\n  \"object\": \"list\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "396634fa-8461-4ced-902b-aaaf5e9c0e61",
+          "name": "Validation Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "v1",
+                "embeddings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"mixedbread-ai/mxbai-embed-large-v1\",\n  \"input\": \"<string>\",\n  \"dimensions\": \"<integer>\",\n  \"prompt\": \"<string>\",\n  \"normalized\": true,\n  \"encoding_format\": \"base64\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mixedbread.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4685cd05-0fee-4fa9-befc-398749760bf0",
+    "name": "Mixedbread Embeddings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mixedbread embeddings endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+      "type": "text/plain"
+    }
+  }
+}

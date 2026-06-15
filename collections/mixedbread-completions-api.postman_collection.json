@@ -1,0 +1,122 @@
+{
+  "item": [
+    {
+      "id": "f70b3258-4a58-4203-a306-0425770de91e",
+      "name": "completions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a05a3c96-eb68-4304-b44d-4715512e70a0",
+          "name": "Create a chat completion",
+          "request": {
+            "name": "Create a chat completion",
+            "description": {
+              "content": "Create a chat completion using the provided parameters.\n\nGenerates a completion response based on the chat messages and model parameters provided.\nThe response can be either a full completion or streamed chunks depending on the request parameters.\n\nArgs:\n    params: Parameters for creating the chat completion including messages, model selection,\n           and generation settings\n    user: The authenticated user making the request\n\nReturns:\n    Either a ChatCompletion containing the full response, or ChatCompletionChunk for streaming\n\nRaises:\n    HTTPException: If there is an error creating the completion (500)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "chat",
+                "completions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1ba4d0b3-b080-444b-a127-d62f65fe3a9b",
+              "name": "The generated chat completion response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "chat",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mixedbread.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4e230ca9-4d88-4994-86b9-780b0064e304",
+    "name": "Mixedbread Chat Completions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mixedbread completions endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+      "type": "text/plain"
+    }
+  }
+}

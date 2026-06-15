@@ -1,0 +1,380 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mixedbread Data Sources API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "data_sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all connectors for a data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/data_sources/:data_source_id/connectors",
+            "params": [
+              {
+                "name": "data_source_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the data source to get connectors for"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page (1-100)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response."
+              },
+              {
+                "name": "include_total",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include total count in response (expensive operation)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all connectors for a data source.\n\nArgs:\n    data_source_id: The ID of the data source to get connectors for.\n    pagination: The pagination options.\n\nReturns:\n    The list of connectors."
+        },
+        {
+          "info": {
+            "name": "Create a new connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/data_sources/:data_source_id/connectors",
+            "params": [
+              {
+                "name": "data_source_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the data source to create a connector for"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new connector.\n\nArgs:\n    data_source_id: The ID of the data source to create a connector for.\n    params: The connector to create.\n\nReturns:\n    The created connector."
+        },
+        {
+          "info": {
+            "name": "Get a connector by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/data_sources/:data_source_id/connectors/:connector_id",
+            "params": [
+              {
+                "name": "data_source_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the data source to get a connector for"
+              },
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the connector to get"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a connector by ID.\n\nArgs:\n    data_source_id: The ID of the data source to get a connector for.\n    connector_id: The ID of the connector to get.\n\nReturns:\n    The connector."
+        },
+        {
+          "info": {
+            "name": "Update a connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mixedbread.com/v1/data_sources/:data_source_id/connectors/:connector_id",
+            "params": [
+              {
+                "name": "data_source_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the data source to update a connector for"
+              },
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the connector to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a connector.\n\nArgs:\n    data_source_id: The ID of the data source to update a connector for.\n    connector_id: The ID of the connector to update.\n    params: The connector to update.\n\nReturns:\n    The updated connector."
+        },
+        {
+          "info": {
+            "name": "Delete a connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/data_sources/:data_source_id/connectors/:connector_id",
+            "params": [
+              {
+                "name": "data_source_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the data source to delete a connector for"
+              },
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the connector to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a connector.\n\nArgs:\n    data_source_id: The ID of the data source to delete a connector for.\n    connector_id: The ID of the connector to delete.\n\nReturns:\n    The deleted connector."
+        },
+        {
+          "info": {
+            "name": "Get all data sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/data_sources/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page (1-100)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response."
+              },
+              {
+                "name": "include_total",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include total count in response (expensive operation)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all data sources.\n\nReturns:\n    The list of data sources."
+        },
+        {
+          "info": {
+            "name": "Create a new data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/data_sources/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new data source.\n\nArgs:\n    params: The data source to create.\n\nReturns:\n    The created data source."
+        },
+        {
+          "info": {
+            "name": "Get a data source by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/data_sources/:data_source_id",
+            "params": [
+              {
+                "name": "data_source_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the data source to fetch"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a data source by ID.\n\nArgs:\n    data_source_id: The ID of the data source to fetch.\n\nReturns:\n    The data source."
+        },
+        {
+          "info": {
+            "name": "Update a data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mixedbread.com/v1/data_sources/:data_source_id",
+            "params": [
+              {
+                "name": "data_source_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the data source to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a data source.\n\nArgs:\n    data_source_id: The ID of the data source to update.\n    params: The data source to update.\n\nReturns:\n    The updated data source."
+        },
+        {
+          "info": {
+            "name": "Delete a data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/data_sources/:data_source_id",
+            "params": [
+              {
+                "name": "data_source_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the data source to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a data source.\n\nArgs:\n    data_source_id: The ID of the data source to delete."
+        },
+        {
+          "info": {
+            "name": "Authorize a data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/data_sources/:data_source_id/oauth2/authorize",
+            "params": [
+              {
+                "name": "data_source_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the data source to authorize"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Start OAuth2 authorization flow for a data source.\n\nInitiates the OAuth2 authorization process by redirecting the user\nto the external service's authorization page. After authorization,\nthe user will be redirected back to the oauth2_callback endpoint.\n\nArgs:\n    data_source_id: The ID of the data source to authorize\n\nReturns:\n    Redirect to the OAuth2 provider's authorization page\n\nRaises:\n    DataSourceNotFoundError: When data source doesn't exist\n    DataSourceAuthTypeNotSupportedError: When "
+        },
+        {
+          "info": {
+            "name": "OAuth2 callback for data source authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/data_sources/oauth2/callback",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "OAuth2 state parameter for CSRF protection"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Authorization code from OAuth2 provider"
+              },
+              {
+                "name": "error",
+                "value": "",
+                "type": "query",
+                "description": "OAuth2 error code if authorization failed"
+              },
+              {
+                "name": "error_description",
+                "value": "",
+                "type": "query",
+                "description": "Human-readable error description"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "OAuth2 callback endpoint for completing data source authorization.\n\nThis endpoint is called by OAuth2 providers after user authorization.\nIt exchanges the authorization code for access tokens and stores them\nsecurely for the data source.\n\nArgs:\n    state: OAuth2 state parameter used for CSRF protection\n    code: Authorization code from the OAuth2 provider\n    error: OAuth2 error code if authorization was denied or failed\n    error_description: Human-readable description of the error\n\nReturns:\n  "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,159 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mixedbread Parsing API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "parsing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List parsing jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/parsing/jobs",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page (1-100)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response."
+              },
+              {
+                "name": "include_total",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include total count in response (expensive operation)"
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Status to filter by"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query to filter by"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List parsing jobs with pagination.\n\nArgs:\n    limit: The number of items to return.\n    offset: The number of items to skip.\n\nReturns:\n    List of parsing jobs with pagination."
+        },
+        {
+          "info": {
+            "name": "Start a parse job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/parsing/jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Start a parse job for the provided file.\n\nArgs:\n    params: The parameters for creating a parse job.\n\nReturns:\n    The created parsing job."
+        },
+        {
+          "info": {
+            "name": "Get parsing job result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/parsing/jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the parse job to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get detailed information about a specific parse job.\n\nArgs:\n    job_id: The ID of the parse job.\n\nReturns:\n    Detailed information about the parse job."
+        },
+        {
+          "info": {
+            "name": "Cancel a parsing job",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mixedbread.com/v1/parsing/jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the parse job to cancel"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Cancel a specific parse job.\n\nArgs:\n    job_id: The ID of the parse job to cancel.\n\nReturns:\n    The cancelled parsing job."
+        },
+        {
+          "info": {
+            "name": "Delete a parsing job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/parsing/jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the parse job to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a specific parse job.\n\nArgs:\n    job_id: The ID of the parse job to delete.\n\nReturns:\n    The deleted parsing job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

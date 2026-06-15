@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mixedbread Reranking API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rerank different kind of documents for a given query",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.mixedbread.com/v1/reranking",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        },
+        "auth": {
+          "type": "bearer",
+          "token": "{{bearerToken}}"
+        }
+      },
+      "docs": "Rerank different kind of documents for a given query.\n\nArgs:\n    params: RerankParams: The parameters for reranking.\n\nReturns:\n    RerankResponse: The reranked documents for the input query."
+    }
+  ],
+  "bundled": true
+}

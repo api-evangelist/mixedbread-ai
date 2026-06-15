@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mixedbread Chat Completions API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "completions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a chat completion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/chat/completions",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a chat completion using the provided parameters.\n\nGenerates a completion response based on the chat messages and model parameters provided.\nThe response can be either a full completion or streamed chunks depending on the request parameters.\n\nArgs:\n    params: Parameters for creating the chat completion including messages, model selection,\n           and generation settings\n    user: The authenticated user making the request\n\nReturns:\n    Either a ChatCompletion containing the full respons"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

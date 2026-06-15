@@ -1,0 +1,462 @@
+{
+  "item": [
+    {
+      "id": "3af129ae-fd5b-4bcb-a9ad-6e2f4f32d833",
+      "name": "billing",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d86f462a-2105-4b21-bfb3-ae1d00448fc0",
+          "name": "Get billing summary",
+          "request": {
+            "name": "Get billing summary",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "billing",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f5e1d1b1-8755-4690-9db4-6e1940446687",
+              "name": "Billing summary for the current period",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "billing",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"period\": {\n    \"start\": \"1993-05-04T19:34:13.326Z\",\n    \"end\": \"1988-06-26T11:48:58.856Z\"\n  },\n  \"cost\": {\n    \"net_usage_cost\": \"0\",\n    \"gross_usage_cost\": \"0\",\n    \"balance_applied\": \"0\"\n  },\n  \"balance\": {\n    \"current_balance\": 8298.99799952896,\n    \"next_effective_balance\": 2951.284392589636,\n    \"next_effective_date\": \"1959-03-26T00:35:54.864Z\"\n  },\n  \"usages\": {\n    \"key_0\": {\n      \"current\": \"0\",\n      \"limit\": \"697509309\",\n      \"unit\": \"\"\n    },\n    \"key_1\": {\n      \"current\": \"0\",\n      \"limit\": \"+00000000002938036.311\",\n      \"unit\": \"\"\n    }\n  },\n  \"generated_at\": \"1963-01-04T23:52:43.336Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3abff726-4f1b-446d-8704-afe55a79a1a8",
+          "name": "List store cost information",
+          "request": {
+            "name": "List store cost information",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "billing",
+                "stores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4a2c123d-18db-414b-9054-2658ea22ddbc",
+              "name": "The list of store cost information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "billing",
+                    "stores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"store_id\": \"string\",\n      \"cost\": \"000184.147546\",\n      \"cost_per_metric\": {\n        \"key_0\": \"133269\",\n        \"key_1\": \"+00000004077932025\"\n      }\n    },\n    {\n      \"store_id\": \"string\",\n      \"cost\": \"+00372863736567\",\n      \"cost_per_metric\": {\n        \"key_0\": \"000.303114\",\n        \"key_1\": \"-0000000380475657910782\"\n      }\n    }\n  ],\n  \"object\": \"list\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65cfa9fb-1cc8-4827-a3b0-c5c975fe06d6",
+          "name": "Get store cost histogram",
+          "request": {
+            "name": "Get store cost histogram",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "billing",
+                "stores",
+                ":store_id",
+                "costs",
+                "histogram"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "store_id",
+                  "description": "(Required) The ID of the store"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9c178f4c-831e-4c96-910b-c29ec7859708",
+              "name": "Histogram of store costs over time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "billing",
+                    "stores",
+                    ":store_id",
+                    "costs",
+                    "histogram"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "store_id",
+                      "description": "(Required) The ID of the store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"day\": \"1956-03-08T12:50:54.804Z\",\n      \"cost\": \"+0000007537546498\",\n      \"cost_per_metric\": {\n        \"key_0\": \"00000020071.975995542\"\n      }\n    },\n    {\n      \"day\": \"1975-12-13T16:58:20.634Z\",\n      \"cost\": \"000000000064011.83\",\n      \"cost_per_metric\": {\n        \"key_0\": \"0000000556933.151\"\n      }\n    }\n  ],\n  \"object\": \"cost.histogram\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "324975fa-3fcd-41c5-af18-a7b137be5279",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "billing",
+                    "stores",
+                    ":store_id",
+                    "costs",
+                    "histogram"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "store_id",
+                      "description": "(Required) The ID of the store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "332ba65a-8787-4504-819e-caa0f0525cbb",
+          "name": "Get parsing cost histogram",
+          "request": {
+            "name": "Get parsing cost histogram",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "billing",
+                "parsing",
+                "costs",
+                "histogram"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fa501875-b270-4803-95bd-202b4332f613",
+              "name": "Histogram of parsing costs over time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "billing",
+                    "parsing",
+                    "costs",
+                    "histogram"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"day\": \"1956-03-08T12:50:54.804Z\",\n      \"cost\": \"+0000007537546498\",\n      \"cost_per_metric\": {\n        \"key_0\": \"00000020071.975995542\"\n      }\n    },\n    {\n      \"day\": \"1975-12-13T16:58:20.634Z\",\n      \"cost\": \"000000000064011.83\",\n      \"cost_per_metric\": {\n        \"key_0\": \"0000000556933.151\"\n      }\n    }\n  ],\n  \"object\": \"cost.histogram\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mixedbread.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0106009e-5885-4801-82e4-79a8792f88ee",
+    "name": "Mixedbread Billing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mixedbread billing endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+      "type": "text/plain"
+    }
+  }
+}

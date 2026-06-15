@@ -1,0 +1,182 @@
+{
+  "item": [
+    {
+      "id": "e9c1277a-f4bd-46cc-be07-40686e7d7d52",
+      "name": "Rerank different kind of documents for a given query",
+      "request": {
+        "name": "Rerank different kind of documents for a given query",
+        "description": {
+          "content": "Rerank different kind of documents for a given query.\n\nArgs:\n    params: RerankParams: The parameters for reranking.\n\nReturns:\n    RerankResponse: The reranked documents for the input query.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "v1",
+            "reranking"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{bearerToken}}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"<string>\",\n  \"input\": [\n    \"<string>\"\n  ],\n  \"model\": \"mixedbread-ai/mxbai-rerank-large-v2\",\n  \"rank_fields\": [\n    \"<string>\"\n  ],\n  \"top_k\": -1,\n  \"return_input\": false,\n  \"rewrite_query\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "b351e585-1921-4c3d-95d0-ff65cc4f1b7d",
+          "name": "The reranked documents for the input query",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "v1",
+                "reranking"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"What are the key features of the Mixedbread embedding model?\",\n  \"input\": [\n    \"Document 1\",\n    \"Document 2\"\n  ],\n  \"model\": \"mixedbread-ai/mxbai-rerank-large-v2\",\n  \"rank_fields\": [\n    \"<string>\"\n  ],\n  \"top_k\": 10,\n  \"return_input\": false,\n  \"rewrite_query\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"usage\": {\n    \"completion_tokens\": 10,\n    \"prompt_tokens\": 10,\n    \"total_tokens\": 20\n  },\n  \"model\": \"string\",\n  \"data\": [\n    {\n      \"index\": 3524,\n      \"score\": 6727.782831844971,\n      \"input\": {},\n      \"object\": \"rank_result\"\n    },\n    {\n      \"index\": 3481,\n      \"score\": 7505.79699525674,\n      \"input\": {},\n      \"object\": \"rank_result\"\n    }\n  ],\n  \"top_k\": 10,\n  \"return_input\": false,\n  \"object\": \"list\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "6f8a377f-32f1-4acb-bb55-5a2b420487ca",
+          "name": "Validation Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "v1",
+                "reranking"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"What are the key features of the Mixedbread embedding model?\",\n  \"input\": [\n    \"Document 1\",\n    \"Document 2\"\n  ],\n  \"model\": \"mixedbread-ai/mxbai-rerank-large-v2\",\n  \"rank_fields\": [\n    \"<string>\"\n  ],\n  \"top_k\": 10,\n  \"return_input\": false,\n  \"rewrite_query\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mixedbread.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "23c8baf6-6b98-4d90-8550-5b6bfe2d1474",
+    "name": "Mixedbread Reranking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mixedbread reranking endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+      "type": "text/plain"
+    }
+  }
+}

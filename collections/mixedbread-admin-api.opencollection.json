@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mixedbread Admin API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Reingest all stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/admin/stores/:organization_id/:store_identifier/reingest",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Statuses of files to reingest"
+              },
+              {
+                "name": "billable",
+                "value": "",
+                "type": "query",
+                "description": "Whether the reingestion is billable to the user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reingest all stores across all organizations (admin only).\n\nThis endpoint creates StoreFileReingestionJob for each store.\n\nReturns:\n    dict: Confirmation message with count of jobs created."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,287 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mixedbread Files API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/files",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page (1-100)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response."
+              },
+              {
+                "name": "include_total",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include total count in response (expensive operation)"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query for fuzzy matching over name and description fields"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all files for the authenticated user.\n\nArgs:\n    pagination: The pagination options\n\nReturns:\n    A list of files belonging to the user."
+        },
+        {
+          "info": {
+            "name": "Upload file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/files",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload a new file.\n\nArgs:\n    file: The file to upload.\n\nReturns:\n    FileResponse: The response containing the details of the uploaded file."
+        },
+        {
+          "info": {
+            "name": "List in-progress multipart uploads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/files/uploads",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all in-progress multipart uploads for the authenticated organization."
+        },
+        {
+          "info": {
+            "name": "Create multipart upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/files/uploads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Initiate a multipart upload and receive presigned URLs for uploading parts directly to storage."
+        },
+        {
+          "info": {
+            "name": "Complete multipart upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/files/uploads/:upload_id/complete",
+            "params": [
+              {
+                "name": "upload_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the multipart upload"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Complete a multipart upload after all parts have been uploaded.\nCreates the file object and returns it."
+        },
+        {
+          "info": {
+            "name": "Abort multipart upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/files/uploads/:upload_id/abort",
+            "params": [
+              {
+                "name": "upload_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the multipart upload to abort"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Abort a multipart upload and clean up any uploaded parts."
+        },
+        {
+          "info": {
+            "name": "Get multipart upload details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/files/uploads/:upload_id",
+            "params": [
+              {
+                "name": "upload_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the multipart upload"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a multipart upload's details with fresh presigned URLs for any parts not yet uploaded."
+        },
+        {
+          "info": {
+            "name": "Get file details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/files/:file_id",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the file to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve details of a specific file by its ID.\n\nArgs:\n    file_id: The ID of the file to retrieve.\n\nReturns:\n    FileResponse: The response containing the file details."
+        },
+        {
+          "info": {
+            "name": "Update file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/files/:file_id",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the file to update"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the details of a specific file.\n\nArgs:\n    file_id: The ID of the file to update.\n    file: The new details for the file.\n\nReturns:\n    FileObject: The updated file details."
+        },
+        {
+          "info": {
+            "name": "Delete file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/files/:file_id",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the file to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a specific file by its ID.\n\nArgs:\n    file_id: The ID of the file to delete.\n\nReturns:\n    FileDeleted: The response containing the details of the deleted file."
+        },
+        {
+          "info": {
+            "name": "Download file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/files/:file_id/content",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the file to download"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download a specific file by its ID.\n\nArgs:\n    file_id: The ID of the file to download.\n\nReturns:\n    FileStreamResponse: The response containing the file to be downloaded."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

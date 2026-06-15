@@ -1,0 +1,1252 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mixedbread Stores API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "stores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List events for a store",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/events",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page (1-100)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response."
+              },
+              {
+                "name": "include_total",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include total count in response (expensive operation)"
+              },
+              {
+                "name": "filter_before",
+                "value": "",
+                "type": "query",
+                "description": "Time to filter events before"
+              },
+              {
+                "name": "filter_after",
+                "value": "",
+                "type": "query",
+                "description": "Time to filter events after"
+              },
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of event to list"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List events for a store.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    options: The pagination options.\n\nReturns:\n    StoreEventListResponse: The list of events for the store."
+        },
+        {
+          "info": {
+            "name": "Get store event histogram",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/events/histogram",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get histogram of store events over time.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    histogram_params: Parameters for histogram generation.\n\nReturns:\n    StoreEventHistogramResponse: The event histogram."
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] List store files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/files",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page (1-100)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response."
+              },
+              {
+                "name": "include_total",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include total count in response (expensive operation)"
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Status to filter by"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores/{store_identifier}/files/list instead"
+        },
+        {
+          "info": {
+            "name": "Upload file to store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/files",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload a file to a store.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    file_add_params: The file to add to the store.\n\nReturns:\n    VectorStoreFile: The uploaded file details."
+        },
+        {
+          "info": {
+            "name": "Upload file via form to store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/files/upload",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload a file via form to a store.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    config: The config for the file.\n    metadata: The metadata for the file.\n    file: The file to upload.\n\nReturns:\n    VectorStoreFile: The uploaded file details."
+        },
+        {
+          "info": {
+            "name": "List store files with metadata filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/files/list",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List files indexed in a vector store with pagination and metadata filter.\n\nArgs:\n    vector_store_identifier: The ID or name of the vector store\n    pagination: Pagination parameters and metadata filter\n\nReturns:\n    VectorStoreFileListResponse: Paginated list of vector store files"
+        },
+        {
+          "info": {
+            "name": "Get store file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/files/:file_identifier",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              },
+              {
+                "name": "file_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the file"
+              },
+              {
+                "name": "return_chunks",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return the chunks for the file. If a list of integers is provided, only the chunks at the specified indices will be returned."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a file from a store.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    file_id: The ID or name of the file.\n    options: Get file options.\n\nReturns:\n    VectorStoreFile: The file details."
+        },
+        {
+          "info": {
+            "name": "Update store file metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/files/:file_identifier",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              },
+              {
+                "name": "file_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the file to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update metadata on a file within a store.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    file_identifier: The ID or name of the file to update.\n    update_params: Metadata update payload.\n\nReturns:\n    StoreFile: The updated file details."
+        },
+        {
+          "info": {
+            "name": "Delete store file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/files/:file_identifier",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              },
+              {
+                "name": "file_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the file to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a file from a store.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    file_id: The ID or name of the file to delete.\n\nReturns:\n    VectorStoreFileDeleted: The deleted file details."
+        },
+        {
+          "info": {
+            "name": "Create search rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/rules",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new search rule for a store.\n\nArgs:\n    store_identifier: The ID or name of the store\n    rule_create: Search rule creation parameters\n\nReturns:\n    SearchRuleResponse: The created search rule details"
+        },
+        {
+          "info": {
+            "name": "Get a search rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/rules/:rule_id",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the search rule"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a search rule by ID.\n\nArgs:\n    store_identifier: The ID or name of the store\n    rule_id: The ID of the search rule to retrieve\n\nReturns:\n    SearchRuleResponse: The search rule details"
+        },
+        {
+          "info": {
+            "name": "Update a search rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/rules/:rule_id",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the search rule to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a search rule by ID.\n\nArgs:\n    store_identifier: The ID or name of the store\n    rule_id: The ID of the search rule to update\n    rule_update: SearchRuleUpdateParams object containing the fields to update\n\nReturns:\n    SearchRuleResponse: The updated search rule details"
+        },
+        {
+          "info": {
+            "name": "Delete a search rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/rules/:rule_id",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the search rule to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a search rule by ID.\n\nArgs:\n    store_identifier: The ID or name of the store\n    rule_id: The ID of the search rule to delete\n\nReturns:\n    SearchRuleDeleted: The deleted search rule details"
+        },
+        {
+          "info": {
+            "name": "Delete a specific rule from rules array",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier/rules/:rule_id/specific",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the search rule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a specific rule from within a search rule's rules array.\n\nArgs:\n    store_identifier: The ID or name of the store\n    rule_id: The ID of the search rule containing the rule to delete\n    rule_delete: The specific rule to delete from the rules array\n\nReturns:\n    SearchRuleSpecificDeleted: Details about the deletion operation"
+        },
+        {
+          "info": {
+            "name": "List stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/stores",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page (1-100)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response."
+              },
+              {
+                "name": "include_total",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include total count in response (expensive operation)"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query for fuzzy matching over name and description fields"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all stores with optional search.\n\nArgs:\n    pagination: The pagination options.\n    q: Optional search query to filter vector stores.\n\nReturns:\n    StoreListResponse: The list of stores."
+        },
+        {
+          "info": {
+            "name": "Create a store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/stores",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new vector store.\n\nArgs:\n    vector_store_create: VectorStoreCreate object containing the name, description, and metadata.\n\nReturns:\n    VectorStore: The response containing the created vector store details."
+        },
+        {
+          "info": {
+            "name": "Get a store",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a store by ID or name.\n\nArgs:\n    store_identifier: The ID or name of the store to retrieve.\n\nReturns:\n    Store: The response containing the store details."
+        },
+        {
+          "info": {
+            "name": "Update a store",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a store by ID or name.\n\nArgs:\n    store_identifier: The ID or name of the store to update.\n    store_update: StoreCreate object containing the name, description, and metadata.\n\nReturns:\n    Store: The response containing the updated store details."
+        },
+        {
+          "info": {
+            "name": "Delete a store",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/stores/:store_identifier",
+            "params": [
+              {
+                "name": "store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the store to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a store by ID or name.\n\nArgs:\n    store_identifier: The ID or name of the store to delete.\n\nReturns:\n    Store: The response containing the deleted store details."
+        },
+        {
+          "info": {
+            "name": "Perform semantic search across store chunks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/stores/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Perform semantic search across store chunks.\n\nThis endpoint searches through store chunks using semantic similarity matching.\nIt supports complex search queries with filters and returns relevance-scored results.\n\nFor the special 'mixedbread/web' store, this endpoint performs web search using\na mixture of different providers instead of semantic search. Web search results are always\nreranked for consistent scoring.\n\nArgs:\n    search_params: Search configuration including:\n        - query text or e"
+        },
+        {
+          "info": {
+            "name": "Match store chunks against a regular expression",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/stores/grep",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Match store chunks against a regular expression.\n\nUnlike `/stores/search`, this performs exact text matching — no embeddings, no\nsemantic similarity, no reranking. Use it to find chunks containing a specific\ntoken, identifier, error code, or literal phrase.\n\ngrep targets a single store and does not support pagination; raise `top_k` to\nretrieve more matches.\n\nArgs:\n    grep_params: Grep configuration including:\n        - pattern: RE2 regular expression matched against chunk text\n        - targets"
+        },
+        {
+          "info": {
+            "name": "List store chunks by metadata filter and numeric ranking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/stores/list-chunks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List store chunks purely by metadata filters — no embeddings, no semantic similarity, no reranking.\n\nUnlike `/stores/search`, this endpoint does not require a query and never runs a vector lookup.\nIt returns chunks whose file and chunk metadata satisfy `filters`, optionally ordered by a\nnumeric metadata field via `sort_by`. Useful for ranked retrieval over numeric attributes\n(e.g. price, BPM) and for reproducing the agentic `filter_chunks` tool externally.\n\nlist-chunks targets a single store and"
+        },
+        {
+          "info": {
+            "name": "Question answering",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/stores/question-answering",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Question answering"
+        },
+        {
+          "info": {
+            "name": "Enhance a search query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/stores/queries/enhance",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Extract metadata filters and ranking preferences from a search query."
+        },
+        {
+          "info": {
+            "name": "Get metadata facets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/stores/metadata-facets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get metadata facets"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "deprecated_vector_stores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "[DEPRECATED] List vector store files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/files",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page (1-100)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response."
+              },
+              {
+                "name": "include_total",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include total count in response (expensive operation)"
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Status to filter by"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores/{store_identifier}/files/list instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Upload file to vector store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/files",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores/{store_identifier}/files instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] List vector store files with metadata filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/files/list",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores/{store_identifier}/files/list instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Get vector store file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/files/:file_id",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the file"
+              },
+              {
+                "name": "return_chunks",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return the chunks for the file"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use GET /stores/{store_identifier}/files/{file_id} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Delete vector store file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/files/:file_id",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the file to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use DELETE /stores/{store_identifier}/files/{file_id} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Create search rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/rules",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores/{store_identifier}/rules instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Get a search rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/rules/:rule_id",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the search rule"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use GET /stores/{store_identifier}/rules/{rule_id} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Update a search rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/rules/:rule_id",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the search rule to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use PUT /stores/{store_identifier}/rules/{rule_id} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Delete a search rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/rules/:rule_id",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the search rule to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use DELETE /stores/{store_identifier}/rules/{rule_id} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Delete a specific rule from rules array",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/rules/:rule_id/specific",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the search rule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use DELETE /stores/{store_identifier}/rules/{rule_id}/specific instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] List vector stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/vector_stores",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page (1-100)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response."
+              },
+              {
+                "name": "include_total",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include total count in response (expensive operation)"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query for fuzzy matching over name and description fields"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use GET /stores instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Create a vector store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/vector_stores",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Get a vector store",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use GET /stores/{store_identifier} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Update a vector store",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use PUT /stores/{store_identifier} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Delete a vector store",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use DELETE /stores/{store_identifier} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Perform semantic search across vector store chunks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/vector_stores/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores/search instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Question answering",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/vector_stores/question-answering",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores/question-answering instead"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
