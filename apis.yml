@@ -247,7 +247,7 @@ common:
   - type: Documentation
     url: https://www.mixedbread.com/api-reference
     name: API Reference
-  - type: SignUp
+  - type: Signup
     url: https://platform.mixedbread.com/
     name: Mixedbread Platform
   - type: Pricing
@@ -262,16 +262,16 @@ common:
   - type: HuggingFace
     url: https://huggingface.co/mixedbread-ai
     name: Mixedbread on Hugging Face
-  - type: SDK
+  - type: SDKs
     url: https://github.com/mixedbread-ai/mixedbread-python
     name: Python SDK
-  - type: SDK
+  - type: SDKs
     url: https://github.com/mixedbread-ai/mixedbread-ts
     name: TypeScript SDK
-  - type: SDK
+  - type: SDKs
     url: https://github.com/mixedbread-ai/python-sdk
     name: Python SDK (legacy)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/mixedbread-ai/typescript-sdk
     name: TypeScript SDK (legacy)
   - type: CLI
@@ -295,16 +295,16 @@ common:
   - type: Tools
     url: https://github.com/mixedbread-ai/mgrep
     name: mgrep (semantic CLI grep)
-  - type: Integration
+  - type: Integrations
     url: https://github.com/mixedbread-ai/mixedbread-ai-langchain
     name: LangChain Integration
-  - type: Integration
+  - type: Integrations
     url: https://github.com/mixedbread-ai/mixedbread-ai-haystack
     name: Haystack Integration
-  - type: Integration
+  - type: Integrations
     url: https://github.com/mixedbread-ai/vercel-marketplace-mixedbread
     name: Vercel Marketplace Integration
-  - type: Integration
+  - type: Integrations
     url: https://www.mixedbread.com/docs/mcp
     name: Model Context Protocol (MCP)
   - type: Authentication
