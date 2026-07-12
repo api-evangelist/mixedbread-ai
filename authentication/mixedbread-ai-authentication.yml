@@ -1,0 +1,29 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/mixedbread-admin-api-openapi.yml, openapi/mixedbread-api-keys-api-openapi.yml,
+  openapi/mixedbread-billing-api-openapi.yml, openapi/mixedbread-completions-api-openapi.yml,
+  openapi/mixedbread-data-sources-api-openapi.yml, openapi/mixedbread-embeddings-api-openapi.yml,
+  openapi/mixedbread-extractions-api-openapi.yml, openapi/mixedbread-files-api-openapi.yml,
+  openapi/mixedbread-parsing-api-openapi.yml, openapi/mixedbread-reranking-api-openapi.yml,
+  openapi/mixedbread-schemas-api-openapi.yml, openapi/mixedbread-stores-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: ApiKeyAuth
+  type: http
+  scheme: bearer
+  description: Api key to access Mixedbreads API
+  sources:
+  - openapi/mixedbread-admin-api-openapi.yml
+  - openapi/mixedbread-api-keys-api-openapi.yml
+  - openapi/mixedbread-billing-api-openapi.yml
+  - openapi/mixedbread-completions-api-openapi.yml
+  - openapi/mixedbread-data-sources-api-openapi.yml
+  - openapi/mixedbread-embeddings-api-openapi.yml
+  - openapi/mixedbread-extractions-api-openapi.yml
+  - openapi/mixedbread-files-api-openapi.yml
+  - openapi/mixedbread-parsing-api-openapi.yml
+  - openapi/mixedbread-reranking-api-openapi.yml
+  - openapi/mixedbread-schemas-api-openapi.yml
+  - openapi/mixedbread-stores-api-openapi.yml
