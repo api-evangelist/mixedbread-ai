@@ -2,11 +2,11 @@
   "repo": "mixedbread-ai",
   "feeds": [
     {
-      "source": "https://www.mixedbread.com/blog",
+      "source": "https://www.mixedbread.com/blog/feed.xml",
       "feed_url": "https://www.mixedbread.com/blog/feed.xml",
       "title": "",
       "saved": 0,
-      "method": "discovered"
+      "method": "feed"
     },
     {
       "source": "https://www.mixedbread.com/pricing",
@@ -16,6 +16,6 @@
       "method": "none"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-06-27T12:03:07Z"
+  "post_count": 6,
+  "fetched": "2026-07-11T11:50:51Z"
 }
