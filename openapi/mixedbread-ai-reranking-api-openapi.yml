@@ -1,0 +1,282 @@
+openapi: 3.1.0
+info:
+  title: Mixedbread admin Reranking API
+  version: 0.1.0
+  description: Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
+servers:
+- url: https://api.mixedbread.com
+  description: mixedbread ai production server
+- url: https://api.dev.mixedbread.com
+  description: mixedbread ai development server
+- url: http://127.0.0.1:8000
+  description: mixedbread local server
+- url: http://localhost:8000
+  description: mixedbread local server
+tags:
+- name: Reranking
+paths:
+  /v1/reranking:
+    post:
+      summary: Rerank different kind of documents for a given query
+      description: "Rerank different kind of documents for a given query.\n\nArgs:\n    params: RerankParams: The parameters for reranking.\n\nReturns:\n    RerankResponse: The reranked documents for the input query."
+      operationId: rerank
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RerankParams'
+              description: The parameters for reranking
+        required: true
+      responses:
+        '200':
+          description: The reranked documents for the input query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RerankResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Reranking
+components:
+  schemas:
+    RankedDocument:
+      properties:
+        index:
+          type: integer
+          title: Index
+          description: The index of the document.
+          examples:
+          - 0
+        score:
+          type: number
+          title: Score
+          description: The score of the document.
+          examples:
+          - 0.95
+        input:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Input
+          description: The input document.
+          examples:
+          - field1: value1
+            field2: value2
+          - Hello, world!
+        object:
+          type: string
+          const: rank_result
+          title: Object
+          description: The object type.
+          default: rank_result
+          examples:
+          - rank_result
+      type: object
+      required:
+      - index
+      - score
+      title: RankedDocument
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Usage:
+      properties:
+        prompt_tokens:
+          type: integer
+          title: Prompt Tokens
+          description: The number of tokens used for the prompt
+        total_tokens:
+          type: integer
+          title: Total Tokens
+          description: The total number of tokens used
+        completion_tokens:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Completion Tokens
+          description: The number of tokens used for the completion
+      type: object
+      required:
+      - prompt_tokens
+      - total_tokens
+      title: Usage
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    RerankResponse:
+      properties:
+        usage:
+          $ref: '#/components/schemas/Usage'
+          description: The usage of the model
+          examples:
+          - completion_tokens: 10
+            prompt_tokens: 10
+            total_tokens: 20
+        model:
+          type: string
+          title: Model
+          description: The model used
+        data:
+          items:
+            $ref: '#/components/schemas/RankedDocument'
+          type: array
+          title: Data
+          description: The ranked documents.
+          examples:
+          - - index: 0
+              input:
+                field1: value1
+                field2: value2
+              object: rank_result
+              score: 0.95
+            - index: 1
+              input: Hello, world!
+              object: rank_result
+              score: 0.94
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        top_k:
+          type: integer
+          title: Top K
+          description: The number of documents to return.
+          examples:
+          - 10
+        return_input:
+          type: boolean
+          title: Return Input
+          description: Whether to return the documents.
+          examples:
+          - false
+      type: object
+      required:
+      - usage
+      - model
+      - data
+      - top_k
+      - return_input
+      title: RerankResponse
+    RerankParams:
+      properties:
+        model:
+          type: string
+          maxLength: 500
+          minLength: 1
+          title: Model
+          description: The model to use for reranking documents.
+          default: mixedbread-ai/mxbai-rerank-large-v2
+          examples:
+          - mixedbread-ai/mxbai-rerank-large-v2
+        query:
+          type: string
+          maxLength: 32000
+          minLength: 1
+          title: Query
+          description: The query to rerank the documents.
+          examples:
+          - What are the key features of the Mixedbread embedding model?
+        input:
+          items:
+            anyOf:
+            - type: string
+            - {}
+            - items: {}
+              type: array
+          type: array
+          maxItems: 1000
+          minItems: 1
+          title: Input
+          description: The input documents to rerank.
+          examples:
+          - - Document 1
+            - Document 2
+          - - field1: value1
+              field2: value2
+            - field1: value3
+              field2: value4
+        rank_fields:
+          anyOf:
+          - items:
+              type: string
+            type: array
+            minItems: 1
+          - type: 'null'
+          title: Rank Fields
+          description: The fields of the documents to rank.
+          examples:
+          - - content
+            - title
+          - - document.text
+            - metadata.summary
+        top_k:
+          type: integer
+          minimum: 1.0
+          title: Top K
+          description: The number of documents to return.
+          default: -1
+          examples:
+          - 10
+        return_input:
+          type: boolean
+          title: Return Input
+          description: Whether to return the documents.
+          default: false
+          examples:
+          - false
+        rewrite_query:
+          type: boolean
+          title: Rewrite Query
+          description: Wether or not to rewrite the query before passing it to the reranking model
+          default: false
+          examples:
+          - false
+      type: object
+      required:
+      - query
+      - input
+      title: RerankParams
+      description: Parameters for reranking documents.
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      description: Api key to access Mixedbreads API
+      scheme: bearer

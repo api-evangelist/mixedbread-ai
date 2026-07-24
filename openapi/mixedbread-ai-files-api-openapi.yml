@@ -1,0 +1,824 @@
+openapi: 3.1.0
+info:
+  title: Mixedbread admin files API
+  version: 0.1.0
+  description: Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
+servers:
+- url: https://api.mixedbread.com
+  description: mixedbread ai production server
+- url: https://api.dev.mixedbread.com
+  description: mixedbread ai development server
+- url: http://127.0.0.1:8000
+  description: mixedbread local server
+- url: http://localhost:8000
+  description: mixedbread local server
+tags:
+- name: files
+paths:
+  /v1/files:
+    post:
+      tags:
+      - files
+      summary: Upload file
+      description: "Upload a new file.\n\nArgs:\n    file: The file to upload.\n\nReturns:\n    FileResponse: The response containing the details of the uploaded file."
+      operationId: create_file
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_create_file'
+      responses:
+        '201':
+          description: The uploaded file details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileObject'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - files
+      summary: List files
+      description: "List all files for the authenticated user.\n\nArgs:\n    pagination: The pagination options\n\nReturns:\n    A list of files belonging to the user."
+      operationId: list_files
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          description: Maximum number of items to return per page (1-100)
+          examples:
+          - 10
+          - 20
+          - 50
+          default: 20
+          title: Limit
+        description: Maximum number of items to return per page (1-100)
+      - name: after
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cursor for forward pagination - get items after this position. Use last_cursor from previous response.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+          title: After
+        description: Cursor for forward pagination - get items after this position. Use last_cursor from previous response.
+      - name: before
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cursor for backward pagination - get items before this position. Use first_cursor from previous response.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+          title: Before
+        description: Cursor for backward pagination - get items before this position. Use first_cursor from previous response.
+      - name: include_total
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Whether to include total count in response (expensive operation)
+          examples:
+          - false
+          - true
+          default: false
+          title: Include Total
+        description: Whether to include total count in response (expensive operation)
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+            maxLength: 255
+          - type: 'null'
+          description: Search query for fuzzy matching over name and description fields
+          title: Q
+        description: Search query for fuzzy matching over name and description fields
+      responses:
+        '200':
+          description: A list of files for the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/files/uploads:
+    get:
+      tags:
+      - files
+      summary: List in-progress multipart uploads
+      description: List all in-progress multipart uploads for the authenticated organization.
+      operationId: list_multipart_uploads
+      responses:
+        '200':
+          description: All in-progress multipart uploads for the organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultipartUploadListResponse'
+      security:
+      - ApiKeyAuth: []
+    post:
+      tags:
+      - files
+      summary: Create multipart upload
+      description: Initiate a multipart upload and receive presigned URLs for uploading parts directly to storage.
+      operationId: create_multipart_upload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMultipartUploadRequest'
+        required: true
+      responses:
+        '201':
+          description: The multipart upload details with presigned URLs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMultipartUploadResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+  /v1/files/uploads/{upload_id}/complete:
+    post:
+      tags:
+      - files
+      summary: Complete multipart upload
+      description: 'Complete a multipart upload after all parts have been uploaded.
+
+        Creates the file object and returns it.'
+      operationId: complete_multipart_upload
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: upload_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the multipart upload
+          title: Upload Id
+        description: The ID of the multipart upload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompleteMultipartUploadRequest'
+      responses:
+        '200':
+          description: The completed file details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileObject'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/files/uploads/{upload_id}/abort:
+    post:
+      tags:
+      - files
+      summary: Abort multipart upload
+      description: Abort a multipart upload and clean up any uploaded parts.
+      operationId: abort_multipart_upload
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: upload_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the multipart upload to abort
+          title: Upload Id
+        description: The ID of the multipart upload to abort
+      responses:
+        '200':
+          description: The details of the aborted upload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileDeleted'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/files/uploads/{upload_id}:
+    get:
+      tags:
+      - files
+      summary: Get multipart upload details
+      description: Get a multipart upload's details with fresh presigned URLs for any parts not yet uploaded.
+      operationId: get_multipart_upload
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: upload_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the multipart upload
+          title: Upload Id
+        description: The ID of the multipart upload
+      responses:
+        '200':
+          description: Upload details with presigned URLs for incomplete parts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultipartUploadDetailResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/files/{file_id}:
+    get:
+      tags:
+      - files
+      summary: Get file details
+      description: "Retrieve details of a specific file by its ID.\n\nArgs:\n    file_id: The ID of the file to retrieve.\n\nReturns:\n    FileResponse: The response containing the file details."
+      operationId: retrieve_file
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: file_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the file to retrieve
+          title: File Id
+        description: The ID of the file to retrieve
+      responses:
+        '200':
+          description: The details of the requested file
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileObject'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - files
+      summary: Update file
+      description: "Update the details of a specific file.\n\nArgs:\n    file_id: The ID of the file to update.\n    file: The new details for the file.\n\nReturns:\n    FileObject: The updated file details."
+      operationId: update_file
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: file_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the file to update
+          title: File Id
+        description: The ID of the file to update
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_update_file'
+      responses:
+        '200':
+          description: The updated file details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileObject'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - files
+      summary: Delete file
+      description: "Delete a specific file by its ID.\n\nArgs:\n    file_id: The ID of the file to delete.\n\nReturns:\n    FileDeleted: The response containing the details of the deleted file."
+      operationId: delete_file
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: file_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the file to delete
+          title: File Id
+        description: The ID of the file to delete
+      responses:
+        '200':
+          description: The details of the deleted file
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileDeleted'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/files/{file_id}/content:
+    get:
+      tags:
+      - files
+      summary: Download file
+      description: "Download a specific file by its ID.\n\nArgs:\n    file_id: The ID of the file to download.\n\nReturns:\n    FileStreamResponse: The response containing the file to be downloaded."
+      operationId: download_file
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: file_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the file to download
+          title: File Id
+        description: The ID of the file to download
+      responses:
+        '200':
+          description: The file to be downloaded
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    MultipartUploadPartUrl:
+      properties:
+        part_number:
+          type: integer
+          minimum: 1.0
+          title: Part Number
+          description: 1-based part number
+        url:
+          type: string
+          title: Url
+          description: Presigned URL for uploading this part
+      type: object
+      required:
+      - part_number
+      - url
+      title: MultipartUploadPartUrl
+    MultipartUploadObject:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The multipart upload record ID
+        filename:
+          type: string
+          title: Filename
+          description: Original filename
+        file_size:
+          type: integer
+          title: File Size
+          description: Total file size in bytes
+        mime_type:
+          type: string
+          title: Mime Type
+          description: MIME type of the file
+        part_count:
+          type: integer
+          title: Part Count
+          description: Number of parts the file was split into
+        created_at:
+          type: string
+          title: Created At
+          description: When the upload was initiated
+      type: object
+      required:
+      - id
+      - filename
+      - file_size
+      - mime_type
+      - part_count
+      - created_at
+      title: MultipartUploadObject
+    FileDeleted:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the deleted file
+        deleted:
+          type: boolean
+          title: Deleted
+          description: Whether the file was deleted
+          default: true
+        object:
+          type: string
+          const: file
+          title: Object
+          description: The type of the deleted object
+          default: file
+      type: object
+      required:
+      - id
+      title: FileDeleted
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    MultipartUploadListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/MultipartUploadObject'
+          type: array
+          title: Data
+          description: List of in-progress multipart uploads
+      type: object
+      required:
+      - data
+      title: MultipartUploadListResponse
+    CompleteMultipartUploadRequest:
+      properties:
+        parts:
+          items:
+            $ref: '#/components/schemas/MultipartUploadPart'
+          type: array
+          minItems: 1
+          title: Parts
+          description: List of completed parts with their ETags
+      type: object
+      required:
+      - parts
+      title: CompleteMultipartUploadRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    MultipartUploadPart:
+      properties:
+        part_number:
+          type: integer
+          minimum: 1.0
+          title: Part Number
+          description: 1-based part number
+        etag:
+          type: string
+          title: Etag
+          description: ETag returned by the storage backend after uploading the part
+      type: object
+      required:
+      - part_number
+      - etag
+      title: MultipartUploadPart
+    CreateMultipartUploadResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The multipart upload ID (use this to complete or abort)
+        part_urls:
+          items:
+            $ref: '#/components/schemas/MultipartUploadPartUrl'
+          type: array
+          title: Part Urls
+          description: Presigned URLs for uploading parts
+      type: object
+      required:
+      - id
+      - part_urls
+      title: CreateMultipartUploadResponse
+    Body_update_file:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+          description: The file to update
+      type: object
+      required:
+      - file
+      title: Body_update_file
+    Body_create_file:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+          description: The file to upload
+      type: object
+      required:
+      - file
+      title: Body_create_file
+    CursorPaginationResponse:
+      properties:
+        has_more:
+          type: boolean
+          title: Has More
+          description: 'Contextual direction-aware flag: True if more items exist in the requested pagination direction. For ''after'': more items after this page. For ''before'': more items before this page.'
+          examples:
+          - true
+          - false
+        first_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Cursor
+          description: Cursor of the first item in this page. Use for backward pagination. None if page is empty.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+          - null
+        last_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Cursor
+          description: Cursor of the last item in this page. Use for forward pagination. None if page is empty.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMFQyMzo1OTo1OS4wMDBaIiwiaWQiOiJ4eXo3ODkifQ==
+          - null
+        total:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Total
+          description: Total number of items available across all pages. Only included when include_total=true was requested. Expensive operation - use sparingly.
+          examples:
+          - 42
+          - 0
+          - null
+      type: object
+      required:
+      - has_more
+      - first_cursor
+      - last_cursor
+      title: CursorPaginationResponse
+      description: Response model for cursor-based pagination.
+    MultipartUploadDetailResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The multipart upload record ID
+        filename:
+          type: string
+          title: Filename
+          description: Original filename
+        file_size:
+          type: integer
+          title: File Size
+          description: Total file size in bytes
+        mime_type:
+          type: string
+          title: Mime Type
+          description: MIME type of the file
+        part_count:
+          type: integer
+          title: Part Count
+          description: Number of parts the file was split into
+        created_at:
+          type: string
+          title: Created At
+          description: When the upload was initiated
+        completed_parts:
+          items:
+            $ref: '#/components/schemas/MultipartUploadPart'
+          type: array
+          title: Completed Parts
+          description: Parts that have already been uploaded
+        part_urls:
+          items:
+            $ref: '#/components/schemas/MultipartUploadPartUrl'
+          type: array
+          title: Part Urls
+          description: Presigned URLs for the parts that still need to be uploaded
+      type: object
+      required:
+      - id
+      - filename
+      - file_size
+      - mime_type
+      - part_count
+      - created_at
+      - completed_parts
+      - part_urls
+      title: MultipartUploadDetailResponse
+    CreateMultipartUploadRequest:
+      properties:
+        filename:
+          type: string
+          minLength: 1
+          title: Filename
+          description: Name of the file including extension
+          examples:
+          - document.pdf
+        file_size:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: File Size
+          description: Total size of the file in bytes
+          examples:
+          - 10485760
+        mime_type:
+          type: string
+          pattern: ^[\w\.\-\+]+/[\w\.\-\+]+(\.\w+)*$
+          title: Mime Type
+          description: MIME type of the file
+          examples:
+          - application/pdf
+        part_count:
+          type: integer
+          maximum: 10000.0
+          minimum: 1.0
+          title: Part Count
+          description: Number of parts to split the upload into
+          default: 1
+          examples:
+          - 3
+      type: object
+      required:
+      - filename
+      - file_size
+      - mime_type
+      title: CreateMultipartUploadRequest
+    FileObject:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Unique identifier for the file
+          examples:
+          - file_abc123
+          - file_xyz789
+        filename:
+          type: string
+          minLength: 1
+          title: Filename
+          description: Name of the file including extension
+          examples:
+          - document.pdf
+          - image.jpg
+        bytes:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Bytes
+          description: Size of the file in bytes
+          examples:
+          - 1024
+          - 2048
+        mime_type:
+          type: string
+          pattern: ^[\w\.\-\+]+/[\w\.\-\+]+(\.\w+)*$
+          title: Mime Type
+          description: MIME type of the file
+          examples:
+          - application/pdf
+          - image/jpeg
+          - application/vnd.openxmlformats-officedocument.presentationml.presentation
+          - application/x-ipynb+json
+        version:
+          type: integer
+          minimum: 1.0
+          title: Version
+          description: Version of the file
+          examples:
+          - 1
+          - 2
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Timestamp when the file was created
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: Timestamp when the file was last updated
+      type: object
+      required:
+      - id
+      - filename
+      - bytes
+      - mime_type
+      - version
+      - created_at
+      - updated_at
+      title: FileObject
+      description: 'A model representing a file object in the system.
+
+
+        This model contains metadata about files stored in the system, including
+
+        identifiers, size information, and timestamps.'
+    FileListResponse:
+      properties:
+        pagination:
+          $ref: '#/components/schemas/CursorPaginationResponse'
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        data:
+          items:
+            $ref: '#/components/schemas/FileObject'
+          type: array
+          title: Data
+          description: The list of files
+      type: object
+      required:
+      - pagination
+      - data
+      title: FileListResponse
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      description: Api key to access Mixedbreads API
+      scheme: bearer

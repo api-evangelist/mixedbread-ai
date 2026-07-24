@@ -1,0 +1,124 @@
+openapi: 3.1.0
+info:
+  title: Mixedbread admin API
+  version: 0.1.0
+  description: Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
+servers:
+- url: https://api.mixedbread.com
+  description: mixedbread ai production server
+- url: https://api.dev.mixedbread.com
+  description: mixedbread ai development server
+- url: http://127.0.0.1:8000
+  description: mixedbread local server
+- url: http://localhost:8000
+  description: mixedbread local server
+tags:
+- name: admin
+paths:
+  /v1/admin/stores/{organization_id}/{store_identifier}/reingest:
+    post:
+      tags:
+      - admin
+      summary: Reingest all stores
+      description: "Reingest all stores across all organizations (admin only).\n\nThis endpoint creates StoreFileReingestionJob for each store.\n\nReturns:\n    dict: Confirmation message with count of jobs created."
+      operationId: reingest_all_stores
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: organization_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Organization Id
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Store Identifier
+      - name: statuses
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/VectorStoreFileStatus'
+          - type: 'null'
+          description: Statuses of files to reingest
+          title: Statuses
+        description: Statuses of files to reingest
+      - name: billable
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Whether the reingestion is billable to the user
+          default: false
+          title: Billable
+        description: Whether the reingestion is billable to the user
+      responses:
+        '200':
+          description: Confirmation that reingestion jobs have been created
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    VectorStoreFileStatus:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - cancelled
+      - completed
+      - failed
+      title: VectorStoreFileStatus
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      description: Api key to access Mixedbreads API
+      scheme: bearer

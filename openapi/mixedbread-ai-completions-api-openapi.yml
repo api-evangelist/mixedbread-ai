@@ -1,0 +1,38 @@
+openapi: 3.1.0
+info:
+  title: Mixedbread admin completions API
+  version: 0.1.0
+  description: Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
+servers:
+- url: https://api.mixedbread.com
+  description: mixedbread ai production server
+- url: https://api.dev.mixedbread.com
+  description: mixedbread ai development server
+- url: http://127.0.0.1:8000
+  description: mixedbread local server
+- url: http://localhost:8000
+  description: mixedbread local server
+tags:
+- name: completions
+paths:
+  /v1/chat/completions:
+    post:
+      tags:
+      - completions
+      summary: Create a chat completion
+      description: "Create a chat completion using the provided parameters.\n\nGenerates a completion response based on the chat messages and model parameters provided.\nThe response can be either a full completion or streamed chunks depending on the request parameters.\n\nArgs:\n    params: Parameters for creating the chat completion including messages, model selection,\n           and generation settings\n    user: The authenticated user making the request\n\nReturns:\n    Either a ChatCompletion containing the full response, or ChatCompletionChunk for streaming\n\nRaises:\n    HTTPException: If there is an error creating the completion (500)"
+      operationId: create_chat_completion
+      responses:
+        '200':
+          description: The generated chat completion response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - ApiKeyAuth: []
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      description: Api key to access Mixedbreads API
+      scheme: bearer

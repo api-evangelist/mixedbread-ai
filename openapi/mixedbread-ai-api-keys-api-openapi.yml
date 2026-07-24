@@ -1,0 +1,555 @@
+openapi: 3.1.0
+info:
+  title: Mixedbread admin api_keys API
+  version: 0.1.0
+  description: Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
+servers:
+- url: https://api.mixedbread.com
+  description: mixedbread ai production server
+- url: https://api.dev.mixedbread.com
+  description: mixedbread ai development server
+- url: http://127.0.0.1:8000
+  description: mixedbread local server
+- url: http://localhost:8000
+  description: mixedbread local server
+tags:
+- name: api_keys
+paths:
+  /v1/api-keys:
+    post:
+      tags:
+      - api_keys
+      summary: Create API key
+      description: "Create a new API key.\n\nArgs:\n    params: The parameters for creating the API key.\n\nReturns:\n    ApiKeyCreated: The response containing the details of the created API key."
+      operationId: create_api_key
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyCreateParams'
+      responses:
+        '201':
+          description: The created API key details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyCreated'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - api_keys
+      summary: List API keys
+      description: "List all API keys for the authenticated user.\n\nArgs:\n    pagination: The pagination options\n\nReturns:\n    A list of API keys belonging to the user."
+      operationId: list_api_keys
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          description: Maximum number of items to return per page
+          default: 100
+          title: Limit
+        description: Maximum number of items to return per page
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Offset of the first item to return
+          default: 0
+          title: Offset
+        description: Offset of the first item to return
+      responses:
+        '200':
+          description: A list of API keys for the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/api-keys/{api_key_id}:
+    get:
+      tags:
+      - api_keys
+      summary: Get API key details
+      description: "Retrieve details of a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to retrieve.\n\nReturns:\n    ApiKey: The response containing the API key details."
+      operationId: retrieve_api_key
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: api_key_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the API key to retrieve
+          title: Api Key Id
+        description: The ID of the API key to retrieve
+      responses:
+        '200':
+          description: The details of the requested API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - api_keys
+      summary: Update API key
+      description: "Update a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to update.\n    params: The parameters to update.\n\nReturns:\n    ApiKey: The updated API key details."
+      operationId: update_api_key
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: api_key_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the API key to update
+          title: Api Key Id
+        description: The ID of the API key to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyUpdateParams'
+      responses:
+        '200':
+          description: The updated API key details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - api_keys
+      summary: Delete API key
+      description: "Delete a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to delete.\n\nReturns:\n    ApiKeyDeleted: The response containing the details of the deleted API key."
+      operationId: delete_api_key
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: api_key_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the API key to delete
+          title: Api Key Id
+        description: The ID of the API key to delete
+      responses:
+        '200':
+          description: The details of the deleted API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyDeleted'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/api-keys/{api_key_id}/revoke:
+    post:
+      tags:
+      - api_keys
+      summary: Revoke API key
+      description: "Revoke a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to revoke.\n\nReturns:\n    ApiKey: The response containing the details of the revoked API key."
+      operationId: revoke_api_key
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: api_key_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the API key to revoke
+          title: Api Key Id
+        description: The ID of the API key to revoke
+      responses:
+        '200':
+          description: The revoked API key details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/api-keys/{api_key_id}/reroll:
+    post:
+      tags:
+      - api_keys
+      summary: Reroll API key
+      description: "Reroll the secret for a specific API key by its ID.\n\nThis generates a new secret key, invalidating the old one.\n\nArgs:\n    api_key_id: The ID of the API key to reroll.\n\nReturns:\n    ApiKeyCreated: The response containing the API key details with the new secret key."
+      operationId: reroll_api_key
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: api_key_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the API key to reroll
+          title: Api Key Id
+        description: The ID of the API key to reroll
+      responses:
+        '200':
+          description: The API key details with the new secret key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyCreated'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ApiKeyUpdateParams:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: A name/description for the API key
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+          description: Optional expiration datetime
+      type: object
+      title: ApiKeyUpdateParams
+      description: Parameters for updating an API key.
+    ApiKeyCreateParams:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: A name/description for the API key
+          default: API Key
+        scope:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Scope'
+            type: array
+          - type: 'null'
+          title: Scope
+          description: The scope of the API key
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+          description: Optional expiration datetime
+      type: object
+      title: ApiKeyCreateParams
+      description: Parameters for creating an API key.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ApiKeyDeleted:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the deleted API key
+        deleted:
+          type: boolean
+          title: Deleted
+          description: Whether the API key was deleted
+        object:
+          type: string
+          const: api_key
+          title: Object
+          description: The type of the object deleted
+          default: api_key
+      type: object
+      required:
+      - id
+      - deleted
+      title: ApiKeyDeleted
+      description: Response model for deleting an API key.
+    ApiKeyCreated:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the API key
+        name:
+          type: string
+          title: Name
+          description: The name of the API key
+        redacted_value:
+          type: string
+          title: Redacted Value
+          description: The redacted value of the API key
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+          description: The expiration datetime of the API key
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: The creation datetime of the API key
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: The last update datetime of the API key
+        last_active_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Active At
+          description: The last active datetime of the API key
+        object:
+          type: string
+          const: api_key
+          title: Object
+          description: The type of the object
+          default: api_key
+        scope:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Scope'
+            type: array
+          - type: 'null'
+          title: Scope
+          description: The scope of the API key
+        value:
+          type: string
+          title: Value
+          description: The value of the API key
+      type: object
+      required:
+      - id
+      - name
+      - redacted_value
+      - created_at
+      - updated_at
+      - value
+      title: ApiKeyCreated
+      description: Response model for creating an API key.
+    Scope:
+      properties:
+        method:
+          type: string
+          enum:
+          - read
+          - write
+          - delete
+          - list
+          - create
+          - search
+          title: Method
+        resource_type:
+          anyOf:
+          - type: string
+            const: store
+          - type: 'null'
+          title: Resource Type
+        resource_id:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Resource Id
+      type: object
+      required:
+      - method
+      title: Scope
+    ApiKeyListResponse:
+      properties:
+        pagination:
+          $ref: '#/components/schemas/PaginationWithTotal'
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        data:
+          items:
+            $ref: '#/components/schemas/ApiKey'
+          type: array
+          title: Data
+          description: The list of API keys
+      type: object
+      required:
+      - pagination
+      - data
+      title: ApiKeyListResponse
+    PaginationWithTotal:
+      properties:
+        limit:
+          type: integer
+          maximum: 1000.0
+          title: Limit
+          description: Maximum number of items to return per page
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          description: Offset of the first item to return
+          default: 0
+        total:
+          type: integer
+          title: Total
+          description: Total number of items available
+          default: 0
+      type: object
+      title: PaginationWithTotal
+      description: Pagination model that includes total count of items.
+    ApiKey:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the API key
+        name:
+          type: string
+          title: Name
+          description: The name of the API key
+        redacted_value:
+          type: string
+          title: Redacted Value
+          description: The redacted value of the API key
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+          description: The expiration datetime of the API key
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: The creation datetime of the API key
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: The last update datetime of the API key
+        last_active_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Active At
+          description: The last active datetime of the API key
+        object:
+          type: string
+          const: api_key
+          title: Object
+          description: The type of the object
+          default: api_key
+        scope:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Scope'
+            type: array
+          - type: 'null'
+          title: Scope
+          description: The scope of the API key
+      type: object
+      required:
+      - id
+      - name
+      - redacted_value
+      - created_at
+      - updated_at
+      title: ApiKey
+      description: Response model for an API key.
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      description: Api key to access Mixedbreads API
+      scheme: bearer

@@ -1,0 +1,5329 @@
+openapi: 3.1.0
+info:
+  title: Mixedbread admin stores API
+  version: 0.1.0
+  description: Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
+servers:
+- url: https://api.mixedbread.com
+  description: mixedbread ai production server
+- url: https://api.dev.mixedbread.com
+  description: mixedbread ai development server
+- url: http://127.0.0.1:8000
+  description: mixedbread local server
+- url: http://localhost:8000
+  description: mixedbread local server
+tags:
+- name: stores
+paths:
+  /v1/stores/{store_identifier}/events:
+    get:
+      tags:
+      - stores
+      summary: List events for a store
+      description: "List events for a store.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    options: The pagination options.\n\nReturns:\n    StoreEventListResponse: The list of events for the store."
+      operationId: list_store_events
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          description: Maximum number of items to return per page (1-100)
+          examples:
+          - 10
+          - 20
+          - 50
+          default: 20
+          title: Limit
+        description: Maximum number of items to return per page (1-100)
+      - name: after
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cursor for forward pagination - get items after this position. Use last_cursor from previous response.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+          title: After
+        description: Cursor for forward pagination - get items after this position. Use last_cursor from previous response.
+      - name: before
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cursor for backward pagination - get items before this position. Use first_cursor from previous response.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+          title: Before
+        description: Cursor for backward pagination - get items before this position. Use first_cursor from previous response.
+      - name: include_total
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Whether to include total count in response (expensive operation)
+          examples:
+          - false
+          - true
+          default: false
+          title: Include Total
+        description: Whether to include total count in response (expensive operation)
+      - name: filter_before
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Time to filter events before
+          title: Filter Before
+        description: Time to filter events before
+      - name: filter_after
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Time to filter events after
+          title: Filter After
+        description: Time to filter events after
+      - name: event_type
+        in: query
+        required: true
+        schema:
+          enum:
+          - ingestion
+          - search
+          - agentic_search
+          type: string
+          description: The type of event to list
+          examples:
+          - ingestion
+          - search
+          - agentic_search
+          title: Event Type
+        description: The type of event to list
+      responses:
+        '200':
+          description: The list of events for the store
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreEventListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/stores/{store_identifier}/events/histogram:
+    post:
+      tags:
+      - stores
+      summary: Get store event histogram
+      description: "Get histogram of store events over time.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    histogram_params: Parameters for histogram generation.\n\nReturns:\n    StoreEventHistogramResponse: The event histogram."
+      operationId: get_store_event_histogram
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreEventHistogramParams'
+      responses:
+        '200':
+          description: Histogram of store events over time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreEventHistogramResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/stores/{store_identifier}/files:
+    post:
+      tags:
+      - stores
+      summary: Upload file to store
+      description: "Upload a file to a store.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    file_add_params: The file to add to the store.\n\nReturns:\n    VectorStoreFile: The uploaded file details."
+      operationId: create_store_file
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeprecatedStoreFileUpsertParams'
+              description: The file to add to the store
+      responses:
+        '201':
+          description: The uploaded store file details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFile'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - stores
+      summary: '[DEPRECATED] List store files'
+      description: 'DEPRECATED: Use POST /stores/{store_identifier}/files/list instead'
+      operationId: list_store_files
+      deprecated: true
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          description: Maximum number of items to return per page (1-100)
+          examples:
+          - 10
+          - 20
+          - 50
+          default: 20
+          title: Limit
+        description: Maximum number of items to return per page (1-100)
+      - name: after
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cursor for forward pagination - get items after this position. Use last_cursor from previous response.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+          title: After
+        description: Cursor for forward pagination - get items after this position. Use last_cursor from previous response.
+      - name: before
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cursor for backward pagination - get items before this position. Use first_cursor from previous response.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+          title: Before
+        description: Cursor for backward pagination - get items before this position. Use first_cursor from previous response.
+      - name: include_total
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Whether to include total count in response (expensive operation)
+          examples:
+          - false
+          - true
+          default: false
+          title: Include Total
+        description: Whether to include total count in response (expensive operation)
+      - name: statuses
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/StoreFileStatus'
+          - type: 'null'
+          description: Status to filter by
+          title: Statuses
+        description: Status to filter by
+      responses:
+        '200':
+          description: The list of store files
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFileListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/stores/{store_identifier}/files/upload:
+    post:
+      tags:
+      - stores
+      summary: Upload file via form to store
+      description: "Upload a file via form to a store.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    config: The config for the file.\n    metadata: The metadata for the file.\n    file: The file to upload.\n\nReturns:\n    VectorStoreFile: The uploaded file details."
+      operationId: upload_store_file
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_upload_store_file'
+      responses:
+        '201':
+          description: The uploaded store file details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFile'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/stores/{store_identifier}/files/list:
+    post:
+      tags:
+      - stores
+      summary: List store files with metadata filter
+      description: "List files indexed in a vector store with pagination and metadata filter.\n\nArgs:\n    vector_store_identifier: The ID or name of the vector store\n    pagination: Pagination parameters and metadata filter\n\nReturns:\n    VectorStoreFileListResponse: Paginated list of vector store files"
+      operationId: list_store_files_with_metadata_filter
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCursorPagination'
+              description: For pagination
+      responses:
+        '200':
+          description: List of files in the store
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFileListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/stores/{store_identifier}/files/{file_identifier}:
+    get:
+      tags:
+      - stores
+      summary: Get store file
+      description: "Get a file from a store.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    file_id: The ID or name of the file.\n    options: Get file options.\n\nReturns:\n    VectorStoreFile: The file details."
+      operationId: retrieve_store_file
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      - name: file_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the file
+          title: File Identifier
+        description: The ID or name of the file
+      - name: return_chunks
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: array
+            items:
+              type: integer
+          description: Whether to return the chunks for the file. If a list of integers is provided, only the chunks at the specified indices will be returned.
+          default: false
+          title: Return Chunks
+        description: Whether to return the chunks for the file. If a list of integers is provided, only the chunks at the specified indices will be returned.
+      responses:
+        '200':
+          description: The store file details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFile'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - stores
+      summary: Update store file metadata
+      description: "Update metadata on a file within a store.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    file_identifier: The ID or name of the file to update.\n    update_params: Metadata update payload.\n\nReturns:\n    StoreFile: The updated file details."
+      operationId: update_store_file
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      - name: file_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the file to update
+          title: File Identifier
+        description: The ID or name of the file to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreFileMetadataUpdateParams'
+              description: Fields to update for the store file
+      responses:
+        '200':
+          description: The updated store file details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFile'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - stores
+      summary: Delete store file
+      description: "Delete a file from a store.\n\nArgs:\n    store_identifier: The ID or name of the store.\n    file_id: The ID or name of the file to delete.\n\nReturns:\n    VectorStoreFileDeleted: The deleted file details."
+      operationId: delete_store_file
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      - name: file_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the file to delete
+          title: File Identifier
+        description: The ID or name of the file to delete
+      responses:
+        '200':
+          description: The deleted store file details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFileDeleted'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/stores/{store_identifier}/rules:
+    post:
+      tags:
+      - stores
+      summary: Create search rule
+      description: "Create a new search rule for a store.\n\nArgs:\n    store_identifier: The ID or name of the store\n    rule_create: Search rule creation parameters\n\nReturns:\n    SearchRuleResponse: The created search rule details"
+      operationId: create_search_rule
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleCreateParams'
+              description: The search rule to create
+      responses:
+        '201':
+          description: The created search rule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/stores/{store_identifier}/rules/{rule_id}:
+    get:
+      tags:
+      - stores
+      summary: Get a search rule
+      description: "Get a search rule by ID.\n\nArgs:\n    store_identifier: The ID or name of the store\n    rule_id: The ID of the search rule to retrieve\n\nReturns:\n    SearchRuleResponse: The search rule details"
+      operationId: retrieve_search_rule
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      - name: rule_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the search rule
+          title: Rule Id
+        description: The ID of the search rule
+      responses:
+        '200':
+          description: The search rule details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - stores
+      summary: Update a search rule
+      description: "Update a search rule by ID.\n\nArgs:\n    store_identifier: The ID or name of the store\n    rule_id: The ID of the search rule to update\n    rule_update: SearchRuleUpdateParams object containing the fields to update\n\nReturns:\n    SearchRuleResponse: The updated search rule details"
+      operationId: update_search_rule
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      - name: rule_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the search rule to update
+          title: Rule Id
+        description: The ID of the search rule to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleUpdateParams'
+              description: The fields to update
+      responses:
+        '200':
+          description: The updated search rule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - stores
+      summary: Delete a search rule
+      description: "Delete a search rule by ID.\n\nArgs:\n    store_identifier: The ID or name of the store\n    rule_id: The ID of the search rule to delete\n\nReturns:\n    SearchRuleDeleted: The deleted search rule details"
+      operationId: delete_search_rule
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      - name: rule_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the search rule to delete
+          title: Rule Id
+        description: The ID of the search rule to delete
+      responses:
+        '200':
+          description: The deleted search rule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleDeleted'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/stores/{store_identifier}/rules/{rule_id}/specific:
+    delete:
+      tags:
+      - stores
+      summary: Delete a specific rule from rules array
+      description: "Delete a specific rule from within a search rule's rules array.\n\nArgs:\n    store_identifier: The ID or name of the store\n    rule_id: The ID of the search rule containing the rule to delete\n    rule_delete: The specific rule to delete from the rules array\n\nReturns:\n    SearchRuleSpecificDeleted: Details about the deletion operation"
+      operationId: delete_specific_search_rule
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      - name: rule_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: The ID of the search rule
+          title: Rule Id
+        description: The ID of the search rule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleSpecificDeleteParams'
+              description: The specific rule to delete
+      responses:
+        '200':
+          description: The updated search rule after deleting specific rule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleSpecificDeleted'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/stores:
+    post:
+      tags:
+      - stores
+      summary: Create a store
+      description: "Create a new vector store.\n\nArgs:\n    vector_store_create: VectorStoreCreate object containing the name, description, and metadata.\n\nReturns:\n    VectorStore: The response containing the created vector store details."
+      operationId: create_store
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreCreateParams'
+              description: The store details for creation
+      responses:
+        '201':
+          description: The details of the created store
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - stores
+      summary: List stores
+      description: "List all stores with optional search.\n\nArgs:\n    pagination: The pagination options.\n    q: Optional search query to filter vector stores.\n\nReturns:\n    StoreListResponse: The list of stores."
+      operationId: list_stores
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          description: Maximum number of items to return per page (1-100)
+          examples:
+          - 10
+          - 20
+          - 50
+          default: 20
+          title: Limit
+        description: Maximum number of items to return per page (1-100)
+      - name: after
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cursor for forward pagination - get items after this position. Use last_cursor from previous response.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+          title: After
+        description: Cursor for forward pagination - get items after this position. Use last_cursor from previous response.
+      - name: before
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cursor for backward pagination - get items before this position. Use first_cursor from previous response.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+          title: Before
+        description: Cursor for backward pagination - get items before this position. Use first_cursor from previous response.
+      - name: include_total
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Whether to include total count in response (expensive operation)
+          examples:
+          - false
+          - true
+          default: false
+          title: Include Total
+        description: Whether to include total count in response (expensive operation)
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+            maxLength: 255
+          - type: 'null'
+          description: Search query for fuzzy matching over name and description fields
+          title: Q
+        description: Search query for fuzzy matching over name and description fields
+      responses:
+        '200':
+          description: The list of stores
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/stores/{store_identifier}:
+    get:
+      tags:
+      - stores
+      summary: Get a store
+      description: "Get a store by ID or name.\n\nArgs:\n    store_identifier: The ID or name of the store to retrieve.\n\nReturns:\n    Store: The response containing the store details."
+      operationId: retrieve_store
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      responses:
+        '200':
+          description: The details of the store
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - stores
+      summary: Update a store
+      description: "Update a store by ID or name.\n\nArgs:\n    store_identifier: The ID or name of the store to update.\n    store_update: StoreCreate object containing the name, description, and metadata.\n\nReturns:\n    Store: The response containing the updated store details."
+      operationId: update_store
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store
+          title: Store Identifier
+        description: The ID or name of the store
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreUpdateParams'
+              description: The fields to update
+      responses:
+        '200':
+          description: The details of the updated store
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - stores
+      summary: Delete a store
+      description: "Delete a store by ID or name.\n\nArgs:\n    store_identifier: The ID or name of the store to delete.\n\nReturns:\n    Store: The response containing the deleted store details."
+      operationId: delete_store
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: store_identifier
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          description: The ID or name of the store to delete
+          title: Store Identifier
+        description: The ID or name of the store to delete
+      responses:
+        '200':
+          description: The details of the deleted store
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreDeleted'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/stores/search:
+    post:
+      tags:
+      - stores
+      summary: Perform semantic search across store chunks
+      description: "Perform semantic search across store chunks.\n\nThis endpoint searches through store chunks using semantic similarity matching.\nIt supports complex search queries with filters and returns relevance-scored results.\n\nFor the special 'mixedbread/web' store, this endpoint performs web search using\na mixture of different providers instead of semantic search. Web search results are always\nreranked for consistent scoring.\n\nArgs:\n    search_params: Search configuration including:\n        - query text or embeddings\n        - store_identifiers: List of store identifiers to search\n        - file_ids: Optional list of file IDs to filter chunks by (or tuple of list and condition operator)\n        - metadata filters\n        - pagination parameters\n        - sorting preferences\n    _state: API state dependency\n    _ctx: Service context dependency\n\nReturns:\n    StoreSearchResponse containing:\n        - List of matched chunks with relevance scores\n        - Pagination details including total result count\n\nRaises:\n    HTTPException (400): If search parameters are invalid\n    HTTPException (404): If no vector stores are found to search"
+      operationId: search_store_chunks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreChunkSearchParams'
+              description: Search parameters including query text, filters and pagination options
+        required: true
+      responses:
+        '200':
+          description: List of semantically similar chunks with relevance scores and pagination details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreSearchResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+  /v1/stores/grep:
+    post:
+      tags:
+      - stores
+      summary: Match store chunks against a regular expression
+      description: "Match store chunks against a regular expression.\n\nUnlike `/stores/search`, this performs exact text matching — no embeddings, no\nsemantic similarity, no reranking. Use it to find chunks containing a specific\ntoken, identifier, error code, or literal phrase.\n\ngrep targets a single store and does not support pagination; raise `top_k` to\nretrieve more matches.\n\nArgs:\n    grep_params: Grep configuration including:\n        - pattern: RE2 regular expression matched against chunk text\n        - targets: chunk content groups to match (`text`, `generated`)\n        - case_sensitive: whether the pattern is case-sensitive\n        - store_identifiers: the single store to grep\n        - file_ids: optional list of file IDs to filter chunks by\n        - filters: optional metadata filter conditions\n        - top_k: number of matches to return\n\nReturns:\n    StoreGrepResponse containing the list of matching chunks.\n\nRaises:\n    HTTPException (400): If grep parameters are invalid\n    HTTPException (404): If the store is not found"
+      operationId: grep_store_chunks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreChunkGrepParams'
+              description: Grep parameters including the regular expression pattern, targets and filters
+        required: true
+      responses:
+        '200':
+          description: List of chunks whose text matches the pattern
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreGrepResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+  /v1/stores/list-chunks:
+    post:
+      tags:
+      - stores
+      summary: List store chunks by metadata filter and numeric ranking
+      description: "List store chunks purely by metadata filters — no embeddings, no semantic similarity, no reranking.\n\nUnlike `/stores/search`, this endpoint does not require a query and never runs a vector lookup.\nIt returns chunks whose file and chunk metadata satisfy `filters`, optionally ordered by a\nnumeric metadata field via `sort_by`. Useful for ranked retrieval over numeric attributes\n(e.g. price, BPM) and for reproducing the agentic `filter_chunks` tool externally.\n\nlist-chunks targets a single store and does not support pagination; raise `top_k` to\nretrieve more chunks.\n\nArgs:\n    filter_params: Filter configuration including:\n        - store_identifiers: the single store to filter against\n        - filters: optional metadata filter conditions\n        - file_ids: optional list of file IDs to filter chunks by\n        - sort_by: optional metadata field path, or `(field, ascending)` tuple, for numeric ordering\n        - top_k: number of chunks to return\n\nReturns:\n    StoreListChunksResponse containing the list of matching chunks.\n\nRaises:\n    HTTPException (400): If filter parameters are invalid or multiple stores are passed\n    HTTPException (404): If the store is not found"
+      operationId: list_store_chunks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreChunkFilterParams'
+              description: Filter parameters including metadata filters, optional numeric sort, and pagination options
+        required: true
+      responses:
+        '200':
+          description: List of chunks matching the metadata filters, optionally ordered by a numeric metadata field
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreListChunksResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+  /v1/stores/question-answering:
+    post:
+      tags:
+      - stores
+      summary: Question answering
+      operationId: create_question_answering
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreQAParams'
+              description: The question answering query
+        required: true
+      responses:
+        '200':
+          description: The answer to the question
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreQAResults'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+  /v1/stores/queries/enhance:
+    post:
+      tags:
+      - stores
+      summary: Enhance a search query
+      description: Extract metadata filters and ranking preferences from a search query.
+      operationId: enhance_query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryEnhanceParams'
+              description: Search query and enhancement options
+        required: true
+      responses:
+        '200':
+          description: A single enhanced query item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryEnhanceResults'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+  /v1/stores/metadata-facets:
+    post:
+      tags:
+      - stores
+      summary: Get metadata facets
+      operationId: get_metadata_facets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataFacetsParams'
+              description: The parameters for getting metadata facets
+        required: true
+      responses:
+        '200':
+          description: The metadata facets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataFacets'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    FileSearchResultRule:
+      properties:
+        query:
+          type: string
+          title: Query
+          description: The query to trigger the rule
+        store_id:
+          type: string
+          title: Store Id
+          description: The store identifier to apply the rule to
+        type:
+          type: string
+          const: file_search_result
+          title: Type
+          description: The type of substitution
+        file_id:
+          type: string
+          title: File Id
+          description: The file ID of the file to substitute
+        chunk_index:
+          type: integer
+          minimum: 0.0
+          title: Chunk Index
+          description: An optional chunk index to use for the chunk substitution
+          default: 0
+        result_index:
+          type: integer
+          minimum: 0.0
+          title: Result Index
+          description: The index where the result will be inserted
+      type: object
+      required:
+      - query
+      - store_id
+      - type
+      - file_id
+      - result_index
+      title: FileSearchResultRule
+      description: Represents a file search result rule for a vector store search.
+    ContextualizationConfig:
+      properties:
+        with_metadata:
+          anyOf:
+          - type: boolean
+          - items:
+              type: string
+            type: array
+          title: With Metadata
+          description: Include all metadata or specific fields in the contextualization. Supports dot notation for nested fields (e.g., 'author.name'). When True, all metadata is included (flattened). When a list, only specified fields are included.
+          default: false
+          examples:
+          - true
+          - false
+          - - title
+            - author.name
+            - author.email
+            - tags
+        with_file_context:
+          type: boolean
+          title: With File Context
+          description: Use an LLM to generate a short context for each text chunk that situates it within the full document, improving retrieval accuracy. Only applies to text content during non-sliced ingestion.
+          default: false
+      type: object
+      title: ContextualizationConfig
+    ImageUrlInputChunk:
+      properties:
+        chunk_index:
+          type: integer
+          title: Chunk Index
+          description: position of the chunk in a file
+          examples:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        mime_type:
+          type: string
+          title: Mime Type
+          description: mime type of the chunk
+          default: image/jpeg
+          examples:
+          - image/jpeg
+        generated_metadata:
+          anyOf:
+          - oneOf:
+            - $ref: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/TextChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/PDFChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/CodeChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/AudioChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/VideoChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/ImageChunkGeneratedMetadata'
+            discriminator:
+              propertyName: type
+              mapping:
+                audio: '#/components/schemas/AudioChunkGeneratedMetadata'
+                code: '#/components/schemas/CodeChunkGeneratedMetadata'
+                image: '#/components/schemas/ImageChunkGeneratedMetadata'
+                markdown: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+                pdf: '#/components/schemas/PDFChunkGeneratedMetadata'
+                text: '#/components/schemas/TextChunkGeneratedMetadata'
+                video: '#/components/schemas/VideoChunkGeneratedMetadata'
+          - type: 'null'
+          title: Generated Metadata
+          description: metadata of the chunk
+          examples:
+          - file_size: 1024
+            file_type: text/plain
+            language: en
+            type: text
+            word_count: 100
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+          description: model used for this chunk
+          examples:
+          - text-embedding-ada-002
+          - clip-vit-large-patch14
+        type:
+          type: string
+          const: image_url
+          title: Type
+          description: Input type identifier
+          default: image_url
+        ocr_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ocr Text
+          description: ocr text of the image
+          examples:
+          - 2025 Financial Report
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+          description: summary of the image
+          examples:
+          - A financial report for 2025
+        image_url:
+          anyOf:
+          - $ref: '#/components/schemas/ImageUrl-Output'
+          - type: 'null'
+          description: Image URL
+      type: object
+      required:
+      - chunk_index
+      title: ImageUrlInputChunk
+    StoreGrepResponse:
+      properties:
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        data:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredTextInputChunk'
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredImageUrlInputChunk'
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredAudioUrlInputChunk'
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredVideoUrlInputChunk'
+            discriminator:
+              propertyName: type
+              mapping:
+                audio_url: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredAudioUrlInputChunk'
+                image_url: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredImageUrlInputChunk'
+                text: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredTextInputChunk'
+                video_url: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredVideoUrlInputChunk'
+          type: array
+          title: Data
+          description: The list of chunks matching the pattern
+      type: object
+      required:
+      - data
+      title: StoreGrepResponse
+    StoreFileParsingStrategy:
+      type: string
+      enum:
+      - fast
+      - high_quality
+      title: StoreFileParsingStrategy
+      description: Strategy for adding a file to a store.
+    SearchFilter-Output:
+      properties:
+        all:
+          anyOf:
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Output'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: All
+          description: List of conditions or filters to be ANDed together
+          examples:
+          - - key: price
+              operator: gt
+              value: '100'
+            - key: color
+              operator: eq
+              value: red
+          - null
+        any:
+          anyOf:
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Output'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: Any
+          description: List of conditions or filters to be ORed together
+          examples:
+          - - key: price
+              operator: gt
+              value: '100'
+            - key: color
+              operator: eq
+              value: red
+          - null
+        none:
+          anyOf:
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Output'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: None
+          description: List of conditions or filters to be NOTed
+          examples:
+          - - key: price
+              operator: gt
+              value: '100'
+            - key: color
+              operator: eq
+              value: red
+          - null
+      type: object
+      title: SearchFilter
+      description: Represents a filter with AND, OR, and NOT conditions.
+    StoreChunkGrepParams:
+      properties:
+        store_identifiers:
+          items:
+            anyOf:
+            - type: string
+            - type: string
+              format: uuid
+          type: array
+          maxItems: 16
+          minItems: 1
+          title: Store Identifiers
+          description: IDs or names of stores
+        top_k:
+          type: integer
+          minimum: 1.0
+          title: Top K
+          description: Number of results to return
+          default: 10
+        filters:
+          anyOf:
+          - $ref: '#/components/schemas/SearchFilter-Input'
+          - $ref: '#/components/schemas/SearchFilterCondition'
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Input'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: Filters
+          description: Optional filter conditions
+        file_ids:
+          anyOf:
+          - prefixItems:
+            - $ref: '#/components/schemas/ConditionOperator'
+            - items:
+                type: string
+                format: uuid
+              type: array
+            type: array
+            maxItems: 2
+            minItems: 2
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: File Ids
+          description: Optional list of file IDs to filter chunks by (inclusion filter)
+          examples:
+          - - 123e4567-e89b-12d3-a456-426614174000
+            - 123e4567-e89b-12d3-a456-426614174001
+          - - in
+            - - 123e4567-e89b-12d3-a456-426614174000
+          - - not_in
+            - - 123e4567-e89b-12d3-a456-426614174000
+        pattern:
+          type: string
+          maxLength: 1024
+          minLength: 1
+          title: Pattern
+          description: Regular expression (RE2 syntax) matched against chunk text
+          examples:
+          - ERR-\d{4}
+          - invoice|receipt
+        targets:
+          items:
+            $ref: '#/components/schemas/StoreChunkGrepTarget'
+          type: array
+          minItems: 1
+          title: Targets
+          description: Chunk content groups to match against. `text` matches the original text of text chunks; `generated` matches ingestion-derived fields (transcription, OCR text, summaries).
+        case_sensitive:
+          type: boolean
+          title: Case Sensitive
+          description: Whether the regular expression is case-sensitive
+          default: false
+        return_metadata:
+          type: boolean
+          title: Return Metadata
+          description: Whether to return file metadata
+          default: true
+      type: object
+      required:
+      - store_identifiers
+      - pattern
+      title: StoreChunkGrepParams
+      description: 'Parameters for matching store chunks against a regular expression.
+
+
+        Unlike semantic search, grep performs exact text matching — no embeddings, no
+
+        reranking. It finds chunks whose literal text contains the pattern.'
+    mxbai_omni__core__store__models__chunk_types__ScoredVideoUrlInputChunk:
+      properties:
+        chunk_index:
+          type: integer
+          title: Chunk Index
+          description: position of the chunk in a file
+          examples:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        mime_type:
+          type: string
+          title: Mime Type
+          description: mime type of the chunk
+          default: video/mp4
+          examples:
+          - video/mp4
+        generated_metadata:
+          anyOf:
+          - oneOf:
+            - $ref: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/TextChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/PDFChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/CodeChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/AudioChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/VideoChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/ImageChunkGeneratedMetadata'
+            discriminator:
+              propertyName: type
+              mapping:
+                audio: '#/components/schemas/AudioChunkGeneratedMetadata'
+                code: '#/components/schemas/CodeChunkGeneratedMetadata'
+                image: '#/components/schemas/ImageChunkGeneratedMetadata'
+                markdown: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+                pdf: '#/components/schemas/PDFChunkGeneratedMetadata'
+                text: '#/components/schemas/TextChunkGeneratedMetadata'
+                video: '#/components/schemas/VideoChunkGeneratedMetadata'
+          - type: 'null'
+          title: Generated Metadata
+          description: metadata of the chunk
+          examples:
+          - file_size: 1024
+            file_type: text/plain
+            language: en
+            type: text
+            word_count: 100
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+          description: model used for this chunk
+          examples:
+          - text-embedding-ada-002
+          - clip-vit-large-patch14
+        score:
+          type: number
+          title: Score
+          description: score of the chunk
+          examples:
+          - 0.5
+        file_id:
+          type: string
+          title: File Id
+          description: file id
+          examples:
+          - file1
+        filename:
+          type: string
+          title: Filename
+          description: filename
+          examples:
+          - file1
+        store_id:
+          type: string
+          title: Store Id
+          description: store id
+          examples:
+          - store1
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+          description: external identifier for this file
+          examples:
+          - ext-123
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Metadata
+          description: file metadata
+          examples:
+          - key: value
+        type:
+          type: string
+          const: video_url
+          title: Type
+          description: Input type identifier
+          default: video_url
+        transcription:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Transcription
+          description: speech recognition (sr) text of the video
+          examples:
+          - The year 2025 reports for ..
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+          description: summary of the video
+          examples:
+          - A financial report video for 2025
+        video_url:
+          anyOf:
+          - $ref: '#/components/schemas/VideoUrl'
+          - type: 'null'
+          description: Video URL
+      type: object
+      required:
+      - chunk_index
+      - score
+      - file_id
+      - filename
+      - store_id
+      title: ScoredVideoUrlInputChunk
+    MetadataFacetsParams:
+      properties:
+        store_identifiers:
+          items:
+            anyOf:
+            - type: string
+            - type: string
+              format: uuid
+          type: array
+          maxItems: 16
+          minItems: 1
+          title: Store Identifiers
+          description: IDs or names of stores
+        top_k:
+          type: integer
+          minimum: 1.0
+          title: Top K
+          description: Number of results to return
+          default: 10
+        filters:
+          anyOf:
+          - $ref: '#/components/schemas/SearchFilter-Input'
+          - $ref: '#/components/schemas/SearchFilterCondition'
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Input'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: Filters
+          description: Optional filter conditions
+        file_ids:
+          anyOf:
+          - prefixItems:
+            - $ref: '#/components/schemas/ConditionOperator'
+            - items:
+                type: string
+                format: uuid
+              type: array
+            type: array
+            maxItems: 2
+            minItems: 2
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: File Ids
+          description: Optional list of file IDs to filter chunks by (inclusion filter)
+          examples:
+          - - 123e4567-e89b-12d3-a456-426614174000
+            - 123e4567-e89b-12d3-a456-426614174001
+          - - in
+            - - 123e4567-e89b-12d3-a456-426614174000
+          - - not_in
+            - - 123e4567-e89b-12d3-a456-426614174000
+        query:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Query
+          description: Search query text
+          examples:
+          - how to configure SSL
+        search_options:
+          $ref: '#/components/schemas/StoreChunkSearchOptions'
+          description: Search configuration options
+        facets:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Facets
+          description: Optional list of facets to return. Use dot for nested fields.
+          examples:
+          - author
+          - year
+          - author.name
+        max_fields:
+          type: integer
+          maximum: 256.0
+          minimum: 1.0
+          title: Max Fields
+          description: Maximum number of distinct metadata fields (keys) to return.
+          default: 64
+        max_values_per_field:
+          type: integer
+          maximum: 256.0
+          minimum: 1.0
+          title: Max Values Per Field
+          description: Maximum number of distinct values returned per field, ranked by count.
+          default: 32
+        max_files:
+          type: integer
+          maximum: 100000.0
+          minimum: 1.0
+          title: Max Files
+          description: Maximum number of store files scanned to compute facets.
+          default: 10000
+      type: object
+      required:
+      - store_identifiers
+      title: MetadataFacetsParams
+      description: Parameters for getting metadata facets.
+    mxbai_omni__core__store__models__chunk_types__ScoredTextInputChunk:
+      properties:
+        chunk_index:
+          type: integer
+          title: Chunk Index
+          description: position of the chunk in a file
+          examples:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        mime_type:
+          type: string
+          title: Mime Type
+          description: mime type of the chunk
+          default: text/plain
+          examples:
+          - text/plain
+        generated_metadata:
+          anyOf:
+          - oneOf:
+            - $ref: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/TextChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/PDFChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/CodeChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/AudioChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/VideoChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/ImageChunkGeneratedMetadata'
+            discriminator:
+              propertyName: type
+              mapping:
+                audio: '#/components/schemas/AudioChunkGeneratedMetadata'
+                code: '#/components/schemas/CodeChunkGeneratedMetadata'
+                image: '#/components/schemas/ImageChunkGeneratedMetadata'
+                markdown: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+                pdf: '#/components/schemas/PDFChunkGeneratedMetadata'
+                text: '#/components/schemas/TextChunkGeneratedMetadata'
+                video: '#/components/schemas/VideoChunkGeneratedMetadata'
+          - type: 'null'
+          title: Generated Metadata
+          description: metadata of the chunk
+          examples:
+          - file_size: 1024
+            file_type: text/plain
+            language: en
+            type: text
+            word_count: 100
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+          description: model used for this chunk
+          examples:
+          - text-embedding-ada-002
+          - clip-vit-large-patch14
+        score:
+          type: number
+          title: Score
+          description: score of the chunk
+          examples:
+          - 0.5
+        file_id:
+          type: string
+          title: File Id
+          description: file id
+          examples:
+          - file1
+        filename:
+          type: string
+          title: Filename
+          description: filename
+          examples:
+          - file1
+        store_id:
+          type: string
+          title: Store Id
+          description: store id
+          examples:
+          - store1
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+          description: external identifier for this file
+          examples:
+          - ext-123
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Metadata
+          description: file metadata
+          examples:
+          - key: value
+        type:
+          type: string
+          const: text
+          title: Type
+          description: Input type identifier
+          default: text
+        offset:
+          type: integer
+          title: Offset
+          description: The offset of the text in the file relative to the start of the file.
+          default: 0
+          examples:
+          - 0
+          - 13
+          - 42
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+          description: Text content
+        context:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Context
+          description: LLM-generated context that situates this chunk within its source document
+          examples:
+          - This chunk is from an SEC filing on ACME corp's Q2 2023 performance.
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+          description: summary of the text chunk
+          examples:
+          - A short overview of ACME's Q2 2023 performance.
+      type: object
+      required:
+      - chunk_index
+      - score
+      - file_id
+      - filename
+      - store_id
+      title: ScoredTextInputChunk
+    ExpiresAfter:
+      properties:
+        anchor:
+          type: string
+          const: last_active_at
+          title: Anchor
+          description: Anchor date for the expiration policy
+          default: last_active_at
+        days:
+          type: integer
+          title: Days
+          description: Number of days after which the store expires
+          default: 30
+      type: object
+      title: ExpiresAfter
+      description: Represents an expiration policy for a store.
+    StoreEventHistogramResponse:
+      properties:
+        object:
+          type: string
+          const: store.histogram
+          title: Object
+          description: The object type of the response
+          default: store.histogram
+        data:
+          items:
+            $ref: '#/components/schemas/StoreEventHistogramBucket'
+          type: array
+          title: Data
+          description: The histogram of store events
+      type: object
+      required:
+      - data
+      title: StoreEventHistogramResponse
+    StoreListResponse:
+      properties:
+        pagination:
+          $ref: '#/components/schemas/CursorPaginationResponse'
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        data:
+          items:
+            $ref: '#/components/schemas/Store'
+          type: array
+          title: Data
+          description: The list of stores
+      type: object
+      required:
+      - pagination
+      - data
+      title: StoreListResponse
+    MarkdownChunkGeneratedMetadata:
+      properties:
+        type:
+          type: string
+          const: markdown
+          title: Type
+          default: markdown
+        file_type:
+          type: string
+          const: text/markdown
+          title: File Type
+          default: text/markdown
+        language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Language
+        word_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Word Count
+        file_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: File Size
+        chunk_headings:
+          items:
+            $ref: '#/components/schemas/MarkdownHeading'
+          type: array
+          title: Chunk Headings
+        heading_context:
+          items:
+            $ref: '#/components/schemas/MarkdownHeading'
+          type: array
+          title: Heading Context
+        start_line:
+          type: integer
+          title: Start Line
+          default: 0
+        num_lines:
+          type: integer
+          title: Num Lines
+          default: 0
+        file_extension:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: File Extension
+        frontmatter:
+          additionalProperties: true
+          type: object
+          title: Frontmatter
+      additionalProperties: true
+      type: object
+      title: MarkdownChunkGeneratedMetadata
+    StoreChunkGrepTarget:
+      type: string
+      enum:
+      - text
+      - generated
+      title: StoreChunkGrepTarget
+      description: "Logical chunk content groups the grep tool can match against.\n\nThese map to one or more underlying chunk fields:\n\n- ``text``      → text chunks' ``text`` field (original text content).\n- ``generated`` → fields produced during ingestion (``transcription`` for audio/video,\n  ``ocr_text`` for images, and ``summary`` across modalities)."
+    CursorPaginationResponse:
+      properties:
+        has_more:
+          type: boolean
+          title: Has More
+          description: 'Contextual direction-aware flag: True if more items exist in the requested pagination direction. For ''after'': more items after this page. For ''before'': more items before this page.'
+          examples:
+          - true
+          - false
+        first_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Cursor
+          description: Cursor of the first item in this page. Use for backward pagination. None if page is empty.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+          - null
+        last_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Cursor
+          description: Cursor of the last item in this page. Use for forward pagination. None if page is empty.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMFQyMzo1OTo1OS4wMDBaIiwiaWQiOiJ4eXo3ODkifQ==
+          - null
+        total:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Total
+          description: Total number of items available across all pages. Only included when include_total=true was requested. Expensive operation - use sparingly.
+          examples:
+          - 42
+          - 0
+          - null
+      type: object
+      required:
+      - has_more
+      - first_cursor
+      - last_cursor
+      title: CursorPaginationResponse
+      description: Response model for cursor-based pagination.
+    VideoUrlInputChunk:
+      properties:
+        chunk_index:
+          type: integer
+          title: Chunk Index
+          description: position of the chunk in a file
+          examples:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        mime_type:
+          type: string
+          title: Mime Type
+          description: mime type of the chunk
+          default: video/mp4
+          examples:
+          - video/mp4
+        generated_metadata:
+          anyOf:
+          - oneOf:
+            - $ref: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/TextChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/PDFChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/CodeChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/AudioChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/VideoChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/ImageChunkGeneratedMetadata'
+            discriminator:
+              propertyName: type
+              mapping:
+                audio: '#/components/schemas/AudioChunkGeneratedMetadata'
+                code: '#/components/schemas/CodeChunkGeneratedMetadata'
+                image: '#/components/schemas/ImageChunkGeneratedMetadata'
+                markdown: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+                pdf: '#/components/schemas/PDFChunkGeneratedMetadata'
+                text: '#/components/schemas/TextChunkGeneratedMetadata'
+                video: '#/components/schemas/VideoChunkGeneratedMetadata'
+          - type: 'null'
+          title: Generated Metadata
+          description: metadata of the chunk
+          examples:
+          - file_size: 1024
+            file_type: text/plain
+            language: en
+            type: text
+            word_count: 100
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+          description: model used for this chunk
+          examples:
+          - text-embedding-ada-002
+          - clip-vit-large-patch14
+        type:
+          type: string
+          const: video_url
+          title: Type
+          description: Input type identifier
+          default: video_url
+        transcription:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Transcription
+          description: speech recognition (sr) text of the video
+          examples:
+          - The year 2025 reports for ..
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+          description: summary of the video
+          examples:
+          - A financial report video for 2025
+        video_url:
+          anyOf:
+          - $ref: '#/components/schemas/VideoUrl'
+          - type: 'null'
+          description: Video URL
+      type: object
+      required:
+      - chunk_index
+      title: VideoUrlInputChunk
+    StoreEventListResponse:
+      properties:
+        pagination:
+          $ref: '#/components/schemas/CursorPaginationResponse'
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        data:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/StoreIngestionEvent'
+            - $ref: '#/components/schemas/StoreSearchEvent'
+            - $ref: '#/components/schemas/StoreAgenticSearchEvent'
+            discriminator:
+              propertyName: type
+              mapping:
+                agentic_search: '#/components/schemas/StoreAgenticSearchEvent'
+                ingestion: '#/components/schemas/StoreIngestionEvent'
+                search: '#/components/schemas/StoreSearchEvent'
+          type: array
+          title: Data
+          description: The list of store events
+      type: object
+      required:
+      - pagination
+      - data
+      title: StoreEventListResponse
+    TextInputChunk:
+      properties:
+        chunk_index:
+          type: integer
+          title: Chunk Index
+          description: position of the chunk in a file
+          examples:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        mime_type:
+          type: string
+          title: Mime Type
+          description: mime type of the chunk
+          default: text/plain
+          examples:
+          - text/plain
+        generated_metadata:
+          anyOf:
+          - oneOf:
+            - $ref: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/TextChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/PDFChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/CodeChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/AudioChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/VideoChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/ImageChunkGeneratedMetadata'
+            discriminator:
+              propertyName: type
+              mapping:
+                audio: '#/components/schemas/AudioChunkGeneratedMetadata'
+                code: '#/components/schemas/CodeChunkGeneratedMetadata'
+                image: '#/components/schemas/ImageChunkGeneratedMetadata'
+                markdown: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+                pdf: '#/components/schemas/PDFChunkGeneratedMetadata'
+                text: '#/components/schemas/TextChunkGeneratedMetadata'
+                video: '#/components/schemas/VideoChunkGeneratedMetadata'
+          - type: 'null'
+          title: Generated Metadata
+          description: metadata of the chunk
+          examples:
+          - file_size: 1024
+            file_type: text/plain
+            language: en
+            type: text
+            word_count: 100
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+          description: model used for this chunk
+          examples:
+          - text-embedding-ada-002
+          - clip-vit-large-patch14
+        type:
+          type: string
+          const: text
+          title: Type
+          description: Input type identifier
+          default: text
+        offset:
+          type: integer
+          title: Offset
+          description: The offset of the text in the file relative to the start of the file.
+          default: 0
+          examples:
+          - 0
+          - 13
+          - 42
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+          description: Text content
+        context:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Context
+          description: LLM-generated context that situates this chunk within its source document
+          examples:
+          - This chunk is from an SEC filing on ACME corp's Q2 2023 performance.
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+          description: summary of the text chunk
+          examples:
+          - A short overview of ACME's Q2 2023 performance.
+      type: object
+      required:
+      - chunk_index
+      title: TextInputChunk
+    Store:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Unique identifier for the store
+          examples:
+          - 1b8b486e-16d0-400b-8868-04cd75217a7e
+        name:
+          type: string
+          maxLength: 128
+          minLength: 1
+          title: Name
+          description: Name of the store
+          examples:
+          - customer-support-kb
+          - product-documentation
+        description:
+          anyOf:
+          - type: string
+            maxLength: 256
+          - type: 'null'
+          title: Description
+          description: Detailed description of the store's purpose and contents
+          examples:
+          - Contains customer support articles and FAQs
+        is_public:
+          type: boolean
+          title: Is Public
+          description: Whether the store can be accessed by anyone with valid login credentials
+          default: false
+          examples:
+          - false
+        license:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: License
+          description: License for public stores
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Metadata
+          description: Additional metadata associated with the store
+          examples:
+          - category: support
+            language: en
+        config:
+          anyOf:
+          - $ref: '#/components/schemas/StoreConfig'
+          - type: 'null'
+          description: Store-level configuration defaults
+        file_counts:
+          $ref: '#/components/schemas/FileCounts'
+          description: Counts of files in different states
+        expires_after:
+          anyOf:
+          - $ref: '#/components/schemas/ExpiresAfter'
+          - type: 'null'
+          description: Optional expiration policy
+        status:
+          $ref: '#/components/schemas/StoreStatus'
+          description: Processing status of the store
+          default: completed
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Timestamp when the store was created
+          examples:
+          - '2024-01-01T00:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: Timestamp when the store was last updated
+          examples:
+          - '2024-01-01T00:00:00Z'
+        last_active_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Active At
+          description: Timestamp when the store was last used
+        usage_bytes:
+          type: integer
+          title: Usage Bytes
+          description: Total storage usage in bytes
+          default: 0
+          examples:
+          - 1024000
+        usage_tokens:
+          type: integer
+          title: Usage Tokens
+          description: Total storage usage in tokens
+          default: 0
+          examples:
+          - 1024000
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+          description: Optional expiration timestamp for the store
+          examples:
+          - '2024-01-01T00:00:00Z'
+        object:
+          type: string
+          const: store
+          title: Object
+          description: Type of the object
+          default: store
+      type: object
+      required:
+      - id
+      - name
+      - created_at
+      - updated_at
+      title: Store
+      description: Model representing a store with its metadata and timestamps.
+    StoreListChunksResponse:
+      properties:
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        data:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredTextInputChunk'
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredImageUrlInputChunk'
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredAudioUrlInputChunk'
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredVideoUrlInputChunk'
+            discriminator:
+              propertyName: type
+              mapping:
+                audio_url: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredAudioUrlInputChunk'
+                image_url: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredImageUrlInputChunk'
+                text: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredTextInputChunk'
+                video_url: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredVideoUrlInputChunk'
+          type: array
+          title: Data
+          description: The list of chunks matching the metadata filters
+      type: object
+      required:
+      - data
+      title: StoreListChunksResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ChunkSearchResultRule:
+      properties:
+        query:
+          type: string
+          title: Query
+          description: The query to trigger the rule
+        store_id:
+          type: string
+          title: Store Id
+          description: The store identifier to apply the rule to
+        type:
+          type: string
+          const: chunk_search_result
+          title: Type
+          description: The type of substitution
+        file_id:
+          type: string
+          title: File Id
+          description: The file ID of the chunk to substitute
+        chunk_index:
+          type: integer
+          minimum: 0.0
+          title: Chunk Index
+          description: The index of the chunk to substitute
+        result_index:
+          type: integer
+          minimum: 0.0
+          title: Result Index
+          description: The index where the result will be inserted
+      type: object
+      required:
+      - query
+      - store_id
+      - type
+      - file_id
+      - chunk_index
+      - result_index
+      title: ChunkSearchResultRule
+      description: Represents a chunk search result rule for a vector store search.
+    ImageUrl-Output:
+      properties:
+        url:
+          type: string
+          title: Url
+          description: The image URL. Can be either a URL or a Data URI.
+        format:
+          type: string
+          title: Format
+          description: The image format/mimetype
+          default: ''
+      type: object
+      required:
+      - url
+      title: ImageUrl
+      description: Model for image URL validation.
+    mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The search rule ID
+        object:
+          type: string
+          const: search_rule
+          title: Object
+          description: The object type
+          default: search_rule
+        query:
+          type: string
+          title: Query
+          description: The query pattern
+        store_id:
+          type: string
+          title: Store Id
+          description: The store ID
+        rules:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/QueryStringSubstitutionRule'
+            - $ref: '#/components/schemas/QueryRegexSubstitutionRule'
+            - $ref: '#/components/schemas/ChunkSearchResultRule'
+            - $ref: '#/components/schemas/FileSearchResultRule'
+            description: The possible rules for a vector store search
+            discriminator:
+              propertyName: type
+              mapping:
+                chunk_search_result: '#/components/schemas/ChunkSearchResultRule'
+                file_search_result: '#/components/schemas/FileSearchResultRule'
+                query_regex: '#/components/schemas/QueryRegexSubstitutionRule'
+                query_string: '#/components/schemas/QueryStringSubstitutionRule'
+          type: array
+          title: Rules
+          description: The rules to apply
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: When the rule was created
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: When the rule was last updated
+      type: object
+      required:
+      - id
+      - query
+      - store_id
+      - rules
+      - created_at
+      - updated_at
+      title: SearchRuleResponse
+      description: Response model for a store search rule.
+    StoreIngestionEvent:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier for the event
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Timestamp when the event was created
+        type:
+          type: string
+          const: ingestion
+          title: Type
+          default: ingestion
+        store_id:
+          type: string
+          format: uuid
+          title: Store Id
+          description: ID of the vector store
+        store_file_id:
+          type: string
+          title: Store File Id
+          description: ID of the vector store file
+        total_time:
+          type: string
+          format: duration
+          title: Total Time
+          description: Total time taken to ingest the file, including queue time
+        queue_time:
+          type: string
+          format: duration
+          title: Queue Time
+          description: Time spent in the queue
+        ingestion_time:
+          type: string
+          format: duration
+          title: Ingestion Time
+          description: Time taken to ingest the file, excluding queue time
+        chunk_count:
+          type: integer
+          title: Chunk Count
+          description: Number of chunks ingested
+        contextualization:
+          type: boolean
+          title: Contextualization
+          description: Whether contextualization was used
+        mode:
+          $ref: '#/components/schemas/StoreFileParsingStrategy'
+          description: Strategy used to ingest the file
+        filename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Filename
+          description: Name of the file if the event is tied to a file
+      type: object
+      required:
+      - id
+      - created_at
+      - store_id
+      - store_file_id
+      - total_time
+      - queue_time
+      - ingestion_time
+      - chunk_count
+      - contextualization
+      - mode
+      title: StoreIngestionEvent
+      description: Represents an ingestion event in a vector store.
+    StoreFileStatus:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - cancelled
+      - completed
+      - failed
+      title: StoreFileStatus
+    StoreQAResults:
+      properties:
+        answer:
+          type: string
+          title: Answer
+          description: The answer generated by the LLM
+        sources:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredTextInputChunk'
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredImageUrlInputChunk'
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredAudioUrlInputChunk'
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredVideoUrlInputChunk'
+            discriminator:
+              propertyName: type
+              mapping:
+                audio_url: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredAudioUrlInputChunk'
+                image_url: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredImageUrlInputChunk'
+                text: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredTextInputChunk'
+                video_url: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredVideoUrlInputChunk'
+          type: array
+          title: Sources
+          description: Source documents used to generate the answer
+      type: object
+      required:
+      - answer
+      title: StoreQAResults
+      description: Results from a question answering operation.
+    mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleSpecificDeleted:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The search rule ID
+        object:
+          type: string
+          const: search_rule
+          title: Object
+          description: The object type
+          default: search_rule
+        deleted_rule:
+          oneOf:
+          - $ref: '#/components/schemas/QueryStringSubstitutionRule'
+          - $ref: '#/components/schemas/QueryRegexSubstitutionRule'
+          - $ref: '#/components/schemas/ChunkSearchResultRule'
+          - $ref: '#/components/schemas/FileSearchResultRule'
+          title: Deleted Rule
+          description: The specific rule that was deleted
+          discriminator:
+            propertyName: type
+            mapping:
+              chunk_search_result: '#/components/schemas/ChunkSearchResultRule'
+              file_search_result: '#/components/schemas/FileSearchResultRule'
+              query_regex: '#/components/schemas/QueryRegexSubstitutionRule'
+              query_string: '#/components/schemas/QueryStringSubstitutionRule'
+        remaining_rules:
+          type: integer
+          title: Remaining Rules
+          description: Number of rules remaining in the array
+      type: object
+      required:
+      - id
+      - deleted_rule
+      - remaining_rules
+      title: SearchRuleSpecificDeleted
+      description: Response model for a specific deleted rule from a search rule array.
+    AgenticSearchConfig:
+      properties:
+        max_rounds:
+          type: integer
+          maximum: 10.0
+          minimum: 1.0
+          title: Max Rounds
+          description: Maximum number of search rounds
+          default: 3
+        queries_per_round:
+          type: integer
+          maximum: 10.0
+          minimum: 1.0
+          title: Queries Per Round
+          description: Maximum queries per round
+          default: 4
+        strict_top_k:
+          type: boolean
+          title: Strict Top K
+          description: Whether the final retrieved chunk list must provide exactly top_k ranked chunks
+          default: false
+        media_content:
+          type: string
+          enum:
+          - auto
+          - never
+          - always
+          title: Media Content
+          description: Controls when retrieved image content is provided to the agent. `auto` sends images only when no OCR text or summary is available, `never` disables image content, and `always` sends image content when available.
+          default: auto
+        instructions:
+          anyOf:
+          - type: string
+            maxLength: 5000
+            minLength: 1
+          - type: 'null'
+          title: Instructions
+          description: Additional custom instructions (followed only when not in conflict with existing rules)
+        verbose:
+          type: boolean
+          title: Verbose
+          description: 'Internal: when set, the response includes a `trace` field with the full tool-call timeline. Used by the Mixedbread playground; not part of the documented public API.'
+          default: false
+      type: object
+      title: AgenticSearchConfig
+      description: Configuration for agentic multi-query search.
+    StoreAgenticSearchEvent:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier for the event
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Timestamp when the event was created
+        type:
+          type: string
+          const: agentic_search
+          title: Type
+          default: agentic_search
+        store_ids:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Store Ids
+          description: IDs of the vector stores searched
+        started_at:
+          type: string
+          format: date-time
+          title: Started At
+          description: Time when the agentic search began
+        search_time:
+          type: string
+          format: duration
+          title: Search Time
+          description: Total wall-clock time of the agent loop
+          default: PT0S
+        query:
+          type: string
+          title: Query
+          description: Original query submitted by the user
+        instructions:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Instructions
+          description: Custom instructions provided with the agentic search, if any
+        ranking_strategy:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ranking Strategy
+          description: Agent-submitted explanation of how chunks were ranked
+        rounds_executed:
+          type: integer
+          title: Rounds Executed
+          description: Number of search rounds the agent executed
+          default: 0
+        filters:
+          anyOf:
+          - $ref: '#/components/schemas/SearchFilter-Output'
+          - $ref: '#/components/schemas/SearchFilterCondition'
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Output'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: Filters
+          description: Metadata filters submitted with the search request
+        token_usage:
+          $ref: '#/components/schemas/AgenticSearchTokenUsage'
+          description: Token usage and cost for LLM calls during the agentic search
+        tool_calls:
+          items:
+            $ref: '#/components/schemas/AgenticToolCall'
+          type: array
+          title: Tool Calls
+          description: Ordered tool calls issued by the agent
+        results:
+          items:
+            $ref: '#/components/schemas/StoreSearchEventResult'
+          type: array
+          title: Results
+          description: Chunks returned by the agentic search
+      type: object
+      required:
+      - id
+      - created_at
+      - store_ids
+      - started_at
+      - query
+      title: StoreAgenticSearchEvent
+      description: 'Represents an agentic search trace in a vector store.
+
+
+        Unlike StoreSearchEvent, this captures the full sequence of tool calls the
+
+        agent issued (name, arguments, result) so developers can inspect what the
+
+        agent did, along with the token usage and cost.'
+    MultiModalQuery:
+      anyOf:
+      - type: string
+        minLength: 1
+        description: The text input document to create embeddings for.
+        examples:
+        - This is a sample text input.
+      - oneOf:
+        - $ref: '#/components/schemas/ImageUrlInput'
+        - $ref: '#/components/schemas/TextInput'
+        description: The input to create embeddings for.
+        discriminator:
+          propertyName: type
+          mapping:
+            image_url: '#/components/schemas/ImageUrlInput'
+            text: '#/components/schemas/TextInput'
+    StoreFileDeleted:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID of the deleted file
+        deleted:
+          type: boolean
+          title: Deleted
+          description: Whether the deletion was successful
+          default: true
+        object:
+          type: string
+          const: store.file
+          title: Object
+          description: Type of the deleted object
+          default: store.file
+      type: object
+      required:
+      - id
+      title: StoreFileDeleted
+      description: Response model for file deletion.
+    StoreFileListResponse:
+      properties:
+        pagination:
+          $ref: '#/components/schemas/CursorPaginationResponse'
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        data:
+          items:
+            $ref: '#/components/schemas/StoreFile'
+          type: array
+          title: Data
+          description: The list of store files
+      type: object
+      required:
+      - pagination
+      - data
+      title: StoreFileListResponse
+    Body_upload_store_file:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+          description: The file to upload and index
+        params:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Params
+      type: object
+      required:
+      - file
+      title: Body_upload_store_file
+    RegexFlag:
+      type: string
+      enum:
+      - IGNORECASE
+      - MULTILINE
+      - DOTALL
+      - VERBOSE
+      - ASCII
+      - UNICODE
+      title: RegexFlag
+      description: Supported regex flags.
+    StoreChunkSearchParams:
+      properties:
+        store_identifiers:
+          items:
+            anyOf:
+            - type: string
+            - type: string
+              format: uuid
+          type: array
+          maxItems: 16
+          minItems: 1
+          title: Store Identifiers
+          description: IDs or names of stores
+        top_k:
+          type: integer
+          minimum: 1.0
+          title: Top K
+          description: Number of results to return
+          default: 10
+        filters:
+          anyOf:
+          - $ref: '#/components/schemas/SearchFilter-Input'
+          - $ref: '#/components/schemas/SearchFilterCondition'
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Input'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: Filters
+          description: Optional filter conditions
+        file_ids:
+          anyOf:
+          - prefixItems:
+            - $ref: '#/components/schemas/ConditionOperator'
+            - items:
+                type: string
+                format: uuid
+              type: array
+            type: array
+            maxItems: 2
+            minItems: 2
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: File Ids
+          description: Optional list of file IDs to filter chunks by (inclusion filter)
+          examples:
+          - - 123e4567-e89b-12d3-a456-426614174000
+            - 123e4567-e89b-12d3-a456-426614174001
+          - - in
+            - - 123e4567-e89b-12d3-a456-426614174000
+          - - not_in
+            - - 123e4567-e89b-12d3-a456-426614174000
+        query:
+          $ref: '#/components/schemas/MultiModalQuery'
+          description: Search query text
+          examples:
+          - how to configure SSL
+        search_options:
+          $ref: '#/components/schemas/StoreChunkSearchOptions'
+          description: Search configuration options
+      type: object
+      required:
+      - store_identifiers
+      - query
+      title: StoreChunkSearchParams
+      description: Query parameters for searching store chunks.
+    StoreConfig:
+      properties:
+        contextualization:
+          anyOf:
+          - type: boolean
+          - $ref: '#/components/schemas/ContextualizationConfig'
+          title: Contextualization
+          description: Contextualize files with metadata
+          default: false
+        save_content:
+          type: boolean
+          title: Save Content
+          description: 'Whether to save original content in the store. When False, only vectors are indexed without the original content (index-only mode). This is useful for data privacy. Note: Reranking is not supported when content is not saved.'
+          default: true
+      type: object
+      title: StoreConfig
+      description: Configuration for a store.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    MetadataFacets:
+      properties:
+        facets:
+          additionalProperties:
+            additionalProperties: true
+            type: object
+          type: object
+          title: Facets
+          description: Metadata facets
+          examples:
+          - author:
+              count: 1
+              value: John Doe
+            year:
+              count: 2
+              value: '2024'
+      type: object
+      required:
+      - facets
+      title: MetadataFacets
+      description: Represents metadata facets for a store.
+    ImageUrl-Input:
+      properties:
+        url:
+          anyOf:
+          - type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          - type: string
+            pattern: data:(?P<mimetype>[\w]+\/[\w\-\+\.]+)?(?:\;name\=(?P<name>[\w\.\-%!*'~\(\)]+))?(?:\;charset\=(?P<charset>[\w\-\+\.]+))?(?P<base64>\;base64)?,(?P<data>.*)
+            examples:
+            - data:text/plain;charset=utf-8;base64,VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wZWQgb3ZlciB0aGUgbGF6eSBkb2cu
+          title: Url
+          description: The image URL. Can be either a URL or a Data URI.
+        format:
+          type: string
+          title: Format
+          description: The image format/mimetype
+          default: ''
+      type: object
+      required:
+      - url
+      title: ImageUrl
+      description: Model for image URL validation.
+    TextChunkGeneratedMetadata:
+      properties:
+        type:
+          type: string
+          const: text
+          title: Type
+          default: text
+        file_type:
+          type: string
+          const: text/plain
+          title: File Type
+          default: text/plain
+        language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Language
+        word_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Word Count
+        file_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: File Size
+        start_line:
+          type: integer
+          title: Start Line
+          default: 0
+        num_lines:
+          type: integer
+          title: Num Lines
+          default: 0
+        file_extension:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: File Extension
+      additionalProperties: true
+      type: object
+      title: TextChunkGeneratedMetadata
+    mxbai_omni__core__store__models__chunk_types__ScoredImageUrlInputChunk:
+      properties:
+        chunk_index:
+          type: integer
+          title: Chunk Index
+          description: position of the chunk in a file
+          examples:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        mime_type:
+          type: string
+          title: Mime Type
+          description: mime type of the chunk
+          default: image/jpeg
+          examples:
+          - image/jpeg
+        generated_metadata:
+          anyOf:
+          - oneOf:
+            - $ref: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/TextChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/PDFChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/CodeChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/AudioChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/VideoChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/ImageChunkGeneratedMetadata'
+            discriminator:
+              propertyName: type
+              mapping:
+                audio: '#/components/schemas/AudioChunkGeneratedMetadata'
+                code: '#/components/schemas/CodeChunkGeneratedMetadata'
+                image: '#/components/schemas/ImageChunkGeneratedMetadata'
+                markdown: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+                pdf: '#/components/schemas/PDFChunkGeneratedMetadata'
+                text: '#/components/schemas/TextChunkGeneratedMetadata'
+                video: '#/components/schemas/VideoChunkGeneratedMetadata'
+          - type: 'null'
+          title: Generated Metadata
+          description: metadata of the chunk
+          examples:
+          - file_size: 1024
+            file_type: text/plain
+            language: en
+            type: text
+            word_count: 100
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+          description: model used for this chunk
+          examples:
+          - text-embedding-ada-002
+          - clip-vit-large-patch14
+        score:
+          type: number
+          title: Score
+          description: score of the chunk
+          examples:
+          - 0.5
+        file_id:
+          type: string
+          title: File Id
+          description: file id
+          examples:
+          - file1
+        filename:
+          type: string
+          title: Filename
+          description: filename
+          examples:
+          - file1
+        store_id:
+          type: string
+          title: Store Id
+          description: store id
+          examples:
+          - store1
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+          description: external identifier for this file
+          examples:
+          - ext-123
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Metadata
+          description: file metadata
+          examples:
+          - key: value
+        type:
+          type: string
+          const: image_url
+          title: Type
+          description: Input type identifier
+          default: image_url
+        ocr_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ocr Text
+          description: ocr text of the image
+          examples:
+          - 2025 Financial Report
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+          description: summary of the image
+          examples:
+          - A financial report for 2025
+        image_url:
+          anyOf:
+          - $ref: '#/components/schemas/ImageUrl-Output'
+          - type: 'null'
+          description: Image URL
+      type: object
+      required:
+      - chunk_index
+      - score
+      - file_id
+      - filename
+      - store_id
+      title: ScoredImageUrlInputChunk
+    DeprecatedStoreFileUpsertParams:
+      properties:
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Metadata
+          description: Optional metadata for the file
+        config:
+          $ref: '#/components/schemas/StoreFileConfig'
+          description: Configuration for adding the file
+        external_id:
+          anyOf:
+          - type: string
+            maxLength: 256
+          - type: 'null'
+          title: External Id
+          description: External identifier for this file in the store
+        overwrite:
+          type: boolean
+          title: Overwrite
+          description: If true, overwrite an existing file with the same external_id
+          default: true
+          examples:
+          - false
+          - true
+        file_id:
+          type: string
+          format: uuid
+          title: File Id
+          description: ID of the file to add
+        experimental:
+          anyOf:
+          - $ref: '#/components/schemas/StoreFileConfig'
+          - type: 'null'
+          description: Strategy for adding the file. This field is deprecated. Please use the top-level 'config' field instead. If this is provided, it will override the top-level 'config' field.
+          deprecated: true
+      type: object
+      required:
+      - file_id
+      title: DeprecatedStoreFileUpsertParams
+    StoreEventHistogramParams:
+      properties:
+        start_time:
+          type: string
+          format: date-time
+          title: Start Time
+          description: Start time of the histogram
+        end_time:
+          type: string
+          format: date-time
+          title: End Time
+          description: End time of the histogram
+        bucket_seconds:
+          type: integer
+          title: Bucket Seconds
+          description: Number of seconds in each bucket
+          default: 7200
+        event_types:
+          anyOf:
+          - items:
+              type: string
+              enum:
+              - ingestion
+              - search
+              - agentic_search
+            type: array
+          - type: 'null'
+          title: Event Types
+          description: Restrict the histogram to these event types. When omitted, includes search, agentic_search, and ingestion events.
+      type: object
+      title: StoreEventHistogramParams
+      description: Parameters for getting a histogram of events in a store.
+    QuestionAnsweringOptions:
+      properties:
+        cite:
+          type: boolean
+          title: Cite
+          description: Whether to use citations
+          default: true
+        multimodal:
+          type: boolean
+          title: Multimodal
+          description: Whether to use multimodal context
+          default: true
+      type: object
+      title: QuestionAnsweringOptions
+      description: Options for question answering.
+    VideoUrl:
+      properties:
+        url:
+          type: string
+          title: Url
+          description: The video URL. Can be either a URL or a Data URI.
+      type: object
+      required:
+      - url
+      title: VideoUrl
+      description: Model for video URL validation.
+    AgenticToolCall:
+      properties:
+        tool_call_id:
+          type: string
+          title: Tool Call Id
+          description: Unique identifier for the tool call (gen_ai.tool.call.id)
+        tool_name:
+          type: string
+          title: Tool Name
+          description: Name of the tool invoked (gen_ai.tool.name)
+          examples:
+          - search_batch
+        tool_type:
+          type: string
+          enum:
+          - function
+          - extension
+          - datastore
+          title: Tool Type
+          description: Category of the tool (gen_ai.tool.type)
+          default: function
+        started_at:
+          type: string
+          format: date-time
+          title: Started At
+          description: Time when the tool call began
+        duration:
+          type: string
+          format: duration
+          title: Duration
+          description: Time taken to execute the tool call
+        arguments:
+          additionalProperties: true
+          type: object
+          title: Arguments
+          description: Arguments passed to the tool (gen_ai.tool.call.arguments)
+        result:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Result
+          description: Result returned to the model (gen_ai.tool.call.result). None if the tool errored.
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+          description: Error message if the tool call failed
+      type: object
+      required:
+      - tool_call_id
+      - tool_name
+      - started_at
+      - duration
+      - arguments
+      title: AgenticToolCall
+      description: 'Represents a single tool call made by the agent during an agentic search.
+
+
+        Fields follow the OpenTelemetry GenAI semantic conventions for tool calls:
+
+        https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/'
+    SearchCursorPagination:
+      properties:
+        limit:
+          type: integer
+          maximum: 100.0
+          minimum: 1.0
+          title: Limit
+          description: Maximum number of items to return per page (1-100)
+          default: 20
+          examples:
+          - 10
+          - 20
+          - 50
+        after:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: After
+          description: Cursor for forward pagination - get items after this position. Use last_cursor from previous response.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+        before:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Before
+          description: Cursor for backward pagination - get items before this position. Use first_cursor from previous response.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+        include_total:
+          type: boolean
+          title: Include Total
+          description: Whether to include total count in response (expensive operation)
+          default: false
+          examples:
+          - false
+          - true
+        statuses:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/StoreFileStatus'
+            type: array
+          - type: 'null'
+          title: Statuses
+          description: Status to filter by
+        metadata_filter:
+          anyOf:
+          - $ref: '#/components/schemas/SearchFilter-Input'
+          - $ref: '#/components/schemas/SearchFilterCondition'
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Input'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: Metadata Filter
+          description: Metadata filter to apply to the query
+        q:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 1
+          - type: 'null'
+          title: Q
+          description: Search query for fuzzy matching over name and external_id fields
+      type: object
+      title: SearchCursorPagination
+      description: Cursor pagination with status, metadata, and a search query.
+    mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleCreateParams:
+      properties:
+        query:
+          type: string
+          title: Query
+          description: The query pattern to match
+        rules:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/QueryStringSubstitutionRule'
+            - $ref: '#/components/schemas/QueryRegexSubstitutionRule'
+            - $ref: '#/components/schemas/ChunkSearchResultRule'
+            - $ref: '#/components/schemas/FileSearchResultRule'
+            description: The possible rules for a vector store search
+            discriminator:
+              propertyName: type
+              mapping:
+                chunk_search_result: '#/components/schemas/ChunkSearchResultRule'
+                file_search_result: '#/components/schemas/FileSearchResultRule'
+                query_regex: '#/components/schemas/QueryRegexSubstitutionRule'
+                query_string: '#/components/schemas/QueryStringSubstitutionRule'
+          type: array
+          title: Rules
+          description: The rules to apply on query matches
+      type: object
+      required:
+      - query
+      - rules
+      title: SearchRuleCreateParams
+      description: Parameters for creating a new search rule for a store.
+    QueryEnhanceResults:
+      properties:
+        items:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/QueryEnhanceQueryItem'
+            - $ref: '#/components/schemas/QueryEnhanceSortItem'
+            discriminator:
+              propertyName: type
+              mapping:
+                query: '#/components/schemas/QueryEnhanceQueryItem'
+                sort: '#/components/schemas/QueryEnhanceSortItem'
+          type: array
+          maxItems: 1
+          minItems: 1
+          title: Items
+          description: Enhanced query item
+      type: object
+      required:
+      - items
+      title: QueryEnhanceResults
+      description: Enhanced query response.
+    AudioUrl:
+      properties:
+        url:
+          type: string
+          title: Url
+          description: The audio URL. Can be either a URL or a Data URI.
+      type: object
+      required:
+      - url
+      title: AudioUrl
+      description: Model for audio URL validation.
+    PDFChunkGeneratedMetadata:
+      properties:
+        type:
+          type: string
+          const: pdf
+          title: Type
+          default: pdf
+        file_type:
+          type: string
+          const: application/pdf
+          title: File Type
+          default: application/pdf
+        total_pages:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Total Pages
+        total_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Total Size
+        file_extension:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: File Extension
+      additionalProperties: true
+      type: object
+      title: PDFChunkGeneratedMetadata
+    StoreEventHistogramBucket:
+      properties:
+        bucket_start:
+          type: string
+          format: date-time
+          title: Bucket Start
+          description: Start time of the bucket
+        bucket_end:
+          type: string
+          format: date-time
+          title: Bucket End
+          description: End time of the bucket
+        type:
+          type: string
+          enum:
+          - inference.embeddings
+          - inference.reranking
+          - model_request
+          - internal_error
+          - store.created
+          - store.deleted
+          - store.updated
+          - store.search
+          - store.web_search
+          - store.file.created
+          - store.file.deleted
+          - store.file.updated
+          - store.file.search
+          - store.question_answer
+          - store.file.completed
+          - store.file.cancelled
+          - store.reingestion.completed
+          - parsing.job.created
+          - parsing.job.deleted
+          - parsing.job.cancelled
+          - parsing.job.completed
+          - extraction.job.created
+          - extraction.job.deleted
+          - extraction.job.cancelled
+          - extraction.job.completed
+          - file.uploaded
+          - file.deleted
+          - file.updated
+          - file.downloaded
+          - api_key.created
+          - api_key.deleted
+          - api_key.updated
+          - api_key.revoked
+          - api_key.rerolled
+          - data_source.created
+          - data_source.updated
+          - data_source.deleted
+          - data_source.oauth2.requested
+          - data_source.oauth2.authorized
+          - data_source.connector.job.completed
+          - auth.invalid_token
+          - auth.success
+          - auth.error
+          title: Type
+          description: Type of the event
+        event_count:
+          type: integer
+          title: Event Count
+          description: Number of events in the bucket
+      type: object
+      required:
+      - bucket_start
+      - bucket_end
+      - type
+      - event_count
+      title: StoreEventHistogramBucket
+      description: Represents a histogram of events in a store.
+    ImageChunkGeneratedMetadata:
+      properties:
+        type:
+          type: string
+          const: image
+          title: Type
+          default: image
+        file_type:
+          type: string
+          title: File Type
+          default: image/jpeg
+        file_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: File Size
+        width:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Width
+        height:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Height
+        file_extension:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: File Extension
+      additionalProperties: true
+      type: object
+      title: ImageChunkGeneratedMetadata
+    mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleUpdateParams:
+      properties:
+        query:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Query
+          description: The query pattern to match
+        rules:
+          anyOf:
+          - items:
+              oneOf:
+              - $ref: '#/components/schemas/QueryStringSubstitutionRule'
+              - $ref: '#/components/schemas/QueryRegexSubstitutionRule'
+              - $ref: '#/components/schemas/ChunkSearchResultRule'
+              - $ref: '#/components/schemas/FileSearchResultRule'
+              description: The possible rules for a vector store search
+              discriminator:
+                propertyName: type
+                mapping:
+                  chunk_search_result: '#/components/schemas/ChunkSearchResultRule'
+                  file_search_result: '#/components/schemas/FileSearchResultRule'
+                  query_regex: '#/components/schemas/QueryRegexSubstitutionRule'
+                  query_string: '#/components/schemas/QueryStringSubstitutionRule'
+            type: array
+          - type: 'null'
+          title: Rules
+          description: The rules to apply on query matches
+      type: object
+      title: SearchRuleUpdateParams
+      description: Parameters for updating an existing search rule for a store.
+    QueryRegexSubstitutionRule:
+      properties:
+        query:
+          type: string
+          title: Query
+          description: The query to trigger the rule
+        store_id:
+          type: string
+          title: Store Id
+          description: The store identifier to apply the rule to
+        type:
+          type: string
+          const: query_regex
+          title: Type
+          description: The type of substitution
+        pattern:
+          type: string
+          title: Pattern
+          description: The regex pattern to match
+          examples:
+          - \b(\w+)\s+world\b
+        flags:
+          items:
+            $ref: '#/components/schemas/RegexFlag'
+          type: array
+          title: Flags
+          description: The regex flags to use
+          default: []
+        replacement:
+          type: string
+          title: Replacement
+          description: The replacement string (can use regex groups)
+          examples:
+          - \1\sglobe
+      type: object
+      required:
+      - query
+      - store_id
+      - type
+      - pattern
+      - replacement
+      title: QueryRegexSubstitutionRule
+      description: Represents a regex query substitution rule for a vector store search.
+    QueryEnhanceMetadataFilter:
+      properties:
+        key:
+          type: string
+          minLength: 1
+          title: Key
+          description: Metadata field key
+        operator:
+          $ref: '#/components/schemas/ConditionOperator'
+          description: Comparison operator
+        value:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: number
+          - type: boolean
+          - items:
+              anyOf:
+              - type: string
+              - type: integer
+              - type: number
+              - type: boolean
+            type: array
+          - type: 'null'
+          title: Value
+          description: Value to compare against. Use a list for `in`/`not_in`.
+      additionalProperties: false
+      type: object
+      required:
+      - key
+      - operator
+      - value
+      title: QueryEnhanceMetadataFilter
+      description: Metadata filter condition.
+    QueryEnhanceSortItem:
+      properties:
+        type:
+          type: string
+          const: sort
+          title: Type
+          default: sort
+        metadata_filters:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/QueryEnhanceMetadataFilter'
+            type: array
+          - type: 'null'
+          title: Metadata Filters
+          description: Metadata filters to apply
+        filter_mode:
+          type: string
+          enum:
+          - all
+          - any
+          title: Filter Mode
+          description: How to combine filters
+          default: all
+        rank_by:
+          type: string
+          minLength: 1
+          title: Rank By
+          description: Metadata field to rank results by
+        direction:
+          type: string
+          enum:
+          - asc
+          - desc
+          title: Direction
+          description: Ranking direction
+      type: object
+      required:
+      - rank_by
+      - direction
+      title: QueryEnhanceSortItem
+      description: Ranking request based on metadata.
+    ConditionOperator:
+      type: string
+      enum:
+      - eq
+      - not_eq
+      - gt
+      - gte
+      - lt
+      - lte
+      - in
+      - not_in
+      - like
+      - starts_with
+      - not_like
+      - regex
+      title: ConditionOperator
+      description: Operator for a filter condition.
+    QueryStringSubstitutionRule:
+      properties:
+        query:
+          type: string
+          title: Query
+          description: The query to trigger the rule
+        store_id:
+          type: string
+          title: Store Id
+          description: The store identifier to apply the rule to
+        type:
+          type: string
+          const: query_string
+          title: Type
+          description: The type of substitution
+        substitution:
+          type: string
+          title: Substitution
+          description: The substitution to apply
+          examples:
+          - query1
+          - query2
+      type: object
+      required:
+      - query
+      - store_id
+      - type
+      - substitution
+      title: QueryStringSubstitutionRule
+      description: Represents a string query substitution rule for a vector store search.
+    QueryEnhanceParams:
+      properties:
+        store_identifiers:
+          items:
+            anyOf:
+            - type: string
+            - type: string
+              format: uuid
+          type: array
+          maxItems: 16
+          minItems: 1
+          title: Store Identifiers
+          description: IDs or names of stores
+        top_k:
+          type: integer
+          minimum: 1.0
+          title: Top K
+          description: Number of results to return
+          default: 10
+        filters:
+          anyOf:
+          - $ref: '#/components/schemas/SearchFilter-Input'
+          - $ref: '#/components/schemas/SearchFilterCondition'
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Input'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: Filters
+          description: Optional filter conditions
+        file_ids:
+          anyOf:
+          - prefixItems:
+            - $ref: '#/components/schemas/ConditionOperator'
+            - items:
+                type: string
+                format: uuid
+              type: array
+            type: array
+            maxItems: 2
+            minItems: 2
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: File Ids
+          description: Optional list of file IDs to filter chunks by (inclusion filter)
+          examples:
+          - - 123e4567-e89b-12d3-a456-426614174000
+            - 123e4567-e89b-12d3-a456-426614174001
+          - - in
+            - - 123e4567-e89b-12d3-a456-426614174000
+          - - not_in
+            - - 123e4567-e89b-12d3-a456-426614174000
+        query:
+          $ref: '#/components/schemas/MultiModalQuery'
+          description: Search query text
+          examples:
+          - how to configure SSL
+        search_options:
+          $ref: '#/components/schemas/StoreChunkSearchOptions'
+          description: Search configuration options
+        instructions:
+          anyOf:
+          - type: string
+            maxLength: 2000
+          - type: 'null'
+          title: Instructions
+          description: Optional guidance for query enhancement.
+      type: object
+      required:
+      - store_identifiers
+      - query
+      title: QueryEnhanceParams
+      description: Parameters for enhancing a search query.
+    CodeChunkGeneratedMetadata:
+      properties:
+        type:
+          type: string
+          const: code
+          title: Type
+          default: code
+        file_type:
+          type: string
+          title: File Type
+        language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Language
+        word_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Word Count
+        file_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: File Size
+        start_line:
+          type: integer
+          title: Start Line
+          default: 0
+        num_lines:
+          type: integer
+          title: Num Lines
+          default: 0
+        file_extension:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: File Extension
+      additionalProperties: true
+      type: object
+      required:
+      - file_type
+      title: CodeChunkGeneratedMetadata
+    StoreFileConfig:
+      properties:
+        parsing_strategy:
+          $ref: '#/components/schemas/StoreFileParsingStrategy'
+          description: Strategy for adding the file, this overrides the store-level default
+          default: fast
+      type: object
+      title: StoreFileConfig
+      description: Configuration for a file.
+    AudioChunkGeneratedMetadata:
+      properties:
+        type:
+          type: string
+          const: audio
+          title: Type
+          default: audio
+        file_type:
+          type: string
+          title: File Type
+          default: audio/mpeg
+        file_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: File Size
+        total_duration_seconds:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Total Duration Seconds
+        sample_rate:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sample Rate
+        channels:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Channels
+        audio_format:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Audio Format
+        bpm:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Bpm
+        file_extension:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: File Extension
+      additionalProperties: true
+      type: object
+      title: AudioChunkGeneratedMetadata
+    StoreSearchResponse:
+      properties:
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        data:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredTextInputChunk'
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredImageUrlInputChunk'
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredAudioUrlInputChunk'
+            - $ref: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredVideoUrlInputChunk'
+            discriminator:
+              propertyName: type
+              mapping:
+                audio_url: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredAudioUrlInputChunk'
+                image_url: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredImageUrlInputChunk'
+                text: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredTextInputChunk'
+                video_url: '#/components/schemas/mxbai_omni__core__store__models__chunk_types__ScoredVideoUrlInputChunk'
+          type: array
+          title: Data
+          description: The list of scored store file chunks
+      additionalProperties: true
+      type: object
+      required:
+      - data
+      title: StoreSearchResponse
+    AudioUrlInputChunk:
+      properties:
+        chunk_index:
+          type: integer
+          title: Chunk Index
+          description: position of the chunk in a file
+          examples:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        mime_type:
+          type: string
+          title: Mime Type
+          description: mime type of the chunk
+          default: audio/mpeg
+          examples:
+          - audio/mpeg
+        generated_metadata:
+          anyOf:
+          - oneOf:
+            - $ref: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/TextChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/PDFChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/CodeChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/AudioChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/VideoChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/ImageChunkGeneratedMetadata'
+            discriminator:
+              propertyName: type
+              mapping:
+                audio: '#/components/schemas/AudioChunkGeneratedMetadata'
+                code: '#/components/schemas/CodeChunkGeneratedMetadata'
+                image: '#/components/schemas/ImageChunkGeneratedMetadata'
+                markdown: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+                pdf: '#/components/schemas/PDFChunkGeneratedMetadata'
+                text: '#/components/schemas/TextChunkGeneratedMetadata'
+                video: '#/components/schemas/VideoChunkGeneratedMetadata'
+          - type: 'null'
+          title: Generated Metadata
+          description: metadata of the chunk
+          examples:
+          - file_size: 1024
+            file_type: text/plain
+            language: en
+            type: text
+            word_count: 100
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+          description: model used for this chunk
+          examples:
+          - text-embedding-ada-002
+          - clip-vit-large-patch14
+        type:
+          type: string
+          const: audio_url
+          title: Type
+          description: Input type identifier
+          default: audio_url
+        transcription:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Transcription
+          description: speech recognition (sr) text of the audio
+          examples:
+          - The year 2025 reports for ..
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+          description: summary of the audio
+          examples:
+          - A financial report audio for 2025
+        audio_url:
+          anyOf:
+          - $ref: '#/components/schemas/AudioUrl'
+          - type: 'null'
+          description: Audio URL
+        sampling_rate:
+          type: integer
+          title: Sampling Rate
+          description: The sampling rate of the audio.
+      type: object
+      required:
+      - chunk_index
+      - sampling_rate
+      title: AudioUrlInputChunk
+    StoreFileMetadataUpdateParams:
+      properties:
+        metadata:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Metadata
+          description: Updated metadata for the file
+      type: object
+      title: StoreFileMetadataUpdateParams
+      description: Parameters for updating metadata on an existing store file.
+    SearchFilter-Input:
+      properties:
+        all:
+          anyOf:
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Input'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: All
+          description: List of conditions or filters to be ANDed together
+          examples:
+          - - key: price
+              operator: gt
+              value: '100'
+            - key: color
+              operator: eq
+              value: red
+          - null
+        any:
+          anyOf:
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Input'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: Any
+          description: List of conditions or filters to be ORed together
+          examples:
+          - - key: price
+              operator: gt
+              value: '100'
+            - key: color
+              operator: eq
+              value: red
+          - null
+        none:
+          anyOf:
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Input'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: None
+          description: List of conditions or filters to be NOTed
+          examples:
+          - - key: price
+              operator: gt
+              value: '100'
+            - key: color
+              operator: eq
+              value: red
+          - null
+      type: object
+      title: SearchFilter
+      description: Represents a filter with AND, OR, and NOT conditions.
+    mxbai_omni__core__store__models__chunk_types__ScoredAudioUrlInputChunk:
+      properties:
+        chunk_index:
+          type: integer
+          title: Chunk Index
+          description: position of the chunk in a file
+          examples:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        mime_type:
+          type: string
+          title: Mime Type
+          description: mime type of the chunk
+          default: audio/mpeg
+          examples:
+          - audio/mpeg
+        generated_metadata:
+          anyOf:
+          - oneOf:
+            - $ref: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/TextChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/PDFChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/CodeChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/AudioChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/VideoChunkGeneratedMetadata'
+            - $ref: '#/components/schemas/ImageChunkGeneratedMetadata'
+            discriminator:
+              propertyName: type
+              mapping:
+                audio: '#/components/schemas/AudioChunkGeneratedMetadata'
+                code: '#/components/schemas/CodeChunkGeneratedMetadata'
+                image: '#/components/schemas/ImageChunkGeneratedMetadata'
+                markdown: '#/components/schemas/MarkdownChunkGeneratedMetadata'
+                pdf: '#/components/schemas/PDFChunkGeneratedMetadata'
+                text: '#/components/schemas/TextChunkGeneratedMetadata'
+                video: '#/components/schemas/VideoChunkGeneratedMetadata'
+          - type: 'null'
+          title: Generated Metadata
+          description: metadata of the chunk
+          examples:
+          - file_size: 1024
+            file_type: text/plain
+            language: en
+            type: text
+            word_count: 100
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+          description: model used for this chunk
+          examples:
+          - text-embedding-ada-002
+          - clip-vit-large-patch14
+        score:
+          type: number
+          title: Score
+          description: score of the chunk
+          examples:
+          - 0.5
+        file_id:
+          type: string
+          title: File Id
+          description: file id
+          examples:
+          - file1
+        filename:
+          type: string
+          title: Filename
+          description: filename
+          examples:
+          - file1
+        store_id:
+          type: string
+          title: Store Id
+          description: store id
+          examples:
+          - store1
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+          description: external identifier for this file
+          examples:
+          - ext-123
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Metadata
+          description: file metadata
+          examples:
+          - key: value
+        type:
+          type: string
+          const: audio_url
+          title: Type
+          description: Input type identifier
+          default: audio_url
+        transcription:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Transcription
+          description: speech recognition (sr) text of the audio
+          examples:
+          - The year 2025 reports for ..
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+          description: summary of the audio
+          examples:
+          - A financial report audio for 2025
+        audio_url:
+          anyOf:
+          - $ref: '#/components/schemas/AudioUrl'
+          - type: 'null'
+          description: Audio URL
+        sampling_rate:
+          type: integer
+          title: Sampling Rate
+          description: The sampling rate of the audio.
+      type: object
+      required:
+      - chunk_index
+      - score
+      - file_id
+      - filename
+      - store_id
+      - sampling_rate
+      title: ScoredAudioUrlInputChunk
+    StoreFile:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Unique identifier for the file
+        filename:
+          type: string
+          title: Filename
+          description: Name of the file
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Metadata
+          description: Optional file metadata
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+          description: External identifier for this file in the store
+        status:
+          $ref: '#/components/schemas/StoreFileStatus'
+          description: Processing status of the file
+          default: pending
+        last_error:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Last Error
+          description: Last error message if processing failed
+        store_id:
+          type: string
+          title: Store Id
+          description: ID of the containing store
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Timestamp of store file creation
+        version:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Version
+          description: Version number of the file
+          examples:
+          - 1
+        usage_bytes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Usage Bytes
+          description: Storage usage in bytes
+          examples:
+          - 51200
+        usage_tokens:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Usage Tokens
+          description: Storage usage in tokens
+          examples:
+          - 51200
+        config:
+          anyOf:
+          - $ref: '#/components/schemas/StoreFileConfig'
+          - type: 'null'
+          description: Configuration for the file
+        object:
+          type: string
+          const: store.file
+          title: Object
+          description: Type of the object
+          default: store.file
+        chunks:
+          anyOf:
+          - items:
+              oneOf:
+              - $ref: '#/components/schemas/TextInputChunk'
+              - $ref: '#/components/schemas/ImageUrlInputChunk'
+              - $ref: '#/components/schemas/AudioUrlInputChunk'
+              - $ref: '#/components/schemas/VideoUrlInputChunk'
+              discriminator:
+                propertyName: type
+                mapping:
+                  audio_url: '#/components/schemas/AudioUrlInputChunk'
+                  image_url: '#/components/schemas/ImageUrlInputChunk'
+                  text: '#/components/schemas/TextInputChunk'
+                  video_url: '#/components/schemas/VideoUrlInputChunk'
+            type: array
+          - type: 'null'
+          title: Chunks
+          description: chunks
+        content_url:
+          type: string
+          title: Content Url
+          description: Presigned URL for file content
+      type: object
+      required:
+      - id
+      - store_id
+      - created_at
+      - content_url
+      title: StoreFile
+      description: Represents a file stored in a store.
+    FileCounts:
+      properties:
+        pending:
+          type: integer
+          title: Pending
+          description: Number of files waiting to be processed
+          default: 0
+          examples:
+          - 5
+        in_progress:
+          type: integer
+          title: In Progress
+          description: Number of files currently being processed
+          default: 0
+          examples:
+          - 5
+        cancelled:
+          type: integer
+          title: Cancelled
+          description: Number of files whose processing was cancelled
+          default: 0
+          examples:
+          - 2
+        completed:
+          type: integer
+          title: Completed
+          description: Number of successfully processed files
+          default: 0
+          examples:
+          - 42
+        failed:
+          type: integer
+          title: Failed
+          description: Number of files that failed processing
+          default: 0
+          examples:
+          - 1
+        total:
+          type: integer
+          title: Total
+          description: Total number of files
+          default: 0
+          examples:
+          - 50
+      type: object
+      title: FileCounts
+      description: Tracks counts of files in different states within a store.
+    TextInput:
+      properties:
+        type:
+          type: string
+          const: text
+          title: Type
+          description: Input type identifier
+          default: text
+        text:
+          type: string
+          maxLength: 65536
+          minLength: 1
+          title: Text
+          description: Text content to process
+      type: object
+      required:
+      - text
+      title: TextInput
+      description: "Model for text input validation.\n\nAttributes:\n    type: Input type identifier, always \"text\"\n    text: The actual text content, with length and whitespace constraints"
+    StoreSearchEventResult:
+      properties:
+        store_id:
+          type: string
+          title: Store Id
+          description: ID of the store the chunk belongs to
+        file_id:
+          type: string
+          title: File Id
+          description: ID of the file the chunk belongs to
+        filename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Filename
+          description: Name of the file the chunk belongs to
+        chunk_index:
+          type: integer
+          title: Chunk Index
+          description: Index of the chunk within its file
+        score:
+          type: number
+          title: Score
+          description: Final score assigned to the chunk
+        first_stage_position:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: First Stage Position
+          description: Position of the chunk in the first-stage ranking
+        first_stage_source:
+          anyOf:
+          - type: string
+            enum:
+            - dense
+            - sparse
+            - both
+          - type: 'null'
+          title: First Stage Source
+          description: Which first-stage retriever surfaced the chunk
+      type: object
+      required:
+      - store_id
+      - file_id
+      - chunk_index
+      - score
+      title: StoreSearchEventResult
+      description: A single result captured on a search event.
+    StoreUpdateParams:
+      properties:
+        name:
+          anyOf:
+          - type: string
+            maxLength: 128
+            minLength: 1
+          - type: 'null'
+          title: Name
+          description: New name for the store. Can only contain lowercase letters, numbers, periods (.), and hyphens (-).
+        description:
+          anyOf:
+          - type: string
+            maxLength: 256
+          - type: 'null'
+          title: Description
+          description: New description
+        is_public:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Public
+          description: Whether the store can be accessed by anyone with valid login credentials
+        license:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: License
+          description: License for public stores
+        expires_after:
+          anyOf:
+          - $ref: '#/components/schemas/ExpiresAfter'
+          - type: 'null'
+          description: Optional expiration policy
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Metadata
+          description: Optional metadata key-value pairs
+      type: object
+      title: StoreUpdateParams
+      description: Parameters for updating an existing store.
+    StoreChunkSearchOptions:
+      properties:
+        score_threshold:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Score Threshold
+          description: Minimum similarity score threshold
+          default: 0.0
+        rewrite_query:
+          type: boolean
+          title: Rewrite Query
+          description: Whether to rewrite the query. Ignored when agentic is enabled (the agent handles query decomposition).
+          default: false
+        rerank:
+          anyOf:
+          - type: boolean
+          - $ref: '#/components/schemas/RerankConfig'
+          - type: 'null'
+          title: Rerank
+          description: Whether to rerank results and optional reranking configuration. Ignored when agentic is enabled (the agent handles ranking).
+        agentic:
+          anyOf:
+          - type: boolean
+          - $ref: '#/components/schemas/AgenticSearchConfig'
+          - type: 'null'
+          title: Agentic
+          description: Whether to use agentic multi-query search with automatic query decomposition and ranking. When enabled, rewrite_query and rerank options are ignored.
+        return_metadata:
+          type: boolean
+          title: Return Metadata
+          description: Whether to return file metadata
+          default: true
+        apply_search_rules:
+          type: boolean
+          title: Apply Search Rules
+          description: Whether to apply search rules
+          default: true
+      type: object
+      title: StoreChunkSearchOptions
+      description: Options for configuring store chunk searches.
+    mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleSpecificDeleteParams:
+      properties:
+        rule:
+          oneOf:
+          - $ref: '#/components/schemas/QueryStringSubstitutionRule'
+          - $ref: '#/components/schemas/QueryRegexSubstitutionRule'
+          - $ref: '#/components/schemas/ChunkSearchResultRule'
+          - $ref: '#/components/schemas/FileSearchResultRule'
+          title: Rule
+          description: The specific rule to delete from the rules array
+          discriminator:
+            propertyName: type
+            mapping:
+              chunk_search_result: '#/components/schemas/ChunkSearchResultRule'
+              file_search_result: '#/components/schemas/FileSearchResultRule'
+              query_regex: '#/components/schemas/QueryRegexSubstitutionRule'
+              query_string: '#/components/schemas/QueryStringSubstitutionRule'
+      type: object
+      required:
+      - rule
+      title: SearchRuleSpecificDeleteParams
+      description: Parameters for deleting a specific rule from a search rule array.
+    ImageUrlInput:
+      properties:
+        type:
+          type: string
+          const: image_url
+          title: Type
+          description: Input type identifier
+          default: image_url
+        image_url:
+          $ref: '#/components/schemas/ImageUrl-Input'
+          description: The image input specification.
+      type: object
+      required:
+      - image_url
+      title: ImageUrlInput
+      description: Model for image input validation.
+    mxbai_omni__api__routes__v1__stores__rules__models__SearchRuleDeleted:
+      properties:
+        deleted:
+          type: boolean
+          title: Deleted
+          description: Whether the search rule was deleted
+        object:
+          type: string
+          const: search_rule.deleted
+          title: Object
+          description: The object type
+          default: search_rule.deleted
+      type: object
+      required:
+      - deleted
+      title: SearchRuleDeleted
+      description: Response model for deleted store search rule.
+    MarkdownHeading:
+      properties:
+        level:
+          type: integer
+          title: Level
+        text:
+          type: string
+          title: Text
+      type: object
+      required:
+      - level
+      - text
+      title: MarkdownHeading
+    StoreChunkFilterParams:
+      properties:
+        store_identifiers:
+          items:
+            anyOf:
+            - type: string
+            - type: string
+              format: uuid
+          type: array
+          maxItems: 16
+          minItems: 1
+          title: Store Identifiers
+          description: IDs or names of stores
+        top_k:
+          type: integer
+          minimum: 1.0
+          title: Top K
+          description: Number of results to return
+          default: 10
+        filters:
+          anyOf:
+          - $ref: '#/components/schemas/SearchFilter-Input'
+          - $ref: '#/components/schemas/SearchFilterCondition'
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Input'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: Filters
+          description: Optional filter conditions
+        file_ids:
+          anyOf:
+          - prefixItems:
+            - $ref: '#/components/schemas/ConditionOperator'
+            - items:
+                type: string
+                format: uuid
+              type: array
+            type: array
+            maxItems: 2
+            minItems: 2
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: File Ids
+          description: Optional list of file IDs to filter chunks by (inclusion filter)
+          examples:
+          - - 123e4567-e89b-12d3-a456-426614174000
+            - 123e4567-e89b-12d3-a456-426614174001
+          - - in
+            - - 123e4567-e89b-12d3-a456-426614174000
+          - - not_in
+            - - 123e4567-e89b-12d3-a456-426614174000
+        sort_by:
+          anyOf:
+          - type: string
+          - prefixItems:
+            - type: string
+            - type: boolean
+            type: array
+            maxItems: 2
+            minItems: 2
+          - type: 'null'
+          title: Sort By
+          description: Optional sort applied to the returned chunks. Pass a metadata field path or a tuple of (field path, ascending). Unprefixed dot paths target file metadata; generated_metadata.* targets chunk metadata.
+          examples:
+          - price
+          - - price
+            - false
+          - campaign.name
+          - - generated_metadata.bpm
+            - true
+        search_options:
+          $ref: '#/components/schemas/StoreChunkSearchOptions'
+          description: Search configuration options
+      type: object
+      required:
+      - store_identifiers
+      title: StoreChunkFilterParams
+      description: Parameters for listing store chunks by metadata filter.
+    StoreSearchEvent:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier for the event
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Timestamp when the event was created
+        type:
+          type: string
+          const: search
+          title: Type
+          default: search
+        store_ids:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Store Ids
+          description: IDs of the vector stores searched
+        search_time:
+          type: string
+          format: duration
+          title: Search Time
+          description: Time taken to search the vector store
+          default: PT0S
+        query:
+          type: string
+          title: Query
+          description: Query used to search the vector store
+        rewritten_query:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Rewritten Query
+          description: Rewritten query if query rewriting was enabled
+        rewritten_filters:
+          anyOf:
+          - $ref: '#/components/schemas/SearchFilter-Output'
+          - $ref: '#/components/schemas/SearchFilterCondition'
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Output'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: Rewritten Filters
+          description: Filters used after query rewriting
+        rewrite_rank_by:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Rewrite Rank By
+          description: Metadata field used for ranking
+        rewrite_rank_direction:
+          anyOf:
+          - type: string
+            enum:
+            - asc
+            - desc
+          - type: 'null'
+          title: Rewrite Rank Direction
+          description: Ranking direction
+        rewrite_rank_mode:
+          anyOf:
+          - type: string
+            enum:
+            - post_search
+            - metadata
+          - type: 'null'
+          title: Rewrite Rank Mode
+          description: Ranking mode
+        rerank:
+          type: boolean
+          title: Rerank
+          description: Whether to rerank the results
+          default: false
+        filters:
+          anyOf:
+          - $ref: '#/components/schemas/SearchFilter-Output'
+          - $ref: '#/components/schemas/SearchFilterCondition'
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Output'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: Filters
+          description: Metadata filters submitted with the search request
+        results:
+          items:
+            $ref: '#/components/schemas/StoreSearchEventResult'
+          type: array
+          title: Results
+          description: Chunks returned by the search
+      type: object
+      required:
+      - id
+      - created_at
+      - store_ids
+      - query
+      title: StoreSearchEvent
+      description: Represents a search event in a vector store.
+    StoreCreateParams:
+      properties:
+        name:
+          anyOf:
+          - type: string
+            maxLength: 128
+            minLength: 1
+          - type: 'null'
+          title: Name
+          description: Name for the new store. Can only contain lowercase letters, numbers, periods (.), and hyphens (-).
+          examples:
+          - technical-documentation
+        description:
+          anyOf:
+          - type: string
+            maxLength: 256
+          - type: 'null'
+          title: Description
+          description: Description of the store
+          examples:
+          - Contains technical specifications and guides
+        is_public:
+          type: boolean
+          title: Is Public
+          description: Whether the store can be accessed by anyone with valid login credentials
+          default: false
+          examples:
+          - false
+        license:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: License
+          description: License for public stores
+        expires_after:
+          anyOf:
+          - $ref: '#/components/schemas/ExpiresAfter'
+          - type: 'null'
+          description: Optional expiration policy
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Metadata
+          description: Optional metadata key-value pairs
+        config:
+          anyOf:
+          - $ref: '#/components/schemas/StoreConfig'
+          - type: 'null'
+          description: Store-level configuration defaults
+        file_ids:
+          anyOf:
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: File Ids
+          description: Optional list of file IDs
+      type: object
+      title: StoreCreateParams
+      description: Parameters for creating a new store.
+    SearchFilterCondition:
+      properties:
+        key:
+          type: string
+          title: Key
+          description: The field to apply the condition on
+          examples:
+          - price
+          - color
+        value:
+          title: Value
+          description: The value to compare against
+          examples:
+          - '100'
+          - red
+        operator:
+          $ref: '#/components/schemas/ConditionOperator'
+          description: The operator for the condition
+          examples:
+          - eq
+          - gt
+      type: object
+      required:
+      - key
+      - value
+      - operator
+      title: SearchFilterCondition
+      description: Represents a condition with a field, operator, and value.
+    AgenticSearchTokenUsage:
+      properties:
+        prompt_tokens:
+          type: integer
+          title: Prompt Tokens
+          description: Number of prompt tokens consumed
+          default: 0
+        completion_tokens:
+          type: integer
+          title: Completion Tokens
+          description: Number of completion tokens generated
+          default: 0
+        total_tokens:
+          type: integer
+          title: Total Tokens
+          description: Total tokens consumed (prompt + completion)
+          default: 0
+        cost_usd:
+          type: number
+          title: Cost Usd
+          description: Estimated cost in USD
+          default: 0.0
+      type: object
+      title: AgenticSearchTokenUsage
+      description: Token usage and cost for LLM calls made during an agentic search.
+    RerankConfig:
+      properties:
+        model:
+          type: string
+          maxLength: 500
+          minLength: 1
+          title: Model
+          description: The name of the reranking model
+          default: mixedbread-ai/mxbai-rerank-large-v2
+          examples:
+          - rerank_model
+        with_metadata:
+          anyOf:
+          - type: boolean
+          - items:
+              type: string
+            type: array
+          title: With Metadata
+          description: Whether to include metadata in the reranked results
+          default: false
+          examples:
+          - true
+          - false
+          - - metadata1
+            - metadata2
+        top_k:
+          anyOf:
+          - type: integer
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Top K
+          description: Maximum number of results to return after reranking. If None, returns all reranked results.
+          examples:
+          - 10
+          - 50
+          - 100
+      type: object
+      title: RerankConfig
+      description: Represents a reranking configuration.
+    VideoChunkGeneratedMetadata:
+      properties:
+        type:
+          type: string
+          const: video
+          title: Type
+          default: video
+        file_type:
+          type: string
+          title: File Type
+          default: video/mp4
+        file_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: File Size
+        total_duration_seconds:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Total Duration Seconds
+        fps:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Fps
+        width:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Width
+        height:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Height
+        frame_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Count
+        has_audio_stream:
+          type: boolean
+          title: Has Audio Stream
+          default: false
+        bpm:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Bpm
+        file_extension:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: File Extension
+      additionalProperties: true
+      type: object
+      title: VideoChunkGeneratedMetadata
+    StoreDeleted:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          title: Id
+          description: ID of the deleted store
+        deleted:
+          type: boolean
+          title: Deleted
+          description: Whether the deletion was successful
+        object:
+          type: string
+          const: store
+          title: Object
+          description: Type of the deleted object
+          default: store
+      type: object
+      required:
+      - id
+      - deleted
+      title: StoreDeleted
+      description: Response model for store deletion.
+    QueryEnhanceQueryItem:
+      properties:
+        type:
+          type: string
+          const: query
+          title: Type
+          default: query
+        query:
+          type: string
+          minLength: 1
+          title: Query
+          description: Search query text
+        metadata_filters:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/QueryEnhanceMetadataFilter'
+            type: array
+          - type: 'null'
+          title: Metadata Filters
+          description: Metadata filters to apply
+        filter_mode:
+          type: string
+          enum:
+          - all
+          - any
+          title: Filter Mode
+          description: How to combine filters
+          default: all
+        rank_by:
+          type: 'null'
+          title: Rank By
+          description: Always null for semantic query items. Use a sort item to rank by metadata.
+        direction:
+          type: 'null'
+          title: Direction
+          description: Always null for semantic query items. Use a sort item to set rank direction.
+      type: object
+      required:
+      - query
+      title: QueryEnhanceQueryItem
+      description: Enhanced semantic search query with optional filters.
+    StoreQAParams:
+      properties:
+        store_identifiers:
+          items:
+            anyOf:
+            - type: string
+            - type: string
+              format: uuid
+          type: array
+          maxItems: 16
+          minItems: 1
+          title: Store Identifiers
+          description: IDs or names of stores
+        top_k:
+          type: integer
+          minimum: 1.0
+          title: Top K
+          description: Number of results to return
+          default: 10
+        filters:
+          anyOf:
+          - $ref: '#/components/schemas/SearchFilter-Input'
+          - $ref: '#/components/schemas/SearchFilterCondition'
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/SearchFilter-Input'
+              - $ref: '#/components/schemas/SearchFilterCondition'
+            type: array
+          - type: 'null'
+          title: Filters
+          description: Optional filter conditions
+        file_ids:
+          anyOf:
+          - prefixItems:
+            - $ref: '#/components/schemas/ConditionOperator'
+            - items:
+                type: string
+                format: uuid
+              type: array
+            type: array
+            maxItems: 2
+            minItems: 2
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: File Ids
+          description: Optional list of file IDs to filter chunks by (inclusion filter)
+          examples:
+          - - 123e4567-e89b-12d3-a456-426614174000
+            - 123e4567-e89b-12d3-a456-426614174001
+          - - in
+            - - 123e4567-e89b-12d3-a456-426614174000
+          - - not_in
+            - - 123e4567-e89b-12d3-a456-426614174000
+        query:
+          type: string
+          minLength: 1
+          title: Query
+          description: Question to answer. If not provided, the question will be extracted from the passed messages.
+        search_options:
+          $ref: '#/components/schemas/StoreChunkSearchOptions'
+          description: Search configuration options
+        stream:
+          type: boolean
+          title: Stream
+          description: Whether to stream the answer
+          default: false
+        instructions:
+          anyOf:
+          - type: string
+            maxLength: 8000
+            minLength: 1
+          - type: 'null'
+          title: Instructions
+          description: Additional custom instructions (followed only when not in conflict with existing rules)
+        qa_options:
+          $ref: '#/components/schemas/QuestionAnsweringOptions'
+          description: Question answering configuration options
+      type: object
+      required:
+      - store_identifiers
+      title: StoreQAParams
+      description: Query parameters for question answering.
+    StoreStatus:
+      type: string
+      enum:
+      - expired
+      - in_progress
+      - completed
+      title: StoreStatus
+      description: Status of a store.
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      description: Api key to access Mixedbreads API
+      scheme: bearer
