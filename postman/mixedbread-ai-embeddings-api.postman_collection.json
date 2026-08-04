@@ -1,0 +1,208 @@
+{
+  "info": {
+    "_postman_id": "f1a11271-8947-49c3-9ecb-b4e148685449",
+    "name": "Mixedbread admin Embeddings API",
+    "description": "Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:14:55.000Z",
+    "updatedAt": "2026-07-28T02:14:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f1a11271-8947-49c3-9ecb-b4e148685449"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "embeddings",
+          "item": [
+            {
+              "name": "Create embeddings for text and images",
+              "id": "bf59dabc-cca3-4ad2-aa8e-131519a52608",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"dimensions\": \"<integer>\",\n  \"prompt\": \"<string>\",\n  \"normalized\": true,\n  \"encoding_format\": \"base64\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/embeddings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "embeddings"
+                  ]
+                },
+                "description": "Create embeddings for text or images using the specified model, encoding format, and normalization.\n\nArgs:\n    params: The parameters for creating embeddings.\n\nReturns:\n    EmbeddingCreateResponse: The response containing the embeddings."
+              },
+              "response": [
+                {
+                  "id": "9a147f4c-d315-44cd-8a5d-59d0b7670bc4",
+                  "name": "The embeddings for the input text or image",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"dimensions\": \"<integer>\",\n  \"prompt\": \"<string>\",\n  \"normalized\": true,\n  \"encoding_format\": \"base64\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/embeddings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "embeddings"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"usage\": {\n    \"prompt_tokens\": \"<integer>\",\n    \"total_tokens\": \"<integer>\",\n    \"completion_tokens\": \"<integer>\"\n  },\n  \"model\": \"<string>\",\n  \"data\": [\n    {\n      \"embedding\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"index\": \"<integer>\",\n      \"object\": \"embedding\"\n    },\n    {\n      \"embedding\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"index\": \"<integer>\",\n      \"object\": \"embedding\"\n    }\n  ],\n  \"normalized\": \"<boolean>\",\n  \"encoding_format\": \"int8\",\n  \"dimensions\": \"<integer>\",\n  \"object\": \"list\"\n}",
+                  "createdAt": "2026-07-28T02:14:55.000Z",
+                  "updatedAt": "2026-07-28T02:14:55.000Z",
+                  "uid": "35240-9a147f4c-d315-44cd-8a5d-59d0b7670bc4"
+                },
+                {
+                  "id": "9f5ae8f4-5235-417e-94f3-d0342a3bdd75",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"dimensions\": \"<integer>\",\n  \"prompt\": \"<string>\",\n  \"normalized\": true,\n  \"encoding_format\": \"base64\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/embeddings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "embeddings"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:14:55.000Z",
+                  "updatedAt": "2026-07-28T02:14:55.000Z",
+                  "uid": "35240-9f5ae8f4-5235-417e-94f3-d0342a3bdd75"
+                }
+              ],
+              "createdAt": "2026-07-28T02:14:55.000Z",
+              "updatedAt": "2026-07-28T02:14:55.000Z",
+              "uid": "35240-bf59dabc-cca3-4ad2-aa8e-131519a52608"
+            }
+          ],
+          "id": "f8f36c95-0615-48b2-a018-7265c4c4d544",
+          "createdAt": "2026-07-28T02:14:55.000Z",
+          "updatedAt": "2026-07-28T02:14:55.000Z",
+          "uid": "35240-f8f36c95-0615-48b2-a018-7265c4c4d544"
+        }
+      ],
+      "id": "c8d71253-69c5-4972-ba3d-081fc4d09c00",
+      "createdAt": "2026-07-28T02:14:55.000Z",
+      "updatedAt": "2026-07-28T02:14:55.000Z",
+      "uid": "35240-c8d71253-69c5-4972-ba3d-081fc4d09c00"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mixedbread.com"
+    }
+  ]
+}

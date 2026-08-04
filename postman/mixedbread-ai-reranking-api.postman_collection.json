@@ -1,0 +1,208 @@
+{
+  "info": {
+    "_postman_id": "41571f61-8b40-4fd5-8125-dd38c49a15a3",
+    "name": "Mixedbread admin Reranking API",
+    "description": "Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:15:21.000Z",
+    "updatedAt": "2026-07-28T02:15:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-41571f61-8b40-4fd5-8125-dd38c49a15a3"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "reranking",
+          "item": [
+            {
+              "name": "Rerank different kind of documents for a given query",
+              "id": "8545cb5b-67c2-4920-a070-41c93f015575",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"input\": [\n    \"<string>\"\n  ],\n  \"model\": \"mixedbread-ai/mxbai-rerank-large-v2\",\n  \"rank_fields\": [\n    \"<string>\"\n  ],\n  \"top_k\": -1,\n  \"return_input\": false,\n  \"rewrite_query\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/reranking",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "reranking"
+                  ]
+                },
+                "description": "Rerank different kind of documents for a given query.\n\nArgs:\n    params: RerankParams: The parameters for reranking.\n\nReturns:\n    RerankResponse: The reranked documents for the input query."
+              },
+              "response": [
+                {
+                  "id": "5b420553-43a9-456f-86b2-4587450e0551",
+                  "name": "The reranked documents for the input query",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"query\": \"<string>\",\n  \"input\": [\n    \"<string>\"\n  ],\n  \"model\": \"mixedbread-ai/mxbai-rerank-large-v2\",\n  \"rank_fields\": [\n    \"<string>\"\n  ],\n  \"top_k\": -1,\n  \"return_input\": false,\n  \"rewrite_query\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/reranking",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "reranking"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"usage\": {\n    \"prompt_tokens\": \"<integer>\",\n    \"total_tokens\": \"<integer>\",\n    \"completion_tokens\": \"<integer>\"\n  },\n  \"model\": \"<string>\",\n  \"data\": [\n    {\n      \"index\": \"<integer>\",\n      \"score\": \"<number>\",\n      \"input\": {},\n      \"object\": \"rank_result\"\n    },\n    {\n      \"index\": \"<integer>\",\n      \"score\": \"<number>\",\n      \"input\": {},\n      \"object\": \"rank_result\"\n    }\n  ],\n  \"top_k\": \"<integer>\",\n  \"return_input\": \"<boolean>\",\n  \"object\": \"list\"\n}",
+                  "createdAt": "2026-07-28T02:15:22.000Z",
+                  "updatedAt": "2026-07-28T02:15:22.000Z",
+                  "uid": "35240-5b420553-43a9-456f-86b2-4587450e0551"
+                },
+                {
+                  "id": "2dfbd8ce-71ee-4f0c-8834-6305ea418f8d",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"query\": \"<string>\",\n  \"input\": [\n    \"<string>\"\n  ],\n  \"model\": \"mixedbread-ai/mxbai-rerank-large-v2\",\n  \"rank_fields\": [\n    \"<string>\"\n  ],\n  \"top_k\": -1,\n  \"return_input\": false,\n  \"rewrite_query\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/reranking",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "reranking"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:15:22.000Z",
+                  "updatedAt": "2026-07-28T02:15:22.000Z",
+                  "uid": "35240-2dfbd8ce-71ee-4f0c-8834-6305ea418f8d"
+                }
+              ],
+              "createdAt": "2026-07-28T02:15:22.000Z",
+              "updatedAt": "2026-07-28T02:15:22.000Z",
+              "uid": "35240-8545cb5b-67c2-4920-a070-41c93f015575"
+            }
+          ],
+          "id": "8013f2ee-2071-42fd-87fe-6e2bce535243",
+          "createdAt": "2026-07-28T02:15:22.000Z",
+          "updatedAt": "2026-07-28T02:15:22.000Z",
+          "uid": "35240-8013f2ee-2071-42fd-87fe-6e2bce535243"
+        }
+      ],
+      "id": "b271046d-cee5-47f9-a13d-53157bab4dd7",
+      "createdAt": "2026-07-28T02:15:22.000Z",
+      "updatedAt": "2026-07-28T02:15:22.000Z",
+      "uid": "35240-b271046d-cee5-47f9-a13d-53157bab4dd7"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mixedbread.com"
+    }
+  ]
+}

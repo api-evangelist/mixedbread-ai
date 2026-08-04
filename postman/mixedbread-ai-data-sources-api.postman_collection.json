@@ -1,0 +1,2386 @@
+{
+  "info": {
+    "_postman_id": "774f18d0-c926-4508-826f-fba1eb07ba72",
+    "name": "Mixedbread admin data_sources API",
+    "description": "Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:14:52.000Z",
+    "updatedAt": "2026-07-28T02:14:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-774f18d0-c926-4508-826f-fba1eb07ba72"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "data_sources",
+          "item": [
+            {
+              "name": "{data_source_id}",
+              "item": [
+                {
+                  "name": "connectors",
+                  "item": [
+                    {
+                      "name": "{connector_id}",
+                      "item": [
+                        {
+                          "name": "Get a connector by ID",
+                          "id": "ee2213bd-25a6-4e86-b08d-4a819644032b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors/:connector_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "data_sources",
+                                ":data_source_id",
+                                "connectors",
+                                ":connector_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "879ba28d-1f7d-4cfb-b8ff-ddde4f82089c",
+                                  "key": "data_source_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The ID of the data source to get a connector for"
+                                },
+                                {
+                                  "id": "75eb3200-7554-4a3b-b4de-b568d6d0d010",
+                                  "key": "connector_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The ID of the connector to get"
+                                }
+                              ]
+                            },
+                            "description": "Get a connector by ID.\n\nArgs:\n    data_source_id: The ID of the data source to get a connector for.\n    connector_id: The ID of the connector to get.\n\nReturns:\n    The connector."
+                          },
+                          "response": [
+                            {
+                              "id": "1c316af3-c66f-4fa4-ad1d-b16fc55ed77e",
+                              "name": "The connector",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors/:connector_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "data_sources",
+                                    ":data_source_id",
+                                    "connectors",
+                                    ":connector_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "data_source_id"
+                                    },
+                                    {
+                                      "key": "connector_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"store_id\": \"<string>\",\n  \"data_source_id\": \"<string>\",\n  \"metadata\": {},\n  \"polling_interval\": \"<string>\",\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"last_synced_at\": \"<dateTime>\",\n  \"status\": \"pending\",\n  \"error\": {\n    \"nisi7f5\": -28891418,\n    \"utc\": false\n  },\n  \"name\": \"New Connector\",\n  \"object\": \"data_source.connector\"\n}",
+                              "createdAt": "2026-07-28T02:14:52.000Z",
+                              "updatedAt": "2026-07-28T02:14:52.000Z",
+                              "uid": "35240-1c316af3-c66f-4fa4-ad1d-b16fc55ed77e"
+                            },
+                            {
+                              "id": "63fe6170-d4fe-454c-91b8-37cc759e203c",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors/:connector_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "data_sources",
+                                    ":data_source_id",
+                                    "connectors",
+                                    ":connector_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "data_source_id"
+                                    },
+                                    {
+                                      "key": "connector_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:14:52.000Z",
+                              "updatedAt": "2026-07-28T02:14:52.000Z",
+                              "uid": "35240-63fe6170-d4fe-454c-91b8-37cc759e203c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:14:52.000Z",
+                          "updatedAt": "2026-07-28T02:14:52.000Z",
+                          "uid": "35240-ee2213bd-25a6-4e86-b08d-4a819644032b"
+                        },
+                        {
+                          "name": "Update a connector",
+                          "id": "211f94a5-a157-49b1-a3f4-2c22338120a0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"metadata\": {\n    \"euc\": -20302770\n  },\n  \"trigger_sync\": \"<boolean>\",\n  \"polling_interval\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors/:connector_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "data_sources",
+                                ":data_source_id",
+                                "connectors",
+                                ":connector_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "6435f528-908c-4d98-bfb8-d01f348f6817",
+                                  "key": "data_source_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The ID of the data source to update a connector for"
+                                },
+                                {
+                                  "id": "f2f76224-b976-4617-af6b-8464e95e1fac",
+                                  "key": "connector_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The ID of the connector to update"
+                                }
+                              ]
+                            },
+                            "description": "Update a connector.\n\nArgs:\n    data_source_id: The ID of the data source to update a connector for.\n    connector_id: The ID of the connector to update.\n    params: The connector to update.\n\nReturns:\n    The updated connector."
+                          },
+                          "response": [
+                            {
+                              "id": "b2fe3170-7cdc-44d0-8089-0f75d1651885",
+                              "name": "The updated connector",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"metadata\": {\n    \"euc\": -20302770\n  },\n  \"trigger_sync\": \"<boolean>\",\n  \"polling_interval\": \"<integer>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors/:connector_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "data_sources",
+                                    ":data_source_id",
+                                    "connectors",
+                                    ":connector_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "data_source_id"
+                                    },
+                                    {
+                                      "key": "connector_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"store_id\": \"<string>\",\n  \"data_source_id\": \"<string>\",\n  \"metadata\": {},\n  \"polling_interval\": \"<string>\",\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"last_synced_at\": \"<dateTime>\",\n  \"status\": \"pending\",\n  \"error\": {\n    \"nisi7f5\": -28891418,\n    \"utc\": false\n  },\n  \"name\": \"New Connector\",\n  \"object\": \"data_source.connector\"\n}",
+                              "createdAt": "2026-07-28T02:14:52.000Z",
+                              "updatedAt": "2026-07-28T02:14:52.000Z",
+                              "uid": "35240-b2fe3170-7cdc-44d0-8089-0f75d1651885"
+                            },
+                            {
+                              "id": "5edfd460-1939-4250-a25d-440ae87df693",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"metadata\": {\n    \"euc\": -20302770\n  },\n  \"trigger_sync\": \"<boolean>\",\n  \"polling_interval\": \"<integer>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors/:connector_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "data_sources",
+                                    ":data_source_id",
+                                    "connectors",
+                                    ":connector_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "data_source_id"
+                                    },
+                                    {
+                                      "key": "connector_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:14:52.000Z",
+                              "updatedAt": "2026-07-28T02:14:52.000Z",
+                              "uid": "35240-5edfd460-1939-4250-a25d-440ae87df693"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:14:52.000Z",
+                          "updatedAt": "2026-07-28T02:14:52.000Z",
+                          "uid": "35240-211f94a5-a157-49b1-a3f4-2c22338120a0"
+                        },
+                        {
+                          "name": "Delete a connector",
+                          "id": "99fd3d39-690e-412a-afc9-e2d794d08cc9",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors/:connector_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "data_sources",
+                                ":data_source_id",
+                                "connectors",
+                                ":connector_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e6334f95-ccd2-4727-afbe-f2a3ae270f12",
+                                  "key": "data_source_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The ID of the data source to delete a connector for"
+                                },
+                                {
+                                  "id": "0d68e37f-cbde-4c6c-b3c8-67507c0ccdf4",
+                                  "key": "connector_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The ID of the connector to delete"
+                                }
+                              ]
+                            },
+                            "description": "Delete a connector.\n\nArgs:\n    data_source_id: The ID of the data source to delete a connector for.\n    connector_id: The ID of the connector to delete.\n\nReturns:\n    The deleted connector."
+                          },
+                          "response": [
+                            {
+                              "id": "4a6c3f50-b40f-4d01-a945-5b3458a58f67",
+                              "name": "The deleted connector",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors/:connector_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "data_sources",
+                                    ":data_source_id",
+                                    "connectors",
+                                    ":connector_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "data_source_id"
+                                    },
+                                    {
+                                      "key": "connector_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"deleted\": true,\n  \"object\": \"data_source.connector\"\n}",
+                              "createdAt": "2026-07-28T02:14:52.000Z",
+                              "updatedAt": "2026-07-28T02:14:52.000Z",
+                              "uid": "35240-4a6c3f50-b40f-4d01-a945-5b3458a58f67"
+                            },
+                            {
+                              "id": "98721fc1-7e50-4595-9076-a27f649df8bf",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors/:connector_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "data_sources",
+                                    ":data_source_id",
+                                    "connectors",
+                                    ":connector_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "data_source_id"
+                                    },
+                                    {
+                                      "key": "connector_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:14:52.000Z",
+                              "updatedAt": "2026-07-28T02:14:52.000Z",
+                              "uid": "35240-98721fc1-7e50-4595-9076-a27f649df8bf"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:14:52.000Z",
+                          "updatedAt": "2026-07-28T02:14:52.000Z",
+                          "uid": "35240-99fd3d39-690e-412a-afc9-e2d794d08cc9"
+                        }
+                      ],
+                      "id": "edb0d1dd-92d3-48c0-96dc-b31236fe9592",
+                      "createdAt": "2026-07-28T02:14:52.000Z",
+                      "updatedAt": "2026-07-28T02:14:52.000Z",
+                      "uid": "35240-edb0d1dd-92d3-48c0-96dc-b31236fe9592"
+                    },
+                    {
+                      "name": "Create a new connector",
+                      "id": "7ae91cd1-d237-4e27-9e32-f9f3e9b0fc76",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"store_id\": \"<string>\",\n  \"name\": \"New Connector\",\n  \"trigger_sync\": true,\n  \"metadata\": {},\n  \"polling_interval\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "data_sources",
+                            ":data_source_id",
+                            "connectors"
+                          ],
+                          "variable": [
+                            {
+                              "id": "f8500354-b1da-429a-b6fd-6e4bf39117a5",
+                              "key": "data_source_id",
+                              "value": "<uuid>",
+                              "description": "(Required) The ID of the data source to create a connector for"
+                            }
+                          ]
+                        },
+                        "description": "Create a new connector.\n\nArgs:\n    data_source_id: The ID of the data source to create a connector for.\n    params: The connector to create.\n\nReturns:\n    The created connector."
+                      },
+                      "response": [
+                        {
+                          "id": "cf84a78a-1bac-458b-b55f-51ad38a7db72",
+                          "name": "The created connector",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"store_id\": \"<string>\",\n  \"name\": \"New Connector\",\n  \"trigger_sync\": true,\n  \"metadata\": {},\n  \"polling_interval\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "data_sources",
+                                ":data_source_id",
+                                "connectors"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "data_source_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"store_id\": \"<string>\",\n  \"data_source_id\": \"<string>\",\n  \"metadata\": {},\n  \"polling_interval\": \"<string>\",\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"last_synced_at\": \"<dateTime>\",\n  \"status\": \"pending\",\n  \"error\": {\n    \"nisi7f5\": -28891418,\n    \"utc\": false\n  },\n  \"name\": \"New Connector\",\n  \"object\": \"data_source.connector\"\n}",
+                          "createdAt": "2026-07-28T02:14:52.000Z",
+                          "updatedAt": "2026-07-28T02:14:52.000Z",
+                          "uid": "35240-cf84a78a-1bac-458b-b55f-51ad38a7db72"
+                        },
+                        {
+                          "id": "13f267a4-1334-4b10-8fbd-c600538d34b2",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"store_id\": \"<string>\",\n  \"name\": \"New Connector\",\n  \"trigger_sync\": true,\n  \"metadata\": {},\n  \"polling_interval\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "data_sources",
+                                ":data_source_id",
+                                "connectors"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "data_source_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:14:52.000Z",
+                          "updatedAt": "2026-07-28T02:14:52.000Z",
+                          "uid": "35240-13f267a4-1334-4b10-8fbd-c600538d34b2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:14:52.000Z",
+                      "updatedAt": "2026-07-28T02:14:52.000Z",
+                      "uid": "35240-7ae91cd1-d237-4e27-9e32-f9f3e9b0fc76"
+                    },
+                    {
+                      "name": "Get all connectors for a data source",
+                      "id": "ebdfdca1-322c-42e0-9f3e-0432718dc5d3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors?limit=20&after=<string>&before=<string>&include_total=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "data_sources",
+                            ":data_source_id",
+                            "connectors"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of items to return per page (1-100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response.",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response.",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Whether to include total count in response (expensive operation)",
+                              "key": "include_total",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "793468c4-e537-47cb-9a52-26381f2733cf",
+                              "key": "data_source_id",
+                              "value": "<uuid>",
+                              "description": "(Required) The ID of the data source to get connectors for"
+                            }
+                          ]
+                        },
+                        "description": "Get all connectors for a data source.\n\nArgs:\n    data_source_id: The ID of the data source to get connectors for.\n    pagination: The pagination options.\n\nReturns:\n    The list of connectors."
+                      },
+                      "response": [
+                        {
+                          "id": "281a3b3b-563f-44e6-bc3e-b54e47bf14f7",
+                          "name": "The list of connectors",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors?limit=20&after=<string>&before=<string>&include_total=false",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "data_sources",
+                                ":data_source_id",
+                                "connectors"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of items to return per page (1-100)",
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response.",
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response.",
+                                  "key": "before",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Whether to include total count in response (expensive operation)",
+                                  "key": "include_total",
+                                  "value": "false"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "data_source_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"pagination\": {\n    \"has_more\": \"<boolean>\",\n    \"first_cursor\": \"<string>\",\n    \"last_cursor\": \"<string>\",\n    \"total\": \"<integer>\"\n  },\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"store_id\": \"<string>\",\n      \"data_source_id\": \"<string>\",\n      \"metadata\": {},\n      \"polling_interval\": \"<string>\",\n      \"started_at\": \"<dateTime>\",\n      \"finished_at\": \"<dateTime>\",\n      \"last_synced_at\": \"<dateTime>\",\n      \"status\": \"failed\",\n      \"error\": {\n        \"ut8\": \"proident in amet nisi\"\n      },\n      \"name\": \"New Connector\",\n      \"object\": \"data_source.connector\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"store_id\": \"<string>\",\n      \"data_source_id\": \"<string>\",\n      \"metadata\": {},\n      \"polling_interval\": \"<string>\",\n      \"started_at\": \"<dateTime>\",\n      \"finished_at\": \"<dateTime>\",\n      \"last_synced_at\": \"<dateTime>\",\n      \"status\": \"cancelled\",\n      \"error\": {\n        \"aliqua3d\": -4809606,\n        \"quis_6\": \"id reprehenderit sit ad\",\n        \"incididuntf04\": 61766153\n      },\n      \"name\": \"New Connector\",\n      \"object\": \"data_source.connector\"\n    }\n  ],\n  \"object\": \"list\"\n}",
+                          "createdAt": "2026-07-28T02:14:52.000Z",
+                          "updatedAt": "2026-07-28T02:14:52.000Z",
+                          "uid": "35240-281a3b3b-563f-44e6-bc3e-b54e47bf14f7"
+                        },
+                        {
+                          "id": "fa98d342-0c3c-4ac8-9225-280d86f37f3b",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/connectors?limit=20&after=<string>&before=<string>&include_total=false",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "data_sources",
+                                ":data_source_id",
+                                "connectors"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of items to return per page (1-100)",
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response.",
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response.",
+                                  "key": "before",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Whether to include total count in response (expensive operation)",
+                                  "key": "include_total",
+                                  "value": "false"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "data_source_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:14:52.000Z",
+                          "updatedAt": "2026-07-28T02:14:52.000Z",
+                          "uid": "35240-fa98d342-0c3c-4ac8-9225-280d86f37f3b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:14:52.000Z",
+                      "updatedAt": "2026-07-28T02:14:52.000Z",
+                      "uid": "35240-ebdfdca1-322c-42e0-9f3e-0432718dc5d3"
+                    }
+                  ],
+                  "id": "0cd42a80-63d7-453e-9d48-fa99445ef3e6",
+                  "createdAt": "2026-07-28T02:14:52.000Z",
+                  "updatedAt": "2026-07-28T02:14:52.000Z",
+                  "uid": "35240-0cd42a80-63d7-453e-9d48-fa99445ef3e6"
+                },
+                {
+                  "name": "oauth2",
+                  "item": [
+                    {
+                      "name": "authorize",
+                      "item": [
+                        {
+                          "name": "Authorize a data source",
+                          "id": "bdfa3458-99f5-4bd7-828a-4b2c3c885ef4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/oauth2/authorize",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "data_sources",
+                                ":data_source_id",
+                                "oauth2",
+                                "authorize"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "211095e9-abff-4a35-abf6-df52873685b5",
+                                  "key": "data_source_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The ID of the data source to authorize"
+                                }
+                              ]
+                            },
+                            "description": "Start OAuth2 authorization flow for a data source.\n\nInitiates the OAuth2 authorization process by redirecting the user\nto the external service's authorization page. After authorization,\nthe user will be redirected back to the oauth2_callback endpoint.\n\nArgs:\n    data_source_id: The ID of the data source to authorize\n\nReturns:\n    Redirect to the OAuth2 provider's authorization page\n\nRaises:\n    DataSourceNotFoundError: When data source doesn't exist\n    DataSourceAuthTypeNotSupportedError: When OAuth2 is not supported for this data source type"
+                          },
+                          "response": [
+                            {
+                              "id": "c79092f1-d4bc-4bfe-a056-2bd9ab418bba",
+                              "name": "The authorization URL",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/oauth2/authorize",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "data_sources",
+                                    ":data_source_id",
+                                    "oauth2",
+                                    "authorize"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "data_source_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T02:14:52.000Z",
+                              "updatedAt": "2026-07-28T02:14:52.000Z",
+                              "uid": "35240-c79092f1-d4bc-4bfe-a056-2bd9ab418bba"
+                            },
+                            {
+                              "id": "ba2e87d2-f5e8-4378-abf6-17b9fd831026",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/data_sources/:data_source_id/oauth2/authorize",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "data_sources",
+                                    ":data_source_id",
+                                    "oauth2",
+                                    "authorize"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "data_source_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:14:52.000Z",
+                              "updatedAt": "2026-07-28T02:14:52.000Z",
+                              "uid": "35240-ba2e87d2-f5e8-4378-abf6-17b9fd831026"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:14:52.000Z",
+                          "updatedAt": "2026-07-28T02:14:52.000Z",
+                          "uid": "35240-bdfa3458-99f5-4bd7-828a-4b2c3c885ef4"
+                        }
+                      ],
+                      "id": "d459d51b-a61e-45af-8981-003a4471e5a9",
+                      "createdAt": "2026-07-28T02:14:52.000Z",
+                      "updatedAt": "2026-07-28T02:14:52.000Z",
+                      "uid": "35240-d459d51b-a61e-45af-8981-003a4471e5a9"
+                    }
+                  ],
+                  "id": "5b1ac908-5493-4b44-9291-d0f7b6049531",
+                  "createdAt": "2026-07-28T02:14:52.000Z",
+                  "updatedAt": "2026-07-28T02:14:52.000Z",
+                  "uid": "35240-5b1ac908-5493-4b44-9291-d0f7b6049531"
+                },
+                {
+                  "name": "Get a data source by ID",
+                  "id": "b7417e64-57e1-42c3-8d40-a192d9dc616c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/data_sources/:data_source_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "data_sources",
+                        ":data_source_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "da79d570-ac7a-4b54-ad78-c25a8cac7b8b",
+                          "key": "data_source_id",
+                          "value": "<uuid>",
+                          "description": "(Required) The ID of the data source to fetch"
+                        }
+                      ]
+                    },
+                    "description": "Get a data source by ID.\n\nArgs:\n    data_source_id: The ID of the data source to fetch.\n\nReturns:\n    The data source."
+                  },
+                  "response": [
+                    {
+                      "id": "f9683eb0-9728-401a-b2d9-e74b9650bfc6",
+                      "name": "The data source",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/data_sources/:data_source_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "data_sources",
+                            ":data_source_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_source_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"type\": \"linear\",\n  \"name\": \"<string>\",\n  \"metadata\": {},\n  \"auth_params\": {\n    \"type\": \"oauth2\",\n    \"created_at\": \"<dateTime>\",\n    \"scope\": \"<string>\",\n    \"access_token\": \"<string>\",\n    \"refresh_token\": \"<string>\",\n    \"token_type\": \"<string>\",\n    \"expires_on\": \"<dateTime>\",\n    \"additional_params\": {\n      \"enim80c\": -83943657.41220629\n    }\n  },\n  \"object\": \"data_source\"\n}",
+                      "createdAt": "2026-07-28T02:14:52.000Z",
+                      "updatedAt": "2026-07-28T02:14:52.000Z",
+                      "uid": "35240-f9683eb0-9728-401a-b2d9-e74b9650bfc6"
+                    },
+                    {
+                      "id": "db62eac4-1b10-4911-9480-720ce4794520",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/data_sources/:data_source_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "data_sources",
+                            ":data_source_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_source_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:14:52.000Z",
+                      "updatedAt": "2026-07-28T02:14:52.000Z",
+                      "uid": "35240-db62eac4-1b10-4911-9480-720ce4794520"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:14:52.000Z",
+                  "updatedAt": "2026-07-28T02:14:52.000Z",
+                  "uid": "35240-b7417e64-57e1-42c3-8d40-a192d9dc616c"
+                },
+                {
+                  "name": "Update a data source",
+                  "id": "a7cd208a-4e80-4a56-8366-0be904a8f432",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"notion\",\n  \"metadata\": {},\n  \"auth_params\": {\n    \"type\": \"oauth2\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/data_sources/:data_source_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "data_sources",
+                        ":data_source_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "49d554fb-4e12-41ba-a6ae-cc4f1fc92f07",
+                          "key": "data_source_id",
+                          "value": "<uuid>",
+                          "description": "(Required) The ID of the data source to update"
+                        }
+                      ]
+                    },
+                    "description": "Update a data source.\n\nArgs:\n    data_source_id: The ID of the data source to update.\n    params: The data source to update.\n\nReturns:\n    The updated data source."
+                  },
+                  "response": [
+                    {
+                      "id": "51c41345-ecfc-43e6-8059-3f2ab65306f7",
+                      "name": "The updated data source",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"notion\",\n  \"metadata\": {},\n  \"auth_params\": {\n    \"type\": \"oauth2\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/data_sources/:data_source_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "data_sources",
+                            ":data_source_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_source_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"type\": \"linear\",\n  \"name\": \"<string>\",\n  \"metadata\": {},\n  \"auth_params\": {\n    \"type\": \"oauth2\",\n    \"created_at\": \"<dateTime>\",\n    \"scope\": \"<string>\",\n    \"access_token\": \"<string>\",\n    \"refresh_token\": \"<string>\",\n    \"token_type\": \"<string>\",\n    \"expires_on\": \"<dateTime>\",\n    \"additional_params\": {\n      \"enim80c\": -83943657.41220629\n    }\n  },\n  \"object\": \"data_source\"\n}",
+                      "createdAt": "2026-07-28T02:14:52.000Z",
+                      "updatedAt": "2026-07-28T02:14:52.000Z",
+                      "uid": "35240-51c41345-ecfc-43e6-8059-3f2ab65306f7"
+                    },
+                    {
+                      "id": "45036906-1d6e-41ba-8249-2c3e02a5a643",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"notion\",\n  \"metadata\": {},\n  \"auth_params\": {\n    \"type\": \"oauth2\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/data_sources/:data_source_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "data_sources",
+                            ":data_source_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_source_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:14:52.000Z",
+                      "updatedAt": "2026-07-28T02:14:52.000Z",
+                      "uid": "35240-45036906-1d6e-41ba-8249-2c3e02a5a643"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:14:52.000Z",
+                  "updatedAt": "2026-07-28T02:14:52.000Z",
+                  "uid": "35240-a7cd208a-4e80-4a56-8366-0be904a8f432"
+                },
+                {
+                  "name": "Delete a data source",
+                  "id": "51b424ea-4f35-4102-88f4-b6b20f26a5ea",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/data_sources/:data_source_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "data_sources",
+                        ":data_source_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "05854e00-f08e-4170-b97f-03e2975edc29",
+                          "key": "data_source_id",
+                          "value": "<uuid>",
+                          "description": "(Required) The ID of the data source to delete"
+                        }
+                      ]
+                    },
+                    "description": "Delete a data source.\n\nArgs:\n    data_source_id: The ID of the data source to delete."
+                  },
+                  "response": [
+                    {
+                      "id": "51606c04-df00-4693-93d1-91844e150bd8",
+                      "name": "The ID of the deleted data source and if it was deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/data_sources/:data_source_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "data_sources",
+                            ":data_source_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_source_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"deleted\": true,\n  \"object\": \"data_source\"\n}",
+                      "createdAt": "2026-07-28T02:14:52.000Z",
+                      "updatedAt": "2026-07-28T02:14:52.000Z",
+                      "uid": "35240-51606c04-df00-4693-93d1-91844e150bd8"
+                    },
+                    {
+                      "id": "5e3f4f58-ef6a-4bc8-9826-f3a587077f3f",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/data_sources/:data_source_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "data_sources",
+                            ":data_source_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_source_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:14:52.000Z",
+                      "updatedAt": "2026-07-28T02:14:52.000Z",
+                      "uid": "35240-5e3f4f58-ef6a-4bc8-9826-f3a587077f3f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:14:52.000Z",
+                  "updatedAt": "2026-07-28T02:14:52.000Z",
+                  "uid": "35240-51b424ea-4f35-4102-88f4-b6b20f26a5ea"
+                }
+              ],
+              "id": "0b072f25-7428-417c-b504-532cf5c576f0",
+              "createdAt": "2026-07-28T02:14:52.000Z",
+              "updatedAt": "2026-07-28T02:14:52.000Z",
+              "uid": "35240-0b072f25-7428-417c-b504-532cf5c576f0"
+            },
+            {
+              "name": "oauth2",
+              "item": [
+                {
+                  "name": "callback",
+                  "item": [
+                    {
+                      "name": "OAuth2 callback for data source authorization",
+                      "id": "a2570ed6-0aa7-4fbe-afae-62bd2e327726",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/data_sources/oauth2/callback?state=<string>&code=<string>&error=<string>&error_description=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "data_sources",
+                            "oauth2",
+                            "callback"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) OAuth2 state parameter for CSRF protection",
+                              "key": "state",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Authorization code from OAuth2 provider",
+                              "key": "code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "OAuth2 error code if authorization failed",
+                              "key": "error",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Human-readable error description",
+                              "key": "error_description",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "OAuth2 callback endpoint for completing data source authorization.\n\nThis endpoint is called by OAuth2 providers after user authorization.\nIt exchanges the authorization code for access tokens and stores them\nsecurely for the data source.\n\nArgs:\n    state: OAuth2 state parameter used for CSRF protection\n    code: Authorization code from the OAuth2 provider\n    error: OAuth2 error code if authorization was denied or failed\n    error_description: Human-readable description of the error\n\nReturns:\n    Redirect to the data source details page on success\n\nRaises:\n    OAuth2TokenExchangeError: When OAuth2 provider returns an error\n    InvalidStateError: When state parameter is invalid or expired"
+                      },
+                      "response": [
+                        {
+                          "id": "66500fcd-22c7-4468-bc30-76e3c2d475b2",
+                          "name": "Successful authorization, redirect to data source",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/data_sources/oauth2/callback?state=<string>&code=<string>&error=<string>&error_description=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "data_sources",
+                                "oauth2",
+                                "callback"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) OAuth2 state parameter for CSRF protection",
+                                  "key": "state",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) Authorization code from OAuth2 provider",
+                                  "key": "code",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "OAuth2 error code if authorization failed",
+                                  "key": "error",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Human-readable error description",
+                                  "key": "error_description",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Temporary Redirect (since HTTP/1.1)",
+                          "code": 307,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T02:14:52.000Z",
+                          "updatedAt": "2026-07-28T02:14:52.000Z",
+                          "uid": "35240-66500fcd-22c7-4468-bc30-76e3c2d475b2"
+                        },
+                        {
+                          "id": "4f39140b-48a7-46c7-90db-d6e9cc088088",
+                          "name": "OAuth2 error or invalid parameters",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/data_sources/oauth2/callback?state=<string>&code=<string>&error=<string>&error_description=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "data_sources",
+                                "oauth2",
+                                "callback"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) OAuth2 state parameter for CSRF protection",
+                                  "key": "state",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) Authorization code from OAuth2 provider",
+                                  "key": "code",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "OAuth2 error code if authorization failed",
+                                  "key": "error",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Human-readable error description",
+                                  "key": "error_description",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:14:52.000Z",
+                          "updatedAt": "2026-07-28T02:14:52.000Z",
+                          "uid": "35240-4f39140b-48a7-46c7-90db-d6e9cc088088"
+                        },
+                        {
+                          "id": "132709d9-e04c-4148-80cb-7bfbf9862276",
+                          "name": "Invalid or expired state parameter",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/data_sources/oauth2/callback?state=<string>&code=<string>&error=<string>&error_description=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "data_sources",
+                                "oauth2",
+                                "callback"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) OAuth2 state parameter for CSRF protection",
+                                  "key": "state",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) Authorization code from OAuth2 provider",
+                                  "key": "code",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "OAuth2 error code if authorization failed",
+                                  "key": "error",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Human-readable error description",
+                                  "key": "error_description",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:14:52.000Z",
+                          "updatedAt": "2026-07-28T02:14:52.000Z",
+                          "uid": "35240-132709d9-e04c-4148-80cb-7bfbf9862276"
+                        },
+                        {
+                          "id": "18a2d42e-36b0-4cda-9799-2305ea814726",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/data_sources/oauth2/callback?state=<string>&code=<string>&error=<string>&error_description=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "data_sources",
+                                "oauth2",
+                                "callback"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) OAuth2 state parameter for CSRF protection",
+                                  "key": "state",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) Authorization code from OAuth2 provider",
+                                  "key": "code",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "OAuth2 error code if authorization failed",
+                                  "key": "error",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Human-readable error description",
+                                  "key": "error_description",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:14:52.000Z",
+                          "updatedAt": "2026-07-28T02:14:52.000Z",
+                          "uid": "35240-18a2d42e-36b0-4cda-9799-2305ea814726"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:14:52.000Z",
+                      "updatedAt": "2026-07-28T02:14:52.000Z",
+                      "uid": "35240-a2570ed6-0aa7-4fbe-afae-62bd2e327726"
+                    }
+                  ],
+                  "id": "007a8e5d-4480-4f0d-8930-b858373c3340",
+                  "createdAt": "2026-07-28T02:14:52.000Z",
+                  "updatedAt": "2026-07-28T02:14:52.000Z",
+                  "uid": "35240-007a8e5d-4480-4f0d-8930-b858373c3340"
+                }
+              ],
+              "id": "4d6bdce5-87f5-4d7b-a3c8-fa63d695ea1a",
+              "createdAt": "2026-07-28T02:14:52.000Z",
+              "updatedAt": "2026-07-28T02:14:52.000Z",
+              "uid": "35240-4d6bdce5-87f5-4d7b-a3c8-fa63d695ea1a"
+            },
+            {
+              "name": "Create a new data source",
+              "id": "6b9c65c0-adbc-4ad2-af74-3d083e43b60a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"notion\",\n  \"metadata\": {},\n  \"auth_params\": {\n    \"type\": \"oauth2\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/data_sources/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "data_sources",
+                    ""
+                  ]
+                },
+                "description": "Create a new data source.\n\nArgs:\n    params: The data source to create.\n\nReturns:\n    The created data source."
+              },
+              "response": [
+                {
+                  "id": "d411c3c0-0e6c-4382-a2e9-16f067f58ec2",
+                  "name": "The created data source",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"notion\",\n  \"metadata\": {},\n  \"auth_params\": {\n    \"type\": \"oauth2\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/data_sources/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "data_sources",
+                        ""
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"type\": \"linear\",\n  \"name\": \"<string>\",\n  \"metadata\": {},\n  \"auth_params\": {\n    \"type\": \"oauth2\",\n    \"created_at\": \"<dateTime>\",\n    \"scope\": \"<string>\",\n    \"access_token\": \"<string>\",\n    \"refresh_token\": \"<string>\",\n    \"token_type\": \"<string>\",\n    \"expires_on\": \"<dateTime>\",\n    \"additional_params\": {\n      \"enim80c\": -83943657.41220629\n    }\n  },\n  \"object\": \"data_source\"\n}",
+                  "createdAt": "2026-07-28T02:14:52.000Z",
+                  "updatedAt": "2026-07-28T02:14:52.000Z",
+                  "uid": "35240-d411c3c0-0e6c-4382-a2e9-16f067f58ec2"
+                },
+                {
+                  "id": "a80d9142-893e-4755-8155-5d25d523f139",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"notion\",\n  \"metadata\": {},\n  \"auth_params\": {\n    \"type\": \"oauth2\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/data_sources/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "data_sources",
+                        ""
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:14:52.000Z",
+                  "updatedAt": "2026-07-28T02:14:52.000Z",
+                  "uid": "35240-a80d9142-893e-4755-8155-5d25d523f139"
+                }
+              ],
+              "createdAt": "2026-07-28T02:14:52.000Z",
+              "updatedAt": "2026-07-28T02:14:52.000Z",
+              "uid": "35240-6b9c65c0-adbc-4ad2-af74-3d083e43b60a"
+            },
+            {
+              "name": "Get all data sources",
+              "id": "2ae7aea3-0000-4bc5-80e5-4cfa0ea62914",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/data_sources/?limit=20&after=<string>&before=<string>&include_total=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "data_sources",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of items to return per page (1-100)",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response.",
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response.",
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Whether to include total count in response (expensive operation)",
+                      "key": "include_total",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Get all data sources.\n\nReturns:\n    The list of data sources."
+              },
+              "response": [
+                {
+                  "id": "e1ba9b61-e3d1-4a94-828b-2d08ac6244bf",
+                  "name": "The list of data sources",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/data_sources/?limit=20&after=<string>&before=<string>&include_total=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "data_sources",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of items to return per page (1-100)",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response.",
+                          "key": "after",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response.",
+                          "key": "before",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Whether to include total count in response (expensive operation)",
+                          "key": "include_total",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"pagination\": {\n    \"has_more\": \"<boolean>\",\n    \"first_cursor\": \"<string>\",\n    \"last_cursor\": \"<string>\",\n    \"total\": \"<integer>\"\n  },\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"type\": \"linear\",\n      \"name\": \"<string>\",\n      \"metadata\": {},\n      \"auth_params\": {\n        \"type\": \"oauth2\",\n        \"created_at\": \"<dateTime>\",\n        \"scope\": \"<string>\",\n        \"access_token\": \"<string>\",\n        \"refresh_token\": \"<string>\",\n        \"token_type\": \"<string>\",\n        \"expires_on\": \"<dateTime>\",\n        \"additional_params\": {\n          \"elitcae\": -67198263.43288\n        }\n      },\n      \"object\": \"data_source\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"type\": \"notion\",\n      \"name\": \"<string>\",\n      \"metadata\": {},\n      \"auth_params\": {\n        \"type\": \"oauth2\",\n        \"created_at\": \"<dateTime>\",\n        \"scope\": \"<string>\",\n        \"access_token\": \"<string>\",\n        \"refresh_token\": \"<string>\",\n        \"token_type\": \"<string>\",\n        \"expires_on\": \"<dateTime>\",\n        \"additional_params\": {\n          \"Duis_b0\": -13653075,\n          \"velit2\": \"consequat proident dolore\"\n        }\n      },\n      \"object\": \"data_source\"\n    }\n  ],\n  \"object\": \"list\"\n}",
+                  "createdAt": "2026-07-28T02:14:52.000Z",
+                  "updatedAt": "2026-07-28T02:14:52.000Z",
+                  "uid": "35240-e1ba9b61-e3d1-4a94-828b-2d08ac6244bf"
+                },
+                {
+                  "id": "474663f8-f994-4a5b-bf61-18c4bfbb9978",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/data_sources/?limit=20&after=<string>&before=<string>&include_total=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "data_sources",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of items to return per page (1-100)",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response.",
+                          "key": "after",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response.",
+                          "key": "before",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Whether to include total count in response (expensive operation)",
+                          "key": "include_total",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:14:52.000Z",
+                  "updatedAt": "2026-07-28T02:14:52.000Z",
+                  "uid": "35240-474663f8-f994-4a5b-bf61-18c4bfbb9978"
+                }
+              ],
+              "createdAt": "2026-07-28T02:14:52.000Z",
+              "updatedAt": "2026-07-28T02:14:52.000Z",
+              "uid": "35240-2ae7aea3-0000-4bc5-80e5-4cfa0ea62914"
+            }
+          ],
+          "id": "868d8215-81ca-443d-bcca-476580219aed",
+          "createdAt": "2026-07-28T02:14:52.000Z",
+          "updatedAt": "2026-07-28T02:14:52.000Z",
+          "uid": "35240-868d8215-81ca-443d-bcca-476580219aed"
+        }
+      ],
+      "id": "13f6a2db-efef-4008-b4b7-f1182c6058af",
+      "createdAt": "2026-07-28T02:14:52.000Z",
+      "updatedAt": "2026-07-28T02:14:52.000Z",
+      "uid": "35240-13f6a2db-efef-4008-b4b7-f1182c6058af"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mixedbread.com"
+    }
+  ]
+}

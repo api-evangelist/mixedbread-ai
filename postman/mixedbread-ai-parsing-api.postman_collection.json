@@ -1,0 +1,917 @@
+{
+  "info": {
+    "_postman_id": "8f3d5450-c5b4-4fca-ab9b-52147b2cd527",
+    "name": "Mixedbread admin parsing API",
+    "description": "Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:15:00.000Z",
+    "updatedAt": "2026-07-28T02:15:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8f3d5450-c5b4-4fca-ab9b-52147b2cd527"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "parsing",
+          "item": [
+            {
+              "name": "jobs",
+              "item": [
+                {
+                  "name": "{job_id}",
+                  "item": [
+                    {
+                      "name": "Get parsing job result",
+                      "id": "abd3810d-0ac0-494a-91a4-bc00835bb54c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/parsing/jobs/:job_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "parsing",
+                            "jobs",
+                            ":job_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3892d0a0-65e3-46fd-a9bc-82d126f2a30f",
+                              "key": "job_id",
+                              "value": "<uuid>",
+                              "description": "(Required) The ID of the parse job to retrieve"
+                            }
+                          ]
+                        },
+                        "description": "Get detailed information about a specific parse job.\n\nArgs:\n    job_id: The ID of the parse job.\n\nReturns:\n    Detailed information about the parse job."
+                      },
+                      "response": [
+                        {
+                          "id": "cf29fc4e-58d5-4487-99e5-7c0db4f9366f",
+                          "name": "Detailed information about a parsing job",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/parsing/jobs/:job_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "parsing",
+                                "jobs",
+                                ":job_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"file_id\": \"<string>\",\n  \"status\": \"in_progress\",\n  \"filename\": \"<string>\",\n  \"error\": {\n    \"commodoe65\": -98173756.52431042,\n    \"deserunt_b3e\": false\n  },\n  \"result\": {\n    \"chunking_strategy\": \"page\",\n    \"return_format\": \"html\",\n    \"element_types\": [\n      \"header\",\n      \"section-header\"\n    ],\n    \"chunks\": [\n      {\n        \"content_to_embed\": \"<string>\",\n        \"elements\": [\n          {\n            \"type\": \"text\",\n            \"confidence\": \"<number>\",\n            \"bbox\": \"<array>\",\n            \"page\": \"<integer>\",\n            \"content\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"image\": \"<string>\"\n          },\n          {\n            \"type\": \"section-header\",\n            \"confidence\": \"<number>\",\n            \"bbox\": \"<array>\",\n            \"page\": \"<integer>\",\n            \"content\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"image\": \"<string>\"\n          }\n        ],\n        \"content\": \"<string>\"\n      },\n      {\n        \"content_to_embed\": \"<string>\",\n        \"elements\": [\n          {\n            \"type\": \"footnote\",\n            \"confidence\": \"<number>\",\n            \"bbox\": \"<array>\",\n            \"page\": \"<integer>\",\n            \"content\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"image\": \"<string>\"\n          },\n          {\n            \"type\": \"form\",\n            \"confidence\": \"<number>\",\n            \"bbox\": \"<array>\",\n            \"page\": \"<integer>\",\n            \"content\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"image\": \"<string>\"\n          }\n        ],\n        \"content\": \"<string>\"\n      }\n    ],\n    \"page_sizes\": [\n      \"<array>\",\n      \"<array>\"\n    ]\n  },\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"object\": \"parsing_job\"\n}",
+                          "createdAt": "2026-07-28T02:15:01.000Z",
+                          "updatedAt": "2026-07-28T02:15:01.000Z",
+                          "uid": "35240-cf29fc4e-58d5-4487-99e5-7c0db4f9366f"
+                        },
+                        {
+                          "id": "b914f141-a575-4d97-b101-eb615ecf406a",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/parsing/jobs/:job_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "parsing",
+                                "jobs",
+                                ":job_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:15:01.000Z",
+                          "updatedAt": "2026-07-28T02:15:01.000Z",
+                          "uid": "35240-b914f141-a575-4d97-b101-eb615ecf406a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:15:01.000Z",
+                      "updatedAt": "2026-07-28T02:15:01.000Z",
+                      "uid": "35240-abd3810d-0ac0-494a-91a4-bc00835bb54c"
+                    },
+                    {
+                      "name": "Cancel a parsing job",
+                      "id": "450aacb5-deb2-4d62-ae5c-c3c055a2ce8a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/parsing/jobs/:job_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "parsing",
+                            "jobs",
+                            ":job_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0c7657c4-3387-439e-8b6d-eb4583e7919d",
+                              "key": "job_id",
+                              "value": "<uuid>",
+                              "description": "(Required) The ID of the parse job to cancel"
+                            }
+                          ]
+                        },
+                        "description": "Cancel a specific parse job.\n\nArgs:\n    job_id: The ID of the parse job to cancel.\n\nReturns:\n    The cancelled parsing job."
+                      },
+                      "response": [
+                        {
+                          "id": "358b8eb0-1f15-439d-9fa4-77e511d99114",
+                          "name": "The cancelled parse job",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/parsing/jobs/:job_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "parsing",
+                                "jobs",
+                                ":job_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"file_id\": \"<string>\",\n  \"status\": \"in_progress\",\n  \"filename\": \"<string>\",\n  \"error\": {\n    \"commodoe65\": -98173756.52431042,\n    \"deserunt_b3e\": false\n  },\n  \"result\": {\n    \"chunking_strategy\": \"page\",\n    \"return_format\": \"html\",\n    \"element_types\": [\n      \"header\",\n      \"section-header\"\n    ],\n    \"chunks\": [\n      {\n        \"content_to_embed\": \"<string>\",\n        \"elements\": [\n          {\n            \"type\": \"text\",\n            \"confidence\": \"<number>\",\n            \"bbox\": \"<array>\",\n            \"page\": \"<integer>\",\n            \"content\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"image\": \"<string>\"\n          },\n          {\n            \"type\": \"section-header\",\n            \"confidence\": \"<number>\",\n            \"bbox\": \"<array>\",\n            \"page\": \"<integer>\",\n            \"content\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"image\": \"<string>\"\n          }\n        ],\n        \"content\": \"<string>\"\n      },\n      {\n        \"content_to_embed\": \"<string>\",\n        \"elements\": [\n          {\n            \"type\": \"footnote\",\n            \"confidence\": \"<number>\",\n            \"bbox\": \"<array>\",\n            \"page\": \"<integer>\",\n            \"content\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"image\": \"<string>\"\n          },\n          {\n            \"type\": \"form\",\n            \"confidence\": \"<number>\",\n            \"bbox\": \"<array>\",\n            \"page\": \"<integer>\",\n            \"content\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"image\": \"<string>\"\n          }\n        ],\n        \"content\": \"<string>\"\n      }\n    ],\n    \"page_sizes\": [\n      \"<array>\",\n      \"<array>\"\n    ]\n  },\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"object\": \"parsing_job\"\n}",
+                          "createdAt": "2026-07-28T02:15:01.000Z",
+                          "updatedAt": "2026-07-28T02:15:01.000Z",
+                          "uid": "35240-358b8eb0-1f15-439d-9fa4-77e511d99114"
+                        },
+                        {
+                          "id": "de1e4a00-8d7c-4396-a299-00caa2478f33",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/parsing/jobs/:job_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "parsing",
+                                "jobs",
+                                ":job_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:15:01.000Z",
+                          "updatedAt": "2026-07-28T02:15:01.000Z",
+                          "uid": "35240-de1e4a00-8d7c-4396-a299-00caa2478f33"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:15:01.000Z",
+                      "updatedAt": "2026-07-28T02:15:01.000Z",
+                      "uid": "35240-450aacb5-deb2-4d62-ae5c-c3c055a2ce8a"
+                    },
+                    {
+                      "name": "Delete a parsing job",
+                      "id": "48f1b5e0-b443-4a1b-a0f9-3464bd83d8f2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/parsing/jobs/:job_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "parsing",
+                            "jobs",
+                            ":job_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ea3c8866-d59a-4305-95b1-79e1057d3e5e",
+                              "key": "job_id",
+                              "value": "<uuid>",
+                              "description": "(Required) The ID of the parse job to delete"
+                            }
+                          ]
+                        },
+                        "description": "Delete a specific parse job.\n\nArgs:\n    job_id: The ID of the parse job to delete.\n\nReturns:\n    The deleted parsing job."
+                      },
+                      "response": [
+                        {
+                          "id": "c95b03eb-ab07-477f-9e8e-c2d4f06405dd",
+                          "name": "The deleted parse job",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/parsing/jobs/:job_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "parsing",
+                                "jobs",
+                                ":job_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"deleted\": true,\n  \"object\": \"parsing_job\"\n}",
+                          "createdAt": "2026-07-28T02:15:01.000Z",
+                          "updatedAt": "2026-07-28T02:15:01.000Z",
+                          "uid": "35240-c95b03eb-ab07-477f-9e8e-c2d4f06405dd"
+                        },
+                        {
+                          "id": "2c43e29f-1cdc-401e-abc8-7bc70d38a617",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/parsing/jobs/:job_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "parsing",
+                                "jobs",
+                                ":job_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:15:01.000Z",
+                          "updatedAt": "2026-07-28T02:15:01.000Z",
+                          "uid": "35240-2c43e29f-1cdc-401e-abc8-7bc70d38a617"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:15:01.000Z",
+                      "updatedAt": "2026-07-28T02:15:01.000Z",
+                      "uid": "35240-48f1b5e0-b443-4a1b-a0f9-3464bd83d8f2"
+                    }
+                  ],
+                  "id": "0397ae3f-66b5-448c-890e-83a2034d9a4f",
+                  "createdAt": "2026-07-28T02:15:01.000Z",
+                  "updatedAt": "2026-07-28T02:15:01.000Z",
+                  "uid": "35240-0397ae3f-66b5-448c-890e-83a2034d9a4f"
+                },
+                {
+                  "name": "Start a parse job",
+                  "id": "0c907309-5c33-42d3-b582-ecb43f48f02e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"file_id\": \"<string>\",\n  \"element_types\": [\n    \"figure\",\n    \"footnote\"\n  ],\n  \"chunking_strategy\": \"page\",\n  \"return_format\": \"html\",\n  \"mode\": \"high_quality\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/parsing/jobs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "parsing",
+                        "jobs"
+                      ]
+                    },
+                    "description": "Start a parse job for the provided file.\n\nArgs:\n    params: The parameters for creating a parse job.\n\nReturns:\n    The created parsing job."
+                  },
+                  "response": [
+                    {
+                      "id": "ad48f149-bb4a-43bf-8adb-f95ff3d5b2a3",
+                      "name": "The created parse job",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"file_id\": \"<string>\",\n  \"element_types\": [\n    \"figure\",\n    \"footnote\"\n  ],\n  \"chunking_strategy\": \"page\",\n  \"return_format\": \"html\",\n  \"mode\": \"high_quality\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/parsing/jobs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "parsing",
+                            "jobs"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"file_id\": \"<string>\",\n  \"status\": \"in_progress\",\n  \"filename\": \"<string>\",\n  \"error\": {\n    \"commodoe65\": -98173756.52431042,\n    \"deserunt_b3e\": false\n  },\n  \"result\": {\n    \"chunking_strategy\": \"page\",\n    \"return_format\": \"html\",\n    \"element_types\": [\n      \"header\",\n      \"section-header\"\n    ],\n    \"chunks\": [\n      {\n        \"content_to_embed\": \"<string>\",\n        \"elements\": [\n          {\n            \"type\": \"text\",\n            \"confidence\": \"<number>\",\n            \"bbox\": \"<array>\",\n            \"page\": \"<integer>\",\n            \"content\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"image\": \"<string>\"\n          },\n          {\n            \"type\": \"section-header\",\n            \"confidence\": \"<number>\",\n            \"bbox\": \"<array>\",\n            \"page\": \"<integer>\",\n            \"content\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"image\": \"<string>\"\n          }\n        ],\n        \"content\": \"<string>\"\n      },\n      {\n        \"content_to_embed\": \"<string>\",\n        \"elements\": [\n          {\n            \"type\": \"footnote\",\n            \"confidence\": \"<number>\",\n            \"bbox\": \"<array>\",\n            \"page\": \"<integer>\",\n            \"content\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"image\": \"<string>\"\n          },\n          {\n            \"type\": \"form\",\n            \"confidence\": \"<number>\",\n            \"bbox\": \"<array>\",\n            \"page\": \"<integer>\",\n            \"content\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"image\": \"<string>\"\n          }\n        ],\n        \"content\": \"<string>\"\n      }\n    ],\n    \"page_sizes\": [\n      \"<array>\",\n      \"<array>\"\n    ]\n  },\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"object\": \"parsing_job\"\n}",
+                      "createdAt": "2026-07-28T02:15:01.000Z",
+                      "updatedAt": "2026-07-28T02:15:01.000Z",
+                      "uid": "35240-ad48f149-bb4a-43bf-8adb-f95ff3d5b2a3"
+                    },
+                    {
+                      "id": "ada03004-dce9-4e89-b70b-90a398c30eda",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"file_id\": \"<string>\",\n  \"element_types\": [\n    \"figure\",\n    \"footnote\"\n  ],\n  \"chunking_strategy\": \"page\",\n  \"return_format\": \"html\",\n  \"mode\": \"high_quality\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/parsing/jobs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "parsing",
+                            "jobs"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:15:01.000Z",
+                      "updatedAt": "2026-07-28T02:15:01.000Z",
+                      "uid": "35240-ada03004-dce9-4e89-b70b-90a398c30eda"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:15:01.000Z",
+                  "updatedAt": "2026-07-28T02:15:01.000Z",
+                  "uid": "35240-0c907309-5c33-42d3-b582-ecb43f48f02e"
+                },
+                {
+                  "name": "List parsing jobs",
+                  "id": "a440688a-b755-4eae-ba27-abbdfb9ead9a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/parsing/jobs?limit=20&after=<string>&before=<string>&include_total=false&statuses=pending&statuses=cancelled&q=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "parsing",
+                        "jobs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of items to return per page (1-100)",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response.",
+                          "key": "after",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response.",
+                          "key": "before",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Whether to include total count in response (expensive operation)",
+                          "key": "include_total",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Status to filter by",
+                          "key": "statuses",
+                          "value": "pending"
+                        },
+                        {
+                          "description": "Status to filter by",
+                          "key": "statuses",
+                          "value": "cancelled"
+                        },
+                        {
+                          "description": "Search query to filter by",
+                          "key": "q",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "List parsing jobs with pagination.\n\nArgs:\n    limit: The number of items to return.\n    offset: The number of items to skip.\n\nReturns:\n    List of parsing jobs with pagination."
+                  },
+                  "response": [
+                    {
+                      "id": "1929c5f8-d33e-41d6-82de-dedd415c1add",
+                      "name": "List of parsing jobs with pagination",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/parsing/jobs?limit=20&after=<string>&before=<string>&include_total=false&statuses=cancelled&q=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "parsing",
+                            "jobs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of items to return per page (1-100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response.",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response.",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Whether to include total count in response (expensive operation)",
+                              "key": "include_total",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Status to filter by",
+                              "key": "statuses",
+                              "value": "cancelled"
+                            },
+                            {
+                              "description": "Search query to filter by",
+                              "key": "q",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"pagination\": {\n    \"has_more\": \"<boolean>\",\n    \"first_cursor\": \"<string>\",\n    \"last_cursor\": \"<string>\",\n    \"total\": \"<integer>\"\n  },\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"file_id\": \"<string>\",\n      \"status\": \"pending\",\n      \"filename\": \"<string>\",\n      \"error\": {\n        \"dolore6d\": 43759082.019687146\n      },\n      \"started_at\": \"<dateTime>\",\n      \"finished_at\": \"<dateTime>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"object\": \"parsing_job\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"file_id\": \"<string>\",\n      \"status\": \"cancelled\",\n      \"filename\": \"<string>\",\n      \"error\": {\n        \"aliquipf_\": 67940203\n      },\n      \"started_at\": \"<dateTime>\",\n      \"finished_at\": \"<dateTime>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"object\": \"parsing_job\"\n    }\n  ],\n  \"object\": \"list\"\n}",
+                      "createdAt": "2026-07-28T02:15:01.000Z",
+                      "updatedAt": "2026-07-28T02:15:01.000Z",
+                      "uid": "35240-1929c5f8-d33e-41d6-82de-dedd415c1add"
+                    },
+                    {
+                      "id": "9032e7e5-c42f-451f-a5fb-67c0eda9005f",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/parsing/jobs?limit=20&after=<string>&before=<string>&include_total=false&statuses=cancelled&q=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "parsing",
+                            "jobs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of items to return per page (1-100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response.",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response.",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Whether to include total count in response (expensive operation)",
+                              "key": "include_total",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Status to filter by",
+                              "key": "statuses",
+                              "value": "cancelled"
+                            },
+                            {
+                              "description": "Search query to filter by",
+                              "key": "q",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:15:01.000Z",
+                      "updatedAt": "2026-07-28T02:15:01.000Z",
+                      "uid": "35240-9032e7e5-c42f-451f-a5fb-67c0eda9005f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:15:01.000Z",
+                  "updatedAt": "2026-07-28T02:15:01.000Z",
+                  "uid": "35240-a440688a-b755-4eae-ba27-abbdfb9ead9a"
+                }
+              ],
+              "id": "3ed1b1a8-8cc3-4247-8bc1-2356121d6557",
+              "createdAt": "2026-07-28T02:15:01.000Z",
+              "updatedAt": "2026-07-28T02:15:01.000Z",
+              "uid": "35240-3ed1b1a8-8cc3-4247-8bc1-2356121d6557"
+            }
+          ],
+          "id": "51aa1bbb-d5e9-4ffb-9bea-4a361a928402",
+          "createdAt": "2026-07-28T02:15:01.000Z",
+          "updatedAt": "2026-07-28T02:15:01.000Z",
+          "uid": "35240-51aa1bbb-d5e9-4ffb-9bea-4a361a928402"
+        }
+      ],
+      "id": "566820d6-d7ce-41e0-91a2-d8d695673164",
+      "createdAt": "2026-07-28T02:15:01.000Z",
+      "updatedAt": "2026-07-28T02:15:01.000Z",
+      "uid": "35240-566820d6-d7ce-41e0-91a2-d8d695673164"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mixedbread.com"
+    }
+  ]
+}

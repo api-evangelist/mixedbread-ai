@@ -1,0 +1,285 @@
+{
+  "info": {
+    "_postman_id": "c22bb87c-7e9d-485d-861c-7dee80a8820b",
+    "name": "Mixedbread admin API",
+    "description": "Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:14:48.000Z",
+    "updatedAt": "2026-07-28T02:14:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c22bb87c-7e9d-485d-861c-7dee80a8820b"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "admin",
+          "item": [
+            {
+              "name": "stores",
+              "item": [
+                {
+                  "name": "{organization_id}",
+                  "item": [
+                    {
+                      "name": "{store_identifier}",
+                      "item": [
+                        {
+                          "name": "reingest",
+                          "item": [
+                            {
+                              "name": "Reingest all stores",
+                              "id": "66148767-1a0a-447b-ab99-3192cd82df08",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "bearer",
+                                  "bearer": [
+                                    {
+                                      "key": "token",
+                                      "value": "{{bearerToken}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/admin/stores/:organization_id/:store_identifier/reingest?statuses=failed&statuses=in_progress&billable=false",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "admin",
+                                    "stores",
+                                    ":organization_id",
+                                    ":store_identifier",
+                                    "reingest"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Statuses of files to reingest",
+                                      "key": "statuses",
+                                      "value": "failed"
+                                    },
+                                    {
+                                      "description": "Statuses of files to reingest",
+                                      "key": "statuses",
+                                      "value": "in_progress"
+                                    },
+                                    {
+                                      "description": "Whether the reingestion is billable to the user",
+                                      "key": "billable",
+                                      "value": "false"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "557d1c51-3fe5-4e68-bea3-2722d07ec181",
+                                      "key": "organization_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "bb407c16-b1ba-49ba-86b7-0bd61e12bac3",
+                                      "key": "store_identifier",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Reingest all stores across all organizations (admin only).\n\nThis endpoint creates StoreFileReingestionJob for each store.\n\nReturns:\n    dict: Confirmation message with count of jobs created."
+                              },
+                              "response": [
+                                {
+                                  "id": "9c8bedc3-0b66-4cf0-b79c-8714508c2f56",
+                                  "name": "Confirmation that reingestion jobs have been created",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/admin/stores/:organization_id/:store_identifier/reingest?statuses=in_progress&billable=false",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "admin",
+                                        "stores",
+                                        ":organization_id",
+                                        ":store_identifier",
+                                        "reingest"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Statuses of files to reingest",
+                                          "key": "statuses",
+                                          "value": "in_progress"
+                                        },
+                                        {
+                                          "description": "Whether the reingestion is billable to the user",
+                                          "key": "billable",
+                                          "value": "false"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id"
+                                        },
+                                        {
+                                          "key": "store_identifier"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{}",
+                                  "createdAt": "2026-07-28T02:14:48.000Z",
+                                  "updatedAt": "2026-07-28T02:14:48.000Z",
+                                  "uid": "35240-9c8bedc3-0b66-4cf0-b79c-8714508c2f56"
+                                },
+                                {
+                                  "id": "1f8f2d28-d4a2-4ee3-b1bf-7b20ab78e7fb",
+                                  "name": "Validation Error",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/admin/stores/:organization_id/:store_identifier/reingest?statuses=in_progress&billable=false",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "admin",
+                                        "stores",
+                                        ":organization_id",
+                                        ":store_identifier",
+                                        "reingest"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Statuses of files to reingest",
+                                          "key": "statuses",
+                                          "value": "in_progress"
+                                        },
+                                        {
+                                          "description": "Whether the reingestion is billable to the user",
+                                          "key": "billable",
+                                          "value": "false"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id"
+                                        },
+                                        {
+                                          "key": "store_identifier"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:14:48.000Z",
+                                  "updatedAt": "2026-07-28T02:14:48.000Z",
+                                  "uid": "35240-1f8f2d28-d4a2-4ee3-b1bf-7b20ab78e7fb"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:14:48.000Z",
+                              "updatedAt": "2026-07-28T02:14:48.000Z",
+                              "uid": "35240-66148767-1a0a-447b-ab99-3192cd82df08"
+                            }
+                          ],
+                          "id": "b856d19e-bdcf-49ba-b1ac-f98140506a25",
+                          "createdAt": "2026-07-28T02:14:48.000Z",
+                          "updatedAt": "2026-07-28T02:14:48.000Z",
+                          "uid": "35240-b856d19e-bdcf-49ba-b1ac-f98140506a25"
+                        }
+                      ],
+                      "id": "fcbd728e-5f6d-4e48-9024-43f4ac5def96",
+                      "createdAt": "2026-07-28T02:14:48.000Z",
+                      "updatedAt": "2026-07-28T02:14:48.000Z",
+                      "uid": "35240-fcbd728e-5f6d-4e48-9024-43f4ac5def96"
+                    }
+                  ],
+                  "id": "3c552b54-a531-42e9-8288-1e0b6ac420ac",
+                  "createdAt": "2026-07-28T02:14:48.000Z",
+                  "updatedAt": "2026-07-28T02:14:48.000Z",
+                  "uid": "35240-3c552b54-a531-42e9-8288-1e0b6ac420ac"
+                }
+              ],
+              "id": "7f651bca-805e-4df6-835c-eb2a0730c824",
+              "createdAt": "2026-07-28T02:14:48.000Z",
+              "updatedAt": "2026-07-28T02:14:48.000Z",
+              "uid": "35240-7f651bca-805e-4df6-835c-eb2a0730c824"
+            }
+          ],
+          "id": "fdfde235-6601-424b-8226-3b7656589f76",
+          "createdAt": "2026-07-28T02:14:48.000Z",
+          "updatedAt": "2026-07-28T02:14:48.000Z",
+          "uid": "35240-fdfde235-6601-424b-8226-3b7656589f76"
+        }
+      ],
+      "id": "c3a3daf8-5169-409d-9139-7aec964af925",
+      "createdAt": "2026-07-28T02:14:48.000Z",
+      "updatedAt": "2026-07-28T02:14:48.000Z",
+      "uid": "35240-c3a3daf8-5169-409d-9139-7aec964af925"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mixedbread.com"
+    }
+  ]
+}

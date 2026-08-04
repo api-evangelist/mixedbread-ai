@@ -1,0 +1,154 @@
+{
+  "info": {
+    "_postman_id": "2487afb5-c002-47ea-af6a-11fe18920a8b",
+    "name": "Mixedbread admin Mixedbread Embeddings API API",
+    "description": "Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:14:59.000Z",
+    "updatedAt": "2026-07-28T02:14:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2487afb5-c002-47ea-af6a-11fe18920a8b"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Info",
+          "id": "c268db14-f074-43ef-a74c-aae10330fac7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ]
+            },
+            "description": "Returns service information, including name and version.\n\nReturns:\n    InfoResponse: A response containing the service name and version."
+          },
+          "response": [
+            {
+              "id": "f2a88cbb-1c0f-483c-b35f-ab091dc71f0f",
+              "name": "Info response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"name\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:00.000Z",
+              "updatedAt": "2026-07-28T02:15:00.000Z",
+              "uid": "35240-f2a88cbb-1c0f-483c-b35f-ab091dc71f0f"
+            },
+            {
+              "id": "b0415a3c-a9ea-4734-90c2-03fa1c770a4b",
+              "name": "Info failed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T02:15:00.000Z",
+              "updatedAt": "2026-07-28T02:15:00.000Z",
+              "uid": "35240-b0415a3c-a9ea-4734-90c2-03fa1c770a4b"
+            }
+          ],
+          "createdAt": "2026-07-28T02:15:00.000Z",
+          "updatedAt": "2026-07-28T02:15:00.000Z",
+          "uid": "35240-c268db14-f074-43ef-a74c-aae10330fac7"
+        }
+      ],
+      "id": "a9ffa989-2681-4881-bbde-7e541557bd2f",
+      "createdAt": "2026-07-28T02:15:00.000Z",
+      "updatedAt": "2026-07-28T02:15:00.000Z",
+      "uid": "35240-a9ffa989-2681-4881-bbde-7e541557bd2f"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mixedbread.com"
+    }
+  ]
+}

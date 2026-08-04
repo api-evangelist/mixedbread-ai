@@ -1,0 +1,40 @@
+{
+  "provider": "mixedbread-ai",
+  "sources": [
+    "mixedbread-ai-admin-api-openapi.yml",
+    "mixedbread-ai-api-keys-api-openapi.yml",
+    "mixedbread-ai-billing-api-openapi.yml",
+    "mixedbread-ai-completions-api-openapi.yml",
+    "mixedbread-ai-data-sources-api-openapi.yml",
+    "mixedbread-ai-deprecated-vector-stores-api-openapi.yml",
+    "mixedbread-ai-embeddings-api-openapi.yml",
+    "mixedbread-ai-extractions-api-openapi.yml",
+    "mixedbread-ai-files-api-openapi.yml",
+    "mixedbread-ai-mixedbread-embeddings-api-api-openapi.yml",
+    "mixedbread-ai-parsing-api-openapi.yml",
+    "mixedbread-ai-reranking-api-openapi.yml",
+    "mixedbread-ai-schemas-api-openapi.yml",
+    "mixedbread-ai-stores-api-openapi.yml"
+  ],
+  "outputs": [
+    "mixedbread-ai-admin-api-openapi.yml",
+    "mixedbread-ai-api-keys-api-openapi.yml",
+    "mixedbread-ai-billing-api-openapi.yml",
+    "mixedbread-ai-completions-api-openapi.yml",
+    "mixedbread-ai-data-sources-api-openapi.yml",
+    "mixedbread-ai-deprecated-vector-stores-api-openapi.yml",
+    "mixedbread-ai-embeddings-api-openapi.yml",
+    "mixedbread-ai-extractions-api-openapi.yml",
+    "mixedbread-ai-files-api-openapi.yml",
+    "mixedbread-ai-mixedbread-embeddings-api-api-openapi.yml",
+    "mixedbread-ai-parsing-api-openapi.yml",
+    "mixedbread-ai-reranking-api-openapi.yml",
+    "mixedbread-ai-schemas-api-openapi.yml",
+    "mixedbread-ai-stores-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

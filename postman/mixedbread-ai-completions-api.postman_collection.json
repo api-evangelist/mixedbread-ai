@@ -1,0 +1,134 @@
+{
+  "info": {
+    "_postman_id": "dea4bc72-9adc-400a-ba6b-c9540ffb7f79",
+    "name": "Mixedbread admin completions API",
+    "description": "Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:14:51.000Z",
+    "updatedAt": "2026-07-28T02:14:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-dea4bc72-9adc-400a-ba6b-c9540ffb7f79"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "chat",
+          "item": [
+            {
+              "name": "completions",
+              "item": [
+                {
+                  "name": "Create a chat completion",
+                  "id": "260bb943-746f-4ea8-bb84-a0f79be157a8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/chat/completions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "chat",
+                        "completions"
+                      ]
+                    },
+                    "description": "Create a chat completion using the provided parameters.\n\nGenerates a completion response based on the chat messages and model parameters provided.\nThe response can be either a full completion or streamed chunks depending on the request parameters.\n\nArgs:\n    params: Parameters for creating the chat completion including messages, model selection,\n           and generation settings\n    user: The authenticated user making the request\n\nReturns:\n    Either a ChatCompletion containing the full response, or ChatCompletionChunk for streaming\n\nRaises:\n    HTTPException: If there is an error creating the completion (500)"
+                  },
+                  "response": [
+                    {
+                      "id": "d3449c20-00b4-4845-bf95-04739f7805d4",
+                      "name": "The generated chat completion response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/chat/completions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "chat",
+                            "completions"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T02:14:51.000Z",
+                      "updatedAt": "2026-07-28T02:14:51.000Z",
+                      "uid": "35240-d3449c20-00b4-4845-bf95-04739f7805d4"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:14:51.000Z",
+                  "updatedAt": "2026-07-28T02:14:51.000Z",
+                  "uid": "35240-260bb943-746f-4ea8-bb84-a0f79be157a8"
+                }
+              ],
+              "id": "3e17c862-8bf7-47f4-acc0-b25b4abd20bc",
+              "createdAt": "2026-07-28T02:14:51.000Z",
+              "updatedAt": "2026-07-28T02:14:51.000Z",
+              "uid": "35240-3e17c862-8bf7-47f4-acc0-b25b4abd20bc"
+            }
+          ],
+          "id": "4ce85201-0f09-4910-9f68-2aaeb1a5cbc7",
+          "createdAt": "2026-07-28T02:14:51.000Z",
+          "updatedAt": "2026-07-28T02:14:51.000Z",
+          "uid": "35240-4ce85201-0f09-4910-9f68-2aaeb1a5cbc7"
+        }
+      ],
+      "id": "7ec1cc1e-3a87-43db-bc8a-c79ce7fc0343",
+      "createdAt": "2026-07-28T02:14:51.000Z",
+      "updatedAt": "2026-07-28T02:14:51.000Z",
+      "uid": "35240-7ec1cc1e-3a87-43db-bc8a-c79ce7fc0343"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mixedbread.com"
+    }
+  ]
+}

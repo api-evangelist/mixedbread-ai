@@ -1,0 +1,1192 @@
+{
+  "info": {
+    "_postman_id": "8095bef4-2b4b-4fb6-81a0-3aaf7d7f1d96",
+    "name": "Mixedbread admin api_keys API",
+    "description": "Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:14:49.000Z",
+    "updatedAt": "2026-07-28T02:14:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8095bef4-2b4b-4fb6-81a0-3aaf7d7f1d96"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "api-keys",
+          "item": [
+            {
+              "name": "{api_key_id}",
+              "item": [
+                {
+                  "name": "revoke",
+                  "item": [
+                    {
+                      "name": "Revoke API key",
+                      "id": "d54ee0c3-f487-45f1-98bc-e8154a2b102a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/api-keys/:api_key_id/revoke",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "api-keys",
+                            ":api_key_id",
+                            "revoke"
+                          ],
+                          "variable": [
+                            {
+                              "id": "2fc7a191-0c0b-4eed-9718-9f5fba8d2ddf",
+                              "key": "api_key_id",
+                              "value": "<uuid>",
+                              "description": "(Required) The ID of the API key to revoke"
+                            }
+                          ]
+                        },
+                        "description": "Revoke a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to revoke.\n\nReturns:\n    ApiKey: The response containing the details of the revoked API key."
+                      },
+                      "response": [
+                        {
+                          "id": "4460a006-27cc-497b-879e-155b9d35c476",
+                          "name": "The revoked API key details",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/api-keys/:api_key_id/revoke",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "api-keys",
+                                ":api_key_id",
+                                "revoke"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "api_key_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"redacted_value\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"expires_at\": \"<dateTime>\",\n  \"last_active_at\": \"<dateTime>\",\n  \"object\": \"api_key\",\n  \"scope\": [\n    {\n      \"method\": \"search\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    },\n    {\n      \"method\": \"list\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:14:49.000Z",
+                          "updatedAt": "2026-07-28T02:14:49.000Z",
+                          "uid": "35240-4460a006-27cc-497b-879e-155b9d35c476"
+                        },
+                        {
+                          "id": "08677728-d57f-4a5c-838b-be8e20ac3f21",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/api-keys/:api_key_id/revoke",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "api-keys",
+                                ":api_key_id",
+                                "revoke"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "api_key_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:14:49.000Z",
+                          "updatedAt": "2026-07-28T02:14:49.000Z",
+                          "uid": "35240-08677728-d57f-4a5c-838b-be8e20ac3f21"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:14:49.000Z",
+                      "updatedAt": "2026-07-28T02:14:49.000Z",
+                      "uid": "35240-d54ee0c3-f487-45f1-98bc-e8154a2b102a"
+                    }
+                  ],
+                  "id": "c7d76a9c-d97b-40d5-88b6-06e7dfb85344",
+                  "createdAt": "2026-07-28T02:14:49.000Z",
+                  "updatedAt": "2026-07-28T02:14:49.000Z",
+                  "uid": "35240-c7d76a9c-d97b-40d5-88b6-06e7dfb85344"
+                },
+                {
+                  "name": "reroll",
+                  "item": [
+                    {
+                      "name": "Reroll API key",
+                      "id": "cd87cae0-37a4-436b-a68e-8a215dc3a98b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/api-keys/:api_key_id/reroll",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "api-keys",
+                            ":api_key_id",
+                            "reroll"
+                          ],
+                          "variable": [
+                            {
+                              "id": "f5e05c24-ffe4-4b72-9ead-aea1593a9deb",
+                              "key": "api_key_id",
+                              "value": "<uuid>",
+                              "description": "(Required) The ID of the API key to reroll"
+                            }
+                          ]
+                        },
+                        "description": "Reroll the secret for a specific API key by its ID.\n\nThis generates a new secret key, invalidating the old one.\n\nArgs:\n    api_key_id: The ID of the API key to reroll.\n\nReturns:\n    ApiKeyCreated: The response containing the API key details with the new secret key."
+                      },
+                      "response": [
+                        {
+                          "id": "c381bc10-4e6e-4165-bba7-6e50678d61ab",
+                          "name": "The API key details with the new secret key",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/api-keys/:api_key_id/reroll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "api-keys",
+                                ":api_key_id",
+                                "reroll"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "api_key_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"redacted_value\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"value\": \"<string>\",\n  \"expires_at\": \"<dateTime>\",\n  \"last_active_at\": \"<dateTime>\",\n  \"object\": \"api_key\",\n  \"scope\": [\n    {\n      \"method\": \"read\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    },\n    {\n      \"method\": \"delete\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:14:49.000Z",
+                          "updatedAt": "2026-07-28T02:14:49.000Z",
+                          "uid": "35240-c381bc10-4e6e-4165-bba7-6e50678d61ab"
+                        },
+                        {
+                          "id": "dd752d86-0931-453a-889a-50c143fd6496",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/api-keys/:api_key_id/reroll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "api-keys",
+                                ":api_key_id",
+                                "reroll"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "api_key_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:14:49.000Z",
+                          "updatedAt": "2026-07-28T02:14:49.000Z",
+                          "uid": "35240-dd752d86-0931-453a-889a-50c143fd6496"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:14:49.000Z",
+                      "updatedAt": "2026-07-28T02:14:49.000Z",
+                      "uid": "35240-cd87cae0-37a4-436b-a68e-8a215dc3a98b"
+                    }
+                  ],
+                  "id": "1922e677-886b-4380-8b44-bfd7aef872bd",
+                  "createdAt": "2026-07-28T02:14:49.000Z",
+                  "updatedAt": "2026-07-28T02:14:49.000Z",
+                  "uid": "35240-1922e677-886b-4380-8b44-bfd7aef872bd"
+                },
+                {
+                  "name": "Get API key details",
+                  "id": "92a5082f-4977-4fbd-b329-6e29dee08524",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/api-keys/:api_key_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "api-keys",
+                        ":api_key_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ad5b6be6-8806-4878-b0bb-65efc02f12d9",
+                          "key": "api_key_id",
+                          "value": "<uuid>",
+                          "description": "(Required) The ID of the API key to retrieve"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve details of a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to retrieve.\n\nReturns:\n    ApiKey: The response containing the API key details."
+                  },
+                  "response": [
+                    {
+                      "id": "4f6291b1-86f7-4ba2-8e16-e3c76d8e114c",
+                      "name": "The details of the requested API key",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"redacted_value\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"expires_at\": \"<dateTime>\",\n  \"last_active_at\": \"<dateTime>\",\n  \"object\": \"api_key\",\n  \"scope\": [\n    {\n      \"method\": \"search\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    },\n    {\n      \"method\": \"list\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:14:49.000Z",
+                      "updatedAt": "2026-07-28T02:14:49.000Z",
+                      "uid": "35240-4f6291b1-86f7-4ba2-8e16-e3c76d8e114c"
+                    },
+                    {
+                      "id": "8feb49e4-55dd-478d-8c02-b6196c54cd69",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:14:49.000Z",
+                      "updatedAt": "2026-07-28T02:14:49.000Z",
+                      "uid": "35240-8feb49e4-55dd-478d-8c02-b6196c54cd69"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:14:49.000Z",
+                  "updatedAt": "2026-07-28T02:14:49.000Z",
+                  "uid": "35240-92a5082f-4977-4fbd-b329-6e29dee08524"
+                },
+                {
+                  "name": "Update API key",
+                  "id": "6a0a7d39-3be4-444f-9f09-d9ee77ffce8e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"expires_at\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/api-keys/:api_key_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "api-keys",
+                        ":api_key_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "26871c5e-3c73-4b6f-bf48-be8812da518e",
+                          "key": "api_key_id",
+                          "value": "<uuid>",
+                          "description": "(Required) The ID of the API key to update"
+                        }
+                      ]
+                    },
+                    "description": "Update a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to update.\n    params: The parameters to update.\n\nReturns:\n    ApiKey: The updated API key details."
+                  },
+                  "response": [
+                    {
+                      "id": "3800bac6-a83a-43d7-88f4-5adfe12acf5c",
+                      "name": "The updated API key details",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"expires_at\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"redacted_value\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"expires_at\": \"<dateTime>\",\n  \"last_active_at\": \"<dateTime>\",\n  \"object\": \"api_key\",\n  \"scope\": [\n    {\n      \"method\": \"search\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    },\n    {\n      \"method\": \"list\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:14:49.000Z",
+                      "updatedAt": "2026-07-28T02:14:49.000Z",
+                      "uid": "35240-3800bac6-a83a-43d7-88f4-5adfe12acf5c"
+                    },
+                    {
+                      "id": "2e3850d2-3818-4a66-93a9-26a1e550364e",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"expires_at\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:14:49.000Z",
+                      "updatedAt": "2026-07-28T02:14:49.000Z",
+                      "uid": "35240-2e3850d2-3818-4a66-93a9-26a1e550364e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:14:49.000Z",
+                  "updatedAt": "2026-07-28T02:14:49.000Z",
+                  "uid": "35240-6a0a7d39-3be4-444f-9f09-d9ee77ffce8e"
+                },
+                {
+                  "name": "Delete API key",
+                  "id": "6fad590b-ac85-463f-99c9-152fb1b882c8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/api-keys/:api_key_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "api-keys",
+                        ":api_key_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4b48eb66-5bd0-42b5-90bc-07441d3bd788",
+                          "key": "api_key_id",
+                          "value": "<uuid>",
+                          "description": "(Required) The ID of the API key to delete"
+                        }
+                      ]
+                    },
+                    "description": "Delete a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to delete.\n\nReturns:\n    ApiKeyDeleted: The response containing the details of the deleted API key."
+                  },
+                  "response": [
+                    {
+                      "id": "eee4e2fc-c2a0-4cd3-a94c-21838f7c5bd7",
+                      "name": "The details of the deleted API key",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"deleted\": \"<boolean>\",\n  \"object\": \"api_key\"\n}",
+                      "createdAt": "2026-07-28T02:14:49.000Z",
+                      "updatedAt": "2026-07-28T02:14:49.000Z",
+                      "uid": "35240-eee4e2fc-c2a0-4cd3-a94c-21838f7c5bd7"
+                    },
+                    {
+                      "id": "07a4b369-871e-4a87-ac29-e1c3aca82241",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:14:49.000Z",
+                      "updatedAt": "2026-07-28T02:14:49.000Z",
+                      "uid": "35240-07a4b369-871e-4a87-ac29-e1c3aca82241"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:14:49.000Z",
+                  "updatedAt": "2026-07-28T02:14:49.000Z",
+                  "uid": "35240-6fad590b-ac85-463f-99c9-152fb1b882c8"
+                }
+              ],
+              "id": "75311ad8-7992-4d96-b614-1f14cb265541",
+              "createdAt": "2026-07-28T02:14:49.000Z",
+              "updatedAt": "2026-07-28T02:14:49.000Z",
+              "uid": "35240-75311ad8-7992-4d96-b614-1f14cb265541"
+            },
+            {
+              "name": "Create API key",
+              "id": "c080fff4-cc1a-435e-a961-18059367e20e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"API Key\",\n  \"scope\": [\n    {\n      \"method\": \"search\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    },\n    {\n      \"method\": \"read\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    }\n  ],\n  \"expires_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/api-keys",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "api-keys"
+                  ]
+                },
+                "description": "Create a new API key.\n\nArgs:\n    params: The parameters for creating the API key.\n\nReturns:\n    ApiKeyCreated: The response containing the details of the created API key."
+              },
+              "response": [
+                {
+                  "id": "771e5b1a-a680-4e9b-b8d0-75764d506305",
+                  "name": "The created API key details",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"API Key\",\n  \"scope\": [\n    {\n      \"method\": \"search\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    },\n    {\n      \"method\": \"read\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    }\n  ],\n  \"expires_at\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/api-keys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "api-keys"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"redacted_value\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"value\": \"<string>\",\n  \"expires_at\": \"<dateTime>\",\n  \"last_active_at\": \"<dateTime>\",\n  \"object\": \"api_key\",\n  \"scope\": [\n    {\n      \"method\": \"read\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    },\n    {\n      \"method\": \"delete\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:14:49.000Z",
+                  "updatedAt": "2026-07-28T02:14:49.000Z",
+                  "uid": "35240-771e5b1a-a680-4e9b-b8d0-75764d506305"
+                },
+                {
+                  "id": "baefcb04-804c-4d54-bed4-fc5f70d4ec0e",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"API Key\",\n  \"scope\": [\n    {\n      \"method\": \"search\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    },\n    {\n      \"method\": \"read\",\n      \"resource_type\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    }\n  ],\n  \"expires_at\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/api-keys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "api-keys"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:14:49.000Z",
+                  "updatedAt": "2026-07-28T02:14:49.000Z",
+                  "uid": "35240-baefcb04-804c-4d54-bed4-fc5f70d4ec0e"
+                }
+              ],
+              "createdAt": "2026-07-28T02:14:49.000Z",
+              "updatedAt": "2026-07-28T02:14:49.000Z",
+              "uid": "35240-c080fff4-cc1a-435e-a961-18059367e20e"
+            },
+            {
+              "name": "List API keys",
+              "id": "846144c5-8cb8-45a0-bb42-e168b72fc3dc",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/api-keys?limit=100&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "api-keys"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of items to return per page",
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "description": "Offset of the first item to return",
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                },
+                "description": "List all API keys for the authenticated user.\n\nArgs:\n    pagination: The pagination options\n\nReturns:\n    A list of API keys belonging to the user."
+              },
+              "response": [
+                {
+                  "id": "7d7c6b43-b5b5-4bbd-a221-1df37843220f",
+                  "name": "A list of API keys for the user",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/api-keys?limit=100&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "api-keys"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of items to return per page",
+                          "key": "limit",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Offset of the first item to return",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"pagination\": {\n    \"limit\": 100,\n    \"offset\": 0,\n    \"total\": 0\n  },\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"redacted_value\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"expires_at\": \"<dateTime>\",\n      \"last_active_at\": \"<dateTime>\",\n      \"object\": \"api_key\",\n      \"scope\": [\n        {\n          \"method\": \"list\",\n          \"resource_type\": \"<string>\",\n          \"resource_id\": \"<string>\"\n        },\n        {\n          \"method\": \"delete\",\n          \"resource_type\": \"<string>\",\n          \"resource_id\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"redacted_value\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"expires_at\": \"<dateTime>\",\n      \"last_active_at\": \"<dateTime>\",\n      \"object\": \"api_key\",\n      \"scope\": [\n        {\n          \"method\": \"list\",\n          \"resource_type\": \"<string>\",\n          \"resource_id\": \"<string>\"\n        },\n        {\n          \"method\": \"list\",\n          \"resource_type\": \"<string>\",\n          \"resource_id\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"object\": \"list\"\n}",
+                  "createdAt": "2026-07-28T02:14:49.000Z",
+                  "updatedAt": "2026-07-28T02:14:49.000Z",
+                  "uid": "35240-7d7c6b43-b5b5-4bbd-a221-1df37843220f"
+                },
+                {
+                  "id": "4b822c62-87a4-43b5-9a01-de2c50f7edf2",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/api-keys?limit=100&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "api-keys"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of items to return per page",
+                          "key": "limit",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Offset of the first item to return",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:14:49.000Z",
+                  "updatedAt": "2026-07-28T02:14:49.000Z",
+                  "uid": "35240-4b822c62-87a4-43b5-9a01-de2c50f7edf2"
+                }
+              ],
+              "createdAt": "2026-07-28T02:14:49.000Z",
+              "updatedAt": "2026-07-28T02:14:49.000Z",
+              "uid": "35240-846144c5-8cb8-45a0-bb42-e168b72fc3dc"
+            }
+          ],
+          "id": "9a2cc916-ebf5-44b4-b68e-312a180250d1",
+          "createdAt": "2026-07-28T02:14:49.000Z",
+          "updatedAt": "2026-07-28T02:14:49.000Z",
+          "uid": "35240-9a2cc916-ebf5-44b4-b68e-312a180250d1"
+        }
+      ],
+      "id": "afb5423a-0681-4f4e-b3e0-3249c4df1e81",
+      "createdAt": "2026-07-28T02:14:49.000Z",
+      "updatedAt": "2026-07-28T02:14:49.000Z",
+      "uid": "35240-afb5423a-0681-4f4e-b3e0-3249c4df1e81"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mixedbread.com"
+    }
+  ]
+}

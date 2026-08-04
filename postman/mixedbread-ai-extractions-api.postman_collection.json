@@ -1,0 +1,1115 @@
+{
+  "info": {
+    "_postman_id": "2428821d-954c-49f9-86f8-4bb46a5c7cf7",
+    "name": "Mixedbread admin extractions API",
+    "description": "Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:14:56.000Z",
+    "updatedAt": "2026-07-28T02:14:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2428821d-954c-49f9-86f8-4bb46a5c7cf7"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "extractions",
+          "item": [
+            {
+              "name": "jobs",
+              "item": [
+                {
+                  "name": "{job_id}",
+                  "item": [
+                    {
+                      "name": "Get extraction job result",
+                      "id": "ea4b4aa7-ffa9-47a0-a68f-e002a21e6277",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/extractions/jobs/:job_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "extractions",
+                            "jobs",
+                            ":job_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "28f23e77-d12b-4697-a56e-6679e9e3126d",
+                              "key": "job_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the extraction job to retrieve"
+                            }
+                          ]
+                        },
+                        "description": "Get detailed information about a specific extraction job.\n\nArgs:\n    job_id: The ID of the extraction job.\n\nReturns:\n    Detailed information about the extraction job."
+                      },
+                      "response": [
+                        {
+                          "id": "681ac6ac-313b-49b3-a1d9-91572583b5ea",
+                          "name": "Detailed information about an extraction job",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/extractions/jobs/:job_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "extractions",
+                                "jobs",
+                                ":job_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"organization_id\": \"<uuid>\",\n  \"file_id\": \"<uuid>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"status\": \"completed\",\n  \"result\": {\n    \"data\": {\n      \"laborum_10_\": 40588144\n    },\n    \"warnings\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"error\": {\n    \"deserunt_bd\": \"velit est anim ullamco labore\"\n  },\n  \"json_schema\": {\n    \"culpa62\": -32985698.352067597,\n    \"dolorde\": \"nulla velit ipsum\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:14:56.000Z",
+                          "updatedAt": "2026-07-28T02:14:56.000Z",
+                          "uid": "35240-681ac6ac-313b-49b3-a1d9-91572583b5ea"
+                        },
+                        {
+                          "id": "d5910a10-51eb-4355-bfe2-efd29c4c5eef",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/extractions/jobs/:job_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "extractions",
+                                "jobs",
+                                ":job_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:14:56.000Z",
+                          "updatedAt": "2026-07-28T02:14:56.000Z",
+                          "uid": "35240-d5910a10-51eb-4355-bfe2-efd29c4c5eef"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:14:56.000Z",
+                      "updatedAt": "2026-07-28T02:14:56.000Z",
+                      "uid": "35240-ea4b4aa7-ffa9-47a0-a68f-e002a21e6277"
+                    }
+                  ],
+                  "id": "e1678483-f07b-4073-a996-99a14414dcf9",
+                  "createdAt": "2026-07-28T02:14:56.000Z",
+                  "updatedAt": "2026-07-28T02:14:56.000Z",
+                  "uid": "35240-e1678483-f07b-4073-a996-99a14414dcf9"
+                },
+                {
+                  "name": "Start an extraction job",
+                  "id": "162b78ba-e301-4957-9a39-5dd609a96994",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"file_id\": \"<string>\",\n  \"json_schema\": {\n    \"elit0_3\": true,\n    \"cupidatat___\": -18948745.14424339,\n    \"velit_c2_\": -99157630.7524257\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/extractions/jobs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "extractions",
+                        "jobs"
+                      ]
+                    },
+                    "description": "Start an extraction job for the provided file and schema.\n\nArgs:\n    params: The parameters for creating an extraction job.\n\nReturns:\n    The created extraction job."
+                  },
+                  "response": [
+                    {
+                      "id": "143b9a10-9686-4e1f-ba78-213617d9ff6e",
+                      "name": "The created extraction job",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"file_id\": \"<string>\",\n  \"json_schema\": {\n    \"elit0_3\": true,\n    \"cupidatat___\": -18948745.14424339,\n    \"velit_c2_\": -99157630.7524257\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/extractions/jobs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "extractions",
+                            "jobs"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"organization_id\": \"<uuid>\",\n  \"file_id\": \"<uuid>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"status\": \"completed\",\n  \"result\": {\n    \"data\": {\n      \"laborum_10_\": 40588144\n    },\n    \"warnings\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"error\": {\n    \"deserunt_bd\": \"velit est anim ullamco labore\"\n  },\n  \"json_schema\": {\n    \"culpa62\": -32985698.352067597,\n    \"dolorde\": \"nulla velit ipsum\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:14:56.000Z",
+                      "updatedAt": "2026-07-28T02:14:56.000Z",
+                      "uid": "35240-143b9a10-9686-4e1f-ba78-213617d9ff6e"
+                    },
+                    {
+                      "id": "3a9593ee-0ffe-49eb-93c6-9241ecbf20ca",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"file_id\": \"<string>\",\n  \"json_schema\": {\n    \"elit0_3\": true,\n    \"cupidatat___\": -18948745.14424339,\n    \"velit_c2_\": -99157630.7524257\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/extractions/jobs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "extractions",
+                            "jobs"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:14:56.000Z",
+                      "updatedAt": "2026-07-28T02:14:56.000Z",
+                      "uid": "35240-3a9593ee-0ffe-49eb-93c6-9241ecbf20ca"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:14:56.000Z",
+                  "updatedAt": "2026-07-28T02:14:56.000Z",
+                  "uid": "35240-162b78ba-e301-4957-9a39-5dd609a96994"
+                }
+              ],
+              "id": "f88afbd5-54ac-450c-881d-a18bb27d4e29",
+              "createdAt": "2026-07-28T02:14:56.000Z",
+              "updatedAt": "2026-07-28T02:14:56.000Z",
+              "uid": "35240-f88afbd5-54ac-450c-881d-a18bb27d4e29"
+            },
+            {
+              "name": "schema",
+              "item": [
+                {
+                  "name": "enhance",
+                  "item": [
+                    {
+                      "name": "Enhance a schema",
+                      "id": "12377e15-e2fc-4d28-b8ff-effd3732adba",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"json_schema\": {\n    \"dolore_\": \"non tempor sed\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/extractions/schema/enhance",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "extractions",
+                            "schema",
+                            "enhance"
+                          ]
+                        },
+                        "description": "Enhance a schema by enriching the descriptions to aid extraction.\n\nArgs:\n    params: The parameters for enhancing a schema.\n\nReturns:\n    The enhanced schema."
+                      },
+                      "response": [
+                        {
+                          "id": "f1f87b49-94a3-4698-a485-70694a01d1ec",
+                          "name": "The enhanced schema",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"json_schema\": {\n    \"dolore_\": \"non tempor sed\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/extractions/schema/enhance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "extractions",
+                                "schema",
+                                "enhance"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"json_schema\": {\n    \"ullamco_8e\": 93642156.82419753,\n    \"anim71\": \"aute consequat deserunt\",\n    \"elit7b2\": 437088,\n    \"anim_79\": 33737923\n  }\n}",
+                          "createdAt": "2026-07-28T02:14:56.000Z",
+                          "updatedAt": "2026-07-28T02:14:56.000Z",
+                          "uid": "35240-f1f87b49-94a3-4698-a485-70694a01d1ec"
+                        },
+                        {
+                          "id": "3fdf2d0b-bb1b-4a0d-801a-5152b1543c9e",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"json_schema\": {\n    \"dolore_\": \"non tempor sed\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/extractions/schema/enhance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "extractions",
+                                "schema",
+                                "enhance"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:14:56.000Z",
+                          "updatedAt": "2026-07-28T02:14:56.000Z",
+                          "uid": "35240-3fdf2d0b-bb1b-4a0d-801a-5152b1543c9e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:14:56.000Z",
+                      "updatedAt": "2026-07-28T02:14:56.000Z",
+                      "uid": "35240-12377e15-e2fc-4d28-b8ff-effd3732adba"
+                    }
+                  ],
+                  "id": "daccf210-a4f3-4f8a-a4f9-e57f391bced4",
+                  "createdAt": "2026-07-28T02:14:56.000Z",
+                  "updatedAt": "2026-07-28T02:14:56.000Z",
+                  "uid": "35240-daccf210-a4f3-4f8a-a4f9-e57f391bced4"
+                },
+                {
+                  "name": "validate",
+                  "item": [
+                    {
+                      "name": "Validate a schema",
+                      "id": "d7247392-388a-4755-ab8f-ab2909b79ebc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"json_schema\": {\n    \"cupidatatd\": 37358948,\n    \"Loremc\": false,\n    \"minime\": -90689425.88028017,\n    \"dolor_16d\": false,\n    \"cillum_118\": 99880540.31925336\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/extractions/schema/validate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "extractions",
+                            "schema",
+                            "validate"
+                          ]
+                        },
+                        "description": "Validate a schema.\n\nArgs:\n    params: The parameters for validating a schema.\n\nReturns:\n    The validation result."
+                      },
+                      "response": [
+                        {
+                          "id": "b84345d7-4f25-44e8-9d5f-6da381353339",
+                          "name": "The validation result",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"json_schema\": {\n    \"cupidatatd\": 37358948,\n    \"Loremc\": false,\n    \"minime\": -90689425.88028017,\n    \"dolor_16d\": false,\n    \"cillum_118\": 99880540.31925336\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/extractions/schema/validate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "extractions",
+                                "schema",
+                                "validate"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"is_valid\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"json_schema\": {\n    \"utced\": 19698759.13810037,\n    \"enim_\": false,\n    \"enimd\": false\n  }\n}",
+                          "createdAt": "2026-07-28T02:14:56.000Z",
+                          "updatedAt": "2026-07-28T02:14:56.000Z",
+                          "uid": "35240-b84345d7-4f25-44e8-9d5f-6da381353339"
+                        },
+                        {
+                          "id": "dcfcdbed-5140-46c4-be85-ce0060496d20",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"json_schema\": {\n    \"cupidatatd\": 37358948,\n    \"Loremc\": false,\n    \"minime\": -90689425.88028017,\n    \"dolor_16d\": false,\n    \"cillum_118\": 99880540.31925336\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/extractions/schema/validate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "extractions",
+                                "schema",
+                                "validate"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:14:56.000Z",
+                          "updatedAt": "2026-07-28T02:14:56.000Z",
+                          "uid": "35240-dcfcdbed-5140-46c4-be85-ce0060496d20"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:14:56.000Z",
+                      "updatedAt": "2026-07-28T02:14:56.000Z",
+                      "uid": "35240-d7247392-388a-4755-ab8f-ab2909b79ebc"
+                    }
+                  ],
+                  "id": "109b9ca1-d675-4337-9975-307a66091080",
+                  "createdAt": "2026-07-28T02:14:56.000Z",
+                  "updatedAt": "2026-07-28T02:14:56.000Z",
+                  "uid": "35240-109b9ca1-d675-4337-9975-307a66091080"
+                },
+                {
+                  "name": "Create a schema",
+                  "id": "2d2d4268-0a67-49a9-b034-74422bf79e87",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/extractions/schema",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "extractions",
+                        "schema"
+                      ]
+                    },
+                    "description": "Create a schema with the provided parameters.\n\nArgs:\n    params: The parameters for creating a schema.\n\nReturns:\n    The created schema."
+                  },
+                  "response": [
+                    {
+                      "id": "07050832-2e3d-4950-8822-5815e75ba662",
+                      "name": "The created schema",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/extractions/schema",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "extractions",
+                            "schema"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"json_schema\": {\n    \"anim311\": -46321021,\n    \"elit_94\": \"qui velit labore dolor in\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:14:56.000Z",
+                      "updatedAt": "2026-07-28T02:14:56.000Z",
+                      "uid": "35240-07050832-2e3d-4950-8822-5815e75ba662"
+                    },
+                    {
+                      "id": "618fbe15-982a-46ad-939f-56dcb48b3a5c",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/extractions/schema",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "extractions",
+                            "schema"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:14:56.000Z",
+                      "updatedAt": "2026-07-28T02:14:56.000Z",
+                      "uid": "35240-618fbe15-982a-46ad-939f-56dcb48b3a5c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:14:56.000Z",
+                  "updatedAt": "2026-07-28T02:14:56.000Z",
+                  "uid": "35240-2d2d4268-0a67-49a9-b034-74422bf79e87"
+                }
+              ],
+              "id": "bb1a4a3b-1611-45b4-b162-365f014c89df",
+              "createdAt": "2026-07-28T02:14:56.000Z",
+              "updatedAt": "2026-07-28T02:14:56.000Z",
+              "uid": "35240-bb1a4a3b-1611-45b4-b162-365f014c89df"
+            },
+            {
+              "name": "content",
+              "item": [
+                {
+                  "name": "Extract content from a string",
+                  "id": "7f5249a6-f3ca-48cc-bfd6-272378c02cf8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"content\": \"<string>\",\n  \"json_schema\": {\n    \"officia5\": -24127831\n  },\n  \"instructions\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/extractions/content",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "extractions",
+                        "content"
+                      ]
+                    },
+                    "description": "Extract content from a string using the provided schema.\n\nArgs:\n    params: The parameters for extracting content from a string.\n\nReturns:\n    The extracted content."
+                  },
+                  "response": [
+                    {
+                      "id": "ebdb4271-c94d-4394-9fdc-9da9eb4eefd6",
+                      "name": "The extracted content",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content\": \"<string>\",\n  \"json_schema\": {\n    \"officia5\": -24127831\n  },\n  \"instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/extractions/content",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "extractions",
+                            "content"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"velit95\": \"id tempor E\",\n    \"Lorem__\": \"aliquip nostrud incididunt sed\",\n    \"quis_9\": false\n  },\n  \"warnings\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T02:14:56.000Z",
+                      "updatedAt": "2026-07-28T02:14:56.000Z",
+                      "uid": "35240-ebdb4271-c94d-4394-9fdc-9da9eb4eefd6"
+                    },
+                    {
+                      "id": "5668f873-c974-4f82-9f13-cb3312216333",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content\": \"<string>\",\n  \"json_schema\": {\n    \"officia5\": -24127831\n  },\n  \"instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/extractions/content",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "extractions",
+                            "content"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:14:56.000Z",
+                      "updatedAt": "2026-07-28T02:14:56.000Z",
+                      "uid": "35240-5668f873-c974-4f82-9f13-cb3312216333"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:14:56.000Z",
+                  "updatedAt": "2026-07-28T02:14:56.000Z",
+                  "uid": "35240-7f5249a6-f3ca-48cc-bfd6-272378c02cf8"
+                }
+              ],
+              "id": "0971f1b9-5288-4adb-a243-9a0cae6c4130",
+              "createdAt": "2026-07-28T02:14:56.000Z",
+              "updatedAt": "2026-07-28T02:14:56.000Z",
+              "uid": "35240-0971f1b9-5288-4adb-a243-9a0cae6c4130"
+            }
+          ],
+          "id": "85d4d335-bde6-4e40-8971-a6b9a3a7e278",
+          "createdAt": "2026-07-28T02:14:56.000Z",
+          "updatedAt": "2026-07-28T02:14:56.000Z",
+          "uid": "35240-85d4d335-bde6-4e40-8971-a6b9a3a7e278"
+        }
+      ],
+      "id": "ea1b2a32-fe81-4328-8c81-5f8465e3e9f9",
+      "createdAt": "2026-07-28T02:14:56.000Z",
+      "updatedAt": "2026-07-28T02:14:56.000Z",
+      "uid": "35240-ea1b2a32-fe81-4328-8c81-5f8465e3e9f9"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mixedbread.com"
+    }
+  ]
+}
