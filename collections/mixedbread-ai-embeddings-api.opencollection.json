@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mixedbread admin Embeddings API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Embeddings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create embeddings for text and images",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/embeddings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create embeddings for text or images using the specified model, encoding format, and normalization.\n\nArgs:\n    params: The parameters for creating embeddings.\n\nReturns:\n    EmbeddingCreateResponse: The response containing the embeddings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

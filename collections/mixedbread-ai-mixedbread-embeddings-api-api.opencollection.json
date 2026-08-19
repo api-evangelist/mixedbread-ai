@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mixedbread admin Mixedbread Embeddings API API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mixedbread Embeddings API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns service information, including name and version.\n\nReturns:\n    InfoResponse: A response containing the service name and version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

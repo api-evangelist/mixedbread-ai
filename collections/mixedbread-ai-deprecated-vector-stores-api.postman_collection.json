@@ -1,0 +1,3251 @@
+{
+  "item": [
+    {
+      "id": "ba8725de-7b77-43ae-a8e1-68597b22f212",
+      "name": "deprecated_vector_stores",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e33e6317-d5dc-44e2-9dfd-9bcea51694cf",
+          "name": "[DEPRECATED] Upload file to vector store",
+          "request": {
+            "name": "[DEPRECATED] Upload file to vector store",
+            "description": {
+              "content": "DEPRECATED: Use POST /stores/{store_identifier}/files instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                ":vector_store_identifier",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vector_store_identifier",
+                  "description": "(Required) The ID or name of the vector store"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"file_id\": \"<uuid>\",\n  \"metadata\": {},\n  \"config\": {\n    \"parsing_strategy\": \"fast\"\n  },\n  \"external_id\": \"<string>\",\n  \"overwrite\": true,\n  \"experimental\": {\n    \"parsing_strategy\": \"fast\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4da05516-8be1-406f-883a-37c082476e38",
+              "name": "The uploaded vector store file details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"file_id\": \"<uuid>\",\n  \"metadata\": {},\n  \"config\": {\n    \"parsing_strategy\": \"fast\"\n  },\n  \"external_id\": \"<string>\",\n  \"overwrite\": false,\n  \"experimental\": {\n    \"parsing_strategy\": \"fast\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"vector_store_id\": \"string\",\n  \"created_at\": \"1992-07-21T03:51:48.786Z\",\n  \"filename\": \"string\",\n  \"metadata\": {},\n  \"status\": \"pending\",\n  \"last_error\": {},\n  \"version\": 9528,\n  \"usage_bytes\": 5417,\n  \"object\": \"vector_store.file\",\n  \"chunks\": [\n    {\n      \"chunk_index\": 0,\n      \"mime_type\": \"text/plain\",\n      \"generated_metadata\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"language\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"word_count\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_size\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chunk_headings\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"heading_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"start_line\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"num_lines\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_extension\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"frontmatter\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"model\": \"string\",\n      \"type\": \"text\",\n      \"offset\": 0,\n      \"text\": \"string\",\n      \"context\": \"string\",\n      \"summary\": \"string\"\n    },\n    {\n      \"chunk_index\": 0,\n      \"mime_type\": \"text/plain\",\n      \"generated_metadata\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"language\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"word_count\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_size\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chunk_headings\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"heading_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"start_line\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"num_lines\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_extension\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"frontmatter\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"model\": \"string\",\n      \"type\": \"text\",\n      \"offset\": 0,\n      \"text\": \"string\",\n      \"context\": \"string\",\n      \"summary\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c77cb217-e6be-49a7-a9a8-587a6e0f3a1f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"file_id\": \"<uuid>\",\n  \"metadata\": {},\n  \"config\": {\n    \"parsing_strategy\": \"fast\"\n  },\n  \"external_id\": \"<string>\",\n  \"overwrite\": false,\n  \"experimental\": {\n    \"parsing_strategy\": \"fast\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "290c1ec8-593d-474b-8ebd-97d7406e6b97",
+          "name": "[DEPRECATED] List vector store files",
+          "request": {
+            "name": "[DEPRECATED] List vector store files",
+            "description": {
+              "content": "DEPRECATED: Use POST /stores/{store_identifier}/files/list instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                ":vector_store_identifier",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of items to return per page (1-100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_total",
+                  "value": "false",
+                  "description": "Whether to include total count in response (expensive operation)"
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>",
+                  "description": "Status to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>",
+                  "description": "Status to filter by"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vector_store_identifier",
+                  "description": "(Required) The ID or name of the vector store"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3e59ba5b-c6a9-48b1-83ba-5a138565409e",
+              "name": "The list of vector store files",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "failed"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "pending"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"has_more\": true,\n    \"first_cursor\": \"string\",\n    \"last_cursor\": \"string\",\n    \"total\": 3524\n  },\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"vector_store_id\": \"string\",\n      \"created_at\": \"1950-04-01T02:02:11.550Z\",\n      \"filename\": \"string\",\n      \"metadata\": {},\n      \"status\": \"pending\",\n      \"last_error\": {},\n      \"version\": 616,\n      \"usage_bytes\": 3469,\n      \"object\": \"vector_store.file\",\n      \"chunks\": [\n        {\n          \"chunk_index\": 0,\n          \"mime_type\": \"text/plain\",\n          \"generated_metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"model\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": \"text\",\n          \"offset\": 0,\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"context\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"summary\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"chunk_index\": 0,\n          \"mime_type\": \"text/plain\",\n          \"generated_metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"model\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": \"text\",\n          \"offset\": 0,\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"context\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"summary\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"vector_store_id\": \"string\",\n      \"created_at\": \"2007-02-11T02:42:41.677Z\",\n      \"filename\": \"string\",\n      \"metadata\": {},\n      \"status\": \"pending\",\n      \"last_error\": {},\n      \"version\": 3162,\n      \"usage_bytes\": 4082,\n      \"object\": \"vector_store.file\",\n      \"chunks\": [\n        {\n          \"chunk_index\": 0,\n          \"mime_type\": \"text/plain\",\n          \"generated_metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"model\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": \"text\",\n          \"offset\": 0,\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"context\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"summary\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"chunk_index\": 0,\n          \"mime_type\": \"text/plain\",\n          \"generated_metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"model\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": \"text\",\n          \"offset\": 0,\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"context\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"summary\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"object\": \"list\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "246bea47-7be5-45b3-a90a-607a9dfe6871",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "failed"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "pending"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c48f508d-77f2-4578-aae8-2f21fe9f61d6",
+          "name": "[DEPRECATED] List vector store files with metadata filter",
+          "request": {
+            "name": "[DEPRECATED] List vector store files with metadata filter",
+            "description": {
+              "content": "DEPRECATED: Use POST /stores/{store_identifier}/files/list instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                ":vector_store_identifier",
+                "files",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vector_store_identifier",
+                  "description": "(Required) The ID or name of the vector store"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": 20,\n  \"after\": \"<string>\",\n  \"before\": \"<string>\",\n  \"include_total\": false,\n  \"statuses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata_filter\": {\n    \"all\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"any\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"none\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e0a7c21a-800d-4c51-a36f-74fb5a58e450",
+              "name": "List of files in the vector store",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "files",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": 10,\n  \"after\": \"<string>\",\n  \"before\": \"<string>\",\n  \"include_total\": false,\n  \"statuses\": [\n    \"pending\",\n    \"failed\"\n  ],\n  \"metadata_filter\": {\n    \"all\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"any\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"none\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"has_more\": true,\n    \"first_cursor\": \"string\",\n    \"last_cursor\": \"string\",\n    \"total\": 3524\n  },\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"vector_store_id\": \"string\",\n      \"created_at\": \"1950-04-01T02:02:11.550Z\",\n      \"filename\": \"string\",\n      \"metadata\": {},\n      \"status\": \"pending\",\n      \"last_error\": {},\n      \"version\": 616,\n      \"usage_bytes\": 3469,\n      \"object\": \"vector_store.file\",\n      \"chunks\": [\n        {\n          \"chunk_index\": 0,\n          \"mime_type\": \"text/plain\",\n          \"generated_metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"model\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": \"text\",\n          \"offset\": 0,\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"context\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"summary\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"chunk_index\": 0,\n          \"mime_type\": \"text/plain\",\n          \"generated_metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"model\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": \"text\",\n          \"offset\": 0,\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"context\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"summary\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"vector_store_id\": \"string\",\n      \"created_at\": \"2007-02-11T02:42:41.677Z\",\n      \"filename\": \"string\",\n      \"metadata\": {},\n      \"status\": \"pending\",\n      \"last_error\": {},\n      \"version\": 3162,\n      \"usage_bytes\": 4082,\n      \"object\": \"vector_store.file\",\n      \"chunks\": [\n        {\n          \"chunk_index\": 0,\n          \"mime_type\": \"text/plain\",\n          \"generated_metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"model\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": \"text\",\n          \"offset\": 0,\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"context\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"summary\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"chunk_index\": 0,\n          \"mime_type\": \"text/plain\",\n          \"generated_metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"model\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": \"text\",\n          \"offset\": 0,\n          \"text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"context\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"summary\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"object\": \"list\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74afca85-12e6-427e-ba7b-729b4a5dcd01",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "files",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": 10,\n  \"after\": \"<string>\",\n  \"before\": \"<string>\",\n  \"include_total\": false,\n  \"statuses\": [\n    \"pending\",\n    \"failed\"\n  ],\n  \"metadata_filter\": {\n    \"all\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"any\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"none\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35da2171-f75d-49d1-a34b-75472c3903b2",
+          "name": "[DEPRECATED] Get vector store file",
+          "request": {
+            "name": "[DEPRECATED] Get vector store file",
+            "description": {
+              "content": "DEPRECATED: Use GET /stores/{store_identifier}/files/{file_id} instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                ":vector_store_identifier",
+                "files",
+                ":file_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "return_chunks",
+                  "value": "false",
+                  "description": "Whether to return the chunks for the file"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vector_store_identifier",
+                  "description": "(Required) The ID or name of the vector store"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "file_id",
+                  "description": "(Required) The ID or name of the file"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "394ab7a0-66d4-4635-b1e9-b95c218622fc",
+              "name": "The vector store file details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "files",
+                    ":file_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "return_chunks",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_id",
+                      "description": "(Required) The ID or name of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"vector_store_id\": \"string\",\n  \"created_at\": \"1992-07-21T03:51:48.786Z\",\n  \"filename\": \"string\",\n  \"metadata\": {},\n  \"status\": \"pending\",\n  \"last_error\": {},\n  \"version\": 9528,\n  \"usage_bytes\": 5417,\n  \"object\": \"vector_store.file\",\n  \"chunks\": [\n    {\n      \"chunk_index\": 0,\n      \"mime_type\": \"text/plain\",\n      \"generated_metadata\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"language\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"word_count\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_size\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chunk_headings\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"heading_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"start_line\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"num_lines\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_extension\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"frontmatter\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"model\": \"string\",\n      \"type\": \"text\",\n      \"offset\": 0,\n      \"text\": \"string\",\n      \"context\": \"string\",\n      \"summary\": \"string\"\n    },\n    {\n      \"chunk_index\": 0,\n      \"mime_type\": \"text/plain\",\n      \"generated_metadata\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"language\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"word_count\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_size\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chunk_headings\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"heading_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"start_line\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"num_lines\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_extension\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"frontmatter\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"model\": \"string\",\n      \"type\": \"text\",\n      \"offset\": 0,\n      \"text\": \"string\",\n      \"context\": \"string\",\n      \"summary\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48214be9-9e76-411e-ac4e-15e6d7382dc2",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "files",
+                    ":file_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "return_chunks",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_id",
+                      "description": "(Required) The ID or name of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc52049c-c886-4c94-8dba-7d4d5bee107c",
+          "name": "[DEPRECATED] Delete vector store file",
+          "request": {
+            "name": "[DEPRECATED] Delete vector store file",
+            "description": {
+              "content": "DEPRECATED: Use DELETE /stores/{store_identifier}/files/{file_id} instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                ":vector_store_identifier",
+                "files",
+                ":file_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vector_store_identifier",
+                  "description": "(Required) The ID or name of the vector store"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "file_id",
+                  "description": "(Required) The ID or name of the file to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "04b4ac86-cd40-409b-a6d0-ecd6fd204e2c",
+              "name": "The deleted vector store file details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "files",
+                    ":file_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_id",
+                      "description": "(Required) The ID or name of the file to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"deleted\": true,\n  \"object\": \"vector_store.file\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36b888be-176d-42c8-9d63-4973d59c3451",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "files",
+                    ":file_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_id",
+                      "description": "(Required) The ID or name of the file to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69895b81-557a-49da-ae4b-f3777c949b14",
+          "name": "[DEPRECATED] Create search rule",
+          "request": {
+            "name": "[DEPRECATED] Create search rule",
+            "description": {
+              "content": "DEPRECATED: Use POST /stores/{store_identifier}/rules instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                ":vector_store_identifier",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vector_store_identifier",
+                  "description": "(Required) The ID or name of the vector store"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"rules\": [\n    {\n      \"query\": \"<string>\",\n      \"store_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"substitution\": \"<string>\"\n    },\n    {\n      \"query\": \"<string>\",\n      \"store_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"substitution\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c2a4ebd7-1b57-47de-b3db-4b838142ee47",
+              "name": "The created search rule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"rules\": [\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    },\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"query\": \"string\",\n  \"vector_store_id\": \"string\",\n  \"rules\": [\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    },\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    }\n  ],\n  \"created_at\": \"1958-06-21T05:43:18.922Z\",\n  \"updated_at\": \"1966-06-04T11:10:00.085Z\",\n  \"object\": \"search_rule\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56b754e4-a04d-4691-94a8-5ef80681eee1",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"rules\": [\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    },\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f82498d-362e-40cc-8e6c-a1efebe193f5",
+          "name": "[DEPRECATED] Get a search rule",
+          "request": {
+            "name": "[DEPRECATED] Get a search rule",
+            "description": {
+              "content": "DEPRECATED: Use GET /stores/{store_identifier}/rules/{rule_id} instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                ":vector_store_identifier",
+                "rules",
+                ":rule_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vector_store_identifier",
+                  "description": "(Required) The ID or name of the vector store"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rule_id",
+                  "description": "(Required) The ID of the search rule"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bc48d092-dd06-487d-8740-558b85d0156d",
+              "name": "The search rule details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_id",
+                      "description": "(Required) The ID of the search rule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"query\": \"string\",\n  \"vector_store_id\": \"string\",\n  \"rules\": [\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    },\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    }\n  ],\n  \"created_at\": \"1958-06-21T05:43:18.922Z\",\n  \"updated_at\": \"1966-06-04T11:10:00.085Z\",\n  \"object\": \"search_rule\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93d47893-e2ed-4db5-b8b8-2b37d288ee2f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_id",
+                      "description": "(Required) The ID of the search rule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf9b06bb-1836-4df3-a515-bef9a7c4a525",
+          "name": "[DEPRECATED] Update a search rule",
+          "request": {
+            "name": "[DEPRECATED] Update a search rule",
+            "description": {
+              "content": "DEPRECATED: Use PUT /stores/{store_identifier}/rules/{rule_id} instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                ":vector_store_identifier",
+                "rules",
+                ":rule_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vector_store_identifier",
+                  "description": "(Required) The ID or name of the vector store"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rule_id",
+                  "description": "(Required) The ID of the search rule to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"rules\": [\n    {\n      \"query\": \"<string>\",\n      \"store_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"substitution\": \"<string>\"\n    },\n    {\n      \"query\": \"<string>\",\n      \"store_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"substitution\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d96bed16-8adf-4422-9241-6eb6716614cc",
+              "name": "The updated search rule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_id",
+                      "description": "(Required) The ID of the search rule to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"rules\": [\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    },\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"query\": \"string\",\n  \"vector_store_id\": \"string\",\n  \"rules\": [\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    },\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    }\n  ],\n  \"created_at\": \"1958-06-21T05:43:18.922Z\",\n  \"updated_at\": \"1966-06-04T11:10:00.085Z\",\n  \"object\": \"search_rule\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ba6ddab-dd9f-41ad-a2f0-536eddc6e37b",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_id",
+                      "description": "(Required) The ID of the search rule to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"rules\": [\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    },\n    {\n      \"query\": \"string\",\n      \"store_id\": \"string\",\n      \"type\": \"string\",\n      \"substitution\": \"query1\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43a09cb5-3e1d-481b-9daf-6b7635bcc660",
+          "name": "[DEPRECATED] Delete a search rule",
+          "request": {
+            "name": "[DEPRECATED] Delete a search rule",
+            "description": {
+              "content": "DEPRECATED: Use DELETE /stores/{store_identifier}/rules/{rule_id} instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                ":vector_store_identifier",
+                "rules",
+                ":rule_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vector_store_identifier",
+                  "description": "(Required) The ID or name of the vector store"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rule_id",
+                  "description": "(Required) The ID of the search rule to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "27ce8b09-b4fe-4a1f-9025-8e3d56f4fbca",
+              "name": "The deleted search rule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_id",
+                      "description": "(Required) The ID of the search rule to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"search_rule\",\n  \"deleted\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86bd89a1-3cee-4030-b13d-23a82cfac73c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_id",
+                      "description": "(Required) The ID of the search rule to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "488fdf5d-40d2-4448-b142-419aee2b7213",
+          "name": "[DEPRECATED] Delete a specific rule from rules array",
+          "request": {
+            "name": "[DEPRECATED] Delete a specific rule from rules array",
+            "description": {
+              "content": "DEPRECATED: Use DELETE /stores/{store_identifier}/rules/{rule_id}/specific instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                ":vector_store_identifier",
+                "rules",
+                ":rule_id",
+                "specific"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vector_store_identifier",
+                  "description": "(Required) The ID or name of the vector store"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rule_id",
+                  "description": "(Required) The ID of the search rule"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rule\": {\n    \"query\": \"<string>\",\n    \"store_id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"substitution\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "52502806-9fd2-4685-978a-da84bbc67de4",
+              "name": "The updated search rule after deleting specific rule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "rules",
+                    ":rule_id",
+                    "specific"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_id",
+                      "description": "(Required) The ID of the search rule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rule\": {\n    \"query\": \"string\",\n    \"store_id\": \"string\",\n    \"type\": \"string\",\n    \"substitution\": \"query1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"deleted_rule\": {\n    \"query\": \"string\",\n    \"store_id\": \"string\",\n    \"type\": \"string\",\n    \"substitution\": \"query1\"\n  },\n  \"remaining_rules\": 5717,\n  \"object\": \"search_rule\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90005243-aa9d-4ce9-ad8f-85172eff2a93",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier",
+                    "rules",
+                    ":rule_id",
+                    "specific"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_id",
+                      "description": "(Required) The ID of the search rule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rule\": {\n    \"query\": \"string\",\n    \"store_id\": \"string\",\n    \"type\": \"string\",\n    \"substitution\": \"query1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe64c7a3-f651-4a9e-87c9-0b219c260e73",
+          "name": "[DEPRECATED] Create a vector store",
+          "request": {
+            "name": "[DEPRECATED] Create a vector store",
+            "description": {
+              "content": "DEPRECATED: Use POST /stores instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_public\": false,\n  \"expires_after\": {\n    \"anchor\": \"last_active_at\",\n    \"days\": 30\n  },\n  \"metadata\": {},\n  \"file_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "82305357-b259-4dc2-b3f8-81fb1243fa64",
+              "name": "The details of the created vector store",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_public\": false,\n  \"expires_after\": {\n    \"anchor\": \"last_active_at\",\n    \"days\": 30\n  },\n  \"metadata\": {},\n  \"file_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1b8b486e-16d0-400b-8868-04cd75217a7e\",\n  \"name\": \"customer-support-kb\",\n  \"created_at\": \"2024-01-01T00:00:00Z\",\n  \"updated_at\": \"2024-01-01T00:00:00Z\",\n  \"description\": \"string\",\n  \"is_public\": false,\n  \"metadata\": {},\n  \"file_counts\": {\n    \"pending\": 5,\n    \"in_progress\": 5,\n    \"cancelled\": 2,\n    \"completed\": 42,\n    \"failed\": 1,\n    \"total\": 50\n  },\n  \"expires_after\": {\n    \"anchor\": \"last_active_at\",\n    \"days\": 30\n  },\n  \"status\": \"completed\",\n  \"last_active_at\": \"1948-04-02T14:40:51.293Z\",\n  \"usage_bytes\": 1024000,\n  \"expires_at\": \"1997-11-19T07:22:42.437Z\",\n  \"object\": \"vector_store\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42dc424d-0473-4bc0-873c-43783a32e192",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_public\": false,\n  \"expires_after\": {\n    \"anchor\": \"last_active_at\",\n    \"days\": 30\n  },\n  \"metadata\": {},\n  \"file_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d42a7367-2b43-4315-8b83-9b1f6e00e0fa",
+          "name": "[DEPRECATED] List vector stores",
+          "request": {
+            "name": "[DEPRECATED] List vector stores",
+            "description": {
+              "content": "DEPRECATED: Use GET /stores instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of items to return per page (1-100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_total",
+                  "value": "false",
+                  "description": "Whether to include total count in response (expensive operation)"
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Search query for fuzzy matching over name and description fields"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "237bb268-faaa-4c61-b3ec-8b45997dff25",
+              "name": "The list of vector stores",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"has_more\": true,\n    \"first_cursor\": \"string\",\n    \"last_cursor\": \"string\",\n    \"total\": 3339\n  },\n  \"data\": [\n    {\n      \"id\": \"1b8b486e-16d0-400b-8868-04cd75217a7e\",\n      \"name\": \"customer-support-kb\",\n      \"created_at\": \"2024-01-01T00:00:00Z\",\n      \"updated_at\": \"2024-01-01T00:00:00Z\",\n      \"description\": \"string\",\n      \"is_public\": false,\n      \"metadata\": {},\n      \"file_counts\": {\n        \"pending\": 5,\n        \"in_progress\": 5,\n        \"cancelled\": 2,\n        \"completed\": 42,\n        \"failed\": 1,\n        \"total\": 50\n      },\n      \"expires_after\": {\n        \"anchor\": \"last_active_at\",\n        \"days\": 30\n      },\n      \"status\": \"completed\",\n      \"last_active_at\": \"1973-11-20T16:44:55.200Z\",\n      \"usage_bytes\": 1024000,\n      \"expires_at\": \"1948-01-18T18:25:11.488Z\",\n      \"object\": \"vector_store\"\n    },\n    {\n      \"id\": \"1b8b486e-16d0-400b-8868-04cd75217a7e\",\n      \"name\": \"customer-support-kb\",\n      \"created_at\": \"2024-01-01T00:00:00Z\",\n      \"updated_at\": \"2024-01-01T00:00:00Z\",\n      \"description\": \"string\",\n      \"is_public\": false,\n      \"metadata\": {},\n      \"file_counts\": {\n        \"pending\": 5,\n        \"in_progress\": 5,\n        \"cancelled\": 2,\n        \"completed\": 42,\n        \"failed\": 1,\n        \"total\": 50\n      },\n      \"expires_after\": {\n        \"anchor\": \"last_active_at\",\n        \"days\": 30\n      },\n      \"status\": \"completed\",\n      \"last_active_at\": \"1952-05-03T08:24:10.224Z\",\n      \"usage_bytes\": 1024000,\n      \"expires_at\": \"2003-02-07T08:25:14.182Z\",\n      \"object\": \"vector_store\"\n    }\n  ],\n  \"object\": \"list\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cd0e8d8-17da-4de2-b2e9-7487c4d0a029",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fdefeb23-958c-47c1-9271-5c1dc39bdb43",
+          "name": "[DEPRECATED] Get a vector store",
+          "request": {
+            "name": "[DEPRECATED] Get a vector store",
+            "description": {
+              "content": "DEPRECATED: Use GET /stores/{store_identifier} instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                ":vector_store_identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vector_store_identifier",
+                  "description": "(Required) The ID or name of the vector store"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "05c29ae7-39f8-47c3-82cc-c76792115ed8",
+              "name": "The details of the vector store",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1b8b486e-16d0-400b-8868-04cd75217a7e\",\n  \"name\": \"customer-support-kb\",\n  \"created_at\": \"2024-01-01T00:00:00Z\",\n  \"updated_at\": \"2024-01-01T00:00:00Z\",\n  \"description\": \"string\",\n  \"is_public\": false,\n  \"metadata\": {},\n  \"file_counts\": {\n    \"pending\": 5,\n    \"in_progress\": 5,\n    \"cancelled\": 2,\n    \"completed\": 42,\n    \"failed\": 1,\n    \"total\": 50\n  },\n  \"expires_after\": {\n    \"anchor\": \"last_active_at\",\n    \"days\": 30\n  },\n  \"status\": \"completed\",\n  \"last_active_at\": \"1948-04-02T14:40:51.293Z\",\n  \"usage_bytes\": 1024000,\n  \"expires_at\": \"1997-11-19T07:22:42.437Z\",\n  \"object\": \"vector_store\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13330fbc-1577-4844-9b3d-a5d1d6b2fb93",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe4b302a-ece5-45c1-96e4-09e93311f63c",
+          "name": "[DEPRECATED] Update a vector store",
+          "request": {
+            "name": "[DEPRECATED] Update a vector store",
+            "description": {
+              "content": "DEPRECATED: Use PUT /stores/{store_identifier} instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                ":vector_store_identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vector_store_identifier",
+                  "description": "(Required) The ID or name of the vector store"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_public\": \"<boolean>\",\n  \"expires_after\": {\n    \"anchor\": \"last_active_at\",\n    \"days\": 30\n  },\n  \"metadata\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "164245f0-032b-4afb-9e17-f26882911800",
+              "name": "The details of the updated vector store",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_public\": \"<boolean>\",\n  \"expires_after\": {\n    \"anchor\": \"last_active_at\",\n    \"days\": 30\n  },\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1b8b486e-16d0-400b-8868-04cd75217a7e\",\n  \"name\": \"customer-support-kb\",\n  \"created_at\": \"2024-01-01T00:00:00Z\",\n  \"updated_at\": \"2024-01-01T00:00:00Z\",\n  \"description\": \"string\",\n  \"is_public\": false,\n  \"metadata\": {},\n  \"file_counts\": {\n    \"pending\": 5,\n    \"in_progress\": 5,\n    \"cancelled\": 2,\n    \"completed\": 42,\n    \"failed\": 1,\n    \"total\": 50\n  },\n  \"expires_after\": {\n    \"anchor\": \"last_active_at\",\n    \"days\": 30\n  },\n  \"status\": \"completed\",\n  \"last_active_at\": \"1948-04-02T14:40:51.293Z\",\n  \"usage_bytes\": 1024000,\n  \"expires_at\": \"1997-11-19T07:22:42.437Z\",\n  \"object\": \"vector_store\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01c4dd21-ced5-4c87-a597-50c143304d1e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_public\": \"<boolean>\",\n  \"expires_after\": {\n    \"anchor\": \"last_active_at\",\n    \"days\": 30\n  },\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5fa8a70-b3af-4418-b24a-15cb2fda4f31",
+          "name": "[DEPRECATED] Delete a vector store",
+          "request": {
+            "name": "[DEPRECATED] Delete a vector store",
+            "description": {
+              "content": "DEPRECATED: Use DELETE /stores/{store_identifier} instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                ":vector_store_identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vector_store_identifier",
+                  "description": "(Required) The ID or name of the vector store to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "655a6cae-80a7-4f3a-9ee6-363fccf8b414",
+              "name": "The details of the deleted vector store",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"deleted\": true,\n  \"object\": \"vector_store\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca909107-0521-44bc-b928-84db1f9abe1c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    ":vector_store_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vector_store_identifier",
+                      "description": "(Required) The ID or name of the vector store to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "688f4283-cdb0-4752-95f7-8b7935f9d2b3",
+          "name": "[DEPRECATED] Perform semantic search across vector store chunks",
+          "request": {
+            "name": "[DEPRECATED] Perform semantic search across vector store chunks",
+            "description": {
+              "content": "DEPRECATED: Use POST /stores/search instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"vector_store_identifiers\": [\n    \"<string>\"\n  ],\n  \"top_k\": 10,\n  \"filters\": {\n    \"all\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"any\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"none\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ]\n  },\n  \"file_ids\": \"<array>\",\n  \"search_options\": {\n    \"score_threshold\": 0,\n    \"rewrite_query\": false,\n    \"rerank\": \"<boolean>\",\n    \"agentic\": \"<boolean>\",\n    \"return_metadata\": true,\n    \"apply_search_rules\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "401bf552-bc47-4dba-a5ff-38534c7ab54f",
+              "name": "List of semantically similar chunks with relevance scores and pagination details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"how to configure SSL\",\n  \"vector_store_identifiers\": [\n    \"<string>\"\n  ],\n  \"top_k\": 10,\n  \"filters\": {\n    \"all\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"any\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"none\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ]\n  },\n  \"file_ids\": \"<array>\",\n  \"search_options\": {\n    \"score_threshold\": 0,\n    \"rewrite_query\": false,\n    \"rerank\": true,\n    \"agentic\": true,\n    \"return_metadata\": true,\n    \"apply_search_rules\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"chunk_index\": 0,\n      \"score\": 0.5,\n      \"file_id\": \"file1\",\n      \"filename\": \"file1\",\n      \"vector_store_id\": \"store1\",\n      \"mime_type\": \"text/plain\",\n      \"generated_metadata\": {\n        \"type\": \"markdown\",\n        \"file_type\": \"text/markdown\",\n        \"language\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"word_count\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_size\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chunk_headings\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"heading_context\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"start_line\": 0,\n        \"num_lines\": 0,\n        \"file_extension\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"frontmatter\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      },\n      \"model\": \"string\",\n      \"metadata\": {},\n      \"type\": \"text\",\n      \"offset\": 0,\n      \"text\": \"string\",\n      \"context\": \"string\",\n      \"summary\": \"string\"\n    },\n    {\n      \"chunk_index\": 0,\n      \"score\": 0.5,\n      \"file_id\": \"file1\",\n      \"filename\": \"file1\",\n      \"vector_store_id\": \"store1\",\n      \"mime_type\": \"text/plain\",\n      \"generated_metadata\": {\n        \"type\": \"markdown\",\n        \"file_type\": \"text/markdown\",\n        \"language\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"word_count\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_size\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chunk_headings\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"heading_context\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"start_line\": 0,\n        \"num_lines\": 0,\n        \"file_extension\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"frontmatter\": {\n          \"key_0\": 3662,\n          \"key_1\": \"string\"\n        },\n        \"key_0\": 9556\n      },\n      \"model\": \"string\",\n      \"metadata\": {},\n      \"type\": \"text\",\n      \"offset\": 0,\n      \"text\": \"string\",\n      \"context\": \"string\",\n      \"summary\": \"string\"\n    }\n  ],\n  \"object\": \"list\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce14bcaa-e901-40d9-abec-076457df7459",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"how to configure SSL\",\n  \"vector_store_identifiers\": [\n    \"<string>\"\n  ],\n  \"top_k\": 10,\n  \"filters\": {\n    \"all\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"any\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"none\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ]\n  },\n  \"file_ids\": \"<array>\",\n  \"search_options\": {\n    \"score_threshold\": 0,\n    \"rewrite_query\": false,\n    \"rerank\": true,\n    \"agentic\": true,\n    \"return_metadata\": true,\n    \"apply_search_rules\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c14e5076-e179-4754-866a-53e0050c0a29",
+          "name": "[DEPRECATED] Question answering",
+          "request": {
+            "name": "[DEPRECATED] Question answering",
+            "description": {
+              "content": "DEPRECATED: Use POST /stores/question-answering instead",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vector_stores",
+                "question-answering"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vector_store_identifiers\": [\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"top_k\": 10,\n  \"filters\": {\n    \"all\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"any\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"none\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ]\n  },\n  \"file_ids\": \"<array>\",\n  \"search_options\": {\n    \"score_threshold\": 0,\n    \"rewrite_query\": false,\n    \"rerank\": \"<boolean>\",\n    \"agentic\": \"<boolean>\",\n    \"return_metadata\": true,\n    \"apply_search_rules\": true\n  },\n  \"stream\": false,\n  \"qa_options\": {\n    \"cite\": true,\n    \"multimodal\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "78f5d24f-516a-4124-a582-f681c4ae3f65",
+              "name": "The answer to the question",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    "question-answering"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vector_store_identifiers\": [\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"top_k\": 10,\n  \"filters\": {\n    \"all\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"any\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"none\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ]\n  },\n  \"file_ids\": \"<array>\",\n  \"search_options\": {\n    \"score_threshold\": 0,\n    \"rewrite_query\": false,\n    \"rerank\": false,\n    \"agentic\": true,\n    \"return_metadata\": true,\n    \"apply_search_rules\": true\n  },\n  \"stream\": false,\n  \"qa_options\": {\n    \"cite\": true,\n    \"multimodal\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"answer\": \"string\",\n  \"sources\": [\n    {\n      \"chunk_index\": 0,\n      \"score\": 0.5,\n      \"file_id\": \"file1\",\n      \"filename\": \"file1\",\n      \"vector_store_id\": \"store1\",\n      \"mime_type\": \"text/plain\",\n      \"generated_metadata\": {\n        \"type\": \"markdown\",\n        \"file_type\": \"text/markdown\",\n        \"language\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"word_count\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_size\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chunk_headings\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"heading_context\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"start_line\": 0,\n        \"num_lines\": 0,\n        \"file_extension\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"frontmatter\": {\n          \"key_0\": false\n        }\n      },\n      \"model\": \"string\",\n      \"metadata\": {},\n      \"type\": \"text\",\n      \"offset\": 0,\n      \"text\": \"string\",\n      \"context\": \"string\",\n      \"summary\": \"string\"\n    },\n    {\n      \"chunk_index\": 0,\n      \"score\": 0.5,\n      \"file_id\": \"file1\",\n      \"filename\": \"file1\",\n      \"vector_store_id\": \"store1\",\n      \"mime_type\": \"text/plain\",\n      \"generated_metadata\": {\n        \"type\": \"markdown\",\n        \"file_type\": \"text/markdown\",\n        \"language\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"word_count\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"file_size\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chunk_headings\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"heading_context\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"start_line\": 0,\n        \"num_lines\": 0,\n        \"file_extension\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"frontmatter\": {\n          \"key_0\": 1084.916974069412,\n          \"key_1\": 6082.674587049135,\n          \"key_2\": \"string\"\n        }\n      },\n      \"model\": \"string\",\n      \"metadata\": {},\n      \"type\": \"text\",\n      \"offset\": 0,\n      \"text\": \"string\",\n      \"context\": \"string\",\n      \"summary\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78ff3379-ae8c-45a0-8ae0-197664f31432",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vector_stores",
+                    "question-answering"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vector_store_identifiers\": [\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"top_k\": 10,\n  \"filters\": {\n    \"all\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"any\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ],\n    \"none\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchFilter-Input detected>\"\n      }\n    ]\n  },\n  \"file_ids\": \"<array>\",\n  \"search_options\": {\n    \"score_threshold\": 0,\n    \"rewrite_query\": false,\n    \"rerank\": false,\n    \"agentic\": true,\n    \"return_metadata\": true,\n    \"apply_search_rules\": true\n  },\n  \"stream\": false,\n  \"qa_options\": {\n    \"cite\": true,\n    \"multimodal\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mixedbread.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5e6e5c04-ed98-48b0-98b1-ce017f9ba961",
+    "name": "Mixedbread admin deprecated_vector_stores API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,517 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mixedbread admin deprecated_vector_stores API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "deprecated_vector_stores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "[DEPRECATED] List vector store files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/files",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page (1-100)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response."
+              },
+              {
+                "name": "include_total",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include total count in response (expensive operation)"
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Status to filter by"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores/{store_identifier}/files/list instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Upload file to vector store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/files",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores/{store_identifier}/files instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] List vector store files with metadata filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/files/list",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores/{store_identifier}/files/list instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Get vector store file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/files/:file_id",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the file"
+              },
+              {
+                "name": "return_chunks",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return the chunks for the file"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use GET /stores/{store_identifier}/files/{file_id} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Delete vector store file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/files/:file_id",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the file to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use DELETE /stores/{store_identifier}/files/{file_id} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Create search rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/rules",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores/{store_identifier}/rules instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Get a search rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/rules/:rule_id",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the search rule"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use GET /stores/{store_identifier}/rules/{rule_id} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Update a search rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/rules/:rule_id",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the search rule to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use PUT /stores/{store_identifier}/rules/{rule_id} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Delete a search rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/rules/:rule_id",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the search rule to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use DELETE /stores/{store_identifier}/rules/{rule_id} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Delete a specific rule from rules array",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier/rules/:rule_id/specific",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the search rule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use DELETE /stores/{store_identifier}/rules/{rule_id}/specific instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] List vector stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/vector_stores",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page (1-100)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination - get items after this position. Use last_cursor from previous response."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination - get items before this position. Use first_cursor from previous response."
+              },
+              {
+                "name": "include_total",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include total count in response (expensive operation)"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query for fuzzy matching over name and description fields"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use GET /stores instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Create a vector store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/vector_stores",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Get a vector store",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use GET /stores/{store_identifier} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Update a vector store",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use PUT /stores/{store_identifier} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Delete a vector store",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mixedbread.com/v1/vector_stores/:vector_store_identifier",
+            "params": [
+              {
+                "name": "vector_store_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the vector store to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use DELETE /stores/{store_identifier} instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Perform semantic search across vector store chunks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/vector_stores/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores/search instead"
+        },
+        {
+          "info": {
+            "name": "[DEPRECATED] Question answering",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mixedbread.com/v1/vector_stores/question-answering",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /stores/question-answering instead"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
