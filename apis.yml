@@ -7,6 +7,8 @@ apis:
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags:
+  - Admin
+  tags_raw:
   - admin
   properties:
   - type: OpenAPI
@@ -29,6 +31,8 @@ apis:
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags:
+  - APIKeys
+  tags_raw:
   - api_keys
   properties:
   - type: OpenAPI
@@ -51,6 +55,8 @@ apis:
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags:
+  - Billing
+  tags_raw:
   - billing
   properties:
   - type: OpenAPI
@@ -73,6 +79,8 @@ apis:
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags:
+  - Completions
+  tags_raw:
   - completions
   properties:
   - type: OpenAPI
@@ -95,6 +103,8 @@ apis:
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags:
+  - Data Sources
+  tags_raw:
   - data_sources
   properties:
   - type: OpenAPI
@@ -117,7 +127,8 @@ apis:
     The deprecated_vector_stores API from Mixedbread — 10 operation(s) for deprecated_vector_stores.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
-  tags:
+  tags: []
+  tags_raw:
   - deprecated_vector_stores
   properties:
   - type: OpenAPI
@@ -162,6 +173,8 @@ apis:
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags:
+  - Extractions
+  tags_raw:
   - extractions
   properties:
   - type: OpenAPI
@@ -184,6 +197,8 @@ apis:
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags:
+  - File
+  tags_raw:
   - files
   properties:
   - type: OpenAPI
@@ -229,6 +244,8 @@ apis:
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags:
+  - Parsing
+  tags_raw:
   - parsing
   properties:
   - type: OpenAPI
@@ -273,6 +290,8 @@ apis:
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags:
+  - Schemas
+  tags_raw:
   - schemas
   properties:
   - type: OpenAPI
@@ -295,6 +314,8 @@ apis:
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags:
+  - Stores
+  tags_raw:
   - stores
   properties:
   - type: OpenAPI
@@ -313,6 +334,17 @@ apis:
     url: json-schema/mixedbread-store-schema.json
 name: Mixedbread
 tags:
+  - Artificial Intelligence
+  - Embeddings
+  - Reranking
+  - Search
+  - Retrieval
+  - RAG
+  - Vector Database
+  - Multi-Modal
+  - Parsing
+  - Open Weights
+tags_raw:
   - AI
   - Artificial Intelligence
   - Embeddings
