@@ -30,7 +30,8 @@ apis:
   description: The api_keys API from Mixedbread — 4 operation(s) for api_keys.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
-  tags: []
+  tags:
+  - APIKeys
   tags_raw:
   - api_keys
   properties:
@@ -101,7 +102,8 @@ apis:
   description: The data_sources API from Mixedbread — 6 operation(s) for data_sources.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
-  tags: []
+  tags:
+  - Data Sources
   tags_raw:
   - data_sources
   properties:
@@ -171,7 +173,7 @@ apis:
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags:
-  - extractions
+  - Extractions
   tags_raw:
   - extractions
   properties:
@@ -242,7 +244,7 @@ apis:
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags:
-  - parsing
+  - Parsing
   tags_raw:
   - parsing
   properties:
@@ -339,7 +341,7 @@ tags:
   - Retrieval
   - RAG
   - Vector Database
-  - Multimodal
+  - Multi-Modal
   - Parsing
   - Open Weights
 tags_raw:
