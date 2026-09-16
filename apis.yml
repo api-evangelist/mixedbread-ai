@@ -123,8 +123,7 @@ apis:
     url: json-schema/mixedbread-store-schema.json
 - aid: mixedbread-ai:mixedbread-ai-deprecated-vector-stores-api
   name: Mixedbread deprecated_vector_stores API
-  description: >-
-    The deprecated_vector_stores API from Mixedbread — 10 operation(s) for deprecated_vector_stores.
+  description: The deprecated_vector_stores API from Mixedbread — 10 operation(s) for deprecated_vector_stores.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags: []
@@ -216,9 +215,9 @@ apis:
   - type: JSONSchema
     url: json-schema/mixedbread-store-schema.json
 - aid: mixedbread-ai:mixedbread-ai-mixedbread-embeddings-api-api
-  name: Mixedbread Mixedbread Embeddings API API
-  description: >-
-    The Mixedbread Embeddings API API from Mixedbread — 1 operation(s) for mixedbread embeddings api.
+  name: Mixedbread Embeddings API
+  description: The Mixedbread Embeddings API API from Mixedbread — 1 operation(s) for mixedbread embeddings
+    api.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
   tags:
@@ -334,28 +333,28 @@ apis:
     url: json-schema/mixedbread-store-schema.json
 name: Mixedbread
 tags:
-  - Artificial Intelligence
-  - Embeddings
-  - Reranking
-  - Search
-  - Retrieval
-  - RAG
-  - Vector Database
-  - Multi-Modal
-  - Parsing
-  - Open Weights
+- Artificial Intelligence
+- Embeddings
+- Reranking
+- Search
+- Retrieval
+- RAG
+- Vector Database
+- Multi-Modal
+- Parsing
+- Open Weights
 tags_raw:
-  - AI
-  - Artificial Intelligence
-  - Embeddings
-  - Reranking
-  - Search
-  - Retrieval
-  - RAG
-  - Vector Database
-  - Multimodal
-  - Parsing
-  - Open Weights
+- AI
+- Artificial Intelligence
+- Embeddings
+- Reranking
+- Search
+- Retrieval
+- RAG
+- Vector Database
+- Multimodal
+- Parsing
+- Open Weights
 kind: contract
 deliveryModel:
   model: saas
@@ -386,112 +385,111 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/mixedbread-ai.png
 access: 3rd-Party
 common:
-  - type: Website
-    url: https://www.mixedbread.com/
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/mixedbread/overview
-  - type: AgenticAccess
-    url: agentic-access/mixedbread-ai-agentic-access.yml
-  - type: DomainSecurity
-    url: security/mixedbread-ai-domain-security.yml
-  - type: Authentication
-    url: authentication/mixedbread-ai-authentication.yml
-  - type: Portal
-    url: https://www.mixedbread.com/
-    name: Mixedbread Home
-  - type: Documentation
-    url: https://www.mixedbread.com/docs
-    name: Mixedbread Docs
-  - type: Documentation
-    url: https://www.mixedbread.com/api-reference
-    name: API Reference
-  - type: Signup
-    url: https://platform.mixedbread.com/
-    name: Mixedbread Platform
-  - type: Pricing
-    url: https://www.mixedbread.com/pricing
-    name: Pricing
-  - type: Blog
-    url: https://www.mixedbread.com/blog
-    name: Blog
-  - type: GitHub
-    url: https://github.com/mixedbread-ai
-    name: Mixedbread GitHub
-  - type: HuggingFace
-    url: https://huggingface.co/mixedbread-ai
-    name: Mixedbread on Hugging Face
-  - type: SDKs
-    url: https://github.com/mixedbread-ai/mixedbread-python
-    name: Python SDK
-  - type: SDKs
-    url: https://github.com/mixedbread-ai/mixedbread-ts
-    name: TypeScript SDK
-  - type: SDKs
-    url: https://github.com/mixedbread-ai/python-sdk
-    name: Python SDK (legacy)
-  - type: SDKs
-    url: https://github.com/mixedbread-ai/typescript-sdk
-    name: TypeScript SDK (legacy)
-  - type: CLI
-    url: https://www.mixedbread.com/docs/cli
-    name: Mixedbread CLI
-  - type: Tools
-    url: https://github.com/mixedbread-ai/skills
-    name: Agent Skills (npx skills add mixedbread-ai/skills)
-  - type: Tools
-    url: https://github.com/mixedbread-ai/mxbai-rerank
-    name: mxbai-rerank (open-weight reranking models)
-  - type: Tools
-    url: https://github.com/mixedbread-ai/baguetter
-    name: Baguetter (search engine library)
-  - type: Tools
-    url: https://github.com/mixedbread-ai/batched
-    name: Batched (dynamic batching for inference)
-  - type: Tools
-    url: https://github.com/mixedbread-ai/maxsim-cpu
-    name: maxsim-cpu (CPU late-interaction kernels)
-  - type: Tools
-    url: https://github.com/mixedbread-ai/mgrep
-    name: mgrep (semantic CLI grep)
-  - type: Integrations
-    url: https://github.com/mixedbread-ai/mixedbread-ai-langchain
-    name: LangChain Integration
-  - type: Integrations
-    url: https://github.com/mixedbread-ai/mixedbread-ai-haystack
-    name: Haystack Integration
-  - type: Integrations
-    url: https://github.com/mixedbread-ai/vercel-marketplace-mixedbread
-    name: Vercel Marketplace Integration
-  - type: Integrations
-    url: https://www.mixedbread.com/docs/mcp
-    name: Model Context Protocol (MCP)
-  - type: Authentication
-    url: https://www.mixedbread.com/api-reference
-    name: API Key (Bearer)
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/mixedbread-ai/
-    name: LinkedIn
-  - type: Twitter
-    url: https://x.com/mixedbreadai
-    name: X (Twitter)
-  - type: Discord
-    url: https://discord.gg/mixedbread
-    name: Discord
-  - type: Plans
-    url: plans/mixedbread-ai-plans-pricing.yml
-    name: Plans (API Commons)
-  - type: RateLimits
-    url: rate-limits/mixedbread-ai-rate-limits.yml
-    name: Rate Limits (API Commons)
-  - type: FinOps
-    url: finops/mixedbread-ai-finops.yml
-    name: FinOps (FOCUS-aligned)
+- type: Website
+  url: https://www.mixedbread.com/
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/mixedbread/overview
+- type: AgenticAccess
+  url: agentic-access/mixedbread-ai-agentic-access.yml
+- type: DomainSecurity
+  url: security/mixedbread-ai-domain-security.yml
+- type: Authentication
+  url: authentication/mixedbread-ai-authentication.yml
+- type: Portal
+  url: https://www.mixedbread.com/
+  name: Mixedbread Home
+- type: Documentation
+  url: https://www.mixedbread.com/docs
+  name: Mixedbread Docs
+- type: Documentation
+  url: https://www.mixedbread.com/api-reference
+  name: API Reference
+- type: Signup
+  url: https://platform.mixedbread.com/
+  name: Mixedbread Platform
+- type: Pricing
+  url: https://www.mixedbread.com/pricing
+  name: Pricing
+- type: Blog
+  url: https://www.mixedbread.com/blog
+  name: Blog
+- type: GitHub
+  url: https://github.com/mixedbread-ai
+  name: Mixedbread GitHub
+- type: HuggingFace
+  url: https://huggingface.co/mixedbread-ai
+  name: Mixedbread on Hugging Face
+- type: SDKs
+  url: https://github.com/mixedbread-ai/mixedbread-python
+  name: Python SDK
+- type: SDKs
+  url: https://github.com/mixedbread-ai/mixedbread-ts
+  name: TypeScript SDK
+- type: SDKs
+  url: https://github.com/mixedbread-ai/python-sdk
+  name: Python SDK (legacy)
+- type: SDKs
+  url: https://github.com/mixedbread-ai/typescript-sdk
+  name: TypeScript SDK (legacy)
+- type: CLI
+  url: https://www.mixedbread.com/docs/cli
+  name: Mixedbread CLI
+- type: Tools
+  url: https://github.com/mixedbread-ai/skills
+  name: Agent Skills (npx skills add mixedbread-ai/skills)
+- type: Tools
+  url: https://github.com/mixedbread-ai/mxbai-rerank
+  name: mxbai-rerank (open-weight reranking models)
+- type: Tools
+  url: https://github.com/mixedbread-ai/baguetter
+  name: Baguetter (search engine library)
+- type: Tools
+  url: https://github.com/mixedbread-ai/batched
+  name: Batched (dynamic batching for inference)
+- type: Tools
+  url: https://github.com/mixedbread-ai/maxsim-cpu
+  name: maxsim-cpu (CPU late-interaction kernels)
+- type: Tools
+  url: https://github.com/mixedbread-ai/mgrep
+  name: mgrep (semantic CLI grep)
+- type: Integrations
+  url: https://github.com/mixedbread-ai/mixedbread-ai-langchain
+  name: LangChain Integration
+- type: Integrations
+  url: https://github.com/mixedbread-ai/mixedbread-ai-haystack
+  name: Haystack Integration
+- type: Integrations
+  url: https://github.com/mixedbread-ai/vercel-marketplace-mixedbread
+  name: Vercel Marketplace Integration
+- type: Integrations
+  url: https://www.mixedbread.com/docs/mcp
+  name: Model Context Protocol (MCP)
+- type: Authentication
+  url: https://www.mixedbread.com/api-reference
+  name: API Key (Bearer)
+- type: LinkedIn
+  url: https://www.linkedin.com/company/mixedbread-ai/
+  name: LinkedIn
+- type: Twitter
+  url: https://x.com/mixedbreadai
+  name: X (Twitter)
+- type: Discord
+  url: https://discord.gg/mixedbread
+  name: Discord
+- type: Plans
+  url: plans/mixedbread-ai-plans-pricing.yml
+  name: Plans (API Commons)
+- type: RateLimits
+  url: rate-limits/mixedbread-ai-rate-limits.yml
+  name: Rate Limits (API Commons)
+- type: FinOps
+  url: finops/mixedbread-ai-finops.yml
+  name: FinOps (FOCUS-aligned)
 created: '2026-05-25'
-modified: '2026-05-25'
+modified: '2026-09-16'
 specificationVersion: '0.23'
-description: >-
-  Mixedbread is a Berlin-based AI search and retrieval platform. It provides embeddings (mxbai-embed, Wholembed v3),
-  rerankers (mxbai-rerank v1/v2/v3-listwise), multimodal stores, document parsing, structured extraction, and
-  connector-based ingestion. Models are published as open weights on Hugging Face and consumed via a hosted REST API at
-  api.mixedbread.com. The platform powers RAG and agent retrieval over text, PDFs, images, audio, and video across 100+
-  languages.
+description: Mixedbread is a Berlin-based AI search and retrieval platform. It provides embeddings (mxbai-embed,
+  Wholembed v3), rerankers (mxbai-rerank v1/v2/v3-listwise), multimodal stores, document parsing, structured
+  extraction, and connector-based ingestion. Models are published as open weights on Hugging Face and
+  consumed via a hosted REST API at api.mixedbread.com. The platform powers RAG and agent retrieval over
+  text, PDFs, images, audio, and video across 100+ languages.
