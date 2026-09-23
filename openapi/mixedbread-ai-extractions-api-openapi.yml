@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mixedbread admin extractions API
+  title: Mixedbread Extractions API
   version: 0.1.0
-  description: Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
+  description: Mixedbread extractions endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
 servers:
 - url: https://api.mixedbread.com
   description: mixedbread ai production server
@@ -13,14 +13,24 @@ servers:
 - url: http://localhost:8000
   description: mixedbread local server
 tags:
-- name: extractions
+- name: Extractions
 paths:
   /v1/extractions/jobs:
     post:
       tags:
-      - extractions
+      - Extractions
       summary: Start an extraction job
-      description: "Start an extraction job for the provided file and schema.\n\nArgs:\n    params: The parameters for creating an extraction job.\n\nReturns:\n    The created extraction job."
+      description: 'Start an extraction job for the provided file and schema.
+
+
+        Args:
+
+        params: The parameters for creating an extraction job.
+
+
+        Returns:
+
+        The created extraction job.'
       operationId: create_extraction_job
       requestBody:
         content:
@@ -47,9 +57,19 @@ paths:
   /v1/extractions/jobs/{job_id}:
     get:
       tags:
-      - extractions
+      - Extractions
       summary: Get extraction job result
-      description: "Get detailed information about a specific extraction job.\n\nArgs:\n    job_id: The ID of the extraction job.\n\nReturns:\n    Detailed information about the extraction job."
+      description: 'Get detailed information about a specific extraction job.
+
+
+        Args:
+
+        job_id: The ID of the extraction job.
+
+
+        Returns:
+
+        Detailed information about the extraction job.'
       operationId: retrieve_extraction_job
       security:
       - ApiKeyAuth: []
@@ -78,9 +98,19 @@ paths:
   /v1/extractions/schema:
     post:
       tags:
-      - extractions
+      - Extractions
       summary: Create a schema
-      description: "Create a schema with the provided parameters.\n\nArgs:\n    params: The parameters for creating a schema.\n\nReturns:\n    The created schema."
+      description: 'Create a schema with the provided parameters.
+
+
+        Args:
+
+        params: The parameters for creating a schema.
+
+
+        Returns:
+
+        The created schema.'
       operationId: create_schema
       requestBody:
         content:
@@ -107,9 +137,19 @@ paths:
   /v1/extractions/schema/enhance:
     post:
       tags:
-      - extractions
+      - Extractions
       summary: Enhance a schema
-      description: "Enhance a schema by enriching the descriptions to aid extraction.\n\nArgs:\n    params: The parameters for enhancing a schema.\n\nReturns:\n    The enhanced schema."
+      description: 'Enhance a schema by enriching the descriptions to aid extraction.
+
+
+        Args:
+
+        params: The parameters for enhancing a schema.
+
+
+        Returns:
+
+        The enhanced schema.'
       operationId: enhance_schema
       requestBody:
         content:
@@ -136,9 +176,19 @@ paths:
   /v1/extractions/schema/validate:
     post:
       tags:
-      - extractions
+      - Extractions
       summary: Validate a schema
-      description: "Validate a schema.\n\nArgs:\n    params: The parameters for validating a schema.\n\nReturns:\n    The validation result."
+      description: 'Validate a schema.
+
+
+        Args:
+
+        params: The parameters for validating a schema.
+
+
+        Returns:
+
+        The validation result.'
       operationId: validate_schema
       requestBody:
         content:
@@ -165,9 +215,19 @@ paths:
   /v1/extractions/content:
     post:
       tags:
-      - extractions
+      - Extractions
       summary: Extract content from a string
-      description: "Extract content from a string using the provided schema.\n\nArgs:\n    params: The parameters for extracting content from a string.\n\nReturns:\n    The extracted content."
+      description: 'Extract content from a string using the provided schema.
+
+
+        Args:
+
+        params: The parameters for extracting content from a string.
+
+
+        Returns:
+
+        The extracted content.'
       operationId: extract_content
       requestBody:
         content:
@@ -217,32 +277,23 @@ components:
       - json_schema
       title: ValidatedJsonSchema
       description: Result of validating a JSON schema.
-    ValidationError:
+    ExtractionResult:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
+        data:
+          additionalProperties: true
           type: object
-          title: Context
+          title: Data
+        warnings:
+          items:
+            type: string
+          type: array
+          title: Warnings
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - data
+      - warnings
+      title: ExtractionResult
+      description: The result of an extraction job.
     ExtractContentCreateParams:
       properties:
         content:
@@ -276,25 +327,48 @@ components:
       - json_schema
       title: ExtractContentCreateParams
       description: Parameters for extracting content using a schema.
-    TextInput:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ImageUrlInput:
       properties:
         type:
           type: string
-          const: text
+          const: image_url
           title: Type
           description: Input type identifier
-          default: text
-        text:
-          type: string
-          maxLength: 65536
-          minLength: 1
-          title: Text
-          description: Text content to process
+          default: image_url
+        image_url:
+          $ref: '#/components/schemas/ImageUrl-Input'
+          description: The image input specification.
       type: object
       required:
-      - text
-      title: TextInput
-      description: "Model for text input validation.\n\nAttributes:\n    type: Input type identifier, always \"text\"\n    text: The actual text content, with length and whitespace constraints"
+      - image_url
+      title: ImageUrlInput
+      description: Model for image input validation.
     HTTPValidationError:
       properties:
         detail:
@@ -304,18 +378,35 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    CreatedJsonSchema:
+    EnhancedJsonSchema:
       properties:
         json_schema:
           additionalProperties: true
           type: object
           title: Json Schema
-          description: The created JSON schema
+          description: The enhanced JSON schema
       type: object
       required:
       - json_schema
-      title: CreatedJsonSchema
-      description: Result of creating a JSON schema.
+      title: EnhancedJsonSchema
+      description: Result of enhancing a JSON schema.
+    ExtractJobCreateParams:
+      properties:
+        file_id:
+          type: string
+          title: File Id
+          description: The ID of the file to extract from
+        json_schema:
+          additionalProperties: true
+          type: object
+          title: Json Schema
+          description: The JSON schema to use for extraction
+      type: object
+      required:
+      - file_id
+      - json_schema
+      title: ExtractJobCreateParams
+      description: Parameters for creating an extraction job.
     ExtractionJob:
       properties:
         id:
@@ -392,35 +483,6 @@ components:
       - json_schema
       title: ExtractionJob
       description: A job for extracting structured data from documents.
-    EnhancedJsonSchema:
-      properties:
-        json_schema:
-          additionalProperties: true
-          type: object
-          title: Json Schema
-          description: The enhanced JSON schema
-      type: object
-      required:
-      - json_schema
-      title: EnhancedJsonSchema
-      description: Result of enhancing a JSON schema.
-    ExtractJobCreateParams:
-      properties:
-        file_id:
-          type: string
-          title: File Id
-          description: The ID of the file to extract from
-        json_schema:
-          additionalProperties: true
-          type: object
-          title: Json Schema
-          description: The JSON schema to use for extraction
-      type: object
-      required:
-      - file_id
-      - json_schema
-      title: ExtractJobCreateParams
-      description: Parameters for creating an extraction job.
     ImageUrl-Input:
       properties:
         url:
@@ -445,17 +507,6 @@ components:
       - url
       title: ImageUrl
       description: Model for image URL validation.
-    JsonSchemaCreateParams:
-      properties:
-        description:
-          type: string
-          title: Description
-          description: Description of the data to extract
-      type: object
-      required:
-      - description
-      title: JsonSchemaCreateParams
-      description: Parameters for creating a JSON schema.
     ParsingJobStatus:
       type: string
       enum:
@@ -477,23 +528,48 @@ components:
       - json_schema
       title: JsonSchemaEnhanceParams
       description: Parameters for enhancing a JSON schema.
-    ExtractionResult:
+    JsonSchemaCreateParams:
       properties:
-        data:
-          additionalProperties: true
-          type: object
-          title: Data
-        warnings:
-          items:
-            type: string
-          type: array
-          title: Warnings
+        description:
+          type: string
+          title: Description
+          description: Description of the data to extract
       type: object
       required:
-      - data
-      - warnings
-      title: ExtractionResult
-      description: The result of an extraction job.
+      - description
+      title: JsonSchemaCreateParams
+      description: Parameters for creating a JSON schema.
+    CreatedJsonSchema:
+      properties:
+        json_schema:
+          additionalProperties: true
+          type: object
+          title: Json Schema
+          description: The created JSON schema
+      type: object
+      required:
+      - json_schema
+      title: CreatedJsonSchema
+      description: Result of creating a JSON schema.
+    TextInput:
+      properties:
+        type:
+          type: string
+          const: text
+          title: Type
+          description: Input type identifier
+          default: text
+        text:
+          type: string
+          maxLength: 65536
+          minLength: 1
+          title: Text
+          description: Text content to process
+      type: object
+      required:
+      - text
+      title: TextInput
+      description: "Model for text input validation.\n\nAttributes:\n    type: Input type identifier, always \"text\"\n    text: The actual text content, with length and whitespace constraints"
     JsonSchemaValidateParams:
       properties:
         json_schema:
@@ -506,22 +582,6 @@ components:
       - json_schema
       title: JsonSchemaValidateParams
       description: Parameters for validating a JSON schema.
-    ImageUrlInput:
-      properties:
-        type:
-          type: string
-          const: image_url
-          title: Type
-          description: Input type identifier
-          default: image_url
-        image_url:
-          $ref: '#/components/schemas/ImageUrl-Input'
-          description: The image input specification.
-      type: object
-      required:
-      - image_url
-      title: ImageUrlInput
-      description: Model for image input validation.
   securitySchemes:
     ApiKeyAuth:
       type: http

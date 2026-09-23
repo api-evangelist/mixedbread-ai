@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mixedbread admin API
+  title: Mixedbread Admin API
   version: 0.1.0
   description: Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
 servers:
@@ -13,14 +13,22 @@ servers:
 - url: http://localhost:8000
   description: mixedbread local server
 tags:
-- name: admin
+- name: Admin
 paths:
   /v1/admin/stores/{organization_id}/{store_identifier}/reingest:
     post:
       tags:
-      - admin
+      - Admin
       summary: Reingest all stores
-      description: "Reingest all stores across all organizations (admin only).\n\nThis endpoint creates StoreFileReingestionJob for each store.\n\nReturns:\n    dict: Confirmation message with count of jobs created."
+      description: 'Reingest all stores across all organizations (admin only).
+
+
+        This endpoint creates StoreFileReingestionJob for each store.
+
+
+        Returns:
+
+        dict: Confirmation message with count of jobs created.'
       operationId: reingest_all_stores
       security:
       - ApiKeyAuth: []
@@ -73,15 +81,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+    VectorStoreFileStatus:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - cancelled
+      - completed
+      - failed
+      title: VectorStoreFileStatus
     ValidationError:
       properties:
         loc:
@@ -108,15 +116,15 @@ components:
       - msg
       - type
       title: ValidationError
-    VectorStoreFileStatus:
-      type: string
-      enum:
-      - pending
-      - in_progress
-      - cancelled
-      - completed
-      - failed
-      title: VectorStoreFileStatus
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     ApiKeyAuth:
       type: http

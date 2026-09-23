@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mixedbread admin data_sources API
+  title: Mixedbread Data Sources API
   version: 0.1.0
-  description: Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
+  description: Mixedbread data-sources endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
 servers:
 - url: https://api.mixedbread.com
   description: mixedbread ai production server
@@ -13,14 +13,26 @@ servers:
 - url: http://localhost:8000
   description: mixedbread local server
 tags:
-- name: data_sources
+- name: Data Sources
 paths:
   /v1/data_sources/{data_source_id}/connectors:
     post:
       tags:
-      - data_sources
+      - Data Sources
       summary: Create a new connector
-      description: "Create a new connector.\n\nArgs:\n    data_source_id: The ID of the data source to create a connector for.\n    params: The connector to create.\n\nReturns:\n    The created connector."
+      description: 'Create a new connector.
+
+
+        Args:
+
+        data_source_id: The ID of the data source to create a connector for.
+
+        params: The connector to create.
+
+
+        Returns:
+
+        The created connector.'
       operationId: create_connector
       security:
       - ApiKeyAuth: []
@@ -56,9 +68,21 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - data_sources
+      - Data Sources
       summary: Get all connectors for a data source
-      description: "Get all connectors for a data source.\n\nArgs:\n    data_source_id: The ID of the data source to get connectors for.\n    pagination: The pagination options.\n\nReturns:\n    The list of connectors."
+      description: 'Get all connectors for a data source.
+
+
+        Args:
+
+        data_source_id: The ID of the data source to get connectors for.
+
+        pagination: The pagination options.
+
+
+        Returns:
+
+        The list of connectors.'
       operationId: list_connectors
       security:
       - ApiKeyAuth: []
@@ -139,9 +163,21 @@ paths:
   /v1/data_sources/{data_source_id}/connectors/{connector_id}:
     get:
       tags:
-      - data_sources
+      - Data Sources
       summary: Get a connector by ID
-      description: "Get a connector by ID.\n\nArgs:\n    data_source_id: The ID of the data source to get a connector for.\n    connector_id: The ID of the connector to get.\n\nReturns:\n    The connector."
+      description: 'Get a connector by ID.
+
+
+        Args:
+
+        data_source_id: The ID of the data source to get a connector for.
+
+        connector_id: The ID of the connector to get.
+
+
+        Returns:
+
+        The connector.'
       operationId: get_connector
       security:
       - ApiKeyAuth: []
@@ -179,9 +215,23 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     put:
       tags:
-      - data_sources
+      - Data Sources
       summary: Update a connector
-      description: "Update a connector.\n\nArgs:\n    data_source_id: The ID of the data source to update a connector for.\n    connector_id: The ID of the connector to update.\n    params: The connector to update.\n\nReturns:\n    The updated connector."
+      description: 'Update a connector.
+
+
+        Args:
+
+        data_source_id: The ID of the data source to update a connector for.
+
+        connector_id: The ID of the connector to update.
+
+        params: The connector to update.
+
+
+        Returns:
+
+        The updated connector.'
       operationId: update_connector
       security:
       - ApiKeyAuth: []
@@ -226,9 +276,21 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - data_sources
+      - Data Sources
       summary: Delete a connector
-      description: "Delete a connector.\n\nArgs:\n    data_source_id: The ID of the data source to delete a connector for.\n    connector_id: The ID of the connector to delete.\n\nReturns:\n    The deleted connector."
+      description: 'Delete a connector.
+
+
+        Args:
+
+        data_source_id: The ID of the data source to delete a connector for.
+
+        connector_id: The ID of the connector to delete.
+
+
+        Returns:
+
+        The deleted connector.'
       operationId: delete_connector
       security:
       - ApiKeyAuth: []
@@ -267,9 +329,19 @@ paths:
   /v1/data_sources/:
     post:
       tags:
-      - data_sources
+      - Data Sources
       summary: Create a new data source
-      description: "Create a new data source.\n\nArgs:\n    params: The data source to create.\n\nReturns:\n    The created data source."
+      description: 'Create a new data source.
+
+
+        Args:
+
+        params: The data source to create.
+
+
+        Returns:
+
+        The created data source.'
       operationId: create_data_source
       security:
       - ApiKeyAuth: []
@@ -298,9 +370,14 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - data_sources
+      - Data Sources
       summary: Get all data sources
-      description: "Get all data sources.\n\nReturns:\n    The list of data sources."
+      description: 'Get all data sources.
+
+
+        Returns:
+
+        The list of data sources.'
       operationId: list_data_sources
       security:
       - ApiKeyAuth: []
@@ -372,9 +449,19 @@ paths:
   /v1/data_sources/{data_source_id}:
     get:
       tags:
-      - data_sources
+      - Data Sources
       summary: Get a data source by ID
-      description: "Get a data source by ID.\n\nArgs:\n    data_source_id: The ID of the data source to fetch.\n\nReturns:\n    The data source."
+      description: 'Get a data source by ID.
+
+
+        Args:
+
+        data_source_id: The ID of the data source to fetch.
+
+
+        Returns:
+
+        The data source.'
       operationId: get_data_source
       security:
       - ApiKeyAuth: []
@@ -403,9 +490,21 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     put:
       tags:
-      - data_sources
+      - Data Sources
       summary: Update a data source
-      description: "Update a data source.\n\nArgs:\n    data_source_id: The ID of the data source to update.\n    params: The data source to update.\n\nReturns:\n    The updated data source."
+      description: 'Update a data source.
+
+
+        Args:
+
+        data_source_id: The ID of the data source to update.
+
+        params: The data source to update.
+
+
+        Returns:
+
+        The updated data source.'
       operationId: update_data_source
       security:
       - ApiKeyAuth: []
@@ -444,9 +543,14 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - data_sources
+      - Data Sources
       summary: Delete a data source
-      description: "Delete a data source.\n\nArgs:\n    data_source_id: The ID of the data source to delete."
+      description: 'Delete a data source.
+
+
+        Args:
+
+        data_source_id: The ID of the data source to delete.'
       operationId: delete_data_source
       security:
       - ApiKeyAuth: []
@@ -476,9 +580,33 @@ paths:
   /v1/data_sources/{data_source_id}/oauth2/authorize:
     get:
       tags:
-      - data_sources
+      - Data Sources
       summary: Authorize a data source
-      description: "Start OAuth2 authorization flow for a data source.\n\nInitiates the OAuth2 authorization process by redirecting the user\nto the external service's authorization page. After authorization,\nthe user will be redirected back to the oauth2_callback endpoint.\n\nArgs:\n    data_source_id: The ID of the data source to authorize\n\nReturns:\n    Redirect to the OAuth2 provider's authorization page\n\nRaises:\n    DataSourceNotFoundError: When data source doesn't exist\n    DataSourceAuthTypeNotSupportedError: When OAuth2 is not supported for this data source type"
+      description: 'Start OAuth2 authorization flow for a data source.
+
+
+        Initiates the OAuth2 authorization process by redirecting the user
+
+        to the external service''s authorization page. After authorization,
+
+        the user will be redirected back to the oauth2_callback endpoint.
+
+
+        Args:
+
+        data_source_id: The ID of the data source to authorize
+
+
+        Returns:
+
+        Redirect to the OAuth2 provider''s authorization page
+
+
+        Raises:
+
+        DataSourceNotFoundError: When data source doesn''t exist
+
+        DataSourceAuthTypeNotSupportedError: When OAuth2 is not supported for this data source type'
       operationId: authorize_data_source
       security:
       - ApiKeyAuth: []
@@ -507,9 +635,39 @@ paths:
   /v1/data_sources/oauth2/callback:
     get:
       tags:
-      - data_sources
+      - Data Sources
       summary: OAuth2 callback for data source authorization
-      description: "OAuth2 callback endpoint for completing data source authorization.\n\nThis endpoint is called by OAuth2 providers after user authorization.\nIt exchanges the authorization code for access tokens and stores them\nsecurely for the data source.\n\nArgs:\n    state: OAuth2 state parameter used for CSRF protection\n    code: Authorization code from the OAuth2 provider\n    error: OAuth2 error code if authorization was denied or failed\n    error_description: Human-readable description of the error\n\nReturns:\n    Redirect to the data source details page on success\n\nRaises:\n    OAuth2TokenExchangeError: When OAuth2 provider returns an error\n    InvalidStateError: When state parameter is invalid or expired"
+      description: 'OAuth2 callback endpoint for completing data source authorization.
+
+
+        This endpoint is called by OAuth2 providers after user authorization.
+
+        It exchanges the authorization code for access tokens and stores them
+
+        securely for the data source.
+
+
+        Args:
+
+        state: OAuth2 state parameter used for CSRF protection
+
+        code: Authorization code from the OAuth2 provider
+
+        error: OAuth2 error code if authorization was denied or failed
+
+        error_description: Human-readable description of the error
+
+
+        Returns:
+
+        Redirect to the data source details page on success
+
+
+        Raises:
+
+        OAuth2TokenExchangeError: When OAuth2 provider returns an error
+
+        InvalidStateError: When state parameter is invalid or expired'
       operationId: oauth2_callback
       security:
       - ApiKeyAuth: []
@@ -568,133 +726,28 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ApiKeyCreateOrUpdateParams:
+    DataSourceConnectorCreateParams:
       properties:
-        type:
+        store_id:
           type: string
-          const: api_key
-          title: Type
-          default: api_key
-        api_key:
-          type: string
-          title: Api Key
-          description: The API key
-      type: object
-      required:
-      - api_key
-      title: ApiKeyCreateOrUpdateParams
-      description: Base class for API key create or update parameters.
-    DataSourceListResponse:
-      properties:
-        pagination:
-          $ref: '#/components/schemas/CursorPaginationResponse'
-        data:
-          items:
-            $ref: '#/components/schemas/DataSource'
-          type: array
-          title: Data
-          description: The list of data sources
-        object:
-          type: string
-          const: list
-          title: Object
-          description: The object type of the response
-          default: list
-      type: object
-      required:
-      - pagination
-      - data
-      title: DataSourceListResponse
-      description: A list of data sources with pagination.
-    OAuth2CreateOrUpdateParams:
-      properties:
-        type:
-          type: string
-          const: oauth2
-          title: Type
-          default: oauth2
-      type: object
-      title: OAuth2CreateOrUpdateParams
-      description: Base class for OAuth2 create or update parameters.
-    NotionDataSourceCreateOrUpdateParams:
-      properties:
-        type:
-          type: string
-          const: notion
-          title: Type
-          description: The type of data source to create
-          default: notion
+          title: Store Id
+          description: The ID of the store
         name:
           type: string
           title: Name
-          description: The name of the data source
+          description: The name of the connector
+          default: New Connector
+        trigger_sync:
+          type: boolean
+          title: Trigger Sync
+          description: Whether the connector should be synced after creation
+          default: true
         metadata:
           anyOf:
           - {}
           - type: 'null'
           title: Metadata
-          description: The metadata of the data source
-        auth_params:
-          anyOf:
-          - oneOf:
-            - $ref: '#/components/schemas/OAuth2CreateOrUpdateParams'
-            - $ref: '#/components/schemas/ApiKeyCreateOrUpdateParams'
-            discriminator:
-              propertyName: type
-              mapping:
-                api_key: '#/components/schemas/ApiKeyCreateOrUpdateParams'
-                oauth2: '#/components/schemas/OAuth2CreateOrUpdateParams'
-          - type: 'null'
-          title: Auth Params
-          description: The authentication parameters of the data source. Notion supports OAuth2 and API key.
-      type: object
-      required:
-      - name
-      title: NotionDataSourceCreateOrUpdateParams
-      description: Parameters for creating or updating a Notion data source.
-    DataSourceType:
-      type: string
-      enum:
-      - notion
-      - linear
-      title: DataSourceType
-    DataSourceApiKeyParams:
-      properties:
-        type:
-          type: string
-          const: api_key
-          title: Type
-          default: api_key
-        api_key:
-          type: string
-          title: Api Key
-          description: The API key
-      type: object
-      required:
-      - api_key
-      title: DataSourceApiKeyParams
-      description: Authentication parameters for a API key data source.
-    DataSourceConnectorUpdateParams:
-      properties:
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-          description: The name of the connector
-        metadata:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Metadata
           description: The metadata of the connector
-        trigger_sync:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Trigger Sync
-          description: Whether the connector should be synced after update
         polling_interval:
           anyOf:
           - type: integer
@@ -714,8 +767,38 @@ components:
           - 1h
           - PT30M
       type: object
-      title: DataSourceConnectorUpdateParams
-      description: Parameters for updating a connector.
+      required:
+      - store_id
+      title: DataSourceConnectorCreateParams
+      description: Parameters for creating a connector.
+    DataSourceType:
+      type: string
+      enum:
+      - notion
+      - linear
+      title: DataSourceType
+    ConnectorListResponse:
+      properties:
+        pagination:
+          $ref: '#/components/schemas/CursorPaginationResponse'
+        data:
+          items:
+            $ref: '#/components/schemas/DataSourceConnector'
+          type: array
+          title: Data
+          description: The list of connectors
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+      type: object
+      required:
+      - pagination
+      - data
+      title: ConnectorListResponse
+      description: A list of connectors with pagination.
     SyncStatus:
       type: string
       enum:
@@ -726,119 +809,6 @@ components:
       - completed
       - failed
       title: SyncStatus
-    DataSource:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The ID of the data source
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-          description: The creation time of the data source
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-          description: The last update time of the data source
-        type:
-          $ref: '#/components/schemas/DataSourceType'
-          description: The type of data source
-        name:
-          type: string
-          title: Name
-          description: The name of the data source
-        metadata:
-          anyOf:
-          - {}
-          - type: 'null'
-          title: Metadata
-          description: The metadata of the data source
-        auth_params:
-          anyOf:
-          - oneOf:
-            - $ref: '#/components/schemas/DataSourceOAuth2Params'
-            - $ref: '#/components/schemas/DataSourceApiKeyParams'
-            discriminator:
-              propertyName: type
-              mapping:
-                api_key: '#/components/schemas/DataSourceApiKeyParams'
-                oauth2: '#/components/schemas/DataSourceOAuth2Params'
-          - type: 'null'
-          title: Auth Params
-          description: Authentication parameters
-        object:
-          type: string
-          const: data_source
-          title: Object
-          description: The type of the object
-          default: data_source
-      type: object
-      required:
-      - id
-      - created_at
-      - updated_at
-      - type
-      - name
-      - metadata
-      - auth_params
-      title: DataSource
-      description: Service-level representation of a data source.
-    DataSourceOAuth2Params:
-      properties:
-        type:
-          type: string
-          const: oauth2
-          title: Type
-          default: oauth2
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-          description: The timestamp when the OAuth2 credentials were created
-        scope:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Scope
-          description: The OAuth2 scope
-          default: read
-        access_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Access Token
-          description: The OAuth2 access token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-          description: The OAuth2 refresh token
-        token_type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Token Type
-          description: The OAuth2 token type
-        expires_on:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Expires On
-          description: The OAuth2 token expiration timestamp
-        additional_params:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Additional Params
-          description: Additional parameters for the OAuth2 flow
-      type: object
-      title: DataSourceOAuth2Params
-      description: Authentication parameters for a OAuth data source.
     DataSourceConnector:
       properties:
         id:
@@ -932,6 +902,340 @@ components:
       - error
       title: DataSourceConnector
       description: Service-level representation of a connector.
+    DataSourceApiKeyParams:
+      properties:
+        type:
+          type: string
+          const: api_key
+          title: Type
+          default: api_key
+        api_key:
+          type: string
+          title: Api Key
+          description: The API key
+      type: object
+      required:
+      - api_key
+      title: DataSourceApiKeyParams
+      description: Authentication parameters for a API key data source.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    DataSourceDeleted:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the data source
+        deleted:
+          type: boolean
+          title: Deleted
+          description: Whether the data source was deleted
+          default: true
+        object:
+          type: string
+          const: data_source
+          title: Object
+          description: The type of the object
+          default: data_source
+      type: object
+      required:
+      - id
+      title: DataSourceDeleted
+      description: Deleted data source.
+    ApiKeyCreateOrUpdateParams:
+      properties:
+        type:
+          type: string
+          const: api_key
+          title: Type
+          default: api_key
+        api_key:
+          type: string
+          title: Api Key
+          description: The API key
+      type: object
+      required:
+      - api_key
+      title: ApiKeyCreateOrUpdateParams
+      description: Base class for API key create or update parameters.
+    OAuth2CreateOrUpdateParams:
+      properties:
+        type:
+          type: string
+          const: oauth2
+          title: Type
+          default: oauth2
+      type: object
+      title: OAuth2CreateOrUpdateParams
+      description: Base class for OAuth2 create or update parameters.
+    DataSourceOAuth2Params:
+      properties:
+        type:
+          type: string
+          const: oauth2
+          title: Type
+          default: oauth2
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: The timestamp when the OAuth2 credentials were created
+        scope:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Scope
+          description: The OAuth2 scope
+          default: read
+        access_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Access Token
+          description: The OAuth2 access token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+          description: The OAuth2 refresh token
+        token_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Token Type
+          description: The OAuth2 token type
+        expires_on:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires On
+          description: The OAuth2 token expiration timestamp
+        additional_params:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Additional Params
+          description: Additional parameters for the OAuth2 flow
+      type: object
+      title: DataSourceOAuth2Params
+      description: Authentication parameters for a OAuth data source.
+    DataSourceConnectorDeleted:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the connector
+        deleted:
+          type: boolean
+          title: Deleted
+          description: Whether the connector was deleted
+          default: true
+        object:
+          type: string
+          const: data_source.connector
+          title: Object
+          description: The type of the object
+          default: data_source.connector
+      type: object
+      required:
+      - id
+      title: DataSourceConnectorDeleted
+      description: Deleted connector.
+    NotionDataSourceCreateOrUpdateParams:
+      properties:
+        type:
+          type: string
+          const: notion
+          title: Type
+          description: The type of data source to create
+          default: notion
+        name:
+          type: string
+          title: Name
+          description: The name of the data source
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Metadata
+          description: The metadata of the data source
+        auth_params:
+          anyOf:
+          - oneOf:
+            - $ref: '#/components/schemas/OAuth2CreateOrUpdateParams'
+            - $ref: '#/components/schemas/ApiKeyCreateOrUpdateParams'
+            discriminator:
+              propertyName: type
+              mapping:
+                api_key: '#/components/schemas/ApiKeyCreateOrUpdateParams'
+                oauth2: '#/components/schemas/OAuth2CreateOrUpdateParams'
+          - type: 'null'
+          title: Auth Params
+          description: The authentication parameters of the data source. Notion supports OAuth2 and API key.
+      type: object
+      required:
+      - name
+      title: NotionDataSourceCreateOrUpdateParams
+      description: Parameters for creating or updating a Notion data source.
+    DataSourceListResponse:
+      properties:
+        pagination:
+          $ref: '#/components/schemas/CursorPaginationResponse'
+        data:
+          items:
+            $ref: '#/components/schemas/DataSource'
+          type: array
+          title: Data
+          description: The list of data sources
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+      type: object
+      required:
+      - pagination
+      - data
+      title: DataSourceListResponse
+      description: A list of data sources with pagination.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    DataSourceConnectorUpdateParams:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The name of the connector
+        metadata:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Metadata
+          description: The metadata of the connector
+        trigger_sync:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Trigger Sync
+          description: Whether the connector should be synced after update
+        polling_interval:
+          anyOf:
+          - type: integer
+          - type: string
+          - type: 'null'
+          title: Polling Interval
+          description: 'Polling interval for the connector. Defaults to 30 minutes if not specified. Can be provided as:
+
+            - int: Number of seconds (e.g., 1800 for 30 minutes)
+
+            - str: Duration string (e.g., ''30m'', ''1h'', ''2d'') or ISO 8601 format (e.g., ''PT30M'', ''P1D'')
+
+            Valid range: 15 seconds to 30 days'
+          examples:
+          - 1800
+          - 30m
+          - 1h
+          - PT30M
+      type: object
+      title: DataSourceConnectorUpdateParams
+      description: Parameters for updating a connector.
+    DataSource:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the data source
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: The creation time of the data source
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: The last update time of the data source
+        type:
+          $ref: '#/components/schemas/DataSourceType'
+          description: The type of data source
+        name:
+          type: string
+          title: Name
+          description: The name of the data source
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Metadata
+          description: The metadata of the data source
+        auth_params:
+          anyOf:
+          - oneOf:
+            - $ref: '#/components/schemas/DataSourceOAuth2Params'
+            - $ref: '#/components/schemas/DataSourceApiKeyParams'
+            discriminator:
+              propertyName: type
+              mapping:
+                api_key: '#/components/schemas/DataSourceApiKeyParams'
+                oauth2: '#/components/schemas/DataSourceOAuth2Params'
+          - type: 'null'
+          title: Auth Params
+          description: Authentication parameters
+        object:
+          type: string
+          const: data_source
+          title: Object
+          description: The type of the object
+          default: data_source
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      - type
+      - name
+      - metadata
+      - auth_params
+      title: DataSource
+      description: Service-level representation of a data source.
     CursorPaginationResponse:
       properties:
         has_more:
@@ -976,28 +1280,6 @@ components:
       - last_cursor
       title: CursorPaginationResponse
       description: Response model for cursor-based pagination.
-    ConnectorListResponse:
-      properties:
-        pagination:
-          $ref: '#/components/schemas/CursorPaginationResponse'
-        data:
-          items:
-            $ref: '#/components/schemas/DataSourceConnector'
-          type: array
-          title: Data
-          description: The list of connectors
-        object:
-          type: string
-          const: list
-          title: Object
-          description: The object type of the response
-          default: list
-      type: object
-      required:
-      - pagination
-      - data
-      title: ConnectorListResponse
-      description: A list of connectors with pagination.
     LinearDataSourceCreateOrUpdateParams:
       properties:
         type:
@@ -1032,130 +1314,6 @@ components:
       - name
       title: LinearDataSourceCreateOrUpdateParams
       description: Parameters for creating or updating a Linear data source.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    DataSourceDeleted:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The ID of the data source
-        deleted:
-          type: boolean
-          title: Deleted
-          description: Whether the data source was deleted
-          default: true
-        object:
-          type: string
-          const: data_source
-          title: Object
-          description: The type of the object
-          default: data_source
-      type: object
-      required:
-      - id
-      title: DataSourceDeleted
-      description: Deleted data source.
-    DataSourceConnectorDeleted:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The ID of the connector
-        deleted:
-          type: boolean
-          title: Deleted
-          description: Whether the connector was deleted
-          default: true
-        object:
-          type: string
-          const: data_source.connector
-          title: Object
-          description: The type of the object
-          default: data_source.connector
-      type: object
-      required:
-      - id
-      title: DataSourceConnectorDeleted
-      description: Deleted connector.
-    DataSourceConnectorCreateParams:
-      properties:
-        store_id:
-          type: string
-          title: Store Id
-          description: The ID of the store
-        name:
-          type: string
-          title: Name
-          description: The name of the connector
-          default: New Connector
-        trigger_sync:
-          type: boolean
-          title: Trigger Sync
-          description: Whether the connector should be synced after creation
-          default: true
-        metadata:
-          anyOf:
-          - {}
-          - type: 'null'
-          title: Metadata
-          description: The metadata of the connector
-        polling_interval:
-          anyOf:
-          - type: integer
-          - type: string
-          - type: 'null'
-          title: Polling Interval
-          description: 'Polling interval for the connector. Defaults to 30 minutes if not specified. Can be provided as:
-
-            - int: Number of seconds (e.g., 1800 for 30 minutes)
-
-            - str: Duration string (e.g., ''30m'', ''1h'', ''2d'') or ISO 8601 format (e.g., ''PT30M'', ''P1D'')
-
-            Valid range: 15 seconds to 30 days'
-          examples:
-          - 1800
-          - 30m
-          - 1h
-          - PT30M
-      type: object
-      required:
-      - store_id
-      title: DataSourceConnectorCreateParams
-      description: Parameters for creating a connector.
   securitySchemes:
     ApiKeyAuth:
       type: http

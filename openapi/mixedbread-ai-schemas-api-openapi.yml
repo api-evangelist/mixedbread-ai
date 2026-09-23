@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mixedbread admin schemas API
+  title: Mixedbread Schemas API
   version: 0.1.0
-  description: Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
+  description: Mixedbread schemas endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
 servers:
 - url: https://api.mixedbread.com
   description: mixedbread ai production server
@@ -13,14 +13,19 @@ servers:
 - url: http://localhost:8000
   description: mixedbread local server
 tags:
-- name: schemas
+- name: Schemas
 paths:
   /v1/schemas/mxjson:
     get:
       tags:
-      - schemas
+      - Schemas
       summary: Get mxbai json schema
-      description: "Get the mxbai json schema.\n\nReturns:\n    The mxbai json schema."
+      description: 'Get the mxbai json schema.
+
+
+        Returns:
+
+        The mxbai json schema.'
       operationId: get_mxbai_json_schema
       responses:
         '200':

@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mixedbread admin api_keys API
+  title: Mixedbread API Keys API
   version: 0.1.0
-  description: Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
+  description: Mixedbread api-keys endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
 servers:
 - url: https://api.mixedbread.com
   description: mixedbread ai production server
@@ -13,14 +13,24 @@ servers:
 - url: http://localhost:8000
   description: mixedbread local server
 tags:
-- name: api_keys
+- name: API Keys
 paths:
   /v1/api-keys:
     post:
       tags:
-      - api_keys
+      - API Keys
       summary: Create API key
-      description: "Create a new API key.\n\nArgs:\n    params: The parameters for creating the API key.\n\nReturns:\n    ApiKeyCreated: The response containing the details of the created API key."
+      description: 'Create a new API key.
+
+
+        Args:
+
+        params: The parameters for creating the API key.
+
+
+        Returns:
+
+        ApiKeyCreated: The response containing the details of the created API key.'
       operationId: create_api_key
       security:
       - ApiKeyAuth: []
@@ -45,9 +55,19 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - api_keys
+      - API Keys
       summary: List API keys
-      description: "List all API keys for the authenticated user.\n\nArgs:\n    pagination: The pagination options\n\nReturns:\n    A list of API keys belonging to the user."
+      description: 'List all API keys for the authenticated user.
+
+
+        Args:
+
+        pagination: The pagination options
+
+
+        Returns:
+
+        A list of API keys belonging to the user.'
       operationId: list_api_keys
       security:
       - ApiKeyAuth: []
@@ -87,9 +107,19 @@ paths:
   /v1/api-keys/{api_key_id}:
     get:
       tags:
-      - api_keys
+      - API Keys
       summary: Get API key details
-      description: "Retrieve details of a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to retrieve.\n\nReturns:\n    ApiKey: The response containing the API key details."
+      description: 'Retrieve details of a specific API key by its ID.
+
+
+        Args:
+
+        api_key_id: The ID of the API key to retrieve.
+
+
+        Returns:
+
+        ApiKey: The response containing the API key details.'
       operationId: retrieve_api_key
       security:
       - ApiKeyAuth: []
@@ -118,9 +148,21 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     patch:
       tags:
-      - api_keys
+      - API Keys
       summary: Update API key
-      description: "Update a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to update.\n    params: The parameters to update.\n\nReturns:\n    ApiKey: The updated API key details."
+      description: 'Update a specific API key by its ID.
+
+
+        Args:
+
+        api_key_id: The ID of the API key to update.
+
+        params: The parameters to update.
+
+
+        Returns:
+
+        ApiKey: The updated API key details.'
       operationId: update_api_key
       security:
       - ApiKeyAuth: []
@@ -155,9 +197,19 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - api_keys
+      - API Keys
       summary: Delete API key
-      description: "Delete a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to delete.\n\nReturns:\n    ApiKeyDeleted: The response containing the details of the deleted API key."
+      description: 'Delete a specific API key by its ID.
+
+
+        Args:
+
+        api_key_id: The ID of the API key to delete.
+
+
+        Returns:
+
+        ApiKeyDeleted: The response containing the details of the deleted API key.'
       operationId: delete_api_key
       security:
       - ApiKeyAuth: []
@@ -187,9 +239,19 @@ paths:
   /v1/api-keys/{api_key_id}/revoke:
     post:
       tags:
-      - api_keys
+      - API Keys
       summary: Revoke API key
-      description: "Revoke a specific API key by its ID.\n\nArgs:\n    api_key_id: The ID of the API key to revoke.\n\nReturns:\n    ApiKey: The response containing the details of the revoked API key."
+      description: 'Revoke a specific API key by its ID.
+
+
+        Args:
+
+        api_key_id: The ID of the API key to revoke.
+
+
+        Returns:
+
+        ApiKey: The response containing the details of the revoked API key.'
       operationId: revoke_api_key
       security:
       - ApiKeyAuth: []
@@ -219,9 +281,22 @@ paths:
   /v1/api-keys/{api_key_id}/reroll:
     post:
       tags:
-      - api_keys
+      - API Keys
       summary: Reroll API key
-      description: "Reroll the secret for a specific API key by its ID.\n\nThis generates a new secret key, invalidating the old one.\n\nArgs:\n    api_key_id: The ID of the API key to reroll.\n\nReturns:\n    ApiKeyCreated: The response containing the API key details with the new secret key."
+      description: 'Reroll the secret for a specific API key by its ID.
+
+
+        This generates a new secret key, invalidating the old one.
+
+
+        Args:
+
+        api_key_id: The ID of the API key to reroll.
+
+
+        Returns:
+
+        ApiKeyCreated: The response containing the API key details with the new secret key.'
       operationId: reroll_api_key
       security:
       - ApiKeyAuth: []
@@ -250,6 +325,27 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    PaginationWithTotal:
+      properties:
+        limit:
+          type: integer
+          maximum: 1000.0
+          title: Limit
+          description: Maximum number of items to return per page
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          description: Offset of the first item to return
+          default: 0
+        total:
+          type: integer
+          title: Total
+          description: Total number of items available
+          default: 0
+      type: object
+      title: PaginationWithTotal
+      description: Pagination model that includes total count of items.
     ApiKeyUpdateParams:
       properties:
         name:
@@ -268,31 +364,27 @@ components:
       type: object
       title: ApiKeyUpdateParams
       description: Parameters for updating an API key.
-    ApiKeyCreateParams:
+    ApiKeyListResponse:
       properties:
-        name:
+        pagination:
+          $ref: '#/components/schemas/PaginationWithTotal'
+        object:
           type: string
-          title: Name
-          description: A name/description for the API key
-          default: API Key
-        scope:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/Scope'
-            type: array
-          - type: 'null'
-          title: Scope
-          description: The scope of the API key
-        expires_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Expires At
-          description: Optional expiration datetime
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        data:
+          items:
+            $ref: '#/components/schemas/ApiKey'
+          type: array
+          title: Data
+          description: The list of API keys
       type: object
-      title: ApiKeyCreateParams
-      description: Parameters for creating an API key.
+      required:
+      - pagination
+      - data
+      title: ApiKeyListResponse
     ValidationError:
       properties:
         loc:
@@ -319,6 +411,35 @@ components:
       - msg
       - type
       title: ValidationError
+    Scope:
+      properties:
+        method:
+          type: string
+          enum:
+          - read
+          - write
+          - delete
+          - list
+          - create
+          - search
+          title: Method
+        resource_type:
+          anyOf:
+          - type: string
+            const: store
+          - type: 'null'
+          title: Resource Type
+        resource_id:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Resource Id
+      type: object
+      required:
+      - method
+      title: Scope
     HTTPValidationError:
       properties:
         detail:
@@ -328,28 +449,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ApiKeyDeleted:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The ID of the deleted API key
-        deleted:
-          type: boolean
-          title: Deleted
-          description: Whether the API key was deleted
-        object:
-          type: string
-          const: api_key
-          title: Object
-          description: The type of the object deleted
-          default: api_key
-      type: object
-      required:
-      - id
-      - deleted
-      title: ApiKeyDeleted
-      description: Response model for deleting an API key.
     ApiKeyCreated:
       properties:
         id:
@@ -416,77 +515,53 @@ components:
       - value
       title: ApiKeyCreated
       description: Response model for creating an API key.
-    Scope:
+    ApiKeyDeleted:
       properties:
-        method:
+        id:
           type: string
-          enum:
-          - read
-          - write
-          - delete
-          - list
-          - create
-          - search
-          title: Method
-        resource_type:
-          anyOf:
-          - type: string
-            const: store
-          - type: 'null'
-          title: Resource Type
-        resource_id:
-          anyOf:
-          - type: string
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Resource Id
-      type: object
-      required:
-      - method
-      title: Scope
-    ApiKeyListResponse:
-      properties:
-        pagination:
-          $ref: '#/components/schemas/PaginationWithTotal'
+          title: Id
+          description: The ID of the deleted API key
+        deleted:
+          type: boolean
+          title: Deleted
+          description: Whether the API key was deleted
         object:
           type: string
-          const: list
+          const: api_key
           title: Object
-          description: The object type of the response
-          default: list
-        data:
-          items:
-            $ref: '#/components/schemas/ApiKey'
-          type: array
-          title: Data
-          description: The list of API keys
+          description: The type of the object deleted
+          default: api_key
       type: object
       required:
-      - pagination
-      - data
-      title: ApiKeyListResponse
-    PaginationWithTotal:
+      - id
+      - deleted
+      title: ApiKeyDeleted
+      description: Response model for deleting an API key.
+    ApiKeyCreateParams:
       properties:
-        limit:
-          type: integer
-          maximum: 1000.0
-          title: Limit
-          description: Maximum number of items to return per page
-          default: 100
-        offset:
-          type: integer
-          title: Offset
-          description: Offset of the first item to return
-          default: 0
-        total:
-          type: integer
-          title: Total
-          description: Total number of items available
-          default: 0
+        name:
+          type: string
+          title: Name
+          description: A name/description for the API key
+          default: API Key
+        scope:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Scope'
+            type: array
+          - type: 'null'
+          title: Scope
+          description: The scope of the API key
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+          description: Optional expiration datetime
       type: object
-      title: PaginationWithTotal
-      description: Pagination model that includes total count of items.
+      title: ApiKeyCreateParams
+      description: Parameters for creating an API key.
     ApiKey:
       properties:
         id:

@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mixedbread admin Mixedbread Embeddings API API
+  title: Mixedbread Embeddings API
   version: 0.1.0
-  description: Mixedbread admin endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
+  description: Mixedbread embeddings endpoints extracted from the canonical OpenAPI spec at https://api.mixedbread.com/openapi.json
 servers:
 - url: https://api.mixedbread.com
   description: mixedbread ai production server
@@ -18,7 +18,12 @@ paths:
   /:
     get:
       summary: Info
-      description: "Returns service information, including name and version.\n\nReturns:\n    InfoResponse: A response containing the service name and version."
+      description: 'Returns service information, including name and version.
+
+
+        Returns:
+
+        InfoResponse: A response containing the service name and version.'
       operationId: info
       responses:
         '200':
@@ -39,6 +44,29 @@ paths:
       - Mixedbread Embeddings API
 components:
   schemas:
+    ErrorResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/InnerErrorResponse'
+      type: object
+      required:
+      - error
+      title: ErrorResponse
+      description: Error Pydantic Response Service Message
+    InfoResponse:
+      properties:
+        name:
+          type: string
+          title: Name
+        version:
+          type: string
+          title: Version
+      type: object
+      required:
+      - name
+      - version
+      title: InfoResponse
+      description: Info Pydantic Response Service Message
     InnerErrorResponse:
       properties:
         message:
@@ -60,29 +88,6 @@ components:
       - type
       title: InnerErrorResponse
       description: Inner Error Pydantic Response Service Message
-    InfoResponse:
-      properties:
-        name:
-          type: string
-          title: Name
-        version:
-          type: string
-          title: Version
-      type: object
-      required:
-      - name
-      - version
-      title: InfoResponse
-      description: Info Pydantic Response Service Message
-    ErrorResponse:
-      properties:
-        error:
-          $ref: '#/components/schemas/InnerErrorResponse'
-      type: object
-      required:
-      - error
-      title: ErrorResponse
-      description: Error Pydantic Response Service Message
   securitySchemes:
     ApiKeyAuth:
       type: http
