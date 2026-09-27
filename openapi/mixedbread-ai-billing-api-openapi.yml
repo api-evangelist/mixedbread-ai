@@ -93,24 +93,24 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
-    StoreCostListResponse:
+    CostHistogramResponse:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/StoreCostInfo'
+            $ref: '#/components/schemas/DailyCostBucket'
           type: array
           title: Data
-          description: The list of store cost information
+          description: The histogram of cost information
         object:
           type: string
-          const: list
+          const: cost.histogram
           title: Object
           description: The object type of the response
-          default: list
+          default: cost.histogram
       type: object
       required:
       - data
-      title: StoreCostListResponse
+      title: CostHistogramResponse
     UsageInfo:
       properties:
         current:
@@ -134,81 +134,6 @@ components:
       type: object
       title: UsageInfo
       description: Resource usage information.
-    CostHistogramResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/DailyCostBucket'
-          type: array
-          title: Data
-          description: The histogram of cost information
-        object:
-          type: string
-          const: cost.histogram
-          title: Object
-          description: The object type of the response
-          default: cost.histogram
-      type: object
-      required:
-      - data
-      title: CostHistogramResponse
-    BillingPeriodSummary:
-      properties:
-        period:
-          $ref: '#/components/schemas/Period'
-          description: The billing period
-        cost:
-          $ref: '#/components/schemas/CostInfo'
-          description: The cost information
-        balance:
-          $ref: '#/components/schemas/BalanceInfo'
-          description: The balance information
-        usages:
-          additionalProperties:
-            $ref: '#/components/schemas/UsageInfo'
-          type: object
-          title: Usages
-          description: The monthly usages information per metric
-        generated_at:
-          type: string
-          format: date-time
-          title: Generated At
-          description: The date and time the summary was generated
-      type: object
-      required:
-      - period
-      - cost
-      - balance
-      - usages
-      - generated_at
-      title: BillingPeriodSummary
-      description: High level billing summary for the currently active period.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     CostInfo:
       properties:
         net_usage_cost:
@@ -246,6 +171,44 @@ components:
       type: object
       title: CostInfo
       description: "Cost information for a billing period.\n\n- net_usage_cost: portion of usage that actually ends up on the invoice after credits,\n    computed as gross_usage_cost - balance_applied.\n- gross_usage_cost: metered usage value before balance applied."
+    BalanceInfo:
+      properties:
+        current_balance:
+          type: number
+          title: Current Balance
+          description: The current balance
+        next_effective_balance:
+          type: number
+          title: Next Effective Balance
+          description: The next effective balance
+        next_effective_date:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Next Effective Date
+          description: The next effective date
+      type: object
+      title: BalanceInfo
+      description: Information about an organization's credit balance.
+    Period:
+      properties:
+        start:
+          type: string
+          format: date-time
+          title: Start
+          description: The start of the billing period
+        end:
+          type: string
+          format: date-time
+          title: End
+          description: The end of the billing period
+      type: object
+      required:
+      - start
+      - end
+      title: Period
+      description: Inclusive/exclusive window describing a billing period.
     HTTPValidationError:
       properties:
         detail:
@@ -255,6 +218,32 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     ProductCostInfo:
       properties:
         product_name:
@@ -284,6 +273,37 @@ components:
       - balance_applied
       title: ProductCostInfo
       description: Cost information for a product.
+    BillingPeriodSummary:
+      properties:
+        period:
+          $ref: '#/components/schemas/Period'
+          description: The billing period
+        cost:
+          $ref: '#/components/schemas/CostInfo'
+          description: The cost information
+        balance:
+          $ref: '#/components/schemas/BalanceInfo'
+          description: The balance information
+        usages:
+          additionalProperties:
+            $ref: '#/components/schemas/UsageInfo'
+          type: object
+          title: Usages
+          description: The monthly usages information per metric
+        generated_at:
+          type: string
+          format: date-time
+          title: Generated At
+          description: The date and time the summary was generated
+      type: object
+      required:
+      - period
+      - cost
+      - balance
+      - usages
+      - generated_at
+      title: BillingPeriodSummary
+      description: High level billing summary for the currently active period.
     DailyCostBucket:
       properties:
         day:
@@ -310,6 +330,49 @@ components:
       - cost_per_metric
       title: DailyCostBucket
       description: Daily cost bucket.
+    StoreCostInfo:
+      properties:
+        store_id:
+          type: string
+          title: Store Id
+          description: The ID of the store
+        cost:
+          type: string
+          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Cost
+          description: The cost
+        cost_per_metric:
+          additionalProperties:
+            type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          type: object
+          title: Cost Per Metric
+          description: The cost per metric
+      type: object
+      required:
+      - store_id
+      - cost
+      - cost_per_metric
+      title: StoreCostInfo
+      description: Cost information for a store.
+    StoreCostListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/StoreCostInfo'
+          type: array
+          title: Data
+          description: The list of store cost information
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+      type: object
+      required:
+      - data
+      title: StoreCostListResponse
     PhaseCostInfo:
       properties:
         period:
@@ -338,69 +401,6 @@ components:
       - balance_applied
       title: PhaseCostInfo
       description: Cost information for a billing phase.
-    Period:
-      properties:
-        start:
-          type: string
-          format: date-time
-          title: Start
-          description: The start of the billing period
-        end:
-          type: string
-          format: date-time
-          title: End
-          description: The end of the billing period
-      type: object
-      required:
-      - start
-      - end
-      title: Period
-      description: Inclusive/exclusive window describing a billing period.
-    StoreCostInfo:
-      properties:
-        store_id:
-          type: string
-          title: Store Id
-          description: The ID of the store
-        cost:
-          type: string
-          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Cost
-          description: The cost
-        cost_per_metric:
-          additionalProperties:
-            type: string
-            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          type: object
-          title: Cost Per Metric
-          description: The cost per metric
-      type: object
-      required:
-      - store_id
-      - cost
-      - cost_per_metric
-      title: StoreCostInfo
-      description: Cost information for a store.
-    BalanceInfo:
-      properties:
-        current_balance:
-          type: number
-          title: Current Balance
-          description: The current balance
-        next_effective_balance:
-          type: number
-          title: Next Effective Balance
-          description: The next effective balance
-        next_effective_date:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Next Effective Date
-          description: The next effective date
-      type: object
-      title: BalanceInfo
-      description: Information about an organization's credit balance.
   securitySchemes:
     ApiKeyAuth:
       type: http

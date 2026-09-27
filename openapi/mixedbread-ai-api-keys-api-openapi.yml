@@ -346,14 +346,21 @@ components:
       type: object
       title: PaginationWithTotal
       description: Pagination model that includes total count of items.
-    ApiKeyUpdateParams:
+    ApiKeyCreateParams:
       properties:
         name:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Name
           description: A name/description for the API key
+          default: API Key
+        scope:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Scope'
+            type: array
+          - type: 'null'
+          title: Scope
+          description: The scope of the API key
         expires_at:
           anyOf:
           - type: string
@@ -362,55 +369,8 @@ components:
           title: Expires At
           description: Optional expiration datetime
       type: object
-      title: ApiKeyUpdateParams
-      description: Parameters for updating an API key.
-    ApiKeyListResponse:
-      properties:
-        pagination:
-          $ref: '#/components/schemas/PaginationWithTotal'
-        object:
-          type: string
-          const: list
-          title: Object
-          description: The object type of the response
-          default: list
-        data:
-          items:
-            $ref: '#/components/schemas/ApiKey'
-          type: array
-          title: Data
-          description: The list of API keys
-      type: object
-      required:
-      - pagination
-      - data
-      title: ApiKeyListResponse
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      title: ApiKeyCreateParams
+      description: Parameters for creating an API key.
     Scope:
       properties:
         method:
@@ -440,6 +400,110 @@ components:
       required:
       - method
       title: Scope
+    ApiKey:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the API key
+        name:
+          type: string
+          title: Name
+          description: The name of the API key
+        redacted_value:
+          type: string
+          title: Redacted Value
+          description: The redacted value of the API key
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+          description: The expiration datetime of the API key
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: The creation datetime of the API key
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: The last update datetime of the API key
+        last_active_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Active At
+          description: The last active datetime of the API key
+        object:
+          type: string
+          const: api_key
+          title: Object
+          description: The type of the object
+          default: api_key
+        scope:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Scope'
+            type: array
+          - type: 'null'
+          title: Scope
+          description: The scope of the API key
+      type: object
+      required:
+      - id
+      - name
+      - redacted_value
+      - created_at
+      - updated_at
+      title: ApiKey
+      description: Response model for an API key.
+    ApiKeyListResponse:
+      properties:
+        pagination:
+          $ref: '#/components/schemas/PaginationWithTotal'
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        data:
+          items:
+            $ref: '#/components/schemas/ApiKey'
+          type: array
+          title: Data
+          description: The list of API keys
+      type: object
+      required:
+      - pagination
+      - data
+      title: ApiKeyListResponse
+    ApiKeyDeleted:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the deleted API key
+        deleted:
+          type: boolean
+          title: Deleted
+          description: Whether the API key was deleted
+        object:
+          type: string
+          const: api_key
+          title: Object
+          description: The type of the object deleted
+          default: api_key
+      type: object
+      required:
+      - id
+      - deleted
+      title: ApiKeyDeleted
+      description: Response model for deleting an API key.
     HTTPValidationError:
       properties:
         detail:
@@ -515,43 +579,40 @@ components:
       - value
       title: ApiKeyCreated
       description: Response model for creating an API key.
-    ApiKeyDeleted:
+    ValidationError:
       properties:
-        id:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-          title: Id
-          description: The ID of the deleted API key
-        deleted:
-          type: boolean
-          title: Deleted
-          description: Whether the API key was deleted
-        object:
+          title: Message
+        type:
           type: string
-          const: api_key
-          title: Object
-          description: The type of the object deleted
-          default: api_key
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
-      - id
-      - deleted
-      title: ApiKeyDeleted
-      description: Response model for deleting an API key.
-    ApiKeyCreateParams:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ApiKeyUpdateParams:
       properties:
         name:
-          type: string
+          anyOf:
+          - type: string
+          - type: 'null'
           title: Name
           description: A name/description for the API key
-          default: API Key
-        scope:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/Scope'
-            type: array
-          - type: 'null'
-          title: Scope
-          description: The scope of the API key
         expires_at:
           anyOf:
           - type: string
@@ -560,69 +621,8 @@ components:
           title: Expires At
           description: Optional expiration datetime
       type: object
-      title: ApiKeyCreateParams
-      description: Parameters for creating an API key.
-    ApiKey:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The ID of the API key
-        name:
-          type: string
-          title: Name
-          description: The name of the API key
-        redacted_value:
-          type: string
-          title: Redacted Value
-          description: The redacted value of the API key
-        expires_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Expires At
-          description: The expiration datetime of the API key
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-          description: The creation datetime of the API key
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-          description: The last update datetime of the API key
-        last_active_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Last Active At
-          description: The last active datetime of the API key
-        object:
-          type: string
-          const: api_key
-          title: Object
-          description: The type of the object
-          default: api_key
-        scope:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/Scope'
-            type: array
-          - type: 'null'
-          title: Scope
-          description: The scope of the API key
-      type: object
-      required:
-      - id
-      - name
-      - redacted_value
-      - created_at
-      - updated_at
-      title: ApiKey
-      description: Response model for an API key.
+      title: ApiKeyUpdateParams
+      description: Parameters for updating an API key.
   securitySchemes:
     ApiKeyAuth:
       type: http

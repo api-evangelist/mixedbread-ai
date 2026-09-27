@@ -56,6 +56,27 @@ paths:
       - Reranking
 components:
   schemas:
+    Usage:
+      properties:
+        prompt_tokens:
+          type: integer
+          title: Prompt Tokens
+          description: The number of tokens used for the prompt
+        total_tokens:
+          type: integer
+          title: Total Tokens
+          description: The total number of tokens used
+        completion_tokens:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Completion Tokens
+          description: The number of tokens used for the completion
+      type: object
+      required:
+      - prompt_tokens
+      - total_tokens
+      title: Usage
     RerankResponse:
       properties:
         usage:
@@ -112,6 +133,52 @@ components:
       - top_k
       - return_input
       title: RerankResponse
+    RankedDocument:
+      properties:
+        index:
+          type: integer
+          title: Index
+          description: The index of the document.
+          examples:
+          - 0
+        score:
+          type: number
+          title: Score
+          description: The score of the document.
+          examples:
+          - 0.95
+        input:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Input
+          description: The input document.
+          examples:
+          - field1: value1
+            field2: value2
+          - Hello, world!
+        object:
+          type: string
+          const: rank_result
+          title: Object
+          description: The object type.
+          default: rank_result
+          examples:
+          - rank_result
+      type: object
+      required:
+      - index
+      - score
+      title: RankedDocument
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -138,36 +205,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Usage:
-      properties:
-        prompt_tokens:
-          type: integer
-          title: Prompt Tokens
-          description: The number of tokens used for the prompt
-        total_tokens:
-          type: integer
-          title: Total Tokens
-          description: The total number of tokens used
-        completion_tokens:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Completion Tokens
-          description: The number of tokens used for the completion
-      type: object
-      required:
-      - prompt_tokens
-      - total_tokens
-      title: Usage
     RerankParams:
       properties:
         model:
@@ -248,43 +285,6 @@ components:
       - input
       title: RerankParams
       description: Parameters for reranking documents.
-    RankedDocument:
-      properties:
-        index:
-          type: integer
-          title: Index
-          description: The index of the document.
-          examples:
-          - 0
-        score:
-          type: number
-          title: Score
-          description: The score of the document.
-          examples:
-          - 0.95
-        input:
-          anyOf:
-          - {}
-          - type: 'null'
-          title: Input
-          description: The input document.
-          examples:
-          - field1: value1
-            field2: value2
-          - Hello, world!
-        object:
-          type: string
-          const: rank_result
-          title: Object
-          description: The object type.
-          default: rank_result
-          examples:
-          - rank_result
-      type: object
-      required:
-      - index
-      - score
-      title: RankedDocument
   securitySchemes:
     ApiKeyAuth:
       type: http

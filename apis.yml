@@ -2,7 +2,7 @@ aid: mixedbread-ai
 url: https://raw.githubusercontent.com/api-evangelist/mixedbread-ai/refs/heads/main/apis.yml
 apis:
 - aid: mixedbread-ai:mixedbread-ai-admin-api
-  name: Mixedbread admin API
+  name: Mixedbread Admin API
   description: The admin API from Mixedbread — 1 operation(s) for admin.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
@@ -26,7 +26,7 @@ apis:
   - type: JSONSchema
     url: json-schema/mixedbread-store-schema.json
 - aid: mixedbread-ai:mixedbread-ai-api-keys-api
-  name: Mixedbread api_keys API
+  name: Mixedbread API Keys API
   description: The api_keys API from Mixedbread — 4 operation(s) for api_keys.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
@@ -50,7 +50,7 @@ apis:
   - type: JSONSchema
     url: json-schema/mixedbread-store-schema.json
 - aid: mixedbread-ai:mixedbread-ai-billing-api
-  name: Mixedbread billing API
+  name: Mixedbread Billing API
   description: The billing API from Mixedbread — 4 operation(s) for billing.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
@@ -74,7 +74,7 @@ apis:
   - type: JSONSchema
     url: json-schema/mixedbread-store-schema.json
 - aid: mixedbread-ai:mixedbread-ai-completions-api
-  name: Mixedbread completions API
+  name: Mixedbread Completions API
   description: The completions API from Mixedbread — 1 operation(s) for completions.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
@@ -98,7 +98,7 @@ apis:
   - type: JSONSchema
     url: json-schema/mixedbread-store-schema.json
 - aid: mixedbread-ai:mixedbread-ai-data-sources-api
-  name: Mixedbread data_sources API
+  name: Mixedbread Data Sources API
   description: The data_sources API from Mixedbread — 6 operation(s) for data_sources.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
@@ -122,7 +122,7 @@ apis:
   - type: JSONSchema
     url: json-schema/mixedbread-store-schema.json
 - aid: mixedbread-ai:mixedbread-ai-deprecated-vector-stores-api
-  name: Mixedbread deprecated_vector_stores API
+  name: Mixedbread Deprecated Vector Stores API
   description: The deprecated_vector_stores API from Mixedbread — 10 operation(s) for deprecated_vector_stores.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
@@ -167,7 +167,7 @@ apis:
   - type: JSONSchema
     url: json-schema/mixedbread-store-schema.json
 - aid: mixedbread-ai:mixedbread-ai-extractions-api
-  name: Mixedbread extractions API
+  name: Mixedbread Extractions API
   description: The extractions API from Mixedbread — 6 operation(s) for extractions.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
@@ -191,7 +191,7 @@ apis:
   - type: JSONSchema
     url: json-schema/mixedbread-store-schema.json
 - aid: mixedbread-ai:mixedbread-ai-files-api
-  name: Mixedbread files API
+  name: Mixedbread Files API
   description: The files API from Mixedbread — 7 operation(s) for files.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
@@ -238,7 +238,7 @@ apis:
   - type: JSONSchema
     url: json-schema/mixedbread-store-schema.json
 - aid: mixedbread-ai:mixedbread-ai-parsing-api
-  name: Mixedbread parsing API
+  name: Mixedbread Parsing API
   description: The parsing API from Mixedbread — 2 operation(s) for parsing.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
@@ -284,7 +284,7 @@ apis:
   - type: JSONSchema
     url: json-schema/mixedbread-store-schema.json
 - aid: mixedbread-ai:mixedbread-ai-schemas-api
-  name: Mixedbread schemas API
+  name: Mixedbread Schemas API
   description: The schemas API from Mixedbread — 1 operation(s) for schemas.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
@@ -308,7 +308,7 @@ apis:
   - type: JSONSchema
     url: json-schema/mixedbread-store-schema.json
 - aid: mixedbread-ai:mixedbread-ai-stores-api
-  name: Mixedbread stores API
+  name: Mixedbread Stores API
   description: The stores API from Mixedbread — 17 operation(s) for stores.
   humanURL: https://www.mixedbread.com/api-reference
   baseURL: https://api.mixedbread.com
