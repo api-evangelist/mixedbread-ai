@@ -56,27 +56,121 @@ paths:
       - Reranking
 components:
   schemas:
-    Usage:
+    RerankParams:
       properties:
-        prompt_tokens:
-          type: integer
-          title: Prompt Tokens
-          description: The number of tokens used for the prompt
-        total_tokens:
-          type: integer
-          title: Total Tokens
-          description: The total number of tokens used
-        completion_tokens:
+        model:
+          type: string
+          maxLength: 500
+          minLength: 1
+          title: Model
+          description: The model to use for reranking documents.
+          default: mixedbread-ai/mxbai-rerank-large-v2
+          examples:
+          - mixedbread-ai/mxbai-rerank-large-v2
+        query:
+          type: string
+          maxLength: 32000
+          minLength: 1
+          title: Query
+          description: The query to rerank the documents.
+          examples:
+          - What are the key features of the Mixedbread embedding model?
+        input:
+          items:
+            anyOf:
+            - type: string
+            - {}
+            - items: {}
+              type: array
+          type: array
+          maxItems: 1000
+          minItems: 1
+          title: Input
+          description: The input documents to rerank.
+          examples:
+          - - Document 1
+            - Document 2
+          - - field1: value1
+              field2: value2
+            - field1: value3
+              field2: value4
+        rank_fields:
           anyOf:
-          - type: integer
+          - items:
+              type: string
+            type: array
+            minItems: 1
           - type: 'null'
-          title: Completion Tokens
-          description: The number of tokens used for the completion
+          title: Rank Fields
+          description: The fields of the documents to rank.
+          examples:
+          - - content
+            - title
+          - - document.text
+            - metadata.summary
+        top_k:
+          type: integer
+          minimum: 1.0
+          title: Top K
+          description: The number of documents to return.
+          default: -1
+          examples:
+          - 10
+        return_input:
+          type: boolean
+          title: Return Input
+          description: Whether to return the documents.
+          default: false
+          examples:
+          - false
+        rewrite_query:
+          type: boolean
+          title: Rewrite Query
+          description: Wether or not to rewrite the query before passing it to the reranking model
+          default: false
+          examples:
+          - false
       type: object
       required:
-      - prompt_tokens
-      - total_tokens
-      title: Usage
+      - query
+      - input
+      title: RerankParams
+      description: Parameters for reranking documents.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     RerankResponse:
       properties:
         usage:
@@ -170,121 +264,27 @@ components:
       - index
       - score
       title: RankedDocument
-    HTTPValidationError:
+    Usage:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    RerankParams:
-      properties:
-        model:
-          type: string
-          maxLength: 500
-          minLength: 1
-          title: Model
-          description: The model to use for reranking documents.
-          default: mixedbread-ai/mxbai-rerank-large-v2
-          examples:
-          - mixedbread-ai/mxbai-rerank-large-v2
-        query:
-          type: string
-          maxLength: 32000
-          minLength: 1
-          title: Query
-          description: The query to rerank the documents.
-          examples:
-          - What are the key features of the Mixedbread embedding model?
-        input:
-          items:
-            anyOf:
-            - type: string
-            - {}
-            - items: {}
-              type: array
-          type: array
-          maxItems: 1000
-          minItems: 1
-          title: Input
-          description: The input documents to rerank.
-          examples:
-          - - Document 1
-            - Document 2
-          - - field1: value1
-              field2: value2
-            - field1: value3
-              field2: value4
-        rank_fields:
-          anyOf:
-          - items:
-              type: string
-            type: array
-            minItems: 1
-          - type: 'null'
-          title: Rank Fields
-          description: The fields of the documents to rank.
-          examples:
-          - - content
-            - title
-          - - document.text
-            - metadata.summary
-        top_k:
+        prompt_tokens:
           type: integer
-          minimum: 1.0
-          title: Top K
-          description: The number of documents to return.
-          default: -1
-          examples:
-          - 10
-        return_input:
-          type: boolean
-          title: Return Input
-          description: Whether to return the documents.
-          default: false
-          examples:
-          - false
-        rewrite_query:
-          type: boolean
-          title: Rewrite Query
-          description: Wether or not to rewrite the query before passing it to the reranking model
-          default: false
-          examples:
-          - false
+          title: Prompt Tokens
+          description: The number of tokens used for the prompt
+        total_tokens:
+          type: integer
+          title: Total Tokens
+          description: The total number of tokens used
+        completion_tokens:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Completion Tokens
+          description: The number of tokens used for the completion
       type: object
       required:
-      - query
-      - input
-      title: RerankParams
-      description: Parameters for reranking documents.
+      - prompt_tokens
+      - total_tokens
+      title: Usage
   securitySchemes:
     ApiKeyAuth:
       type: http

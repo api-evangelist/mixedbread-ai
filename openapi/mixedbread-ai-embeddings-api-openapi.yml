@@ -138,104 +138,6 @@ components:
       - input
       title: EmbeddingCreateParams
       description: Parameters for creating embeddings.
-    EncodingFormat:
-      type: string
-      enum:
-      - float
-      - float16
-      - base64
-      - binary
-      - ubinary
-      - int8
-      - uint8
-      title: EncodingFormat
-      description: Enumeration of encoding formats.
-    Usage:
-      properties:
-        prompt_tokens:
-          type: integer
-          title: Prompt Tokens
-          description: The number of tokens used for the prompt
-        total_tokens:
-          type: integer
-          title: Total Tokens
-          description: The total number of tokens used
-        completion_tokens:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Completion Tokens
-          description: The number of tokens used for the completion
-      type: object
-      required:
-      - prompt_tokens
-      - total_tokens
-      title: Usage
-    Embedding:
-      properties:
-        embedding:
-          $ref: '#/components/schemas/EmbeddingItem'
-          description: The encoded embedding.
-        index:
-          type: integer
-          title: Index
-          description: The index of the embedding.
-          examples:
-          - 0
-        object:
-          type: string
-          const: embedding
-          title: Object
-          description: The object type of the embedding.
-          default: embedding
-          examples:
-          - embedding
-      type: object
-      required:
-      - embedding
-      - index
-      title: Embedding
-    MultipleEncodingsEmbeddingItem:
-      properties:
-        float:
-          items:
-            type: number
-          type: array
-          title: Float
-        int8:
-          items:
-            type: integer
-          type: array
-          title: Int8
-        uint8:
-          items:
-            type: integer
-          type: array
-          title: Uint8
-        binary:
-          items:
-            type: integer
-          type: array
-          title: Binary
-        ubinary:
-          items:
-            type: integer
-          type: array
-          title: Ubinary
-        base64:
-          type: string
-          title: Base64
-      type: object
-      title: MultipleEncodingsEmbeddingItem
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     MultiEncodingEmbedding:
       properties:
         embedding:
@@ -269,32 +171,18 @@ components:
       - embedding
       - index
       title: MultiEncodingEmbedding
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+    EncodingFormat:
+      type: string
+      enum:
+      - float
+      - float16
+      - base64
+      - binary
+      - ubinary
+      - int8
+      - uint8
+      title: EncodingFormat
+      description: Enumeration of encoding formats.
     EmbeddingCreateResponse:
       properties:
         usage:
@@ -357,6 +245,118 @@ components:
       - encoding_format
       - dimensions
       title: EmbeddingCreateResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    MultipleEncodingsEmbeddingItem:
+      properties:
+        float:
+          items:
+            type: number
+          type: array
+          title: Float
+        int8:
+          items:
+            type: integer
+          type: array
+          title: Int8
+        uint8:
+          items:
+            type: integer
+          type: array
+          title: Uint8
+        binary:
+          items:
+            type: integer
+          type: array
+          title: Binary
+        ubinary:
+          items:
+            type: integer
+          type: array
+          title: Ubinary
+        base64:
+          type: string
+          title: Base64
+      type: object
+      title: MultipleEncodingsEmbeddingItem
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Embedding:
+      properties:
+        embedding:
+          $ref: '#/components/schemas/EmbeddingItem'
+          description: The encoded embedding.
+        index:
+          type: integer
+          title: Index
+          description: The index of the embedding.
+          examples:
+          - 0
+        object:
+          type: string
+          const: embedding
+          title: Object
+          description: The object type of the embedding.
+          default: embedding
+          examples:
+          - embedding
+      type: object
+      required:
+      - embedding
+      - index
+      title: Embedding
+    Usage:
+      properties:
+        prompt_tokens:
+          type: integer
+          title: Prompt Tokens
+          description: The number of tokens used for the prompt
+        total_tokens:
+          type: integer
+          title: Total Tokens
+          description: The total number of tokens used
+        completion_tokens:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Completion Tokens
+          description: The number of tokens used for the completion
+      type: object
+      required:
+      - prompt_tokens
+      - total_tokens
+      title: Usage
   securitySchemes:
     ApiKeyAuth:
       type: http

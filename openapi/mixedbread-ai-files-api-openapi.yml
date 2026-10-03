@@ -471,73 +471,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    MultipartUploadPart:
-      properties:
-        part_number:
-          type: integer
-          minimum: 1.0
-          title: Part Number
-          description: 1-based part number
-        etag:
-          type: string
-          title: Etag
-          description: ETag returned by the storage backend after uploading the part
-      type: object
-      required:
-      - part_number
-      - etag
-      title: MultipartUploadPart
-    MultipartUploadPartUrl:
-      properties:
-        part_number:
-          type: integer
-          minimum: 1.0
-          title: Part Number
-          description: 1-based part number
-        url:
-          type: string
-          title: Url
-          description: Presigned URL for uploading this part
-      type: object
-      required:
-      - part_number
-      - url
-      title: MultipartUploadPartUrl
-    MultipartUploadObject:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The multipart upload record ID
-        filename:
-          type: string
-          title: Filename
-          description: Original filename
-        file_size:
-          type: integer
-          title: File Size
-          description: Total file size in bytes
-        mime_type:
-          type: string
-          title: Mime Type
-          description: MIME type of the file
-        part_count:
-          type: integer
-          title: Part Count
-          description: Number of parts the file was split into
-        created_at:
-          type: string
-          title: Created At
-          description: When the upload was initiated
-      type: object
-      required:
-      - id
-      - filename
-      - file_size
-      - mime_type
-      - part_count
-      - created_at
-      title: MultipartUploadObject
     FileDeleted:
       properties:
         id:
@@ -559,50 +492,6 @@ components:
       required:
       - id
       title: FileDeleted
-    CursorPaginationResponse:
-      properties:
-        has_more:
-          type: boolean
-          title: Has More
-          description: 'Contextual direction-aware flag: True if more items exist in the requested pagination direction. For ''after'': more items after this page. For ''before'': more items before this page.'
-          examples:
-          - true
-          - false
-        first_cursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: First Cursor
-          description: Cursor of the first item in this page. Use for backward pagination. None if page is empty.
-          examples:
-          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
-          - null
-        last_cursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Cursor
-          description: Cursor of the last item in this page. Use for forward pagination. None if page is empty.
-          examples:
-          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMFQyMzo1OTo1OS4wMDBaIiwiaWQiOiJ4eXo3ODkifQ==
-          - null
-        total:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Total
-          description: Total number of items available across all pages. Only included when include_total=true was requested. Expensive operation - use sparingly.
-          examples:
-          - 42
-          - 0
-          - null
-      type: object
-      required:
-      - has_more
-      - first_cursor
-      - last_cursor
-      title: CursorPaginationResponse
-      description: Response model for cursor-based pagination.
     CreateMultipartUploadResponse:
       properties:
         id:
@@ -620,6 +509,52 @@ components:
       - id
       - part_urls
       title: CreateMultipartUploadResponse
+    MultipartUploadListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/MultipartUploadObject'
+          type: array
+          title: Data
+          description: List of in-progress multipart uploads
+      type: object
+      required:
+      - data
+      title: MultipartUploadListResponse
+    FileListResponse:
+      properties:
+        pagination:
+          $ref: '#/components/schemas/CursorPaginationResponse'
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        data:
+          items:
+            $ref: '#/components/schemas/FileObject'
+          type: array
+          title: Data
+          description: The list of files
+      type: object
+      required:
+      - pagination
+      - data
+      title: FileListResponse
+    CompleteMultipartUploadRequest:
+      properties:
+        parts:
+          items:
+            $ref: '#/components/schemas/MultipartUploadPart'
+          type: array
+          minItems: 1
+          title: Parts
+          description: List of completed parts with their ETags
+      type: object
+      required:
+      - parts
+      title: CompleteMultipartUploadRequest
     FileObject:
       properties:
         id:
@@ -689,65 +624,6 @@ components:
         This model contains metadata about files stored in the system, including
 
         identifiers, size information, and timestamps.'
-    CreateMultipartUploadRequest:
-      properties:
-        filename:
-          type: string
-          minLength: 1
-          title: Filename
-          description: Name of the file including extension
-          examples:
-          - document.pdf
-        file_size:
-          type: integer
-          exclusiveMinimum: 0.0
-          title: File Size
-          description: Total size of the file in bytes
-          examples:
-          - 10485760
-        mime_type:
-          type: string
-          pattern: ^[\w\.\-\+]+/[\w\.\-\+]+(\.\w+)*$
-          title: Mime Type
-          description: MIME type of the file
-          examples:
-          - application/pdf
-        part_count:
-          type: integer
-          maximum: 10000.0
-          minimum: 1.0
-          title: Part Count
-          description: Number of parts to split the upload into
-          default: 1
-          examples:
-          - 3
-      type: object
-      required:
-      - filename
-      - file_size
-      - mime_type
-      title: CreateMultipartUploadRequest
-    FileListResponse:
-      properties:
-        pagination:
-          $ref: '#/components/schemas/CursorPaginationResponse'
-        object:
-          type: string
-          const: list
-          title: Object
-          description: The object type of the response
-          default: list
-        data:
-          items:
-            $ref: '#/components/schemas/FileObject'
-          type: array
-          title: Data
-          description: The list of files
-      type: object
-      required:
-      - pagination
-      - data
-      title: FileListResponse
     HTTPValidationError:
       properties:
         detail:
@@ -783,31 +659,6 @@ components:
       - msg
       - type
       title: ValidationError
-    MultipartUploadListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/MultipartUploadObject'
-          type: array
-          title: Data
-          description: List of in-progress multipart uploads
-      type: object
-      required:
-      - data
-      title: MultipartUploadListResponse
-    CompleteMultipartUploadRequest:
-      properties:
-        parts:
-          items:
-            $ref: '#/components/schemas/MultipartUploadPart'
-          type: array
-          minItems: 1
-          title: Parts
-          description: List of completed parts with their ETags
-      type: object
-      required:
-      - parts
-      title: CompleteMultipartUploadRequest
     MultipartUploadDetailResponse:
       properties:
         id:
@@ -857,17 +708,66 @@ components:
       - completed_parts
       - part_urls
       title: MultipartUploadDetailResponse
-    Body_update_file:
+    CursorPaginationResponse:
       properties:
-        file:
-          type: string
-          format: binary
-          title: File
-          description: The file to update
+        has_more:
+          type: boolean
+          title: Has More
+          description: 'Contextual direction-aware flag: True if more items exist in the requested pagination direction. For ''after'': more items after this page. For ''before'': more items before this page.'
+          examples:
+          - true
+          - false
+        first_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Cursor
+          description: Cursor of the first item in this page. Use for backward pagination. None if page is empty.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+          - null
+        last_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Cursor
+          description: Cursor of the last item in this page. Use for forward pagination. None if page is empty.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMFQyMzo1OTo1OS4wMDBaIiwiaWQiOiJ4eXo3ODkifQ==
+          - null
+        total:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Total
+          description: Total number of items available across all pages. Only included when include_total=true was requested. Expensive operation - use sparingly.
+          examples:
+          - 42
+          - 0
+          - null
       type: object
       required:
-      - file
-      title: Body_update_file
+      - has_more
+      - first_cursor
+      - last_cursor
+      title: CursorPaginationResponse
+      description: Response model for cursor-based pagination.
+    MultipartUploadPartUrl:
+      properties:
+        part_number:
+          type: integer
+          minimum: 1.0
+          title: Part Number
+          description: 1-based part number
+        url:
+          type: string
+          title: Url
+          description: Presigned URL for uploading this part
+      type: object
+      required:
+      - part_number
+      - url
+      title: MultipartUploadPartUrl
     Body_create_file:
       properties:
         file:
@@ -879,6 +779,106 @@ components:
       required:
       - file
       title: Body_create_file
+    Body_update_file:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+          description: The file to update
+      type: object
+      required:
+      - file
+      title: Body_update_file
+    MultipartUploadPart:
+      properties:
+        part_number:
+          type: integer
+          minimum: 1.0
+          title: Part Number
+          description: 1-based part number
+        etag:
+          type: string
+          title: Etag
+          description: ETag returned by the storage backend after uploading the part
+      type: object
+      required:
+      - part_number
+      - etag
+      title: MultipartUploadPart
+    MultipartUploadObject:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The multipart upload record ID
+        filename:
+          type: string
+          title: Filename
+          description: Original filename
+        file_size:
+          type: integer
+          title: File Size
+          description: Total file size in bytes
+        mime_type:
+          type: string
+          title: Mime Type
+          description: MIME type of the file
+        part_count:
+          type: integer
+          title: Part Count
+          description: Number of parts the file was split into
+        created_at:
+          type: string
+          title: Created At
+          description: When the upload was initiated
+      type: object
+      required:
+      - id
+      - filename
+      - file_size
+      - mime_type
+      - part_count
+      - created_at
+      title: MultipartUploadObject
+    CreateMultipartUploadRequest:
+      properties:
+        filename:
+          type: string
+          minLength: 1
+          title: Filename
+          description: Name of the file including extension
+          examples:
+          - document.pdf
+        file_size:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: File Size
+          description: Total size of the file in bytes
+          examples:
+          - 10485760
+        mime_type:
+          type: string
+          pattern: ^[\w\.\-\+]+/[\w\.\-\+]+(\.\w+)*$
+          title: Mime Type
+          description: MIME type of the file
+          examples:
+          - application/pdf
+        part_count:
+          type: integer
+          maximum: 10000.0
+          minimum: 1.0
+          title: Part Count
+          description: Number of parts to split the upload into
+          default: 1
+          examples:
+          - 3
+      type: object
+      required:
+      - filename
+      - file_size
+      - mime_type
+      title: CreateMultipartUploadRequest
   securitySchemes:
     ApiKeyAuth:
       type: http

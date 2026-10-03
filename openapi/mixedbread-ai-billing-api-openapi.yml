@@ -93,6 +93,79 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
+    StoreCostInfo:
+      properties:
+        store_id:
+          type: string
+          title: Store Id
+          description: The ID of the store
+        cost:
+          type: string
+          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Cost
+          description: The cost
+        cost_per_metric:
+          additionalProperties:
+            type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          type: object
+          title: Cost Per Metric
+          description: The cost per metric
+      type: object
+      required:
+      - store_id
+      - cost
+      - cost_per_metric
+      title: StoreCostInfo
+      description: Cost information for a store.
+    BalanceInfo:
+      properties:
+        current_balance:
+          type: number
+          title: Current Balance
+          description: The current balance
+        next_effective_balance:
+          type: number
+          title: Next Effective Balance
+          description: The next effective balance
+        next_effective_date:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Next Effective Date
+          description: The next effective date
+      type: object
+      title: BalanceInfo
+      description: Information about an organization's credit balance.
+    PhaseCostInfo:
+      properties:
+        period:
+          $ref: '#/components/schemas/Period'
+          description: The period
+        net_usage_cost:
+          type: string
+          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Net Usage Cost
+          description: The net usage cost
+        gross_usage_cost:
+          type: string
+          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Gross Usage Cost
+          description: The gross usage cost
+        balance_applied:
+          type: string
+          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Balance Applied
+          description: The balance applied
+      type: object
+      required:
+      - period
+      - net_usage_cost
+      - gross_usage_cost
+      - balance_applied
+      title: PhaseCostInfo
+      description: Cost information for a billing phase.
     CostHistogramResponse:
       properties:
         data:
@@ -111,29 +184,114 @@ components:
       required:
       - data
       title: CostHistogramResponse
-    UsageInfo:
+    DailyCostBucket:
       properties:
-        current:
+        day:
+          type: string
+          format: date-time
+          title: Day
+          description: The date of the cost bucket
+        cost:
           type: string
           pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Current
-          description: The current usage of the resource
-          default: '0'
-        limit:
-          anyOf:
-          - type: string
+          title: Cost
+          description: The cost of the cost bucket
+        cost_per_metric:
+          additionalProperties:
+            type: string
             pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          - type: 'null'
-          title: Limit
-          description: The limit of the resource
-        unit:
-          type: string
-          title: Unit
-          description: The unit of the resource
-          default: ''
+          type: object
+          title: Cost Per Metric
+          description: The cost per metric
       type: object
-      title: UsageInfo
-      description: Resource usage information.
+      required:
+      - day
+      - cost
+      - cost_per_metric
+      title: DailyCostBucket
+      description: Daily cost bucket.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ProductCostInfo:
+      properties:
+        product_name:
+          type: string
+          title: Product Name
+          description: The name of the product. Store, Parsing, Reranking, Embeddings
+        gross_usage_cost:
+          type: string
+          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Gross Usage Cost
+          description: The gross usage cost of the product
+        net_usage_cost:
+          type: string
+          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Net Usage Cost
+          description: The net usage cost of the product
+        balance_applied:
+          type: string
+          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Balance Applied
+          description: The balance applied to the product
+      type: object
+      required:
+      - product_name
+      - gross_usage_cost
+      - net_usage_cost
+      - balance_applied
+      title: ProductCostInfo
+      description: Cost information for a product.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    StoreCostListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/StoreCostInfo'
+          type: array
+          title: Data
+          description: The list of store cost information
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+      type: object
+      required:
+      - data
+      title: StoreCostListResponse
     CostInfo:
       properties:
         net_usage_cost:
@@ -171,26 +329,29 @@ components:
       type: object
       title: CostInfo
       description: "Cost information for a billing period.\n\n- net_usage_cost: portion of usage that actually ends up on the invoice after credits,\n    computed as gross_usage_cost - balance_applied.\n- gross_usage_cost: metered usage value before balance applied."
-    BalanceInfo:
+    UsageInfo:
       properties:
-        current_balance:
-          type: number
-          title: Current Balance
-          description: The current balance
-        next_effective_balance:
-          type: number
-          title: Next Effective Balance
-          description: The next effective balance
-        next_effective_date:
+        current:
+          type: string
+          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Current
+          description: The current usage of the resource
+          default: '0'
+        limit:
           anyOf:
           - type: string
-            format: date-time
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
           - type: 'null'
-          title: Next Effective Date
-          description: The next effective date
+          title: Limit
+          description: The limit of the resource
+        unit:
+          type: string
+          title: Unit
+          description: The unit of the resource
+          default: ''
       type: object
-      title: BalanceInfo
-      description: Information about an organization's credit balance.
+      title: UsageInfo
+      description: Resource usage information.
     Period:
       properties:
         start:
@@ -209,70 +370,6 @@ components:
       - end
       title: Period
       description: Inclusive/exclusive window describing a billing period.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    ProductCostInfo:
-      properties:
-        product_name:
-          type: string
-          title: Product Name
-          description: The name of the product. Store, Parsing, Reranking, Embeddings
-        gross_usage_cost:
-          type: string
-          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Gross Usage Cost
-          description: The gross usage cost of the product
-        net_usage_cost:
-          type: string
-          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Net Usage Cost
-          description: The net usage cost of the product
-        balance_applied:
-          type: string
-          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Balance Applied
-          description: The balance applied to the product
-      type: object
-      required:
-      - product_name
-      - gross_usage_cost
-      - net_usage_cost
-      - balance_applied
-      title: ProductCostInfo
-      description: Cost information for a product.
     BillingPeriodSummary:
       properties:
         period:
@@ -304,103 +401,6 @@ components:
       - generated_at
       title: BillingPeriodSummary
       description: High level billing summary for the currently active period.
-    DailyCostBucket:
-      properties:
-        day:
-          type: string
-          format: date-time
-          title: Day
-          description: The date of the cost bucket
-        cost:
-          type: string
-          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Cost
-          description: The cost of the cost bucket
-        cost_per_metric:
-          additionalProperties:
-            type: string
-            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          type: object
-          title: Cost Per Metric
-          description: The cost per metric
-      type: object
-      required:
-      - day
-      - cost
-      - cost_per_metric
-      title: DailyCostBucket
-      description: Daily cost bucket.
-    StoreCostInfo:
-      properties:
-        store_id:
-          type: string
-          title: Store Id
-          description: The ID of the store
-        cost:
-          type: string
-          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Cost
-          description: The cost
-        cost_per_metric:
-          additionalProperties:
-            type: string
-            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          type: object
-          title: Cost Per Metric
-          description: The cost per metric
-      type: object
-      required:
-      - store_id
-      - cost
-      - cost_per_metric
-      title: StoreCostInfo
-      description: Cost information for a store.
-    StoreCostListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/StoreCostInfo'
-          type: array
-          title: Data
-          description: The list of store cost information
-        object:
-          type: string
-          const: list
-          title: Object
-          description: The object type of the response
-          default: list
-      type: object
-      required:
-      - data
-      title: StoreCostListResponse
-    PhaseCostInfo:
-      properties:
-        period:
-          $ref: '#/components/schemas/Period'
-          description: The period
-        net_usage_cost:
-          type: string
-          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Net Usage Cost
-          description: The net usage cost
-        gross_usage_cost:
-          type: string
-          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Gross Usage Cost
-          description: The gross usage cost
-        balance_applied:
-          type: string
-          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Balance Applied
-          description: The balance applied
-      type: object
-      required:
-      - period
-      - net_usage_cost
-      - gross_usage_cost
-      - balance_applied
-      title: PhaseCostInfo
-      description: Cost information for a billing phase.
   securitySchemes:
     ApiKeyAuth:
       type: http

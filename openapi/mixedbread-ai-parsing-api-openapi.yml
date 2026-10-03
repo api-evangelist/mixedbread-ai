@@ -289,88 +289,37 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ChunkElement:
+    ParsingJobCreateParams:
       properties:
-        type:
-          $ref: '#/components/schemas/ElementType'
-          description: The type of the extracted element
-        confidence:
-          type: number
-          maximum: 1.0
-          minimum: 0.0
-          title: Confidence
-          description: The confidence score of the extraction
-        bbox:
-          prefixItems:
-          - type: number
-          - type: number
-          - type: number
-          - type: number
-          type: array
-          maxItems: 4
-          minItems: 4
-          title: Bbox
-          description: The bounding box coordinates [x1, y1, x2, y2]
-        page:
-          type: integer
-          minimum: 0.0
-          title: Page
-          description: The page number where the element was found
-        content:
+        file_id:
           type: string
-          title: Content
-          description: The extracted text content of the element
-        summary:
+          title: File Id
+          description: The ID of the file to parse
+        element_types:
           anyOf:
-          - type: string
+          - items:
+              $ref: '#/components/schemas/ElementType'
+            type: array
           - type: 'null'
-          title: Summary
-          description: A brief summary of the element's content
-        image:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Image
-          description: The base64-encoded image data for figure elements
+          title: Element Types
+          description: The elements to extract from the document
+        chunking_strategy:
+          $ref: '#/components/schemas/ChunkingStrategy'
+          description: The strategy to use for chunking the content
+          default: page
+        return_format:
+          $ref: '#/components/schemas/ReturnFormat'
+          description: The format of the returned content
+          default: markdown
+        mode:
+          $ref: '#/components/schemas/Mode'
+          description: The strategy to use for OCR
+          default: high_quality
       type: object
       required:
-      - type
-      - confidence
-      - bbox
-      - page
-      - content
-      title: ChunkElement
-      description: Represents an extracted element from a document with its content and metadata.
-    ReturnFormat:
-      type: string
-      enum:
-      - html
-      - markdown
-      - plain
-      title: ReturnFormat
-      description: Format options for the returned document content.
-    ParsingJobListResponse:
-      properties:
-        pagination:
-          $ref: '#/components/schemas/CursorPaginationResponse'
-        data:
-          items:
-            $ref: '#/components/schemas/ParsingJobListItem'
-          type: array
-          title: Data
-          description: The list of parsing jobs
-        object:
-          type: string
-          const: list
-          title: Object
-          description: The object type of the response
-          default: list
-      type: object
-      required:
-      - pagination
-      - data
-      title: ParsingJobListResponse
-      description: A list of parsing jobs with pagination.
+      - file_id
+      title: ParsingJobCreateParams
+      description: Parameters for creating a parsing job.
     Chunk:
       properties:
         content:
@@ -434,96 +383,50 @@ components:
       - chunks
       title: DocumentParserResult
       description: Result of document parsing operation.
-    CursorPaginationResponse:
+    ParsingJobDeleted:
       properties:
-        has_more:
-          type: boolean
-          title: Has More
-          description: 'Contextual direction-aware flag: True if more items exist in the requested pagination direction. For ''after'': more items after this page. For ''before'': more items before this page.'
-          examples:
-          - true
-          - false
-        first_cursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: First Cursor
-          description: Cursor of the first item in this page. Use for backward pagination. None if page is empty.
-          examples:
-          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
-          - null
-        last_cursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Cursor
-          description: Cursor of the last item in this page. Use for forward pagination. None if page is empty.
-          examples:
-          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMFQyMzo1OTo1OS4wMDBaIiwiaWQiOiJ4eXo3ODkifQ==
-          - null
-        total:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Total
-          description: Total number of items available across all pages. Only included when include_total=true was requested. Expensive operation - use sparingly.
-          examples:
-          - 42
-          - 0
-          - null
-      type: object
-      required:
-      - has_more
-      - first_cursor
-      - last_cursor
-      title: CursorPaginationResponse
-      description: Response model for cursor-based pagination.
-    ParsingJobCreateParams:
-      properties:
-        file_id:
+        id:
           type: string
-          title: File Id
-          description: The ID of the file to parse
-        element_types:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/ElementType'
-            type: array
-          - type: 'null'
-          title: Element Types
-          description: The elements to extract from the document
-        chunking_strategy:
-          $ref: '#/components/schemas/ChunkingStrategy'
-          description: The strategy to use for chunking the content
-          default: page
-        return_format:
-          $ref: '#/components/schemas/ReturnFormat'
-          description: The format of the returned content
-          default: markdown
-        mode:
-          $ref: '#/components/schemas/Mode'
-          description: The strategy to use for OCR
-          default: high_quality
+          title: Id
+          description: The ID of the deleted job
+        deleted:
+          type: boolean
+          title: Deleted
+          description: Whether the job was deleted
+          default: true
+        object:
+          type: string
+          const: parsing_job
+          title: Object
+          description: The type of the object
+          default: parsing_job
       type: object
       required:
-      - file_id
-      title: ParsingJobCreateParams
-      description: Parameters for creating a parsing job.
-    HTTPValidationError:
+      - id
+      title: ParsingJobDeleted
+      description: A deleted parsing job.
+    ParsingJobListResponse:
       properties:
-        detail:
+        pagination:
+          $ref: '#/components/schemas/CursorPaginationResponse'
+        data:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/ParsingJobListItem'
           type: array
-          title: Detail
+          title: Data
+          description: The list of parsing jobs
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
       type: object
-      title: HTTPValidationError
-    ChunkingStrategy:
-      type: string
-      enum:
-      - page
-      title: ChunkingStrategy
-      description: Strategy used for chunking document content.
+      required:
+      - pagination
+      - data
+      title: ParsingJobListResponse
+      description: A list of parsing jobs with pagination.
     ParsingJobListItem:
       properties:
         id:
@@ -589,28 +492,24 @@ components:
       - status
       title: ParsingJobListItem
       description: A parsing job item for list responses.
-    ParsingJobDeleted:
+    ParsingJobStatus:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - cancelled
+      - completed
+      - failed
+      title: ParsingJobStatus
+    HTTPValidationError:
       properties:
-        id:
-          type: string
-          title: Id
-          description: The ID of the deleted job
-        deleted:
-          type: boolean
-          title: Deleted
-          description: Whether the job was deleted
-          default: true
-        object:
-          type: string
-          const: parsing_job
-          title: Object
-          description: The type of the object
-          default: parsing_job
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - id
-      title: ParsingJobDeleted
-      description: A deleted parsing job.
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -637,15 +536,50 @@ components:
       - msg
       - type
       title: ValidationError
-    ParsingJobStatus:
-      type: string
-      enum:
-      - pending
-      - in_progress
-      - cancelled
-      - completed
-      - failed
-      title: ParsingJobStatus
+    CursorPaginationResponse:
+      properties:
+        has_more:
+          type: boolean
+          title: Has More
+          description: 'Contextual direction-aware flag: True if more items exist in the requested pagination direction. For ''after'': more items after this page. For ''before'': more items before this page.'
+          examples:
+          - true
+          - false
+        first_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Cursor
+          description: Cursor of the first item in this page. Use for backward pagination. None if page is empty.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMVQyMzo1OTo1OS4wMDBaIiwiaWQiOiJhYmMxMjMifQ==
+          - null
+        last_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Cursor
+          description: Cursor of the last item in this page. Use for forward pagination. None if page is empty.
+          examples:
+          - eyJjcmVhdGVkX2F0IjoiMjAyNC0xMi0zMFQyMzo1OTo1OS4wMDBaIiwiaWQiOiJ4eXo3ODkifQ==
+          - null
+        total:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Total
+          description: Total number of items available across all pages. Only included when include_total=true was requested. Expensive operation - use sparingly.
+          examples:
+          - 42
+          - 0
+          - null
+      type: object
+      required:
+      - has_more
+      - first_cursor
+      - last_cursor
+      title: CursorPaginationResponse
+      description: Response model for cursor-based pagination.
     Mode:
       type: string
       enum:
@@ -739,6 +673,72 @@ components:
       - footnote
       title: ElementType
       description: Types of elements that can be extracted from a document.
+    ChunkElement:
+      properties:
+        type:
+          $ref: '#/components/schemas/ElementType'
+          description: The type of the extracted element
+        confidence:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Confidence
+          description: The confidence score of the extraction
+        bbox:
+          prefixItems:
+          - type: number
+          - type: number
+          - type: number
+          - type: number
+          type: array
+          maxItems: 4
+          minItems: 4
+          title: Bbox
+          description: The bounding box coordinates [x1, y1, x2, y2]
+        page:
+          type: integer
+          minimum: 0.0
+          title: Page
+          description: The page number where the element was found
+        content:
+          type: string
+          title: Content
+          description: The extracted text content of the element
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+          description: A brief summary of the element's content
+        image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image
+          description: The base64-encoded image data for figure elements
+      type: object
+      required:
+      - type
+      - confidence
+      - bbox
+      - page
+      - content
+      title: ChunkElement
+      description: Represents an extracted element from a document with its content and metadata.
+    ChunkingStrategy:
+      type: string
+      enum:
+      - page
+      title: ChunkingStrategy
+      description: Strategy used for chunking document content.
+    ReturnFormat:
+      type: string
+      enum:
+      - html
+      - markdown
+      - plain
+      title: ReturnFormat
+      description: Format options for the returned document content.
   securitySchemes:
     ApiKeyAuth:
       type: http
