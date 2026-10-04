@@ -1,0 +1,55 @@
+slug: mixedbread-ai
+provider: Mixedbread
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: API Keys
+  spec_file: mixedbread-ai-api-keys-api-openapi.yml
+  capability_id: BC-4270.40
+  capability_id_l1: BC-4270
+  capability_name: Developer Identity & Credential Management
+  confidence: 0.82
+  evidence: 'POST /v1/api-keys  create_api_key  Create API key; POST /v1/api-keys/{api_key_id}/revoke  revoke_api_key  Revoke
+    API key; schemas: Scope, ApiKeyCreated'
+  reason: Issuance, scoping, rotation (reroll) and revocation of API credentials used by developers consuming
+    the hosted REST API is developer credential management for the platform's API ecosystem.
+- tag: Embeddings
+  spec_file: mixedbread-ai-embeddings-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.75
+  evidence: POST /v1/embeddings  create_embeddings  Create embeddings for text and images
+  reason: Vendor-supplied AI model inference endpoint producing vector embeddings; the closest honest
+    capability is AI/ML capability under Information & Data Management. Generic AI inference service,
+    so moderate confidence.
+- tag: Billing
+  spec_file: mixedbread-ai-billing-api-openapi.yml
+  capability_id: BC-4250
+  capability_id_l1: BC-4250
+  capability_name: Subscription Billing & Revenue Management
+  confidence: 0.72
+  evidence: 'GET /v1/billing/summary  get_billing_summary; GET /v1/billing/stores  list_store_cost_info;
+    schemas: BillingPeriodSummary, UsageInfo, BalanceInfo, DailyCostBucket'
+  reason: Exposes period billing summaries, balance and usage-derived cost breakdowns for the consumption-based
+    service, which is subscription/usage billing reporting. Read-only cost views do not clearly identify
+    a single sub-capability between usage metering and invoicing, so L1 only.
+- tag: Reranking
+  spec_file: mixedbread-ai-reranking-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.7
+  evidence: POST /v1/reranking  rerank  Rerank different kind of documents for a given query
+  reason: ML reranker model inference for search relevance; maps to AI/ML model service under Information
+    & Data Management rather than any business-domain capability.
