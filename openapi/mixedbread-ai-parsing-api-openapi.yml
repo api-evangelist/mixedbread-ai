@@ -289,6 +289,32 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     ParsingJobCreateParams:
       properties:
         file_id:
@@ -320,6 +346,14 @@ components:
       - file_id
       title: ParsingJobCreateParams
       description: Parameters for creating a parsing job.
+    ReturnFormat:
+      type: string
+      enum:
+      - html
+      - markdown
+      - plain
+      title: ReturnFormat
+      description: Format options for the returned document content.
     Chunk:
       properties:
         content:
@@ -344,56 +378,115 @@ components:
       - elements
       title: Chunk
       description: A chunk of text extracted from a document page.
-    DocumentParserResult:
+    ChunkElement:
       properties:
-        chunking_strategy:
-          $ref: '#/components/schemas/ChunkingStrategy'
-          description: The strategy used for chunking the document
-        return_format:
-          $ref: '#/components/schemas/ReturnFormat'
-          description: The format of the returned content
-        element_types:
-          items:
-            $ref: '#/components/schemas/ElementType'
+        type:
+          $ref: '#/components/schemas/ElementType'
+          description: The type of the extracted element
+        confidence:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Confidence
+          description: The confidence score of the extraction
+        bbox:
+          prefixItems:
+          - type: number
+          - type: number
+          - type: number
+          - type: number
           type: array
-          title: Element Types
-          description: The types of elements extracted
-        chunks:
-          items:
-            $ref: '#/components/schemas/Chunk'
-          type: array
-          title: Chunks
-          description: List of extracted chunks from the document
-        page_sizes:
-          items:
-            prefixItems:
-            - type: integer
-            - type: integer
-            type: array
-            maxItems: 2
-            minItems: 2
-          type: array
-          title: Page Sizes
-          description: List of (width, height) tuples for each page
+          maxItems: 4
+          minItems: 4
+          title: Bbox
+          description: The bounding box coordinates [x1, y1, x2, y2]
+        page:
+          type: integer
+          minimum: 0.0
+          title: Page
+          description: The page number where the element was found
+        content:
+          type: string
+          title: Content
+          description: The extracted text content of the element
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+          description: A brief summary of the element's content
+        image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image
+          description: The base64-encoded image data for figure elements
       type: object
       required:
-      - chunking_strategy
-      - return_format
-      - element_types
-      - chunks
-      title: DocumentParserResult
-      description: Result of document parsing operation.
-    ParsingJobDeleted:
+      - type
+      - confidence
+      - bbox
+      - page
+      - content
+      title: ChunkElement
+      description: Represents an extracted element from a document with its content and metadata.
+    ParsingJob:
       properties:
         id:
           type: string
           title: Id
-          description: The ID of the deleted job
-        deleted:
-          type: boolean
-          title: Deleted
-          description: Whether the job was deleted
-          default: true
+          description: The ID of the job
+        file_id:
+          type: string
+          title: File Id
+          description: The ID of the file to parse
+        filename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Filename
+          description: The name of the file
+        status:
+          $ref: '#/components/schemas/ParsingJobStatus'
+          description: The status of the job
+        error:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Error
+          description: The error of the job
+        result:
+          anyOf:
+          - $ref: '#/components/schemas/DocumentParserResult'
+          - type: 'null'
+          description: The result of the job
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+          description: The started time of the job
+        finished_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Finished At
+          description: The finished time of the job
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: The creation time of the job
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+          description: The updated time of the job
         object:
           type: string
           const: parsing_job
@@ -403,8 +496,10 @@ components:
       type: object
       required:
       - id
-      title: ParsingJobDeleted
-      description: A deleted parsing job.
+      - file_id
+      - status
+      title: ParsingJob
+      description: A job for parsing documents with its current state and result.
     ParsingJobListResponse:
       properties:
         pagination:
@@ -492,50 +587,6 @@ components:
       - status
       title: ParsingJobListItem
       description: A parsing job item for list responses.
-    ParsingJobStatus:
-      type: string
-      enum:
-      - pending
-      - in_progress
-      - cancelled
-      - completed
-      - failed
-      title: ParsingJobStatus
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     CursorPaginationResponse:
       properties:
         has_more:
@@ -587,76 +638,60 @@ components:
       - high_quality
       title: Mode
       description: The mode of the document parser.
-    ParsingJob:
+    DocumentParserResult:
       properties:
-        id:
-          type: string
-          title: Id
-          description: The ID of the job
-        file_id:
-          type: string
-          title: File Id
-          description: The ID of the file to parse
-        filename:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Filename
-          description: The name of the file
-        status:
-          $ref: '#/components/schemas/ParsingJobStatus'
-          description: The status of the job
-        error:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Error
-          description: The error of the job
-        result:
-          anyOf:
-          - $ref: '#/components/schemas/DocumentParserResult'
-          - type: 'null'
-          description: The result of the job
-        started_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Started At
-          description: The started time of the job
-        finished_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Finished At
-          description: The finished time of the job
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-          description: The creation time of the job
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-          description: The updated time of the job
-        object:
-          type: string
-          const: parsing_job
-          title: Object
-          description: The type of the object
-          default: parsing_job
+        chunking_strategy:
+          $ref: '#/components/schemas/ChunkingStrategy'
+          description: The strategy used for chunking the document
+        return_format:
+          $ref: '#/components/schemas/ReturnFormat'
+          description: The format of the returned content
+        element_types:
+          items:
+            $ref: '#/components/schemas/ElementType'
+          type: array
+          title: Element Types
+          description: The types of elements extracted
+        chunks:
+          items:
+            $ref: '#/components/schemas/Chunk'
+          type: array
+          title: Chunks
+          description: List of extracted chunks from the document
+        page_sizes:
+          items:
+            prefixItems:
+            - type: integer
+            - type: integer
+            type: array
+            maxItems: 2
+            minItems: 2
+          type: array
+          title: Page Sizes
+          description: List of (width, height) tuples for each page
       type: object
       required:
-      - id
-      - file_id
-      - status
-      title: ParsingJob
-      description: A job for parsing documents with its current state and result.
+      - chunking_strategy
+      - return_format
+      - element_types
+      - chunks
+      title: DocumentParserResult
+      description: Result of document parsing operation.
+    ChunkingStrategy:
+      type: string
+      enum:
+      - page
+      title: ChunkingStrategy
+      description: Strategy used for chunking document content.
+    ParsingJobStatus:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - cancelled
+      - completed
+      - failed
+      title: ParsingJobStatus
     ElementType:
       type: string
       enum:
@@ -673,72 +708,37 @@ components:
       - footnote
       title: ElementType
       description: Types of elements that can be extracted from a document.
-    ChunkElement:
+    ParsingJobDeleted:
       properties:
-        type:
-          $ref: '#/components/schemas/ElementType'
-          description: The type of the extracted element
-        confidence:
-          type: number
-          maximum: 1.0
-          minimum: 0.0
-          title: Confidence
-          description: The confidence score of the extraction
-        bbox:
-          prefixItems:
-          - type: number
-          - type: number
-          - type: number
-          - type: number
-          type: array
-          maxItems: 4
-          minItems: 4
-          title: Bbox
-          description: The bounding box coordinates [x1, y1, x2, y2]
-        page:
-          type: integer
-          minimum: 0.0
-          title: Page
-          description: The page number where the element was found
-        content:
+        id:
           type: string
-          title: Content
-          description: The extracted text content of the element
-        summary:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Summary
-          description: A brief summary of the element's content
-        image:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Image
-          description: The base64-encoded image data for figure elements
+          title: Id
+          description: The ID of the deleted job
+        deleted:
+          type: boolean
+          title: Deleted
+          description: Whether the job was deleted
+          default: true
+        object:
+          type: string
+          const: parsing_job
+          title: Object
+          description: The type of the object
+          default: parsing_job
       type: object
       required:
-      - type
-      - confidence
-      - bbox
-      - page
-      - content
-      title: ChunkElement
-      description: Represents an extracted element from a document with its content and metadata.
-    ChunkingStrategy:
-      type: string
-      enum:
-      - page
-      title: ChunkingStrategy
-      description: Strategy used for chunking document content.
-    ReturnFormat:
-      type: string
-      enum:
-      - html
-      - markdown
-      - plain
-      title: ReturnFormat
-      description: Format options for the returned document content.
+      - id
+      title: ParsingJobDeleted
+      description: A deleted parsing job.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     ApiKeyAuth:
       type: http

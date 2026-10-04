@@ -107,15 +107,6 @@ components:
       - msg
       - type
       title: ValidationError
-    VectorStoreFileStatus:
-      type: string
-      enum:
-      - pending
-      - in_progress
-      - cancelled
-      - completed
-      - failed
-      title: VectorStoreFileStatus
     HTTPValidationError:
       properties:
         detail:
@@ -125,6 +116,15 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    VectorStoreFileStatus:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - cancelled
+      - completed
+      - failed
+      title: VectorStoreFileStatus
   securitySchemes:
     ApiKeyAuth:
       type: http

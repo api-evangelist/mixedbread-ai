@@ -44,29 +44,6 @@ paths:
       - Mixedbread Embeddings API
 components:
   schemas:
-    ErrorResponse:
-      properties:
-        error:
-          $ref: '#/components/schemas/InnerErrorResponse'
-      type: object
-      required:
-      - error
-      title: ErrorResponse
-      description: Error Pydantic Response Service Message
-    InfoResponse:
-      properties:
-        name:
-          type: string
-          title: Name
-        version:
-          type: string
-          title: Version
-      type: object
-      required:
-      - name
-      - version
-      title: InfoResponse
-      description: Info Pydantic Response Service Message
     InnerErrorResponse:
       properties:
         message:
@@ -88,6 +65,29 @@ components:
       - type
       title: InnerErrorResponse
       description: Inner Error Pydantic Response Service Message
+    InfoResponse:
+      properties:
+        name:
+          type: string
+          title: Name
+        version:
+          type: string
+          title: Version
+      type: object
+      required:
+      - name
+      - version
+      title: InfoResponse
+      description: Info Pydantic Response Service Message
+    ErrorResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/InnerErrorResponse'
+      type: object
+      required:
+      - error
+      title: ErrorResponse
+      description: Error Pydantic Response Service Message
   securitySchemes:
     ApiKeyAuth:
       type: http
