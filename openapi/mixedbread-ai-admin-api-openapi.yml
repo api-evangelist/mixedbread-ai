@@ -81,6 +81,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    VectorStoreFileStatus:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - cancelled
+      - completed
+      - failed
+      title: VectorStoreFileStatus
     ValidationError:
       properties:
         loc:
@@ -116,15 +125,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    VectorStoreFileStatus:
-      type: string
-      enum:
-      - pending
-      - in_progress
-      - cancelled
-      - completed
-      - failed
-      title: VectorStoreFileStatus
   securitySchemes:
     ApiKeyAuth:
       type: http

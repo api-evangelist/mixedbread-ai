@@ -325,52 +325,65 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ApiKeyListResponse:
+    Scope:
       properties:
-        pagination:
-          $ref: '#/components/schemas/PaginationWithTotal'
-        object:
+        method:
           type: string
-          const: list
-          title: Object
-          description: The object type of the response
-          default: list
-        data:
-          items:
-            $ref: '#/components/schemas/ApiKey'
-          type: array
-          title: Data
-          description: The list of API keys
-      type: object
-      required:
-      - pagination
-      - data
-      title: ApiKeyListResponse
-    ApiKeyCreateParams:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: A name/description for the API key
-          default: API Key
-        scope:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/Scope'
-            type: array
-          - type: 'null'
-          title: Scope
-          description: The scope of the API key
-        expires_at:
+          enum:
+          - read
+          - write
+          - delete
+          - list
+          - create
+          - search
+          title: Method
+        resource_type:
           anyOf:
           - type: string
-            format: date-time
+            const: store
           - type: 'null'
-          title: Expires At
-          description: Optional expiration datetime
+          title: Resource Type
+        resource_id:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Resource Id
       type: object
-      title: ApiKeyCreateParams
-      description: Parameters for creating an API key.
+      required:
+      - method
+      title: Scope
+    PaginationWithTotal:
+      properties:
+        limit:
+          type: integer
+          maximum: 1000.0
+          title: Limit
+          description: Maximum number of items to return per page
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          description: Offset of the first item to return
+          default: 0
+        total:
+          type: integer
+          title: Total
+          description: Total number of items available
+          default: 0
+      type: object
+      title: PaginationWithTotal
+      description: Pagination model that includes total count of items.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ApiKey:
       properties:
         id:
@@ -432,28 +445,31 @@ components:
       - updated_at
       title: ApiKey
       description: Response model for an API key.
-    ApiKeyDeleted:
+    ApiKeyCreateParams:
       properties:
-        id:
+        name:
           type: string
-          title: Id
-          description: The ID of the deleted API key
-        deleted:
-          type: boolean
-          title: Deleted
-          description: Whether the API key was deleted
-        object:
-          type: string
-          const: api_key
-          title: Object
-          description: The type of the object deleted
-          default: api_key
+          title: Name
+          description: A name/description for the API key
+          default: API Key
+        scope:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Scope'
+            type: array
+          - type: 'null'
+          title: Scope
+          description: The scope of the API key
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+          description: Optional expiration datetime
       type: object
-      required:
-      - id
-      - deleted
-      title: ApiKeyDeleted
-      description: Response model for deleting an API key.
+      title: ApiKeyCreateParams
+      description: Parameters for creating an API key.
     ApiKeyCreated:
       properties:
         id:
@@ -520,35 +536,49 @@ components:
       - value
       title: ApiKeyCreated
       description: Response model for creating an API key.
-    Scope:
+    ApiKeyListResponse:
       properties:
-        method:
+        pagination:
+          $ref: '#/components/schemas/PaginationWithTotal'
+        object:
           type: string
-          enum:
-          - read
-          - write
-          - delete
-          - list
-          - create
-          - search
-          title: Method
-        resource_type:
-          anyOf:
-          - type: string
-            const: store
-          - type: 'null'
-          title: Resource Type
-        resource_id:
-          anyOf:
-          - type: string
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Resource Id
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        data:
+          items:
+            $ref: '#/components/schemas/ApiKey'
+          type: array
+          title: Data
+          description: The list of API keys
       type: object
       required:
-      - method
-      title: Scope
+      - pagination
+      - data
+      title: ApiKeyListResponse
+    ApiKeyDeleted:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID of the deleted API key
+        deleted:
+          type: boolean
+          title: Deleted
+          description: Whether the API key was deleted
+        object:
+          type: string
+          const: api_key
+          title: Object
+          description: The type of the object deleted
+          default: api_key
+      type: object
+      required:
+      - id
+      - deleted
+      title: ApiKeyDeleted
+      description: Response model for deleting an API key.
     ValidationError:
       properties:
         loc:
@@ -575,15 +605,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ApiKeyUpdateParams:
       properties:
         name:
@@ -602,27 +623,6 @@ components:
       type: object
       title: ApiKeyUpdateParams
       description: Parameters for updating an API key.
-    PaginationWithTotal:
-      properties:
-        limit:
-          type: integer
-          maximum: 1000.0
-          title: Limit
-          description: Maximum number of items to return per page
-          default: 100
-        offset:
-          type: integer
-          title: Offset
-          description: Offset of the first item to return
-          default: 0
-        total:
-          type: integer
-          title: Total
-          description: Total number of items available
-          default: 0
-      type: object
-      title: PaginationWithTotal
-      description: Pagination model that includes total count of items.
   securitySchemes:
     ApiKeyAuth:
       type: http

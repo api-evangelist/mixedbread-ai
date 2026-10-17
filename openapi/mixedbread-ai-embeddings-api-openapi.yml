@@ -56,6 +56,15 @@ paths:
       - Embeddings
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     Usage:
       properties:
         prompt_tokens:
@@ -77,6 +86,101 @@ components:
       - prompt_tokens
       - total_tokens
       title: Usage
+    EmbeddingCreateResponse:
+      properties:
+        usage:
+          $ref: '#/components/schemas/Usage'
+          description: The usage of the model
+          examples:
+          - completion_tokens: 10
+            prompt_tokens: 10
+            total_tokens: 20
+        model:
+          type: string
+          title: Model
+          description: The model used
+        data:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Embedding'
+            type: array
+          - items:
+              $ref: '#/components/schemas/MultiEncodingEmbedding'
+            type: array
+          title: Data
+          description: The created embeddings.
+        object:
+          type: string
+          const: list
+          title: Object
+          description: The object type of the response
+          default: list
+        normalized:
+          type: boolean
+          title: Normalized
+          description: Whether the embeddings are normalized.
+          examples:
+          - true
+        encoding_format:
+          anyOf:
+          - $ref: '#/components/schemas/EncodingFormat'
+          - items:
+              $ref: '#/components/schemas/EncodingFormat'
+            type: array
+          title: Encoding Format
+          description: The encoding formats of the embeddings.
+          examples:
+          - float
+        dimensions:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Dimensions
+          description: The number of dimensions used for the embeddings.
+          examples:
+          - 768
+      type: object
+      required:
+      - usage
+      - model
+      - data
+      - normalized
+      - encoding_format
+      - dimensions
+      title: EmbeddingCreateResponse
+    MultiEncodingEmbedding:
+      properties:
+        embedding:
+          $ref: '#/components/schemas/MultipleEncodingsEmbeddingItem'
+          description: The encoded embedding data by encoding format.Returned, if more than one encoding format is used.
+          examples:
+          - float:
+            - 0.1
+            - 0.2
+            - 0.3
+            int8:
+            - 1
+            - 2
+            - 3
+        index:
+          type: integer
+          title: Index
+          description: The index of the embedding.
+          examples:
+          - 0
+        object:
+          type: string
+          const: embedding_dict
+          title: Object
+          description: The object type of the embedding.
+          default: embedding_dict
+          examples:
+          - embedding_dict
+      type: object
+      required:
+      - embedding
+      - index
+      title: MultiEncodingEmbedding
     EncodingFormat:
       type: string
       enum:
@@ -89,6 +193,45 @@ components:
       - uint8
       title: EncodingFormat
       description: Enumeration of encoding formats.
+    Embedding:
+      properties:
+        embedding:
+          $ref: '#/components/schemas/EmbeddingItem'
+          description: The encoded embedding.
+        index:
+          type: integer
+          title: Index
+          description: The index of the embedding.
+          examples:
+          - 0
+        object:
+          type: string
+          const: embedding
+          title: Object
+          description: The object type of the embedding.
+          default: embedding
+          examples:
+          - embedding
+      type: object
+      required:
+      - embedding
+      - index
+      title: Embedding
+    EmbeddingItem:
+      anyOf:
+      - items:
+          type: number
+        type: array
+      - items:
+          type: integer
+        type: array
+      - type: string
+      title: EmbeddingItem
+      description: The encoded embedding data by encoding format.
+      examples:
+      - 0.1
+      - 0.2
+      - 0.3
     EmbeddingCreateParams:
       properties:
         model:
@@ -156,45 +299,6 @@ components:
       - input
       title: EmbeddingCreateParams
       description: Parameters for creating embeddings.
-    EmbeddingItem:
-      anyOf:
-      - items:
-          type: number
-        type: array
-      - items:
-          type: integer
-        type: array
-      - type: string
-      title: EmbeddingItem
-      description: The encoded embedding data by encoding format.
-      examples:
-      - 0.1
-      - 0.2
-      - 0.3
-    Embedding:
-      properties:
-        embedding:
-          $ref: '#/components/schemas/EmbeddingItem'
-          description: The encoded embedding.
-        index:
-          type: integer
-          title: Index
-          description: The index of the embedding.
-          examples:
-          - 0
-        object:
-          type: string
-          const: embedding
-          title: Object
-          description: The object type of the embedding.
-          default: embedding
-          examples:
-          - embedding
-      type: object
-      required:
-      - embedding
-      - index
-      title: Embedding
     MultipleEncodingsEmbeddingItem:
       properties:
         float:
@@ -227,68 +331,6 @@ components:
           title: Base64
       type: object
       title: MultipleEncodingsEmbeddingItem
-    EmbeddingCreateResponse:
-      properties:
-        usage:
-          $ref: '#/components/schemas/Usage'
-          description: The usage of the model
-          examples:
-          - completion_tokens: 10
-            prompt_tokens: 10
-            total_tokens: 20
-        model:
-          type: string
-          title: Model
-          description: The model used
-        data:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/Embedding'
-            type: array
-          - items:
-              $ref: '#/components/schemas/MultiEncodingEmbedding'
-            type: array
-          title: Data
-          description: The created embeddings.
-        object:
-          type: string
-          const: list
-          title: Object
-          description: The object type of the response
-          default: list
-        normalized:
-          type: boolean
-          title: Normalized
-          description: Whether the embeddings are normalized.
-          examples:
-          - true
-        encoding_format:
-          anyOf:
-          - $ref: '#/components/schemas/EncodingFormat'
-          - items:
-              $ref: '#/components/schemas/EncodingFormat'
-            type: array
-          title: Encoding Format
-          description: The encoding formats of the embeddings.
-          examples:
-          - float
-        dimensions:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Dimensions
-          description: The number of dimensions used for the embeddings.
-          examples:
-          - 768
-      type: object
-      required:
-      - usage
-      - model
-      - data
-      - normalized
-      - encoding_format
-      - dimensions
-      title: EmbeddingCreateResponse
     ValidationError:
       properties:
         loc:
@@ -315,48 +357,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    MultiEncodingEmbedding:
-      properties:
-        embedding:
-          $ref: '#/components/schemas/MultipleEncodingsEmbeddingItem'
-          description: The encoded embedding data by encoding format.Returned, if more than one encoding format is used.
-          examples:
-          - float:
-            - 0.1
-            - 0.2
-            - 0.3
-            int8:
-            - 1
-            - 2
-            - 3
-        index:
-          type: integer
-          title: Index
-          description: The index of the embedding.
-          examples:
-          - 0
-        object:
-          type: string
-          const: embedding_dict
-          title: Object
-          description: The object type of the embedding.
-          default: embedding_dict
-          examples:
-          - embedding_dict
-      type: object
-      required:
-      - embedding
-      - index
-      title: MultiEncodingEmbedding
   securitySchemes:
     ApiKeyAuth:
       type: http
