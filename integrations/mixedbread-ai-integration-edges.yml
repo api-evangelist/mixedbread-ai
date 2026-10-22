@@ -21,7 +21,28 @@ edges:
   matched_by: verified-domain-table
   detected_by: sweep-rag-vector.py
   first_seen: '2026-10-15'
+- partner_name: Vercel (own)
+  partner: vercel
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://vercel.com/marketplace/mixedbread
+  mirror_of: vercel/integrations/vercel-integration-edges.yml
+  apps:
+  - Mixedbread
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Storage Agents Searching
+  partner_tier: native
 generated: '2026-10-15'
 method: searched
 checked:
 - https://github.com/run-llama/llama_index/tree/main/llama-index-integrations
+- vercel/integrations/vercel-integration-edges.yml
+source:
+- vercel/integrations/vercel-integration-edges.yml
