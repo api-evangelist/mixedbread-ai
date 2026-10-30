@@ -1,4 +1,4 @@
-# Mixedbread (mixedbread-ai)
+# Mixedbread
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,320 +66,196 @@
 
 Mixedbread is a Berlin-based AI search and retrieval platform. It provides embeddings (mxbai-embed, Wholembed v3), rerankers (mxbai-rerank v1/v2/v3-listwise), multimodal stores, document parsing, structured extraction, and connector-based ingestion. Models are published as open weights on Hugging Face and consumed via a hosted REST API at api.mixedbread.com. The platform powers RAG and agent retrieval over text, PDFs, images, audio, and video across 100+ languages.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/mixedbread-ai/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/mixedbread-ai/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Embeddings · Reranking · Search · Retrieval · RAG · Vector Search · Multi-Modal · Parsing · Open Weights
 
-## Scope
+## Mixedbread on APIs.io
 
-- **Access:** 3rd-Party
+Everything profiled for Mixedbread is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/mixedbread-ai/](https://apis.io/providers/mixedbread-ai/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (14)
 
-- AI
-- Artificial Intelligence
-- Embeddings
-- Reranking
-- Search
-- Retrieval
-- RAG
-- Vector Database
-- Multimodal
-- Parsing
-- Open Weights
+- [Mixedbread Admin API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-admin-api/) — The admin API from Mixedbread — 1 operation(s) for admin.
+- [Mixedbread API Keys API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-api-keys-api/) — The api_keys API from Mixedbread — 4 operation(s) for api_keys.
+- [Mixedbread Billing API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-billing-api/) — The billing API from Mixedbread — 4 operation(s) for billing.
+- [Mixedbread Completions API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-completions-api/) — The completions API from Mixedbread — 1 operation(s) for completions.
+- [Mixedbread Data Sources API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-data-sources-api/) — The data_sources API from Mixedbread — 6 operation(s) for data_sources.
+- [Mixedbread Deprecated Vector Stores API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-deprecated-vector-stores-api/) — The deprecated_vector_stores API from Mixedbread — 10 operation(s) for deprecated_vector_stores.
+- [Mixedbread Embeddings API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-embeddings-api/) — The Embeddings API from Mixedbread — 1 operation(s) for embeddings.
+- [Mixedbread Extractions API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-extractions-api/) — The extractions API from Mixedbread — 6 operation(s) for extractions.
+- [Mixedbread Files API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-files-api/) — The files API from Mixedbread — 7 operation(s) for files.
+- [Mixedbread Embeddings API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-mixedbread-embeddings-api-api/) — The Mixedbread Embeddings API API from Mixedbread — 1 operation(s) for mixedbread embeddings api.
+- [Mixedbread Parsing API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-parsing-api/) — The parsing API from Mixedbread — 2 operation(s) for parsing.
+- [Mixedbread Reranking API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-reranking-api/) — The Reranking API from Mixedbread — 1 operation(s) for reranking.
+- [Mixedbread Schemas API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-schemas-api/) — The schemas API from Mixedbread — 1 operation(s) for schemas.
+- [Mixedbread Stores API](https://apis.io/apis/mixedbread-ai/mixedbread-ai-stores-api/) — The stores API from Mixedbread — 17 operation(s) for stores.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-25
-- **Modified:** 2026-05-25
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Mixedbread Embeddings API
+Model Context Protocol servers that expose the API to agents.
 
-POST /v1/embeddings creates dense or multi-encoding embeddings for text and images using mxbai embedding models (mxbai-embed-large-v1, deepset-mxbai-embed-de-large-v1, mxbai-embed-xsmall-v1, Wholembed v3). Supports Matryoshka dimensions, binary/int8/float32 encodings, and prompt instructions. Returns Embedding objects with token usage.
+- [mixedbread-ai](https://apis.io/servers/mixedbread-ai/mixedbread-ai/)
 
-- **Human URL:** [https://www.mixedbread.com/api-reference](https://www.mixedbread.com/api-reference)
-- **Base URL:** `https://api.mixedbread.com`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- AI
-- Embeddings
-- Vectors
-- Multimodal
+- [Mixedbread Ai Agentic Access](https://apis.io/agentic-access/mixedbread-ai/mixedbread-ai-agentic-access/)
 
-#### Properties
+#### JSON Schema (3)
 
-- [Documentation](https://www.mixedbread.com/api-reference)
-- [OpenAPI](openapi/mixedbread-embeddings-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mixedbread-embeddings-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mixedbread-embeddings-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/mixedbread-embedding-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/mixedbread-ai-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+The data models the API reads and writes.
 
-### Mixedbread Reranking API
+- [Mixedbread Embedding](https://apis.io/schemas/mixedbread-ai/mixedbread-embedding/)
+- [Mixedbread Rerank](https://apis.io/schemas/mixedbread-ai/mixedbread-rerank/)
+- [Mixedbread Store](https://apis.io/schemas/mixedbread-ai/mixedbread-store/)
 
-POST /v1/reranking reorders a candidate document list against a query using the mxbai-rerank family (xsmall-v1, base-v1, large-v1, base-v2, large-v2, plus the v3-listwise instruction-following reranker). Documents can be raw strings or structured objects with a return_input flag. Top-K results returned with relevance scores.
+#### JSON-LD (1)
 
-- **Human URL:** [https://www.mixedbread.com/api-reference](https://www.mixedbread.com/api-reference)
-- **Base URL:** `https://api.mixedbread.com`
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Mixedbread Ai Context](https://apis.io/jsonld/mixedbread-ai/mixedbread-ai-context/)
 
-- AI
-- Reranking
-- Search
-- Retrieval
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://www.mixedbread.com/api-reference)
-- [OpenAPI](openapi/mixedbread-reranking-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mixedbread-reranking-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mixedbread-reranking-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/mixedbread-rerank-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [Mixedbread Ai Vocabulary](https://apis.io/vocabularies/mixedbread-ai/mixedbread-ai-vocabulary/)
 
-### Mixedbread Stores API
+#### Examples (3)
 
-Stores are AI-powered multimodal search indexes. CRUD for stores plus file upload, semantic search, grep, list-chunks, question-answering, query enhancement, metadata facets, search rules, and events. Replaces the deprecated /v1/vector_stores surface; deprecated endpoints kept for backward compatibility.
+Example requests and responses.
 
-- **Human URL:** [https://www.mixedbread.com/api-reference](https://www.mixedbread.com/api-reference)
-- **Base URL:** `https://api.mixedbread.com`
+- [Mixedbread Embeddings Example](https://apis.io/examples/mixedbread-ai/mixedbread-embeddings-example/)
+- [Mixedbread Reranking Example](https://apis.io/examples/mixedbread-ai/mixedbread-reranking-example/)
+- [Mixedbread Stores Search Example](https://apis.io/examples/mixedbread-ai/mixedbread-stores-search-example/)
 
-#### Tags
+#### Collections (40)
 
-- AI
-- Search
-- Vector Database
-- RAG
-- Retrieval
+Postman and Open Collection request collections.
 
-#### Properties
+- [Mixedbread Admin API](https://apis.io/collections/mixedbread-ai/open-mixedbread-admin-api/)
+- [Mixedbread admin API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-admin-api/)
+- [Mixedbread admin api_keys API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-api-keys-api/)
+- [Mixedbread admin billing API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-billing-api/)
+- [Mixedbread admin completions API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-completions-api/)
+- [Mixedbread admin data_sources API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-data-sources-api/)
+- [Mixedbread admin deprecated_vector_stores API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-deprecated-vector-stores-api/)
+- [Mixedbread admin Embeddings API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-embeddings-api/)
+- [Mixedbread admin extractions API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-extractions-api/)
+- [Mixedbread admin files API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-files-api/)
+- [Mixedbread admin Mixedbread Embeddings API API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-mixedbread-embeddings-api-api/)
+- [Mixedbread admin parsing API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-parsing-api/)
+- [Mixedbread admin Reranking API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-reranking-api/)
+- [Mixedbread admin schemas API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-schemas-api/)
+- [Mixedbread admin stores API](https://apis.io/collections/mixedbread-ai/open-mixedbread-ai-stores-api/)
+- [Mixedbread API Keys API](https://apis.io/collections/mixedbread-ai/open-mixedbread-api-keys-api/)
+- [Mixedbread Billing API](https://apis.io/collections/mixedbread-ai/open-mixedbread-billing-api/)
+- [Mixedbread Chat Completions API](https://apis.io/collections/mixedbread-ai/open-mixedbread-completions-api/)
+- [Mixedbread Data Sources API](https://apis.io/collections/mixedbread-ai/open-mixedbread-data-sources-api/)
+- [Mixedbread Embeddings API](https://apis.io/collections/mixedbread-ai/open-mixedbread-embeddings-api/)
+- [Mixedbread Extractions API](https://apis.io/collections/mixedbread-ai/open-mixedbread-extractions-api/)
+- [Mixedbread Files API](https://apis.io/collections/mixedbread-ai/open-mixedbread-files-api/)
+- [Mixedbread Parsing API](https://apis.io/collections/mixedbread-ai/open-mixedbread-parsing-api/)
+- [Mixedbread Reranking API](https://apis.io/collections/mixedbread-ai/open-mixedbread-reranking-api/)
+- [Mixedbread Schemas API](https://apis.io/collections/mixedbread-ai/open-mixedbread-schemas-api/)
+- …and 15 more published on APIs.io
 
-- [Documentation](https://www.mixedbread.com/docs/stores/overview)
-- [OpenAPI](openapi/mixedbread-stores-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mixedbread-stores-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mixedbread-stores-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/mixedbread-store-schema.json) — [JSON Schema](https://json-schema.org/specification)
+#### Governance rules (2)
 
-### Mixedbread Parsing API
+Spectral rulesets for the provider's contracts.
 
-Asynchronous document parsing as jobs. POST /v1/parsing/jobs starts a parse over an uploaded file with configurable chunking strategy, return format (markdown/HTML/text), and element extraction. GET/PATCH/DELETE on /v1/parsing/jobs/{job_id} for retrieval, cancellation, and deletion. Produces structured chunks with type metadata for text, code, tables, images, audio, video.
+- [Mixedbread — jsonschema rules](https://apis.io/rules/mixedbread-ai/mixedbread-ai-jsonschema-spectral-rules/)
+- [Mixedbread API Rules](https://apis.io/rules/mixedbread-ai/mixedbread-ai-rules/)
 
-- **Human URL:** [https://www.mixedbread.com/api-reference](https://www.mixedbread.com/api-reference)
-- **Base URL:** `https://api.mixedbread.com`
+#### Security (2)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- AI
-- Parsing
-- Documents
-- Chunking
-- OCR
+- [Mixedbread Ai Authentication](https://apis.io/security/mixedbread-ai/mixedbread-ai-authentication/)
+- [Mixedbread Ai Domain Security](https://apis.io/security/mixedbread-ai/mixedbread-ai-domain-security/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://www.mixedbread.com/api-reference)
-- [OpenAPI](openapi/mixedbread-parsing-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mixedbread-parsing-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mixedbread-parsing-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-### Mixedbread Extractions API
+- [Mixedbread Ai Plans Pricing](https://apis.io/plans/mixedbread-ai/mixedbread-ai-plans-pricing/)
 
-Schema-guided structured extraction. POST /v1/extractions/jobs runs an extraction job against a file; POST /v1/extractions/content extracts from raw strings. The /v1/extractions/schema family creates, enhances, and validates JSON Schema definitions used by the extraction pipeline.
+#### Rate limits (1)
 
-- **Human URL:** [https://www.mixedbread.com/api-reference](https://www.mixedbread.com/api-reference)
-- **Base URL:** `https://api.mixedbread.com`
+Published request limits.
 
-#### Tags
+- [Mixedbread Ai Rate Limits](https://apis.io/rate-limits/mixedbread-ai/mixedbread-ai-rate-limits/)
 
-- AI
-- Extraction
-- Structured Output
-- JSON Schema
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://www.mixedbread.com/api-reference)
-- [OpenAPI](openapi/mixedbread-extractions-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mixedbread-extractions-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mixedbread-extractions-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Mixedbread Ai Finops](https://apis.io/finops/mixedbread-ai/mixedbread-ai-finops/)
 
-### Mixedbread Files API
+## Where to find this API
 
-Workspace file management for files used across stores, parsing, and extraction. Single-shot upload via POST /v1/files plus multipart upload via /v1/files/uploads (create, complete, abort, list). Standard CRUD on /v1/files/{file_id} including content download.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://www.mixedbread.com/api-reference](https://www.mixedbread.com/api-reference)
-- **Base URL:** `https://api.mixedbread.com`
-
-#### Tags
-
-- AI
-- Files
-- Storage
-- Multipart Upload
-
-#### Properties
-
-- [Documentation](https://www.mixedbread.com/api-reference)
-- [OpenAPI](openapi/mixedbread-files-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mixedbread-files-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mixedbread-files-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Mixedbread Chat Completions API
-
-POST /v1/chat/completions exposes an OpenAI-compatible chat completion surface that grounds responses in Mixedbread Stores. Used to drive question-answering and agentic flows on top of indexed multimodal content.
-
-- **Human URL:** [https://www.mixedbread.com/api-reference](https://www.mixedbread.com/api-reference)
-- **Base URL:** `https://api.mixedbread.com`
-
-#### Tags
-
-- AI
-- Chat
-- Completions
-- LLM
-
-#### Properties
-
-- [Documentation](https://www.mixedbread.com/api-reference)
-- [OpenAPI](openapi/mixedbread-completions-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mixedbread-completions-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mixedbread-completions-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Mixedbread Data Sources API
-
-Manage external data sources and their connectors, including OAuth2 authorization/callback flows. Lets stores ingest content from third-party SaaS systems through reusable connector definitions.
-
-- **Human URL:** [https://www.mixedbread.com/api-reference](https://www.mixedbread.com/api-reference)
-- **Base URL:** `https://api.mixedbread.com`
-
-#### Tags
-
-- AI
-- Data Sources
-- Connectors
-- Integrations
-- OAuth2
-
-#### Properties
-
-- [Documentation](https://www.mixedbread.com/api-reference)
-- [OpenAPI](openapi/mixedbread-data-sources-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mixedbread-data-sources-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mixedbread-data-sources-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Mixedbread API Keys API
-
-Programmatic management of workspace API keys. CRUD plus rotation (reroll) and revocation under /v1/api-keys.
-
-- **Human URL:** [https://www.mixedbread.com/api-reference](https://www.mixedbread.com/api-reference)
-- **Base URL:** `https://api.mixedbread.com`
-
-#### Tags
-
-- AI
-- Administration
-- API Keys
-- Security
-
-#### Properties
-
-- [Documentation](https://www.mixedbread.com/api-reference)
-- [OpenAPI](openapi/mixedbread-api-keys-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mixedbread-api-keys-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mixedbread-api-keys-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Mixedbread Billing API
-
-Read-only billing telemetry. GET /v1/billing/summary returns workspace-level spend; /v1/billing/stores breaks cost down per store; histogram endpoints chart store and parsing costs over time. Aligns with the workspace's usage-based pricing.
-
-- **Human URL:** [https://www.mixedbread.com/api-reference](https://www.mixedbread.com/api-reference)
-- **Base URL:** `https://api.mixedbread.com`
-
-#### Tags
-
-- AI
-- Billing
-- Usage
-- FinOps
-- Cost
-
-#### Properties
-
-- [Documentation](https://www.mixedbread.com/api-reference)
-- [OpenAPI](openapi/mixedbread-billing-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mixedbread-billing-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mixedbread-billing-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Mixedbread Schemas API
-
-GET /v1/schemas/mxjson returns the mxbai JSON schema definition. Used by clients and the CLI to validate Mixedbread-flavored JSON payloads.
-
-- **Human URL:** [https://www.mixedbread.com/api-reference](https://www.mixedbread.com/api-reference)
-- **Base URL:** `https://api.mixedbread.com`
-
-#### Tags
-
-- AI
-- JSON Schema
-- Discovery
-
-#### Properties
-
-- [Documentation](https://www.mixedbread.com/api-reference)
-- [OpenAPI](openapi/mixedbread-schemas-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mixedbread-schemas-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mixedbread-schemas-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Mixedbread Admin API
-
-Reserved operations for Mixedbread platform administrators. POST /v1/admin/stores/{organization_id}/{store_identifier}/reingest triggers a full reingest of a tenant store.
-
-- **Human URL:** [https://www.mixedbread.com/api-reference](https://www.mixedbread.com/api-reference)
-- **Base URL:** `https://api.mixedbread.com`
-
-#### Tags
-
-- AI
-- Administration
-- Operations
-
-#### Properties
-
-- [Documentation](https://www.mixedbread.com/api-reference)
-- [OpenAPI](openapi/mixedbread-admin-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mixedbread-admin-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mixedbread-admin-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Portal](https://www.mixedbread.com/)
+- [Website](https://www.mixedbread.com/)
 - [Documentation](https://www.mixedbread.com/docs)
-- [Documentation](https://www.mixedbread.com/api-reference)
-- [Sign Up](https://platform.mixedbread.com/)
 - [Pricing](https://www.mixedbread.com/pricing)
 - [Blog](https://www.mixedbread.com/blog)
-- [Git Hub](https://github.com/mixedbread-ai)
-- [Hugging Face](https://huggingface.co/mixedbread-ai)
-- [SDK](https://github.com/mixedbread-ai/mixedbread-python)
-- [SDK](https://github.com/mixedbread-ai/mixedbread-ts)
-- [SDK](https://github.com/mixedbread-ai/python-sdk)
-- [SDK](https://github.com/mixedbread-ai/typescript-sdk)
-- [C L I](https://www.mixedbread.com/docs/cli)
-- [Tools](https://github.com/mixedbread-ai/skills)
-- [Tools](https://github.com/mixedbread-ai/mxbai-rerank)
-- [Tools](https://github.com/mixedbread-ai/baguetter)
-- [Tools](https://github.com/mixedbread-ai/batched)
-- [Tools](https://github.com/mixedbread-ai/maxsim-cpu)
-- [Tools](https://github.com/mixedbread-ai/mgrep)
-- [Integration](https://github.com/mixedbread-ai/mixedbread-ai-langchain)
-- [Integration](https://github.com/mixedbread-ai/mixedbread-ai-haystack)
-- [Integration](https://github.com/mixedbread-ai/vercel-marketplace-mixedbread)
-- [Integration](https://www.mixedbread.com/docs/mcp)
-- [Authentication](https://www.mixedbread.com/api-reference)
-- [LinkedIn](https://www.linkedin.com/company/mixedbread-ai/)
-- [Twitter](https://x.com/mixedbreadai)
-- [Discord](https://discord.gg/mixedbread)
-- [Plans](plans/mixedbread-ai-plans-pricing.yml)
-- [Rate Limits](rate-limits/mixedbread-ai-rate-limits.yml)
-- [Fin Ops](finops/mixedbread-ai-finops.yml)
+
+## API Evangelist rating
+
+**Kin Score 53.1** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 59.5 |
+| Contract governance | 13.6 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 63.1 |
+| Access clarity | 63.2 |
+
+**Agent readiness 51.2** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 15.5** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/mixedbread-ai/](https://apis.io/providers/mixedbread-ai/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Mixedbread: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/mixedbread-ai/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
